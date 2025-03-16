@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Clock } from "lucide-react";
+import { ArrowRight, Check, Clock, Shield } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -11,21 +11,21 @@ const Hero = () => {
         <div className="max-w-3xl animate-fade-in">
           <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full mb-4">London's Trusted Structural Engineers</span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Don't Risk Costly Structural Problems
+            Structural Problems Identified & Solutions Provided
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            Get expert assessment within 24 hours. Our structural engineers identify issues that regular surveys miss, saving you thousands in future repairs.
+            Expert structural engineering assessments within 24 hours. We catch issues that RICS surveys miss, saving you thousands in future repairs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
               <span className="relative z-10 flex items-center">
-                Get a Free Consultation
+                Book a Structural Survey
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg">
-              Our Specialised Services
+              Call Us: 020 8004 9060
             </Button>
           </div>
           <div className="bg-black bg-opacity-30 p-4 rounded-lg mb-6">
@@ -33,6 +33,7 @@ const Hero = () => {
               <Clock className="mr-2 h-5 w-5" />
               <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
             </div>
+            <p className="text-sm text-gray-300">Located at 6 Highbury Corner, London, N5 1RD - Serving all of Greater London</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-center">

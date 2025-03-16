@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,7 +68,7 @@ const ContactForm = () => {
                 <Phone className="h-6 w-6 text-[#ea384c] mr-4 mt-1" />
                 <div>
                   <h3 className="font-semibold text-[#1A1F2C] text-lg">Call Us</h3>
-                  <p className="text-gray-700">020 1234 5678</p>
+                  <p className="text-gray-700">020 8004 9060</p>
                 </div>
               </div>
               
@@ -83,7 +84,7 @@ const ContactForm = () => {
                 <MapPin className="h-6 w-6 text-[#ea384c] mr-4 mt-1" />
                 <div>
                   <h3 className="font-semibold text-[#1A1F2C] text-lg">Our Office</h3>
-                  <p className="text-gray-700">123 Engineering Street, London, EC1V 9BD</p>
+                  <p className="text-gray-700">6 Highbury Corner, London, N5 1RD</p>
                 </div>
               </div>
             </div>

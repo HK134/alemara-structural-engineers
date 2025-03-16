@@ -27,7 +27,7 @@ const Navbar = () => {
               </div>
               <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
-                020 1234 5678
+                020 8004 9060
               </Button>
             </div>
           </div>

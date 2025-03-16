@@ -48,7 +48,7 @@ const CTA = () => {
                   <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </Button>
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg">
-                  Contact Us for Advice
+                  Call 020 8004 9060
                 </Button>
               </div>
             </div>
@@ -63,6 +63,10 @@ const CTA = () => {
               <div className="border-t border-white/20 pt-4">
                 <p className="italic text-gray-200 mb-3">"Alemara identified serious issues our RICS survey missed. Saved us £25,000 in future repairs."</p>
                 <p className="font-semibold">— Michael T., Kensington</p>
+              </div>
+              <div className="mt-4 pt-4 border-t border-white/20">
+                <p className="text-center text-sm text-gray-300">Visit us at 6 Highbury Corner, London, N5 1RD</p>
+                <p className="text-center text-sm text-gray-300">Email: info@alemara.co.uk</p>
               </div>
             </div>
           </div>
