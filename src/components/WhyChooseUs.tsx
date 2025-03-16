@@ -10,8 +10,8 @@ const reasons = [
   },
   {
     icon: <History className="h-12 w-12 text-[#ea384c]" />,
-    title: "10+ Years of Experience",
-    description: "With over a decade of structural engineering experience in London, we've surveyed thousands of properties across all boroughs and building types."
+    title: "Years of Experience",
+    description: "With our structural engineering experience in London, we've surveyed thousands of properties across all boroughs and building types."
   },
   {
     icon: <Clock className="h-12 w-12 text-[#ea384c]" />,
@@ -32,11 +32,6 @@ const reasons = [
     icon: <FileText className="h-12 w-12 text-[#ea384c]" />,
     title: "Jargon-Free Reports",
     description: "We explain our findings in clear, straightforward language, ensuring you fully understand the structural condition of your property."
-  },
-  {
-    icon: <Award className="h-12 w-12 text-[#ea384c]" />,
-    title: "Professional Indemnity Insurance",
-    description: "Full professional indemnity insurance coverage, giving you complete peace of mind when making decisions based on our expert assessment."
   }
 ];
 
@@ -47,7 +42,7 @@ const WhyChooseUs = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Why Choose Alemara Structural Engineers?</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            When it comes to assessing structural issues in your London property, our 10+ years of specialist expertise and experience matter.
+            When it comes to assessing structural issues in your London property, our specialist expertise and experience matter.
           </p>
         </div>
         
@@ -59,6 +54,17 @@ const WhyChooseUs = () => {
               <p className="text-gray-700">{reason.description}</p>
             </div>
           ))}
+          
+          {/* Professional Indemnity Insurance - Redesigned as a single row with logo on left */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 mt-8">
+            <div className="flex flex-col md:flex-row items-center justify-center bg-gray-50 p-4 rounded-lg border border-gray-100">
+              <Award className="h-12 w-12 text-[#ea384c] mr-0 md:mr-4 mb-3 md:mb-0" />
+              <div className="text-center md:text-left">
+                <h3 className="text-xl font-semibold text-[#1A1F2C]">Full Professional Indemnity Insurance Coverage</h3>
+                <p className="text-gray-700">Complete peace of mind when making decisions based on our expert assessment.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
