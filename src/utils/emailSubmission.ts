@@ -6,7 +6,7 @@ import emailjs from 'emailjs-com';
  * This uses EmailJS to send emails from the client-side
  */
 export const submitFormToEmail = async (formData: any, formType: string) => {
-  console.log(`Sending ${formType} form data to info@alemara.co.uk:`, formData);
+  console.log(`Sending ${formType} form data to hayder@alemara.co.uk:`, formData);
   
   try {
     // Initialize EmailJS with your user ID (only needs to be done once)
@@ -14,7 +14,8 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     
     // Prepare template parameters for EmailJS
     const templateParams = {
-      to_email: 'info@alemara.co.uk', // Change this to your actual email if needed
+      to_name: "Hayder", // Name of recipient
+      to_email: 'hayder@alemara.co.uk', // Updated email based on your EmailJS configuration
       form_type: formType,
       first_name: formData.firstName,
       last_name: formData.lastName,
@@ -24,13 +25,14 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
       message: formData.message || 'No additional message provided',
       from_name: `${formData.firstName} ${formData.lastName}`,
       reply_to: formData.email,
+      subject: `New ${formType} Submission from ${formData.firstName} ${formData.lastName}`
     };
     
     console.log("Template params being sent:", templateParams);
     
     // Send email using EmailJS
     const response = await emailjs.send(
-      'service_v3sqaub', // Your EmailJS service ID
+      'service_v3sqaub', // Your EmailJS service ID from the screenshot
       'template_mi8klv3', // Your EmailJS template ID
       templateParams
     );
