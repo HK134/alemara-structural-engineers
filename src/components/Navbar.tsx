@@ -56,9 +56,9 @@ const Navbar = () => {
                 <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
               </div>
               <a href="tel:02080049060" className="block">
-                <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
+                <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white font-medium flex items-center">
                   <Phone className="mr-2 h-4 w-4" />
-                  020 8004 9060
+                  <span className="text-white">020 8004 9060</span>
                 </Button>
               </a>
             </div>
@@ -66,9 +66,9 @@ const Navbar = () => {
         </div>
         <div className="md:hidden">
           <a href="tel:02080049060" className="block mr-4">
-            <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
+            <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white font-medium flex items-center">
               <Phone className="mr-2 h-4 w-4" />
-              <span className="text-xs">020 8004 9060</span>
+              <span className="text-white text-xs">020 8004 9060</span>
             </Button>
           </a>
         </div>
@@ -92,9 +92,9 @@ const Navbar = () => {
                     <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
                   </div>
                   <a href="tel:02080049060" className="block px-4">
-                    <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center w-full justify-center">
+                    <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white font-medium flex items-center w-full justify-center">
                       <Phone className="mr-2 h-4 w-4" />
-                      020 8004 9060
+                      <span className="text-white">020 8004 9060</span>
                     </Button>
                   </a>
                 </div>
