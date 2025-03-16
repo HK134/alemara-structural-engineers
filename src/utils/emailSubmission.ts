@@ -13,6 +13,7 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     emailjs.init("B_jYcT8aQ8L7R1Dp3"); // EmailJS public key from Account > API Keys
     
     // Prepare template parameters for EmailJS
+    // These parameter names MUST match exactly what's in your EmailJS template
     const templateParams = {
       to_name: "Hayder", // Name of recipient
       to_email: 'hayder@alemara.co.uk', // Updated email based on your EmailJS configuration
@@ -32,8 +33,8 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     
     // Send email using EmailJS
     const response = await emailjs.send(
-      'service_v3sqaub', // Your EmailJS service ID from the screenshot
-      'template_mi8klv3', // Your EmailJS template ID
+      'service_v3sqaub', // Your EmailJS service ID 
+      'template_mi8klv3', // Your EmailJS template ID as shown in the image
       templateParams
     );
     
