@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Clock, Shield } from "lucide-react";
+import { Phone, Clock, Shield, MapPin } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -13,6 +13,9 @@ const Navbar = () => {
             alt="Alemara Structural Engineering" 
             className="h-12 mr-3" 
           />
+          <div className="hidden md:block">
+            <span className="text-xs text-gray-400">Serving Greater London</span>
+          </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
           <a href="#services" className="text-white hover:text-[#ea384c] transition-colors">Services</a>
@@ -41,8 +44,8 @@ const Navbar = () => {
       <div className="hidden md:block bg-[#ea384c] py-1">
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
-            <Clock className="h-4 w-4 mr-2" />
-            <span>We typically respond to all enquiries within 4 hours during business hours</span>
+            <MapPin className="h-4 w-4 mr-2" />
+            <span>Central London Location: 6 Highbury Corner, London, N5 1RD</span>
           </div>
         </div>
       </div>

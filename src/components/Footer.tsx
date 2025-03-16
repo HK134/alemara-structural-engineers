@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -16,7 +16,7 @@ const Footer = () => {
               />
             </div>
             <p className="text-gray-300 mb-4">
-              Specialist structural engineering consultancy providing expert assessments and solutions for property-related structural issues across London and surrounding areas.
+              Specialist London structural engineering consultancy providing expert assessments for London's unique property landscape from historic buildings to modern developments.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Facebook">
@@ -35,38 +35,50 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Our Services</h3>
+            <h3 className="text-xl font-bold mb-4">London Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Post-RICS Structural Surveys</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Crack Assessment</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Subsidence Investigations</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Pre-Purchase Structural Inspections</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Party Wall Assessments</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Property Surveys</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Basement Extensions</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Subsidence Solutions</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Period Property Inspections</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Party Wall Assessments</a></li>
               <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Structural Defect Analysis</a></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Areas We Cover</h3>
+            <h3 className="text-xl font-bold mb-4">London Areas We Cover</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">North London</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">East London</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">South London</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">West London</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Central London</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Greater London</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Islington & Highbury</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Camden & Kentish Town</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Hackney & Shoreditch</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Kensington & Chelsea</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Westminster & Mayfair</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">All London Boroughs</a></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-300">020 8004 9060</li>
-              <li className="text-gray-300">info@alemara.co.uk</li>
-              <li className="text-gray-300">6 Highbury Corner, London, N5 1RD</li>
+            <h3 className="text-xl font-bold mb-4">Contact Our London Office</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <Phone className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
+                <span className="text-gray-300">020 8004 9060</span>
+              </li>
+              <li className="flex items-start">
+                <Mail className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
+                <span className="text-gray-300">info@alemara.co.uk</span>
+              </li>
+              <li className="flex items-start">
+                <MapPin className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
+                <span className="text-gray-300">6 Highbury Corner, London, N5 1RD</span>
+              </li>
             </ul>
             <div className="mt-4 pt-4 border-t border-gray-700">
-              <h4 className="font-semibold mb-2">Business Hours</h4>
+              <h4 className="font-semibold mb-2 flex items-center">
+                <Clock className="text-[#ea384c] mr-2 h-4 w-4" />
+                London Office Hours
+              </h4>
               <p className="text-gray-300 text-sm">Monday to Friday: 8:30am - 6:00pm</p>
               <p className="text-gray-300 text-sm">Saturday: By appointment</p>
               <p className="text-gray-300 text-sm">Sunday: Closed</p>
@@ -76,7 +88,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Alemara Structural Engineering. All rights reserved.
+            &copy; {new Date().getFullYear()} Alemara Structural Engineering London. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
