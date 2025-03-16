@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -20,16 +19,16 @@ const Footer = () => {
               Specialist London structural engineering consultancy providing expert assessments for London's unique property landscape from historic buildings to modern developments.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/amatrix.co" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Twitter">
+              <a href="https://twitter.com/amatrix.co" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Twitter">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/amatrix.co" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/amatrix.co" className="text-gray-300 hover:text-[#ea384c] transition-colors" aria-label="LinkedIn">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
