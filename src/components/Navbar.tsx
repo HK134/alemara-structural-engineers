@@ -33,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${scrolled ? 'bg-[#1A1F2C]' : 'bg-[#1A1F2C]'} py-4 w-full z-10 sticky top-0 transition-all duration-300`}>
+    <nav className={`${scrolled ? 'bg-[#1A1F2C]' : 'bg-[#1A1F2C]'} py-4 w-full z-50 sticky top-0 transition-all duration-300`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <button onClick={scrollToTop} className="focus:outline-none">
@@ -110,7 +110,7 @@ const Navbar = () => {
           </Dialog>
         </div>
       </div>
-      <div className="bg-[#ea384c] py-2 mt-2">
+      <div className="bg-[#ea384c] py-2 mt-2 relative z-50">
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
             <Clock className="h-4 w-4 mr-2" />
