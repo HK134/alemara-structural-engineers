@@ -41,7 +41,7 @@ const Footer = () => {
               <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Basement Extensions</a></li>
               <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Subsidence Solutions</a></li>
               <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Period Property Inspections</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Party Wall Assessments</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Bulging Walls & Movement Analysis</a></li>
               <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Structural Defect Analysis</a></li>
             </ul>
           </div>

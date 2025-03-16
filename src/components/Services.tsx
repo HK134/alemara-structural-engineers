@@ -26,8 +26,8 @@ const serviceItems = [
   },
   {
     icon: <Scale className="h-10 w-10 text-[#ea384c]" />,
-    title: "Party Wall Assessments",
-    description: "Expert evaluation and reporting for party wall matters, ensuring compliance with regulations and protecting your interests during building works."
+    title: "Bulging Walls & Movement Analysis",
+    description: "Expert assessment of wall bulging, leaning structures and building movement issues common in London period properties, with detailed remediation advice."
   },
   {
     icon: <Wrench className="h-10 w-10 text-[#ea384c]" />,
