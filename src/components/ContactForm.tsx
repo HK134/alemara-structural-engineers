@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle, ArrowRight } from "lucide-react";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -27,10 +26,41 @@ const ContactForm = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-6">Book Your Structural Inspection</h2>
-            <p className="text-xl text-gray-700 mb-8">
-              Fill out the form for a no-obligation quote or to discuss your structural concerns with one of our chartered engineers.
+            <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full mb-4">Fast Response Guaranteed</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Book Your Structural Inspection Today</h2>
+            <p className="text-xl text-gray-700 mb-6">
+              Complete the form for priority scheduling. A senior structural engineer will contact you within 4 hours.
             </p>
+            
+            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-8">
+              <h3 className="font-semibold text-[#1A1F2C] text-lg mb-4 flex items-center">
+                <CheckCircle className="text-[#ea384c] mr-2 h-5 w-5" />
+                What Our Process Includes:
+              </h3>
+              <div className="space-y-3 text-gray-700">
+                <div className="flex items-start">
+                  <div className="bg-[#ea384c] rounded-full text-white w-6 h-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">1</div>
+                  <div>
+                    <span className="font-semibold block">Initial Consultation</span>
+                    <span className="text-sm">We discuss your concerns and establish if a structural inspection is needed</span>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-[#ea384c] rounded-full text-white w-6 h-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">2</div>
+                  <div>
+                    <span className="font-semibold block">On-site Inspection</span>
+                    <span className="text-sm">Thorough assessment by a chartered structural engineer</span>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-[#ea384c] rounded-full text-white w-6 h-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">3</div>
+                  <div>
+                    <span className="font-semibold block">Detailed Report</span>
+                    <span className="text-sm">Comprehensive findings and recommendations within 48 hours</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             
             <div className="space-y-6 mb-8">
               <div className="flex items-start">
@@ -90,6 +120,14 @@ const ContactForm = () => {
           </div>
           
           <div className="bg-white p-8 rounded-lg shadow-lg border-t-4 border-[#ea384c]">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-[#1A1F2C]">Request a Structural Assessment</h3>
+              <div className="flex items-center bg-[#1A1F2C] text-white text-xs px-3 py-1 rounded-full">
+                <Clock className="h-3 w-3 mr-1" />
+                <span>Takes only 2 minutes</span>
+              </div>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
@@ -113,23 +151,6 @@ const ContactForm = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="propertyType">Property Type*</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select property type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="terrace">Terraced House</SelectItem>
-                    <SelectItem value="semidetached">Semi-Detached House</SelectItem>
-                    <SelectItem value="detached">Detached House</SelectItem>
-                    <SelectItem value="flat">Flat/Apartment</SelectItem>
-                    <SelectItem value="commercial">Commercial Property</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-2">
                 <Label htmlFor="serviceType">Service Required*</Label>
                 <Select>
                   <SelectTrigger>
@@ -149,15 +170,24 @@ const ContactForm = () => {
               
               <div className="space-y-2">
                 <Label htmlFor="message">Describe Your Structural Concerns</Label>
-                <Textarea id="message" placeholder="Please provide details about the structural issues or concerns you have..." className="h-32" />
+                <Textarea id="message" placeholder="Please provide details about the structural issues or concerns you have..." className="h-24" />
+              </div>
+
+              <div className="bg-gray-100 p-3 rounded-lg border border-gray-200 text-sm text-gray-600 flex items-start mb-2">
+                <CheckCircle className="text-[#ea384c] h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
+                <span>By submitting this form, you'll secure priority scheduling with one of our senior structural engineers. We're currently booking appointments within 3-5 business days.</span>
               </div>
               
-              <Button type="submit" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg">
-                Request a Structural Assessment
+              <Button type="submit" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden h-14">
+                <span className="relative z-10 flex items-center">
+                  Request a Structural Assessment
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
               </Button>
               
               <p className="text-sm text-gray-500 text-center">
-                We aim to respond to all enquiries within 24 hours during business days.
+                We aim to respond to all enquiries within 4 hours during business hours.
               </p>
             </form>
           </div>
