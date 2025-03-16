@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
@@ -24,7 +25,7 @@ const Hero = () => {
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
             Get a certified structural assessment within 24 hours. We catch issues that RICS surveys miss, saving you thousands in repairs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <div className="relative">
               <BookingDialog>
                 <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
@@ -49,14 +50,14 @@ const Hero = () => {
             </a>
           </div>
           
-          <div className="bg-black bg-opacity-30 p-4 rounded-lg mb-6">
+          <div className="mt-8 bg-black bg-opacity-30 p-4 rounded-lg mb-10">
             <div className="flex items-center text-[#ea384c] mb-2">
               <Clock className="mr-2 h-5 w-5" />
               <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
             </div>
             <p className="text-sm text-gray-300">Located at 6 Highbury Corner, London, N5 1RD - Serving all of Greater London</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div className="flex items-center">
               <Check className="text-[#ea384c] mr-2 h-5 w-5" />
               <span>London Property Specialists</span>
