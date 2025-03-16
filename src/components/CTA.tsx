@@ -79,7 +79,7 @@ const CTA = () => {
                   <span className="text-2xl font-bold">97%</span>
                 </div>
                 <h3 className="text-xl font-semibold">London Client Satisfaction</h3>
-                <p className="text-sm text-gray-300">Based on over 500 London property assessments</p>
+                <p className="text-sm text-gray-300">Based on over 1000 London property assessments</p>
               </div>
               <div className="border-t border-white/20 pt-4">
                 <p className="italic text-gray-200 mb-3">"Alemara identified serious structural issues in our Islington Victorian terrace that our RICS survey missed."</p>
