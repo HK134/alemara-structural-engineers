@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import BookingDialog from "./BookingDialog";
 
 const Hero = () => {
   return (
@@ -26,7 +27,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <div className="relative">
-              <a href="#contact" className="inline-block w-full">
+              <BookingDialog>
                 <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
                   <span className="relative z-10 flex items-center">
                     Book a Structural Survey
@@ -34,7 +35,7 @@ const Hero = () => {
                   </span>
                   <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </Button>
-              </a>
+              </BookingDialog>
               <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                 <span className="flex items-center text-xs text-gray-300">
                   <Clock className="mr-1 h-3 w-3 text-[#ea384c]" />
@@ -42,9 +43,11 @@ const Hero = () => {
                 </span>
               </div>
             </div>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg">
-              Call Us: 020 8004 9060
-            </Button>
+            <a href="tel:02080049060">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full sm:w-auto">
+                Call Us: 020 8004 9060
+              </Button>
+            </a>
           </div>
           <div className="bg-black bg-opacity-30 p-4 rounded-lg mb-6">
             <div className="flex items-center text-[#ea384c] mb-2">

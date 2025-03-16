@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, Shield, Building, MapPin } from "lucide-react";
+import BookingDialog from "./BookingDialog";
 
 const CTA = () => {
   return (
@@ -50,16 +51,20 @@ const CTA = () => {
                 <span>We cover all London boroughs with same-week appointments available</span>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
-                  <span className="relative z-10 flex items-center">
-                    Book a London Property Inspection
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-                </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg">
-                  Call 020 8004 9060
-                </Button>
+                <BookingDialog buttonText="Book a London Property Inspection">
+                  <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
+                    <span className="relative z-10 flex items-center">
+                      Book a London Property Inspection
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                  </Button>
+                </BookingDialog>
+                <a href="tel:02080049060">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full sm:w-auto">
+                    Call 020 8004 9060
+                  </Button>
+                </a>
               </div>
             </div>
             <div className="md:w-2/5 bg-white/10 p-6 rounded-lg">
