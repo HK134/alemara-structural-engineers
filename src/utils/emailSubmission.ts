@@ -9,6 +9,9 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
   console.log(`Sending ${formType} form data to info@alemara.co.uk:`, formData);
   
   try {
+    // Initialize EmailJS with your user ID (only needs to be done once)
+    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+    
     // Prepare template parameters for EmailJS
     const templateParams = {
       to_email: 'info@alemara.co.uk',
@@ -23,10 +26,9 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     
     // Send email using EmailJS
     const response = await emailjs.send(
-      'service_alemara', // Replace with your EmailJS service ID
-      'template_alemara', // Replace with your EmailJS template ID
-      templateParams,
-      'your_user_id' // Replace with your EmailJS user ID
+      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      templateParams
     );
     
     console.log('Email successfully sent!', response);
