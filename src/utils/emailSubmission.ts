@@ -14,15 +14,19 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     
     // Prepare template parameters for EmailJS
     const templateParams = {
-      to_email: 'info@alemara.co.uk',
+      to_email: 'info@alemara.co.uk', // Change this to your actual email if needed
       form_type: formType,
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,
-      service_type: formData.serviceType,
+      service_type: formData.serviceType || 'Not specified',
       message: formData.message || 'No additional message provided',
+      from_name: `${formData.firstName} ${formData.lastName}`,
+      reply_to: formData.email,
     };
+    
+    console.log("Template params being sent:", templateParams);
     
     // Send email using EmailJS
     const response = await emailjs.send(
