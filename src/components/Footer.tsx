@@ -102,7 +102,7 @@ const Footer = () => {
               <Link to="/terms" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
                 Terms of Service
               </Link>
-              <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
+              <a href="/sitemap.xml" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
                 Sitemap
               </a>
             </div>

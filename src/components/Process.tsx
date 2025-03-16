@@ -12,7 +12,7 @@ const Process = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-8">Book Your Structural Inspection Today</h2>
           
           <p className="text-xl text-gray-700 mb-10">
-            Complete the form for priority scheduling. A senior structural engineer with 10+ years of experience will contact you within 4 hours.
+            Complete the form for priority scheduling. A certified structural engineer with 10+ years of experience will contact you within 4 hours.
           </p>
           
           <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md border border-gray-200 mb-8">
