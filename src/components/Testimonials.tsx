@@ -5,33 +5,33 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "The structural survey was incredibly thorough and revealed issues we would have completely missed. Saved us thousands in potential repairs.",
+    quote: "Alemara's structural assessment was incredibly thorough. They identified issues that the initial RICS survey missed and provided clear guidance on remedial work. Saved us from a potentially expensive mistake.",
     author: "Sarah Johnson",
-    location: "Chelsea, London",
-    rating: 5
-  },
-  {
-    quote: "Fast, professional and extremely knowledgeable about London's Victorian properties. The report was clear and helped us negotiate a better price.",
-    author: "James Wilson",
     location: "Islington, London",
     rating: 5
   },
   {
-    quote: "As first-time buyers, we were nervous about structural issues. The survey team was patient, explained everything clearly and gave us confidence in our purchase.",
-    author: "Emma and Tom Davis",
+    quote: "After noticing cracks in our Victorian terrace, we were worried about subsidence. Alemara's engineers conducted a detailed assessment, explained the actual cause was much simpler, and saved us thousands on unnecessary work.",
+    author: "James Wilson",
     location: "Greenwich, London",
+    rating: 5
+  },
+  {
+    quote: "As a property developer, I regularly use Alemara for structural inspections. Their reports are detailed yet easy to understand, and their recommendations are always practical and cost-effective.",
+    author: "Emma Davis",
+    location: "Kensington, London",
     rating: 5
   }
 ];
 
 const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-20 bg-survey-primary text-white">
+    <section id="testimonials" className="py-20 bg-[#1A1F2C] text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
           <p className="text-xl max-w-3xl mx-auto text-gray-300">
-            We've helped hundreds of property owners and buyers across London make informed decisions.
+            We've helped hundreds of property owners across London understand and address structural concerns.
           </p>
         </div>
         
@@ -41,7 +41,7 @@ const Testimonials = () => {
               <CardContent className="pt-6">
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-survey-accent text-survey-accent" />
+                    <Star key={i} className="h-5 w-5 fill-[#ea384c] text-[#ea384c]" />
                   ))}
                 </div>
                 <p className="mb-4 text-gray-100 italic">"{testimonial.quote}"</p>

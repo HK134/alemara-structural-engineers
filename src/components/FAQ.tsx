@@ -4,28 +4,28 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqItems = [
   {
-    question: "How long does a structural survey take?",
-    answer: "A typical structural survey in London takes 2-4 hours depending on the property size and complexity. For larger properties or those with significant concerns, we may need up to a full day to complete a thorough assessment."
+    question: "When do I need a structural engineer rather than just a RICS surveyor?",
+    answer: "While RICS surveyors provide general property assessments, you need a structural engineer when specific structural issues are identified or suspected. This includes visible cracks, signs of subsidence, planned structural alterations, or when a RICS survey highlights potential structural concerns that require specialist investigation."
   },
   {
-    question: "How quickly can I get my survey report?",
-    answer: "We deliver all structural survey reports within 48 hours of completing the inspection. If you have an urgent need, we offer an express service with same-day reports for an additional fee."
+    question: "How quickly can you conduct a structural inspection after I contact you?",
+    answer: "We understand the time-sensitive nature of property purchases and structural concerns. In most cases, we can arrange an inspection within 2-3 working days across London. For urgent cases, we offer a priority service with next-day inspections where possible."
   },
   {
-    question: "What's the difference between a structural survey and a homebuyer's report?",
-    answer: "A structural survey is much more comprehensive than a homebuyer's report. Our structural surveys involve a detailed inspection of all accessible parts of the property, focusing specifically on structural elements and providing in-depth analysis of any defects. A homebuyer's report is more general and less detailed."
+    question: "What's included in your structural assessment report?",
+    answer: "Our comprehensive reports include detailed analysis of the structural issue, potential causes, supporting photographic evidence, and clear recommendations for remedial work. We also provide an assessment of the urgency of repairs and, where requested, indicative costs for the recommended works."
   },
   {
-    question: "Do I need to be present during the survey?",
-    answer: "While not mandatory, we recommend that clients be present at least at the beginning and end of the survey. This allows us to discuss any specific concerns you have beforehand and provide immediate feedback on major findings afterward."
+    question: "How much does a structural inspection cost?",
+    answer: "Our fees depend on the property size, location, and the specific issues requiring assessment. Typical inspections range from £550 for crack assessments in smaller properties to £950+ for comprehensive structural surveys of larger homes. We provide transparent, no-obligation quotes after understanding your specific requirements."
   },
   {
-    question: "How much does a structural survey cost in London?",
-    answer: "The cost varies depending on the property size, location, age, and complexity. Surveys typically range from £600 for a small flat to £1,500+ for larger properties. We provide transparent quotes with no hidden fees after understanding your specific requirements."
+    question: "Will your report help me negotiate with the property seller?",
+    answer: "Absolutely. Our detailed, professional reports are specifically designed to help in property negotiations. They provide clear evidence of any structural issues, the scope of required repairs, and potential costs – giving you concrete information to renegotiate the purchase price or request that sellers complete necessary repairs."
   },
   {
-    question: "Do you provide recommendations for structural engineers or contractors?",
-    answer: "Yes, our reports include actionable recommendations, and we can refer you to trusted structural engineers and contractors in London if remedial work is required. We have an extensive network of professionals we've worked with over many years."
+    question: "Do you recommend contractors for the remedial work?",
+    answer: "Yes, we can recommend trusted contractors from our network of specialists who are experienced in implementing our recommended solutions. We can also provide specifications for the work and, if required, oversee the repairs to ensure they're completed to the necessary standard."
   }
 ];
 
@@ -34,9 +34,9 @@ const FAQ = () => {
     <section id="faq" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-survey-primary mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-survey-dark max-w-3xl mx-auto">
-            Get answers to common questions about our structural survey services in London.
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Frequently Asked Questions</h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Get answers to common questions about our structural engineering assessments.
           </p>
         </div>
         
@@ -44,10 +44,10 @@ const FAQ = () => {
           <Accordion type="single" collapsible className="w-full">
             {faqItems.map((item, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left text-lg font-medium text-survey-primary hover:text-survey-accent">
+                <AccordionTrigger className="text-left text-lg font-medium text-[#1A1F2C] hover:text-[#ea384c]">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-survey-dark">
+                <AccordionContent className="text-gray-700">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -56,8 +56,8 @@ const FAQ = () => {
         </div>
         
         <div className="text-center mt-12">
-          <p className="text-survey-dark mb-4">Still have questions? We're here to help!</p>
-          <a href="#contact" className="text-survey-accent hover:underline font-semibold">Contact us for more information</a>
+          <p className="text-gray-700 mb-4">Still have questions about structural issues with your property?</p>
+          <a href="#contact" className="text-[#ea384c] hover:underline font-semibold">Contact our structural engineers directly</a>
         </div>
       </div>
     </section>

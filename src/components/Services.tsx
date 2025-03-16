@@ -1,62 +1,62 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building, ClipboardCheck, FileText, SearchCheck, Scale, Wrench } from "lucide-react";
+import { Building, Search, AlertTriangle, Scale, Ruler, Wrench } from "lucide-react";
 
 const serviceItems = [
   {
-    icon: <Building className="h-10 w-10 text-survey-accent" />,
-    title: "Full Structural Surveys",
-    description: "Comprehensive assessment of all structural elements of your property, identifying any defects or concerns."
+    icon: <Building className="h-10 w-10 text-[#ea384c]" />,
+    title: "Post-RICS Structural Surveys",
+    description: "Detailed follow-up inspections after initial RICS surveys to investigate specific structural concerns highlighted in homebuyer reports."
   },
   {
-    icon: <ClipboardCheck className="h-10 w-10 text-survey-accent" />,
-    title: "Pre-Purchase Surveys",
-    description: "Detailed inspection before you buy to identify potential issues and maintenance requirements."
+    icon: <AlertTriangle className="h-10 w-10 text-[#ea384c]" />,
+    title: "Crack Assessment",
+    description: "Expert analysis of cracks in walls, floors and ceilings to determine their cause, severity and the appropriate remedial action required."
   },
   {
-    icon: <FileText className="h-10 w-10 text-survey-accent" />,
-    title: "Building Reports",
-    description: "Clear, jargon-free reports detailing our findings with actionable recommendations."
+    icon: <Search className="h-10 w-10 text-[#ea384c]" />,
+    title: "Subsidence Investigations",
+    description: "Comprehensive assessment of potential subsidence issues, including soil analysis, monitoring, and detailed recommendations for stabilisation."
   },
   {
-    icon: <SearchCheck className="h-10 w-10 text-survey-accent" />,
-    title: "Defect Analysis",
-    description: "Targeted inspections to diagnose specific structural issues and recommend remedial solutions."
+    icon: <Ruler className="h-10 w-10 text-[#ea384c]" />,
+    title: "Pre-Purchase Structural Inspections",
+    description: "Thorough structural assessments before property purchase to identify potential issues that may affect structural integrity and value."
   },
   {
-    icon: <Scale className="h-10 w-10 text-survey-accent" />,
-    title: "Party Wall Surveys",
-    description: "Expert guidance through the party wall process, ensuring legal compliance and protecting your interests."
+    icon: <Scale className="h-10 w-10 text-[#ea384c]" />,
+    title: "Party Wall Assessments",
+    description: "Expert evaluation and reporting for party wall matters, ensuring compliance with regulations and protecting your interests during building works."
   },
   {
-    icon: <Wrench className="h-10 w-10 text-survey-accent" />,
-    title: "Renovation Consultation",
-    description: "Professional advice on structural modifications for renovation or extension projects."
+    icon: <Wrench className="h-10 w-10 text-[#ea384c]" />,
+    title: "Structural Defect Analysis",
+    description: "Specialised investigation of specific structural defects, identifying root causes and providing detailed remediation strategies."
   }
 ];
 
 const Services = () => {
   return (
-    <section id="services" className="py-20 bg-survey-light">
+    <section id="services" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-survey-primary mb-4">Our Structural Survey Services</h2>
-          <p className="text-xl text-survey-dark max-w-3xl mx-auto">
-            We offer a comprehensive range of structural survey services tailored to London properties, 
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Our Structural Engineering Services</h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            We provide specialist structural engineering assessments for London properties, 
             from Victorian terraces to modern apartments.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {serviceItems.map((service, index) => (
-            <Card key={index} className="border-2 hover:border-survey-accent transition-all duration-300 hover:shadow-lg">
+            <Card key={index} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg">
               <CardHeader className="pb-2">
                 <div className="mb-4">{service.icon}</div>
-                <CardTitle className="text-xl text-survey-primary">{service.title}</CardTitle>
+                <CardTitle className="text-xl text-[#1A1F2C]">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-survey-dark text-base">{service.description}</CardDescription>
+                <CardDescription className="text-gray-700 text-base">{service.description}</CardDescription>
               </CardContent>
             </Card>
           ))}
