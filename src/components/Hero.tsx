@@ -64,7 +64,7 @@ const Hero = () => {
               <Clock className="mr-2 h-5 w-5" />
               <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
             </div>
-            <p className="text-sm text-gray-300">Located at 6 Highbury Corner, London, N5 1RD - Serving all of Greater London</p>
+            <p className="text-sm text-gray-300">Located at 6 Highbury Corner, London, N5 1RD - Serving all of Greater London for 10+ years</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div className="flex items-center">

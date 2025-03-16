@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, Shield, Building, MapPin } from "lucide-react";
+import { ArrowRight, Clock, Shield, Building, MapPin, History } from "lucide-react";
 import BookingDialog from "./BookingDialog";
 
 const CTA = () => {
@@ -27,6 +27,12 @@ const CTA = () => {
                 From historic Georgian architecture to modern developments, our London-based engineers understand the unique challenges of the capital's buildings:
               </p>
               <ul className="mb-6 space-y-2">
+                <li className="flex items-start">
+                  <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
+                    <History className="h-3 w-3 text-white" />
+                  </span>
+                  <span>10+ years of experience in London structural engineering</span>
+                </li>
                 <li className="flex items-start">
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
                     <Building className="h-3 w-3 text-white" />
@@ -82,6 +88,7 @@ const CTA = () => {
               <div className="mt-4 pt-4 border-t border-white/20">
                 <p className="text-center text-sm text-gray-300">Visit us at 6 Highbury Corner, London, N5 1RD</p>
                 <p className="text-center text-sm text-gray-300">Email: info@alemara.co.uk</p>
+                <p className="text-center text-sm text-gray-300 mt-1">Serving London for over 10 years</p>
               </div>
             </div>
           </div>

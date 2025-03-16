@@ -15,8 +15,8 @@ const AboutUs = () => {
               
               <div className="prose prose-lg">
                 <p className="mb-6">
-                  London Structural Surveys is a specialist structural engineering consultancy serving the Greater London area. 
-                  With decades of combined experience, our team of certified structural engineers provides expert assessments and 
+                  London Structural Surveys is a specialist structural engineering consultancy serving the Greater London area
+                  for over 10 years. With decades of combined experience, our team of certified structural engineers provides expert assessments and 
                   solutions for London's unique property landscape.
                 </p>
                 

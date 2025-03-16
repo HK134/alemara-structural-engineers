@@ -1,12 +1,17 @@
 
 import React from 'react';
-import { Award, Clock, MapPin, ThumbsUp, GraduationCap, FileText } from 'lucide-react';
+import { Award, Clock, MapPin, ThumbsUp, GraduationCap, FileText, History } from 'lucide-react';
 
 const reasons = [
   {
     icon: <GraduationCap className="h-12 w-12 text-[#ea384c]" />,
-    title: "Chartered Structural Engineers",
-    description: "Our team consists of experienced chartered structural engineers with specialist knowledge in building pathology and defect diagnosis."
+    title: "Certified Structural Engineers",
+    description: "Our team consists of experienced certified structural engineers with specialist knowledge in building pathology and defect diagnosis."
+  },
+  {
+    icon: <History className="h-12 w-12 text-[#ea384c]" />,
+    title: "10+ Years of Experience",
+    description: "With over a decade of structural engineering experience in London, we've surveyed thousands of properties across all boroughs and building types."
   },
   {
     icon: <Clock className="h-12 w-12 text-[#ea384c]" />,
@@ -42,7 +47,7 @@ const WhyChooseUs = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Why Choose Alemara Structural Engineers?</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            When it comes to assessing structural issues in your London property, specialist expertise and experience matter.
+            When it comes to assessing structural issues in your London property, our 10+ years of specialist expertise and experience matter.
           </p>
         </div>
         
