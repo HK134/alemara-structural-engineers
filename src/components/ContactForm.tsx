@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,19 +7,79 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { Phone, Mail, MapPin, Clock, CheckCircle, ArrowRight } from "lucide-react";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+const formSchema = z.object({
+  firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
+  lastName: z.string().min(2, { message: "Last name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phone: z.string().min(5, { message: "Please enter a valid phone number." }),
+  serviceType: z.string({ required_error: "Please select a service type." }),
+  message: z.string().optional(),
+});
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
     
-    // In a real implementation, this would send the form data to a server
-    toast({
-      title: "Request submitted successfully!",
-      description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
-      duration: 5000,
-    });
+    try {
+      // Log form data for development purposes
+      console.log("Form submission data:", data);
+      
+      // In a production environment, you would send this data to your backend
+      // Example:
+      // const response = await fetch('https://your-api-endpoint.com/submit-contact', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(data),
+      // });
+      
+      // For now, we'll simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Request submitted successfully!",
+        description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
+        duration: 5000,
+      });
+      
+      // Reset form
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your request. Please try again later.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,69 +189,133 @@ const ContactForm = () => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name*</Label>
-                  <Input id="firstName" placeholder="Enter first name" required />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First Name*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter first name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last Name*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter last name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name*</Label>
-                  <Input id="lastName" placeholder="Enter last name" required />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address*</Label>
-                <Input id="email" type="email" placeholder="Enter your email" required />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number*</Label>
-                <Input id="phone" placeholder="Enter your phone number" required />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="serviceType">Service Required*</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select service type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="rics-follow">Post-RICS Survey Assessment</SelectItem>
-                    <SelectItem value="crack">Crack Assessment</SelectItem>
-                    <SelectItem value="subsidence">Subsidence Investigation</SelectItem>
-                    <SelectItem value="prepurchase">Pre-Purchase Structural Inspection</SelectItem>
-                    <SelectItem value="party">Party Wall Assessment</SelectItem>
-                    <SelectItem value="defect">Structural Defect Analysis</SelectItem>
-                    <SelectItem value="unsure">Not Sure - Need Advice</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="message">Describe Your Structural Concerns</Label>
-                <Textarea id="message" placeholder="Please provide details about the structural issues or concerns you have..." className="h-24" />
-              </div>
+                
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email Address*</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="Enter your email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number*</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter your phone number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="serviceType"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Service Required*</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select service type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="rics-follow">Post-RICS Survey Assessment</SelectItem>
+                          <SelectItem value="crack">Crack Assessment</SelectItem>
+                          <SelectItem value="subsidence">Subsidence Investigation</SelectItem>
+                          <SelectItem value="prepurchase">Pre-Purchase Structural Inspection</SelectItem>
+                          <SelectItem value="party">Party Wall Assessment</SelectItem>
+                          <SelectItem value="defect">Structural Defect Analysis</SelectItem>
+                          <SelectItem value="unsure">Not Sure - Need Advice</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Describe Your Structural Concerns</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Please provide details about the structural issues or concerns you have..." 
+                          className="h-24"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <div className="bg-gray-100 p-3 rounded-lg border border-gray-200 text-sm text-gray-600 flex items-start mb-2">
-                <CheckCircle className="text-[#ea384c] h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                <span>By submitting this form, you'll secure priority scheduling with one of our senior structural engineers. We're currently booking appointments within 3-5 business days.</span>
-              </div>
-              
-              <Button type="submit" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden h-14">
-                <span className="relative z-10 flex items-center">
-                  Request a Structural Assessment
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-              </Button>
-              
-              <p className="text-sm text-gray-500 text-center mt-4">
-                <Clock className="inline-block mr-1 h-3 w-3" />
-                We typically respond to all enquiries within 4 hours during business hours.
-              </p>
-            </form>
+                <div className="bg-gray-100 p-3 rounded-lg border border-gray-200 text-sm text-gray-600 flex items-start mb-2">
+                  <CheckCircle className="text-[#ea384c] h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>By submitting this form, you'll secure priority scheduling with one of our senior structural engineers. We're currently booking appointments within 3-5 business days.</span>
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden h-14"
+                  disabled={isSubmitting}
+                >
+                  <span className="relative z-10 flex items-center">
+                    {isSubmitting ? "Submitting..." : "Request a Structural Assessment"}
+                    {!isSubmitting && <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />}
+                  </span>
+                  <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                </Button>
+                
+                <p className="text-sm text-gray-500 text-center mt-4">
+                  <Clock className="inline-block mr-1 h-3 w-3" />
+                  We typically respond to all enquiries within 4 hours during business hours.
+                </p>
+              </form>
+            </Form>
           </div>
         </div>
       </div>
