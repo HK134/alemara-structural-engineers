@@ -22,7 +22,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors">About Us</Link>
+          <a href="/#why-choose-us" className="text-white hover:text-[#ea384c] transition-colors">About Us</a>
           <a href="/#services" className="text-white hover:text-[#ea384c] transition-colors">Services</a>
           <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors">Our Process</a>
           <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors">Testimonials</a>
@@ -51,7 +51,7 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
-                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About Us</Link>
+                <a href="/#why-choose-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About Us</a>
                 <a href="/#services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</a>
                 <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Our Process</a>
                 <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Testimonials</a>
