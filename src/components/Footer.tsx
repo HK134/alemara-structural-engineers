@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
@@ -90,20 +89,34 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} London Structural Surveys, powered by Alemara Ltd. All rights reserved.
-          </p>
-          <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
-              Sitemap
-            </a>
+        <div className="border-t border-gray-700 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+            <p className="text-gray-400 text-sm mb-4 md:mb-0">
+              &copy; {new Date().getFullYear()} London Structural Surveys, powered by Alemara Ltd. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
+                Terms of Service
+              </a>
+              <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
+                Sitemap
+              </a>
+            </div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center justify-center border-t border-gray-700 pt-6">
+            <p className="text-gray-400 text-sm mr-3 mb-2 md:mb-0">Professional Accreditation:</p>
+            <div className="flex items-center">
+              <img 
+                src="/lovable-uploads/b73082d3-f4cd-498f-93a3-137ac572ed47.png" 
+                alt="IStructE - The Institution of Structural Engineers" 
+                className="h-10 mr-2" 
+              />
+              <span className="text-gray-300 text-sm">Endorsed by the Institution of Structural Engineers (IStructE)</span>
+            </div>
           </div>
         </div>
       </div>

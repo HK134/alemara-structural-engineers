@@ -30,7 +30,7 @@ const Navbar = () => {
             <div className="mr-4">
               <div className="flex items-center mb-1">
                 <Shield className="h-4 w-4 text-[#ea384c] mr-1" />
-                <span className="text-xs text-gray-300 font-semibold">ISTRUCTE ENDORSED</span>
+                <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
               </div>
               <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
