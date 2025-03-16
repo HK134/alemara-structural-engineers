@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Clock, Shield, MapPin } from "lucide-react";
+import { Phone, Clock, Shield, MapPin, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Navbar = () => {
   return (
@@ -32,17 +33,44 @@ const Navbar = () => {
                 <Shield className="h-4 w-4 text-[#ea384c] mr-1" />
                 <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
               </div>
-              <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
-                <Phone className="mr-2 h-4 w-4" />
-                020 8004 9060
-              </Button>
+              <a href="tel:02080049060">
+                <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
+                  <Phone className="mr-2 h-4 w-4" />
+                  020 8004 9060
+                </Button>
+              </a>
             </div>
           </div>
         </div>
         <div className="md:hidden">
-          <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white">
-            <Phone className="h-4 w-4" />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="border-[#ea384c] text-[#ea384c]">
+                <Menu className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
+              <div className="flex flex-col space-y-4 py-4">
+                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About Us</Link>
+                <a href="/#services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</a>
+                <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Our Process</a>
+                <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Testimonials</a>
+                <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</a>
+                <div className="border-t border-gray-700 pt-4 mt-2">
+                  <div className="flex items-center mb-2 px-4">
+                    <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
+                    <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
+                  </div>
+                  <a href="tel:02080049060" className="block px-4">
+                    <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center w-full justify-center">
+                      <Phone className="mr-2 h-4 w-4" />
+                      020 8004 9060
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="hidden md:block bg-[#ea384c] py-1">

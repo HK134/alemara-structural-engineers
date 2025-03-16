@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -24,13 +25,23 @@ const Hero = () => {
             Expert structural engineering assessments within 24 hours. We catch issues that RICS surveys miss, saving you thousands in future repairs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
-              <span className="relative z-10 flex items-center">
-                Book a Structural Survey
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-            </Button>
+            <div className="relative">
+              <a href="#contact" className="inline-block w-full">
+                <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
+                  <span className="relative z-10 flex items-center">
+                    Book a Structural Survey
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                </Button>
+              </a>
+              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                <span className="flex items-center text-xs text-gray-300">
+                  <Clock className="mr-1 h-3 w-3 text-[#ea384c]" />
+                  Only takes 2 minutes
+                </span>
+              </div>
+            </div>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg">
               Call Us: 020 8004 9060
             </Button>
