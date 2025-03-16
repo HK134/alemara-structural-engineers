@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Dialog, 
@@ -98,7 +99,7 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[1000px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-[#1A1F2C]">Request a Structural Assessment</DialogTitle>
           <DialogDescription className="flex items-center text-sm">
