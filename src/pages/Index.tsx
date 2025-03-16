@@ -9,6 +9,7 @@ import FAQ from '@/components/FAQ';
 import ContactForm from '@/components/ContactForm';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
         <CTA />
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

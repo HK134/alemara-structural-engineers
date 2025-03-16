@@ -36,8 +36,8 @@ const Hero = () => {
                   <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </Button>
               </BookingDialog>
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                <span className="flex items-center text-xs text-gray-300">
+              <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                <span className="flex items-center bg-black bg-opacity-30 text-white px-2 py-1 rounded-full text-xs">
                   <Clock className="mr-1 h-3 w-3 text-[#ea384c]" />
                   Only takes 2 minutes
                 </span>
@@ -49,6 +49,7 @@ const Hero = () => {
               </Button>
             </a>
           </div>
+          
           <div className="bg-black bg-opacity-30 p-4 rounded-lg mb-6">
             <div className="flex items-center text-[#ea384c] mb-2">
               <Clock className="mr-2 h-5 w-5" />
