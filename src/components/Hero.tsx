@@ -22,7 +22,7 @@ const Hero = () => {
             Expert Structural Engineering Surveys Across London
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            Expert structural engineering assessments within 24 hours. We catch issues that RICS surveys miss, saving you thousands in future repairs.
+            Get a certified structural assessment within 24 hours. We catch issues that RICS surveys miss, saving you thousands in repairs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <div className="relative">
