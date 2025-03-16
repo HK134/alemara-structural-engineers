@@ -41,7 +41,7 @@ const Services = () => {
     <section id="services" className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Our Structural Engineering Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">London Structural Surveys & Engineering Services</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             We provide specialist structural engineering assessments for London properties, 
             from Victorian terraces to modern apartments.
