@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -106,7 +107,7 @@ const ContactForm = () => {
                   <div className="bg-[#ea384c] rounded-full text-white w-6 h-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">2</div>
                   <div>
                     <span className="font-semibold block">On-site Inspection</span>
-                    <span className="text-sm">Thorough assessment by a chartered structural engineer</span>
+                    <span className="text-sm">Thorough assessment by a certified structural engineer</span>
                   </div>
                 </div>
                 <div className="flex items-start">

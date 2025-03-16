@@ -38,7 +38,7 @@ const Process = () => {
                 </div>
                 <div>
                   <h4 className="text-xl font-semibold text-[#1A1F2C] mb-1">On-site Inspection</h4>
-                  <p className="text-gray-700">Thorough assessment by a chartered structural engineer</p>
+                  <p className="text-gray-700">Thorough assessment by a certified structural engineer</p>
                 </div>
               </div>
               
