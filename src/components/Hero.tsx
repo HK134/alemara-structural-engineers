@@ -14,7 +14,7 @@ const Hero = () => {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-[url('/lovable-uploads/london-skyline-silhouette.png')] bg-repeat-x bg-bottom opacity-20"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl animate-fade-in">
+        <div className="max-w-3xl">
           <div className="flex items-center mb-4">
             <MapPin className="text-[#ea384c] mr-2 h-5 w-5" />
             <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full">London's Trusted Structural Engineers</span>
@@ -28,12 +28,11 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <div className="relative">
               <BookingDialog>
-                <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
-                  <span className="relative z-10 flex items-center">
+                <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg">
+                  <span className="flex items-center">
                     Book a Structural Survey
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </span>
-                  <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </Button>
               </BookingDialog>
               <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
@@ -50,7 +49,7 @@ const Hero = () => {
             </a>
           </div>
           
-          <div className="mt-8 bg-black bg-opacity-30 p-4 rounded-lg mb-10">
+          <div className="mt-12 bg-black bg-opacity-30 p-4 rounded-lg mb-10">
             <div className="flex items-center text-[#ea384c] mb-2">
               <Clock className="mr-2 h-5 w-5" />
               <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
