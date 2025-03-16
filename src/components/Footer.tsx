@@ -107,44 +107,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
-          <div className="border-t border-gray-700 pt-6 mt-4">
-            <div className="flex flex-col items-center mb-6">
-              <p className="text-gray-300 text-lg font-semibold mb-4">Professional Accreditation:</p>
-              <div className="flex flex-wrap justify-center items-center gap-6 max-w-5xl mx-auto">
-                <img 
-                  src="/lovable-uploads/b73082d3-f4cd-498f-93a3-137ac572ed47.png" 
-                  alt="IStructE - The Institution of Structural Engineers" 
-                  className="h-14 object-contain" 
-                />
-                <img 
-                  src="/lovable-uploads/205ece92-2248-4d3f-ad1e-2c7a1921f65d.png" 
-                  alt="ICE - Institution of Civil Engineers" 
-                  className="h-12 object-contain" 
-                />
-                <img 
-                  src="/lovable-uploads/23cacf03-8d2a-410a-8aa0-b13a3d9357c4.png" 
-                  alt="Constructionline - UK Government Certification Service" 
-                  className="h-12 object-contain" 
-                />
-                <img 
-                  src="https://www.acclaim-health-safety.co.uk/wp-content/uploads/2023/02/homepage-logo.webp" 
-                  alt="Acclaim Accreditation" 
-                  className="h-12 object-contain" 
-                />
-                <img 
-                  src="https://ssip.co.uk/wp-content/uploads/2019/10/SSIP-NEW-LOGO.jpg" 
-                  alt="SSIP - Safety Schemes in Procurement" 
-                  className="h-12 object-contain" 
-                />
-              </div>
-            </div>
-            <div className="text-center border-t border-gray-700 pt-4">
-              <p className="text-gray-400 text-sm">
-                Endorsed by the Institution of Structural Engineers (IStructE) and registered with the Institution of Civil Engineers (ICE)
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </footer>
