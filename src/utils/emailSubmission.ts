@@ -10,7 +10,7 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
   
   try {
     // Initialize EmailJS with your user ID (only needs to be done once)
-    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID from Account > API Keys
     
     // Prepare template parameters for EmailJS
     const templateParams = {
@@ -27,7 +27,7 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     // Send email using EmailJS
     const response = await emailjs.send(
       'service_v3sqaub', // Your EmailJS service ID
-      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID from Email Templates
       templateParams
     );
     
