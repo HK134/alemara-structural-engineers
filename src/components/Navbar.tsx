@@ -33,13 +33,13 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
-              className="h-16"
+              className="h-16 mb-1"
               width="auto"
               height="64"
               loading="eager"
             />
           </Link>
-          <div className="hidden md:block">
+          <div className="hidden md:block ml-2">
             <span className="text-xs text-gray-400">Serving Greater London</span>
           </div>
         </div>
@@ -53,12 +53,12 @@ const Navbar = () => {
             <div className="mr-4">
               <div className="flex items-center mb-1">
                 <Shield className="h-4 w-4 text-[#ea384c] mr-1" />
-                <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
+                <span className="text-xs text-white font-semibold">IStructE ENDORSED</span>
               </div>
-              <a href="tel:02080049060" className="text-[#000000] font-medium block">
+              <a href="tel:02080049060" className="block">
                 <span className="flex items-center">
                   <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-                  <span className="text-[#000000]">Call Us: 020 8004 9060</span>
+                  <span className="text-[#000000] font-bold">020 8004 9060</span>
                 </span>
               </a>
             </div>
@@ -68,7 +68,7 @@ const Navbar = () => {
           <a href="tel:02080049060" className="block mr-4">
             <span className="flex items-center">
               <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-              <span className="text-[#000000] text-xs">Call Us: 020 8004 9060</span>
+              <span className="text-[#000000] text-xs font-bold">020 8004 9060</span>
             </span>
           </a>
         </div>
@@ -89,12 +89,12 @@ const Navbar = () => {
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
-                    <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
+                    <span className="text-xs text-white font-semibold">IStructE ENDORSED</span>
                   </div>
                   <a href="tel:02080049060" className="block px-4">
                     <span className="flex items-center">
                       <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-                      <span className="text-[#000000]">Call Us: 020 8004 9060</span>
+                      <span className="text-[#000000] font-bold">020 8004 9060</span>
                     </span>
                   </a>
                 </div>
@@ -103,7 +103,7 @@ const Navbar = () => {
           </Dialog>
         </div>
       </div>
-      <div className={`hidden md:block ${scrolled ? 'bg-[#ea384c]' : 'bg-[#ea384c]'} py-1`}>
+      <div className={`${scrolled ? 'bg-[#ea384c]' : 'bg-[#ea384c]'} py-2 mt-2`}>
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
             <Clock className="h-4 w-4 mr-2" />
