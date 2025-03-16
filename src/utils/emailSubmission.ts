@@ -12,21 +12,21 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     // Initialize EmailJS with your user ID (only needs to be done once)
     emailjs.init("B_jYcT8aQ8L7R1Dp3"); // EmailJS public key from Account > API Keys
     
-    // Prepare template parameters for EmailJS to match the Auto-Reply template format
+    // Prepare template parameters to match what we want to collect from our website
     const templateParams = {
-      email: formData.email, // This maps to {{email}} in the template
-      from_name: `${formData.firstName} ${formData.lastName}`,
-      to_email: 'info@londonstructuralsurveys.com', // Primary recipient
-      reply_to: formData.email,
-      bcc: 'info@alemara.co.uk', // BCC recipient as shown in your template
-      subject: `New ${formType} Submission from ${formData.firstName} ${formData.lastName}`,
-      // Additional useful information for the email body
+      to_name: "London Structural Surveys", 
+      to_email: 'info@londonstructuralsurveys.com',
+      bcc: 'info@alemara.co.uk',
       form_type: formType,
       first_name: formData.firstName,
       last_name: formData.lastName,
+      email: formData.email,
       phone: formData.phone,
       service_type: formData.serviceType || 'Not specified',
-      message: formData.message || 'No additional message provided'
+      message: formData.message || 'No additional message provided',
+      from_name: `${formData.firstName} ${formData.lastName}`,
+      reply_to: formData.email,
+      subject: `New ${formType} Submission from ${formData.firstName} ${formData.lastName}`
     };
     
     console.log("Template params being sent:", templateParams);
