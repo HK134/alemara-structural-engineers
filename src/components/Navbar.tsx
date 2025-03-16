@@ -55,21 +55,21 @@ const Navbar = () => {
                 <Shield className="h-4 w-4 text-[#ea384c] mr-1" />
                 <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
               </div>
-              <a href="tel:02080049060" className="block">
-                <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white font-medium flex items-center">
-                  <Phone className="mr-2 h-4 w-4" />
-                  <span className="text-white">020 8004 9060</span>
-                </Button>
+              <a href="tel:02080049060" className="text-[#000000] font-medium block">
+                <span className="flex items-center">
+                  <Phone className="mr-2 h-4 w-4 text-[#000000]" />
+                  <span className="text-[#000000]">020 8004 9060</span>
+                </span>
               </a>
             </div>
           </div>
         </div>
         <div className="md:hidden">
           <a href="tel:02080049060" className="block mr-4">
-            <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white font-medium flex items-center">
-              <Phone className="mr-2 h-4 w-4" />
-              <span className="text-white text-xs">020 8004 9060</span>
-            </Button>
+            <span className="flex items-center">
+              <Phone className="mr-2 h-4 w-4 text-[#000000]" />
+              <span className="text-[#000000] text-xs">020 8004 9060</span>
+            </span>
           </a>
         </div>
         <div className="md:hidden">
@@ -92,10 +92,10 @@ const Navbar = () => {
                     <span className="text-xs text-gray-300 font-semibold">IStructE ENDORSED</span>
                   </div>
                   <a href="tel:02080049060" className="block px-4">
-                    <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white font-medium flex items-center w-full justify-center">
-                      <Phone className="mr-2 h-4 w-4" />
-                      <span className="text-white">020 8004 9060</span>
-                    </Button>
+                    <span className="flex items-center">
+                      <Phone className="mr-2 h-4 w-4 text-[#000000]" />
+                      <span className="text-[#000000]">020 8004 9060</span>
+                    </span>
                   </a>
                 </div>
               </div>
