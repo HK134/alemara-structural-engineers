@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
@@ -20,7 +19,7 @@ const Hero = () => {
             <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full">London's Trusted Structural Engineers</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Structural Problems Identified & Solutions Provided
+            Expert Structural Engineering Surveys Across London
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
             Expert structural engineering assessments within 24 hours. We catch issues that RICS surveys miss, saving you thousands in future repairs.
