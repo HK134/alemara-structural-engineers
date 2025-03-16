@@ -1,13 +1,30 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-[#1A1F2C] py-4 w-full z-10 sticky top-0 shadow-md">
+    <nav className={`${scrolled ? 'bg-[#1A1F2C] shadow-lg' : 'bg-[#1A1F2C]'} py-4 w-full z-10 sticky top-0 transition-all duration-300`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <Link to="/">
@@ -73,7 +90,7 @@ const Navbar = () => {
           </Dialog>
         </div>
       </div>
-      <div className="hidden md:block bg-[#ea384c] py-1">
+      <div className={`hidden md:block ${scrolled ? 'bg-[#ea384c]' : 'bg-[#ea384c]'} py-1`}>
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
             <Clock className="h-4 w-4 mr-2" />
