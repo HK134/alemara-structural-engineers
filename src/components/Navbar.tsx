@@ -33,9 +33,9 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
-              className="h-12 mr-3"
-              width="144"
-              height="48"
+              className="h-16"
+              width="auto"
+              height="64"
               loading="eager"
             />
           </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
               <a href="tel:02080049060" className="text-[#000000] font-medium block">
                 <span className="flex items-center">
                   <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-                  <span className="text-[#000000]">020 8004 9060</span>
+                  <span className="text-[#000000]">Call Us: 020 8004 9060</span>
                 </span>
               </a>
             </div>
@@ -68,7 +68,7 @@ const Navbar = () => {
           <a href="tel:02080049060" className="block mr-4">
             <span className="flex items-center">
               <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-              <span className="text-[#000000] text-xs">020 8004 9060</span>
+              <span className="text-[#000000] text-xs">Call Us: 020 8004 9060</span>
             </span>
           </a>
         </div>
@@ -94,7 +94,7 @@ const Navbar = () => {
                   <a href="tel:02080049060" className="block px-4">
                     <span className="flex items-center">
                       <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-                      <span className="text-[#000000]">020 8004 9060</span>
+                      <span className="text-[#000000]">Call Us: 020 8004 9060</span>
                     </span>
                   </a>
                 </div>
