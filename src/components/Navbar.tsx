@@ -33,7 +33,7 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
-              className="h-16 mb-1"
+              className="h-16 mb-1 mr-3"
               width="auto"
               height="64"
               loading="eager"
