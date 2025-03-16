@@ -10,14 +10,14 @@ const StickyBookingButton = () => {
       <BookingDialog>
         <Button 
           size="lg" 
-          className="bg-[#ea384c] hover:bg-opacity-90 text-white rounded-full shadow-lg group transition-all duration-300 hover:scale-105"
+          className="bg-[#ea384c]/90 hover:bg-[#ea384c] text-white rounded-full shadow-lg group transition-all duration-300 hover:scale-105"
         >
           <Calendar className="mr-2 h-5 w-5" />
           <span className="font-medium">Book Now</span>
         </Button>
       </BookingDialog>
       <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-        <span className="bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded-full">
+        <span className="bg-black/60 text-white text-xs px-2 py-1 rounded-full">
           Takes 2 mins
         </span>
       </div>
