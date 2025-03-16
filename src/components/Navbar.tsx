@@ -44,8 +44,8 @@ const Navbar = () => {
       <div className="hidden md:block bg-[#ea384c] py-1">
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
-            <MapPin className="h-4 w-4 mr-2" />
-            <span>Located at 6 Highbury Corner, London, N5 1RD - Serving all of Greater London</span>
+            <Clock className="h-4 w-4 mr-2" />
+            <span>We respond to all enquiries within 4 hours during business hours</span>
           </div>
         </div>
       </div>
