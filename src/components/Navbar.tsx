@@ -56,20 +56,20 @@ const Navbar = () => {
                 <span className="text-xs text-white font-semibold">IStructE ENDORSED</span>
               </div>
               <a href="tel:02080049060" className="block">
-                <span className="flex items-center">
-                  <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-                  <span className="text-[#000000] font-bold">020 8004 9060</span>
-                </span>
+                <div className="bg-[#ea384c] text-white px-4 py-2 rounded-md flex items-center justify-center">
+                  <Phone className="mr-2 h-5 w-5 text-white" />
+                  <span className="text-white font-bold text-lg">020 8004 9060</span>
+                </div>
               </a>
             </div>
           </div>
         </div>
         <div className="md:hidden">
           <a href="tel:02080049060" className="block mr-4">
-            <span className="flex items-center">
-              <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-              <span className="text-[#000000] text-xs font-bold">020 8004 9060</span>
-            </span>
+            <div className="bg-[#ea384c] text-white px-3 py-1 rounded-md flex items-center justify-center">
+              <Phone className="mr-1 h-4 w-4 text-white" />
+              <span className="text-white text-xs font-bold">020 8004 9060</span>
+            </div>
           </a>
         </div>
         <div className="md:hidden">
@@ -92,10 +92,10 @@ const Navbar = () => {
                     <span className="text-xs text-white font-semibold">IStructE ENDORSED</span>
                   </div>
                   <a href="tel:02080049060" className="block px-4">
-                    <span className="flex items-center">
-                      <Phone className="mr-2 h-4 w-4 text-[#000000]" />
-                      <span className="text-[#000000] font-bold">020 8004 9060</span>
-                    </span>
+                    <div className="bg-[#ea384c] text-white px-4 py-2 rounded-md flex items-center justify-center">
+                      <Phone className="mr-2 h-4 w-4 text-white" />
+                      <span className="text-white font-bold">020 8004 9060</span>
+                    </div>
                   </a>
                 </div>
               </div>
