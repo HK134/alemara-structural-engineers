@@ -26,7 +26,7 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     
     // Send email using EmailJS
     const response = await emailjs.send(
-      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+      'service_v3sqaub', // Your EmailJS service ID
       'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
       templateParams
     );
