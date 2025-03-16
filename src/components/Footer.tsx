@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -96,9 +96,9 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} London Structural Surveys, powered by Alemara Ltd. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
+              <Link to="/privacy-policy" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
                 Privacy Policy
-              </a>
+              </Link>
               <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">
                 Terms of Service
               </a>
