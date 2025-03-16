@@ -10,7 +10,7 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
   
   try {
     // Initialize EmailJS with your user ID (only needs to be done once)
-    emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID from Account > API Keys
+    emailjs.init("B_jYcT8aQ8L7R1Dp3"); // EmailJS public key from Account > API Keys
     
     // Prepare template parameters for EmailJS
     const templateParams = {
