@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu } from "lucide-react";
@@ -6,8 +7,14 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
+    // Set initialLoad to false after a short delay
+    const loadTimer = setTimeout(() => {
+      setInitialLoad(false);
+    }, 1500); // 1.5 seconds for the initial enlarged state
+
     const handleScroll = () => {
       const offset = window.scrollY;
       if (offset > 10) {
@@ -18,8 +25,10 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(loadTimer);
     };
   }, []);
 
@@ -31,7 +40,7 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
-              className="h-12 mr-3" 
+              className={`transition-all duration-500 ${initialLoad && !scrolled ? 'h-20 scale-110' : 'h-12'} mr-3`}
             />
           </Link>
           <div className="hidden md:block">
