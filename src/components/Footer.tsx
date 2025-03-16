@@ -10,8 +10,8 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/lovable-uploads/6680eb37-5f4f-4000-abea-88ccf4675de9.png" 
-                alt="Alemara Structural Engineering London" 
+                src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
+                alt="London Structural Surveys" 
                 className="h-12 mr-3" 
               />
             </div>
@@ -67,7 +67,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <Mail className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
-                <span className="text-gray-300">info@alemara.co.uk</span>
+                <span className="text-gray-300">info@londonstructuralsurveys.com</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
@@ -82,13 +82,17 @@ const Footer = () => {
               <p className="text-gray-300 text-sm">Monday to Friday: 8:30am - 6:00pm</p>
               <p className="text-gray-300 text-sm">Saturday: By appointment</p>
               <p className="text-gray-300 text-sm">Sunday: Closed</p>
+              <div className="mt-3 bg-[#ea384c] rounded-md p-2 text-white text-sm">
+                <Clock className="inline-block mr-1 h-3 w-3" />
+                We typically respond to all enquiries within 4 hours during business hours
+              </div>
             </div>
           </div>
         </div>
         
         <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Alemara Structural Engineering London. All rights reserved.
+            &copy; {new Date().getFullYear()} London Structural Surveys, powered by Alemara Ltd. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">

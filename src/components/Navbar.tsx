@@ -9,8 +9,8 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <img 
-            src="/lovable-uploads/6680eb37-5f4f-4000-abea-88ccf4675de9.png" 
-            alt="Alemara Structural Engineering" 
+            src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
+            alt="London Structural Surveys" 
             className="h-12 mr-3" 
           />
           <div className="hidden md:block">
@@ -26,7 +26,7 @@ const Navbar = () => {
             <div className="mr-4">
               <div className="flex items-center mb-1">
                 <Shield className="h-4 w-4 text-[#ea384c] mr-1" />
-                <span className="text-xs text-gray-300 font-semibold">RICS APPROVED</span>
+                <span className="text-xs text-gray-300 font-semibold">ISTRUCTE ENDORSED</span>
               </div>
               <Button className="bg-[#ea384c] hover:bg-[#c02d3f] text-white flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
@@ -45,7 +45,7 @@ const Navbar = () => {
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
             <MapPin className="h-4 w-4 mr-2" />
-            <span>Central London Location: 6 Highbury Corner, London, N5 1RD</span>
+            <span>Located at 6 Highbury Corner, London, N5 1RD - Serving all of Greater London</span>
           </div>
         </div>
       </div>

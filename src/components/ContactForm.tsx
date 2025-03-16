@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -76,7 +75,7 @@ const ContactForm = () => {
                 <Mail className="h-6 w-6 text-[#ea384c] mr-4 mt-1" />
                 <div>
                   <h3 className="font-semibold text-[#1A1F2C] text-lg">Email Us</h3>
-                  <p className="text-gray-700">info@alemara.co.uk</p>
+                  <p className="text-gray-700">info@londonstructuralsurveys.com</p>
                 </div>
               </div>
               
@@ -187,8 +186,9 @@ const ContactForm = () => {
                 <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
               </Button>
               
-              <p className="text-sm text-gray-500 text-center">
-                We aim to respond to all enquiries within 4 hours during business hours.
+              <p className="text-sm text-gray-500 text-center mt-4">
+                <Clock className="inline-block mr-1 h-3 w-3" />
+                We typically respond to all enquiries within 4 hours during business hours.
               </p>
             </form>
           </div>
