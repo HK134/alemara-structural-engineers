@@ -29,11 +29,14 @@ const Navbar = () => {
     <nav className={`${scrolled ? 'bg-[#1A1F2C] shadow-lg' : 'bg-[#1A1F2C]'} py-4 w-full z-10 sticky top-0 transition-all duration-300`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
-          <Link to="/">
+          <Link to="/" prefetch="intent">
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
               className="h-12 mr-3"
+              width="144"
+              height="48"
+              loading="eager"
             />
           </Link>
           <div className="hidden md:block">

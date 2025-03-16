@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
 import BookingDialog from "./BookingDialog";
 
 const Hero = () => {
@@ -10,7 +9,6 @@ const Hero = () => {
     <section className="relative bg-[#1A1F2C] py-20 text-white">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
       
-      {/* London skyline silhouette */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-[url('/lovable-uploads/london-skyline-silhouette.png')] bg-repeat-x bg-bottom opacity-20"></div>
       
       <div className="container mx-auto px-4 relative z-10">
