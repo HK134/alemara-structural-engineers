@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock, CheckCircle, ArrowRight } from "lucide-react";
 import {
   Form,
@@ -18,6 +17,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { submitFormToEmail } from "@/utils/emailSubmission";
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
@@ -50,25 +50,21 @@ const ContactForm = () => {
       // Log form data for development purposes
       console.log("Form submission data:", data);
       
-      // In a production environment, you would send this data to your backend
-      // Example:
-      // const response = await fetch('https://your-api-endpoint.com/submit-contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data),
-      // });
+      // Send form data to email
+      const result = await submitFormToEmail(data, "Contact Form");
       
-      // For now, we'll simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Request submitted successfully!",
-        description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
-        duration: 5000,
-      });
-      
-      // Reset form
-      form.reset();
+      if (result.success) {
+        toast({
+          title: "Request submitted successfully!",
+          description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
+          duration: 5000,
+        });
+        
+        // Reset form
+        form.reset();
+      } else {
+        throw new Error(result.message);
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({

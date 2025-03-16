@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Dialog, 
@@ -26,6 +25,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { submitFormToEmail } from "@/utils/emailSubmission";
 
 interface BookingDialogProps {
   children: React.ReactNode;
@@ -64,26 +64,22 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
       // Log form data for development purposes
       console.log("Form submission data:", data);
       
-      // In a production environment, you would send this data to your backend
-      // Example:
-      // const response = await fetch('https://your-api-endpoint.com/submit-booking', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data),
-      // });
+      // Send form data to email
+      const result = await submitFormToEmail(data, "Structural Survey Booking");
       
-      // For now, we'll simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Request submitted successfully!",
-        description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
-        duration: 5000,
-      });
-      
-      // Reset form and close dialog
-      form.reset();
-      setIsOpen(false);
+      if (result.success) {
+        toast({
+          title: "Request submitted successfully!",
+          description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
+          duration: 5000,
+        });
+        
+        // Reset form and close dialog
+        form.reset();
+        setIsOpen(false);
+      } else {
+        throw new Error(result.message);
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
