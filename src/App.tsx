@@ -12,6 +12,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
+import ClientLogin from "./pages/ClientLogin";
+import EngineerLogin from "./pages/EngineerLogin";
 import ClientDashboard from "./pages/ClientDashboard";
 import EngineerDashboard from "./pages/EngineerDashboard";
 import EngineerMessages from "./pages/EngineerMessages";
@@ -31,7 +33,10 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/admin-login" element={<Login />} />
+            <Route path="/client-login" element={<ClientLogin />} />
+            <Route path="/engineer-login" element={<EngineerLogin />} />
+            <Route path="/login" element={<Navigate to="/client-login" replace />} />
             <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />
             
             {/* Protected backend routes */}
