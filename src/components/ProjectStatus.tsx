@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
+export type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
 
 type ProjectStatusProps = {
   status: string;

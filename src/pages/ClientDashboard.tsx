@@ -1,59 +1,64 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Calendar, Clock, FileText, MessageSquare, Wrench, HelpCircle, CheckCircle, FileCheck, Package } from "lucide-react";
+import { Calendar, Clock, FileText, MessageSquare, Wrench, HelpCircle, CheckCircle, FileCheck, Package, User } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import ClientDashboardHeader from '@/components/ClientDashboardHeader';
-import ProjectStatus from '@/components/ProjectStatus';
+import ProjectStatus, { ProjectStage } from '@/components/ProjectStatus';
 
 const ClientDashboard = () => {
   const { isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Mock data for client projects with stages
+  // Mock data for client projects with stages and lead engineers
   const projects = [
     {
       id: "W-25-001",
       name: "Home Extension Survey",
       status: "In Progress",
-      stage: "Site Visit",
+      stage: "Site Visit" as ProjectStage,
       due: "2024-08-15",
       lastUpdated: "2024-07-28",
       progress: 33,
       isArchitect: false,
+      leadEngineer: "Sarah Johnson"
     },
     {
       id: "W-25-002",
       name: "Structural Assessment",
       status: "Completed",
-      stage: "Final Package",
+      stage: "Final Package" as ProjectStage,
       due: "2024-07-10",
       lastUpdated: "2024-07-09",
       progress: 100,
       isArchitect: false,
+      leadEngineer: "Michael Chen"
     },
     {
       id: "W-25-003",
       name: "Building Regulations",
       status: "Awaiting Info",
-      stage: "Schematic Submission",
+      stage: "Schematic Submission" as ProjectStage,
       due: "2024-09-05",
       lastUpdated: "2024-07-20",
       progress: 66,
       isArchitect: true,
+      leadEngineer: "David Smith"
     },
     {
       id: "W-25-004",
       name: "Commercial Development",
       status: "In Progress",
-      stage: "Schematic Submission",
+      stage: "Schematic Submission" as ProjectStage,
       due: "2024-10-15",
       lastUpdated: "2024-07-30",
       progress: 66,
       isArchitect: true,
+      leadEngineer: "Emily Wilson"
     }
   ];
 
@@ -63,7 +68,7 @@ const ClientDashboard = () => {
   const clientProjects = projects.filter(project => !project.isArchitect);
 
   // Get stage icon based on project stage
-  const getStageIcon = (stage) => {
+  const getStageIcon = (stage: ProjectStage) => {
     switch(stage) {
       case 'Site Visit':
         return <Calendar className="h-4 w-4 mr-1" />;
@@ -207,6 +212,7 @@ const ClientDashboard = () => {
                     <TableHead>Project</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Stage</TableHead>
+                    <TableHead>Lead Engineer</TableHead>
                     <TableHead>Progress</TableHead>
                     <TableHead>Due Date</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
@@ -222,6 +228,12 @@ const ClientDashboard = () => {
                         <div className="flex items-center">
                           {getStageIcon(project.stage)}
                           <span>{project.stage}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center">
+                          <User className="h-4 w-4 mr-1 text-gray-500" />
+                          <span>{project.leadEngineer}</span>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -268,6 +280,10 @@ const ClientDashboard = () => {
                             <span className="text-xs">{project.progress}%</span>
                           </div>
                           <Progress value={project.progress} className="h-2" />
+                        </div>
+                        <div className="mt-3 flex items-center">
+                          <User className="h-3 w-3 mr-1 text-gray-500" />
+                          <span className="text-xs text-gray-600">Lead: {project.leadEngineer}</span>
                         </div>
                       </CardContent>
                       <CardFooter className="p-4 pt-0">

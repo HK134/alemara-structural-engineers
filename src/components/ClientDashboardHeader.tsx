@@ -36,13 +36,8 @@ const ClientDashboardHeader = () => {
     <header className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
             <h1 className="text-2xl font-bold text-[#1A1F2C]">Client Dashboard</h1>
-            <div className="hidden md:flex space-x-2 mt-1">
-              <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Site Visit</span>
-              <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">Schematic</span>
-              <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Final Package</span>
-            </div>
           </div>
           
           <div className="flex items-center space-x-2 md:space-x-4">
