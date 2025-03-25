@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -6,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieCha
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ChartBarIcon, ChartPieIcon, LockClosedIcon, Users } from 'lucide-react';
+import { ChartBarIcon, ChartPieIcon, LockIcon, Users } from 'lucide-react';
 import LeadsMap from './LeadsMap';
 
 const LeadAnalytics = () => {
@@ -29,11 +28,8 @@ const LeadAnalytics = () => {
       
       if (securedError) throw securedError;
 
-      // Get counts by status
-      const { data: statusData, error: statusError } = await supabase
-        .from('form_submissions')
-        .select('status, count')
-        .group('status');
+      // Get counts by status - fixed the group method issue
+      const { data: statusData, error: statusError } = await supabase.rpc('get_status_counts');
       
       if (statusError) throw statusError;
 
@@ -42,22 +38,28 @@ const LeadAnalytics = () => {
       const totalSecuredValue = securedCount * averageProjectValue;
 
       // Format status data for chart
-      const statusCounts = statusData.reduce((acc, curr) => {
-        acc[curr.status] = parseInt(curr.count);
-        return acc;
-      }, {});
+      const statusCounts = {
+        new: 0,
+        contacted: 0,
+        closed: 0,
+        archived: 0
+      };
+      
+      // Process the status counts from the RPC function
+      if (statusData) {
+        statusData.forEach((item: any) => {
+          if (statusCounts.hasOwnProperty(item.status)) {
+            statusCounts[item.status as keyof typeof statusCounts] = parseInt(item.count);
+          }
+        });
+      }
 
       return {
         totalLeads: totalCount || 0,
         securedLeads: securedCount || 0,
         securedPercentage: totalCount ? Math.round((securedCount / totalCount) * 100) : 0,
         totalSecuredValue,
-        statusCounts: {
-          new: statusCounts.new || 0,
-          contacted: statusCounts.contacted || 0,
-          closed: statusCounts.closed || 0,
-          archived: statusCounts.archived || 0
-        }
+        statusCounts
       };
     }
   });
@@ -131,7 +133,7 @@ const LeadAnalytics = () => {
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-bold">{stats?.securedLeads || 0}</div>
-                  <LockClosedIcon className="h-5 w-5 text-muted-foreground" />
+                  <LockIcon className="h-5 w-5 text-muted-foreground" />
                 </div>
               </CardContent>
             </Card>
