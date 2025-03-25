@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -31,8 +30,9 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { toast } from 'sonner';
-import { Edit, Filter, LogOut, MoreHorizontal, Search } from 'lucide-react';
+import { Edit, Filter, LogOut, Map, MoreHorizontal, Search } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import LeadAnalytics from '@/components/LeadAnalytics';
 
 // Types for form submissions
 type FormSubmission = {
@@ -46,6 +46,7 @@ type FormSubmission = {
   message: string | null;
   created_at: string;
   status: string;
+  postcode: string;
 }
 
 const statusColors: Record<string, string> = {
@@ -61,6 +62,7 @@ const Admin = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
+  const [viewMode, setViewMode] = useState<'leads' | 'map'>('leads');
   const itemsPerPage = 10;
 
   // Fetch form submissions
@@ -164,250 +166,141 @@ const Admin = () => {
     <div className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Lead Management Dashboard</h1>
-        <Button 
-          variant="outline" 
-          onClick={logout}
-          className="flex items-center gap-2"
-        >
-          <LogOut size={16} />
-          Logout
-        </Button>
-      </div>
-
-      <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
-        <div className="flex items-center w-full md:w-auto relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-          <Input
-            placeholder="Search by name or email"
-            className="pl-10 w-full md:w-80"
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1); // Reset to first page on new search
-            }}
-          />
+        <div className="flex items-center gap-3">
+          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map')} className="mr-4">
+            <TabsList>
+              <TabsTrigger value="leads" className="flex items-center gap-2">
+                <Filter size={16} />
+                Leads
+              </TabsTrigger>
+              <TabsTrigger value="map" className="flex items-center gap-2">
+                <Map size={16} />
+                Map
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <Button 
+            variant="outline" 
+            onClick={logout}
+            className="flex items-center gap-2"
+          >
+            <LogOut size={16} />
+            Logout
+          </Button>
         </div>
       </div>
 
-      <Tabs defaultValue="all" value={currentTab} onValueChange={setCurrentTab} className="w-full">
-        <TabsList className="mb-6">
-          <TabsTrigger value="all">All Leads</TabsTrigger>
-          <TabsTrigger value="new">New</TabsTrigger>
-          <TabsTrigger value="contacted">Contacted</TabsTrigger>
-          <TabsTrigger value="closed">Closed</TabsTrigger>
-          <TabsTrigger value="archived">Archived</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value={currentTab} className="w-full">
-          {isLoading ? (
-            <div className="text-center py-8">Loading submissions...</div>
-          ) : error ? (
-            <div className="text-center py-8 text-red-500">Error loading data. Please try again.</div>
-          ) : submissions && submissions.length > 0 ? (
-            <>
-              <div className="rounded-md border overflow-hidden">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead className="hidden md:table-cell">Email</TableHead>
-                      <TableHead className="hidden md:table-cell">Phone</TableHead>
-                      <TableHead className="hidden md:table-cell">Service</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {submissions.map((submission) => (
-                      <TableRow key={submission.id}>
-                        <TableCell className="font-medium">
-                          {formatDate(submission.created_at)}
-                        </TableCell>
-                        <TableCell>
-                          {submission.first_name} {submission.last_name}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {submission.email}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {submission.phone}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {submission.service_type}
-                        </TableCell>
-                        <TableCell>
-                          <Badge className={`${statusColors[submission.status] || 'bg-gray-500'}`}>
-                            {submission.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <div className="flex justify-end">
-                            <Sheet>
-                              <SheetTrigger asChild>
-                                <Button
-                                  variant="ghost" 
-                                  size="icon"
-                                  onClick={() => setSelectedSubmission(submission)}
-                                >
-                                  <Edit size={16} />
-                                </Button>
-                              </SheetTrigger>
-                              {selectedSubmission && (
-                                <SheetContent className="w-full sm:max-w-md">
-                                  <SheetHeader>
-                                    <SheetTitle>Lead Details</SheetTitle>
-                                  </SheetHeader>
-                                  <div className="py-6">
-                                    <div className="space-y-6">
-                                      <div>
-                                        <h3 className="text-sm font-medium text-gray-500">Full Name</h3>
-                                        <p className="mt-1 text-lg">{selectedSubmission.first_name} {selectedSubmission.last_name}</p>
-                                      </div>
-                                      <div>
-                                        <h3 className="text-sm font-medium text-gray-500">Email</h3>
-                                        <p className="mt-1 text-lg">{selectedSubmission.email}</p>
-                                      </div>
-                                      <div>
-                                        <h3 className="text-sm font-medium text-gray-500">Phone</h3>
-                                        <p className="mt-1 text-lg">{selectedSubmission.phone}</p>
-                                      </div>
-                                      <div>
-                                        <h3 className="text-sm font-medium text-gray-500">Service Type</h3>
-                                        <p className="mt-1 text-lg">{selectedSubmission.service_type}</p>
-                                      </div>
-                                      <div>
-                                        <h3 className="text-sm font-medium text-gray-500">Message</h3>
-                                        <p className="mt-1 text-lg whitespace-pre-wrap">{selectedSubmission.message || 'No message provided'}</p>
-                                      </div>
-                                      <div>
-                                        <h3 className="text-sm font-medium text-gray-500">Status</h3>
-                                        <div className="mt-2">
-                                          <div className="grid grid-cols-2 gap-2">
-                                            <Button 
-                                              className={`${selectedSubmission.status === 'new' ? 'border-2 border-primary' : ''}`}
-                                              variant={selectedSubmission.status === 'new' ? 'default' : 'outline'}
-                                              onClick={() => updateStatus(selectedSubmission.id, 'new')}
-                                            >
-                                              New
-                                            </Button>
-                                            <Button 
-                                              className={`${selectedSubmission.status === 'contacted' ? 'border-2 border-primary' : ''}`}
-                                              variant={selectedSubmission.status === 'contacted' ? 'default' : 'outline'}
-                                              onClick={() => updateStatus(selectedSubmission.id, 'contacted')}
-                                            >
-                                              Contacted
-                                            </Button>
-                                            <Button 
-                                              className={`${selectedSubmission.status === 'closed' ? 'border-2 border-primary' : ''}`}
-                                              variant={selectedSubmission.status === 'closed' ? 'default' : 'outline'}
-                                              onClick={() => updateStatus(selectedSubmission.id, 'closed')}
-                                            >
-                                              Closed
-                                            </Button>
-                                            <Button 
-                                              className={`${selectedSubmission.status === 'archived' ? 'border-2 border-primary' : ''}`}
-                                              variant={selectedSubmission.status === 'archived' ? 'default' : 'outline'}
-                                              onClick={() => updateStatus(selectedSubmission.id, 'archived')}
-                                            >
-                                              Archived
-                                            </Button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </SheetContent>
-                              )}
-                            </Sheet>
-
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon">
-                                  <MoreHorizontal size={16} />
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuItem onClick={() => updateStatus(submission.id, 'new')}>
-                                  Mark as New
-                                </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => updateStatus(submission.id, 'contacted')}>
-                                  Mark as Contacted
-                                </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => updateStatus(submission.id, 'closed')}>
-                                  Mark as Closed
-                                </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => updateStatus(submission.id, 'archived')}>
-                                  Archive
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-              
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <Pagination className="mt-6">
-                  <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious 
-                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                        aria-disabled={currentPage === 1}
-                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                      />
-                    </PaginationItem>
-                    
-                    {Array.from({ length: totalPages }, (_, i) => i + 1)
-                      .filter(page => {
-                        // Show current page, first, last, and pages adjacent to current
-                        return page === 1 || 
-                               page === totalPages || 
-                               Math.abs(page - currentPage) <= 1;
-                      })
-                      .map((page, index, array) => (
-                        <React.Fragment key={page}>
-                          {index > 0 && array[index - 1] !== page - 1 && (
-                            <PaginationItem>
-                              <span className="px-2">...</span>
-                            </PaginationItem>
-                          )}
-                          <PaginationItem>
-                            <PaginationLink
-                              isActive={page === currentPage}
-                              onClick={() => setCurrentPage(page)}
-                            >
-                              {page}
-                            </PaginationLink>
-                          </PaginationItem>
-                        </React.Fragment>
-                      ))}
-                    
-                    <PaginationItem>
-                      <PaginationNext 
-                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                        aria-disabled={currentPage === totalPages}
-                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                      />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-12 border rounded-lg">
-              <p className="text-xl text-gray-500">No submissions found</p>
-              <p className="text-sm text-gray-400 mt-2">Try changing your search or filter criteria</p>
+      {viewMode === 'leads' ? (
+        <>
+          <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
+            <div className="flex items-center w-full md:w-auto relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+              <Input
+                placeholder="Search by name or email"
+                className="pl-10 w-full md:w-80"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1); // Reset to first page on new search
+                }}
+              />
             </div>
-          )}
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
-};
+          </div>
 
-export default Admin;
+          <Tabs defaultValue="all" value={currentTab} onValueChange={setCurrentTab} className="w-full">
+            <TabsList className="mb-6">
+              <TabsTrigger value="all">All Leads</TabsTrigger>
+              <TabsTrigger value="new">New</TabsTrigger>
+              <TabsTrigger value="contacted">Contacted</TabsTrigger>
+              <TabsTrigger value="closed">Closed</TabsTrigger>
+              <TabsTrigger value="archived">Archived</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value={currentTab} className="w-full">
+              {isLoading ? (
+                <div className="text-center py-8">Loading submissions...</div>
+              ) : error ? (
+                <div className="text-center py-8 text-red-500">Error loading data. Please try again.</div>
+              ) : submissions && submissions.length > 0 ? (
+                <>
+                  <div className="rounded-md border overflow-hidden">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Date</TableHead>
+                          <TableHead>Name</TableHead>
+                          <TableHead className="hidden md:table-cell">Email</TableHead>
+                          <TableHead className="hidden md:table-cell">Phone</TableHead>
+                          <TableHead className="hidden md:table-cell">Service</TableHead>
+                          <TableHead>Status</TableHead>
+                          <TableHead className="text-right">Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {submissions.map((submission) => (
+                          <TableRow key={submission.id}>
+                            <TableCell className="font-medium">
+                              {formatDate(submission.created_at)}
+                            </TableCell>
+                            <TableCell>
+                              {submission.first_name} {submission.last_name}
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell">
+                              {submission.email}
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell">
+                              {submission.phone}
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell">
+                              {submission.service_type}
+                            </TableCell>
+                            <TableCell>
+                              <Badge className={`${statusColors[submission.status] || 'bg-gray-500'}`}>
+                                {submission.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex justify-end">
+                                <Sheet>
+                                  <SheetTrigger asChild>
+                                    <Button
+                                      variant="ghost" 
+                                      size="icon"
+                                      onClick={() => setSelectedSubmission(submission)}
+                                    >
+                                      <Edit size={16} />
+                                    </Button>
+                                  </SheetTrigger>
+                                  {selectedSubmission && (
+                                    <SheetContent className="w-full sm:max-w-md">
+                                      <SheetHeader>
+                                        <SheetTitle>Lead Details</SheetTitle>
+                                      </SheetHeader>
+                                      <div className="py-6">
+                                        <div className="space-y-6">
+                                          <div>
+                                            <h3 className="text-sm font-medium text-gray-500">Full Name</h3>
+                                            <p className="mt-1 text-lg">{selectedSubmission.first_name} {selectedSubmission.last_name}</p>
+                                          </div>
+                                          <div>
+                                            <h3 className="text-sm font-medium text-gray-500">Email</h3>
+                                            <p className="mt-1 text-lg">{selectedSubmission.email}</p>
+                                          </div>
+                                          <div>
+                                            <h3 className="text-sm font-medium text-gray-500">Phone</h3>
+                                            <p className="mt-1 text-lg">{selectedSubmission.phone}</p>
+                                          </div>
+                                          <div>
+                                            <h3 className="text-sm font-medium text-gray-500">Service Type</h3>
+                                            <p className="mt-1 text-lg">{selectedSubmission.service_type}</p>
+                                          </div>
+                                          <div>
+                                            <h3 className="text-sm font-medium text-gray-500">Message</h3>
+                                            <p className="mt-1 text-lg whitespace-pre-wrap">{selectedSubmission.message || 'No message provided'}</p>
+                                          </div>
+                                          <div>
+                                            <h3 className="text-sm font-medium text-gray-500">Status</h3>
+                                            <div className="mt-2">
+                                              <div
+
+

@@ -19,7 +19,8 @@ export const saveFormSubmissionToDatabase = async (formData: any, formType: stri
         phone: formData.phone,
         service_type: formData.serviceType || 'Not specified',
         message: formData.message || '',
-        status: 'new'
+        status: 'new',
+        postcode: formData.postcode || 'Unknown'
       })
       .select();
     
