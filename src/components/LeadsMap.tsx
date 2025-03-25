@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -290,15 +291,15 @@ const LeadsMap = () => {
 
   const formatError = (error: any) => {
     if (error && typeof error === 'object') {
-      if ('status' in error) {
-        return `Error ${error.status}: ${error.message || 'Unknown error'}`;
-      } else {
+      if ('message' in error) {
         return error.message || 'Unknown error';
       }
+      return 'Unknown error';
     }
     return 'Unknown error occurred';
   };
 
+  // Render functions
   if (isConfiguring) {
     return (
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
