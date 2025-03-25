@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -42,6 +43,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import LeadAnalytics from '@/components/LeadAnalytics';
 import EngineerStats from '@/components/EngineerStats';
 import { generateOneDriveFolder } from '@/utils/oneDriveIntegration';
+import { createTestSubmission } from '@/utils/testDatabaseConnection';
 
 // Types for form submissions
 type FormSubmission = {
@@ -106,39 +108,6 @@ const Admin = () => {
       return data as Engineer[];
     }
   });
-
-  // Enhanced debug hook to check for submissions when component loads
-  useEffect(() => {
-    const checkSubmissions = async () => {
-      console.log("Debug: Checking for submissions in database...");
-      const { data, error } = await supabase
-        .from('form_submissions')
-        .select('*');
-      
-      if (error) {
-        console.error("Debug check failed:", error);
-        toast.error("Error fetching form submissions. Please check console for details.");
-      } else {
-        console.log("Debug: All submissions in database:", data);
-        if (data && data.length > 0) {
-          console.log("Database has submissions, but they may not be shown due to filters");
-        } else {
-          console.log("No submissions found in database");
-          toast.info("No submissions found in the database. Try submitting a new form.");
-        }
-      }
-    };
-    
-    checkSubmissions();
-    
-    // Force a refetch of submissions after a short delay
-    const refreshTimer = setTimeout(() => {
-      console.log("Forcing refetch of submissions...");
-      refetch();
-    }, 1000);
-    
-    return () => clearTimeout(refreshTimer);
-  }, [refetch]);
 
   // Fetch form submissions with debugging
   const { data: submissions, isLoading, error, refetch } = useQuery({
@@ -213,6 +182,40 @@ const Admin = () => {
       return count || 0;
     }
   });
+
+  // Enhanced debug hook to check for submissions when component loads
+  // FIXED: Moved after refetch is defined
+  useEffect(() => {
+    const checkSubmissions = async () => {
+      console.log("Debug: Checking for submissions in database...");
+      const { data, error } = await supabase
+        .from('form_submissions')
+        .select('*');
+      
+      if (error) {
+        console.error("Debug check failed:", error);
+        toast.error("Error fetching form submissions. Please check console for details.");
+      } else {
+        console.log("Debug: All submissions in database:", data);
+        if (data && data.length > 0) {
+          console.log("Database has submissions, but they may not be shown due to filters");
+        } else {
+          console.log("No submissions found in database");
+          toast.info("No submissions found in the database. Try submitting a new form.");
+        }
+      }
+    };
+    
+    checkSubmissions();
+    
+    // Force a refetch of submissions after a short delay
+    const refreshTimer = setTimeout(() => {
+      console.log("Forcing refetch of submissions...");
+      refetch();
+    }, 1000);
+    
+    return () => clearTimeout(refreshTimer);
+  }, [refetch]);
 
   const totalPages = totalCount ? Math.ceil(totalCount / itemsPerPage) : 1;
 
@@ -295,6 +298,25 @@ const Admin = () => {
     }
   };
 
+  // Function to create a test submission for debugging
+  const handleCreateTestSubmission = async () => {
+    try {
+      toast.info("Creating test submission...");
+      const result = await createTestSubmission();
+      
+      if (result.success) {
+        toast.success("Test submission created successfully!");
+        refetch();
+      } else {
+        toast.error("Failed to create test submission");
+        console.error("Test submission error:", result.error);
+      }
+    } catch (error) {
+      console.error("Error creating test submission:", error);
+      toast.error("Error creating test submission");
+    }
+  };
+
   // Assign engineer to project
   const assignEngineer = async (projectId: string, engineerId: string | null) => {
     try {
@@ -354,6 +376,13 @@ const Admin = () => {
             className="mr-2"
           >
             Refresh Data
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={handleCreateTestSubmission} 
+            className="mr-2"
+          >
+            Create Test Submission
           </Button>
           <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers')} className="mr-4">
             <TabsList>
