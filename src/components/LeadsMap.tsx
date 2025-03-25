@@ -297,11 +297,12 @@ const LeadsMap = () => {
     if (error && typeof error === 'object') {
       // Check if error has a message property
       if ('message' in error) {
-        return error.message as string || 'Unknown error';
+        return (error as Error).message || 'Unknown error';
       }
       
       // Check if it's an API error with status
       if ('status' in error) {
+        // Properly type cast to ApiError interface
         const apiError = error as ApiError;
         return `API Error ${apiError.status}: ${apiError.message || 'Unknown error'}`;
       }
