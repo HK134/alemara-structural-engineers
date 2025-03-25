@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -301,6 +302,102 @@ const Admin = () => {
                                           <div>
                                             <h3 className="text-sm font-medium text-gray-500">Status</h3>
                                             <div className="mt-2">
-                                              <div
+                                              <div className="flex flex-wrap gap-2">
+                                                {['new', 'contacted', 'closed', 'archived'].map((status) => (
+                                                  <Button
+                                                    key={status}
+                                                    variant={selectedSubmission.status === status ? "default" : "outline"}
+                                                    size="sm"
+                                                    onClick={() => updateStatus(selectedSubmission.id, status)}
+                                                    className="capitalize"
+                                                  >
+                                                    {status}
+                                                  </Button>
+                                                ))}
+                                              </div>
+                                            </div>
+                                          </div>
+                                          {selectedSubmission.postcode && (
+                                            <div>
+                                              <h3 className="text-sm font-medium text-gray-500">Postcode</h3>
+                                              <p className="mt-1 text-lg">{selectedSubmission.postcode}</p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </SheetContent>
+                                  )}
+                                </Sheet>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                  
+                  {totalPages > 1 && (
+                    <Pagination className="mt-4">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious 
+                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+                            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                          />
+                        </PaginationItem>
+                        
+                        {Array.from({ length: totalPages }, (_, i) => i + 1)
+                          .filter(page => {
+                            // Show first page, last page, current page, and pages around current
+                            return page === 1 || 
+                                   page === totalPages || 
+                                   (page >= currentPage - 1 && page <= currentPage + 1);
+                          })
+                          .map((page, i, array) => {
+                            // Show ellipsis if there's a gap
+                            if (i > 0 && array[i - 1] !== page - 1) {
+                              return (
+                                <PaginationItem key={`ellipsis-${page}`}>
+                                  <div className="px-4">...</div>
+                                </PaginationItem>
+                              );
+                            }
+                            
+                            return (
+                              <PaginationItem key={page}>
+                                <PaginationLink 
+                                  isActive={currentPage === page}
+                                  onClick={() => setCurrentPage(page)}
+                                >
+                                  {page}
+                                </PaginationLink>
+                              </PaginationItem>
+                            );
+                          })}
+                        
+                        <PaginationItem>
+                          <PaginationNext 
+                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  )}
+                </>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  No submissions found. Try changing your search or filter criteria.
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
+        </>
+      ) : (
+        <LeadAnalytics />
+      )}
+    </div>
+  );
+};
 
-
+export default Admin;
