@@ -10,20 +10,26 @@ export const saveFormSubmissionToDatabase = async (formData: any, formType: stri
   console.log(`Saving ${formType} submission to database:`, formData);
   
   try {
+    // Create the submission object with all required fields
+    const submissionData = {
+      form_type: formType,
+      first_name: formData.firstName,
+      last_name: formData.lastName || '', // Support for empty lastName
+      email: formData.email,
+      phone: formData.phone,
+      service_type: formData.serviceType || 'Not specified',
+      message: formData.message || '',
+      status: 'new',
+      postcode: formData.postcode || '',
+      address: formData.address || '', // Add support for storing address
+      secured: false // Explicitly set default value
+    };
+    
+    console.log("Submitting data to Supabase:", submissionData);
+    
     const { data, error } = await supabase
       .from('form_submissions')
-      .insert({
-        form_type: formType,
-        first_name: formData.firstName,
-        last_name: formData.lastName || '', // Support for empty lastName
-        email: formData.email,
-        phone: formData.phone,
-        service_type: formData.serviceType || 'Not specified',
-        message: formData.message || '',
-        status: 'new',
-        postcode: formData.postcode || '',
-        address: formData.address || '' // Add support for storing address
-      })
+      .insert(submissionData)
       .select();
     
     if (error) {

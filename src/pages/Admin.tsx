@@ -107,6 +107,39 @@ const Admin = () => {
     }
   });
 
+  // Enhanced debug hook to check for submissions when component loads
+  useEffect(() => {
+    const checkSubmissions = async () => {
+      console.log("Debug: Checking for submissions in database...");
+      const { data, error } = await supabase
+        .from('form_submissions')
+        .select('*');
+      
+      if (error) {
+        console.error("Debug check failed:", error);
+        toast.error("Error fetching form submissions. Please check console for details.");
+      } else {
+        console.log("Debug: All submissions in database:", data);
+        if (data && data.length > 0) {
+          console.log("Database has submissions, but they may not be shown due to filters");
+        } else {
+          console.log("No submissions found in database");
+          toast.info("No submissions found in the database. Try submitting a new form.");
+        }
+      }
+    };
+    
+    checkSubmissions();
+    
+    // Force a refetch of submissions after a short delay
+    const refreshTimer = setTimeout(() => {
+      console.log("Forcing refetch of submissions...");
+      refetch();
+    }, 1000);
+    
+    return () => clearTimeout(refreshTimer);
+  }, [refetch]);
+
   // Fetch form submissions with debugging
   const { data: submissions, isLoading, error, refetch } = useQuery({
     queryKey: ['formSubmissions', currentTab, searchQuery, currentPage],
@@ -119,19 +152,24 @@ const Admin = () => {
 
       // Apply status filter if not "all"
       if (currentTab !== 'all') {
+        console.log(`Applying status filter: ${currentTab}`);
         query = query.eq('status', currentTab);
       }
 
       // Apply search if provided
       if (searchQuery) {
+        console.log(`Applying search query: ${searchQuery}`);
         query = query.or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%`);
       }
 
       // Apply pagination
       const from = (currentPage - 1) * itemsPerPage;
       const to = from + itemsPerPage - 1;
+      console.log(`Applying pagination: rows ${from} to ${to}`);
       query = query.range(from, to).order('created_at', { ascending: false });
 
+      // Execute query
+      console.log("Executing Supabase query...");
       const { data, error } = await query;
       
       if (error) {
@@ -139,28 +177,12 @@ const Admin = () => {
         throw new Error(`Error fetching submissions: ${error.message}`);
       }
       
-      console.log("Fetched submissions:", data?.length || 0, "results");
+      console.log("Fetched submissions:", data);
       return data as FormSubmission[];
-    }
+    },
+    refetchOnWindowFocus: true,
+    retry: 2
   });
-
-  // Debug hook to check for submissions on mount
-  useEffect(() => {
-    const checkSubmissions = async () => {
-      const { data, error } = await supabase
-        .from('form_submissions')
-        .select('*')
-        .limit(5);
-      
-      if (error) {
-        console.error("Debug check failed:", error);
-      } else {
-        console.log("Debug: Recent submissions in database:", data);
-      }
-    };
-    
-    checkSubmissions();
-  }, []);
 
   // Count total submissions (for pagination)
   const { data: totalCount } = useQuery({
@@ -314,11 +336,25 @@ const Admin = () => {
     return engineer ? engineer.name : 'Unknown engineer';
   };
 
+  // Add a manual refresh button
+  const handleManualRefresh = () => {
+    console.log("Manual refresh requested");
+    toast.info("Refreshing data...");
+    refetch();
+  };
+
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Lead Management Dashboard</h1>
         <div className="flex items-center gap-3">
+          <Button 
+            variant="outline" 
+            onClick={handleManualRefresh}
+            className="mr-2"
+          >
+            Refresh Data
+          </Button>
           <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers')} className="mr-4">
             <TabsList>
               <TabsTrigger value="leads" className="flex items-center gap-2">
