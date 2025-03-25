@@ -34,10 +34,10 @@ interface BookingDialogProps {
 }
 
 const formSchema = z.object({
-  firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
-  lastName: z.string().min(2, { message: "Last name must be at least 2 characters." }),
+  firstName: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(5, { message: "Please enter a valid phone number." }),
+  postcode: z.string().min(1, { message: "Please enter your postcode." }),
   serviceType: z.string({ required_error: "Please select a service type." }),
   message: z.string().optional(),
 });
@@ -51,9 +51,9 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
-      lastName: "",
       email: "",
       phone: "",
+      postcode: "",
       message: "",
     },
   });
@@ -65,8 +65,11 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
       // Log form data for development purposes
       console.log("Form submission data:", data);
       
-      // Send form data to email
-      const result = await submitFormToEmail(data, "Structural Survey Booking");
+      // Send form data to email with empty lastName for compatibility
+      const result = await submitFormToEmail({
+        ...data,
+        lastName: "" // Pass empty lastName for backend compatibility
+      }, "Structural Survey Booking");
       
       if (result.success) {
         toast({
@@ -110,28 +113,43 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-2">
+            <FormField
+              control={form.control}
+              name="firstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name*</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="firstName"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name*</FormLabel>
+                    <FormLabel>Email Address*</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter first name" {...field} />
+                      <Input type="email" placeholder="Enter your email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              
               <FormField
                 control={form.control}
-                name="lastName"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name*</FormLabel>
+                    <FormLabel>Phone Number*</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter last name" {...field} />
+                      <Input placeholder="Enter your phone number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -141,26 +159,12 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
             
             <FormField
               control={form.control}
-              name="email"
+              name="postcode"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address*</FormLabel>
+                  <FormLabel>Postcode*</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="Enter your email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your phone number" {...field} />
+                    <Input placeholder="Enter your postcode" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
