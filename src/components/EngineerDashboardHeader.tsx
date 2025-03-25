@@ -9,7 +9,8 @@ import {
   FileText, 
   Settings,
   LayoutDashboard,
-  MessageSquare
+  MessageSquare,
+  CalendarClock
 } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -72,6 +73,17 @@ const EngineerDashboardHeader = () => {
             >
               <Calendar className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Schedule</span>
+            </Button>
+            
+            {/* Availability Button - NEW */}
+            <Button 
+              variant={isActive('/engineer/availability') ? "default" : "ghost"} 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/engineer/availability')}
+            >
+              <CalendarClock className="mr-2 h-4 w-4" />
+              <span className="hidden md:inline">Availability</span>
             </Button>
 
             {/* Messages Button */}
