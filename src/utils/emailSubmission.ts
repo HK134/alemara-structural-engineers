@@ -1,14 +1,23 @@
 
 import emailjs from 'emailjs-com';
+import { saveFormSubmissionToDatabase } from './formSubmissionDB';
 
 /**
- * Utility function to handle form submissions via email
- * This uses EmailJS to send emails from the client-side
+ * Utility function to handle form submissions via email and database
+ * This uses EmailJS to send emails from the client-side and also stores in Supabase
  */
 export const submitFormToEmail = async (formData: any, formType: string) => {
   console.log(`Sending ${formType} form data to info@londonstructuralsurveys.com:`, formData);
   
   try {
+    // Save to database first
+    const dbResult = await saveFormSubmissionToDatabase(formData, formType);
+    
+    // Even if database save fails, continue with email (don't block email sending)
+    if (!dbResult.success) {
+      console.warn("Database save failed, but continuing with email sending");
+    }
+    
     // Initialize EmailJS with your user ID (only needs to be done once)
     emailjs.init("B_jYcT8aQ8L7R1Dp3"); // EmailJS public key from Account > API Keys
     
