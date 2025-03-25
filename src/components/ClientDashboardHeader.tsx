@@ -7,7 +7,10 @@ import {
   User, 
   Calendar, 
   Wrench, 
-  HelpCircle 
+  HelpCircle,
+  LayoutDashboard,
+  FileCheck,
+  Package
 } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
@@ -35,6 +38,11 @@ const ClientDashboardHeader = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <h1 className="text-2xl font-bold text-[#1A1F2C]">Client Dashboard</h1>
+            <div className="hidden md:flex space-x-2 mt-1">
+              <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Site Visit</span>
+              <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">Schematic</span>
+              <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Final Package</span>
+            </div>
           </div>
           
           <div className="flex items-center space-x-2 md:space-x-4">
@@ -82,6 +90,47 @@ const ClientDashboardHeader = () => {
                   <Button className="w-full" onClick={() => navigate('/request-contractor')}>
                     Request Quote
                   </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* Project Stages Button */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" size="sm" className="md:hidden flex items-center">
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  <span className="hidden md:inline">Stages</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Project Stages</DialogTitle>
+                  <DialogDescription>
+                    Understanding your project's current stage
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="py-4 space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <Calendar className="h-5 w-5 text-blue-500 mt-1" />
+                    <div>
+                      <h4 className="font-medium text-blue-700">Site Visit</h4>
+                      <p className="text-sm text-gray-500">Our engineers visit your property to gather data and assess the structure.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <FileCheck className="h-5 w-5 text-amber-500 mt-1" />
+                    <div>
+                      <h4 className="font-medium text-amber-700">Schematic Submission</h4>
+                      <p className="text-sm text-gray-500">Preliminary designs and structural calculations are prepared for your review.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <Package className="h-5 w-5 text-green-500 mt-1" />
+                    <div>
+                      <h4 className="font-medium text-green-700">Final Package</h4>
+                      <p className="text-sm text-gray-500">Complete structural report with final drawings and specifications are delivered.</p>
+                    </div>
+                  </div>
                 </div>
               </DialogContent>
             </Dialog>

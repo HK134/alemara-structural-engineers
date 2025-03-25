@@ -1,14 +1,18 @@
 
 import React from 'react';
 
+type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
+
 type ProjectStatusProps = {
   status: string;
+  stage?: ProjectStage;
 };
 
-const ProjectStatus: React.FC<ProjectStatusProps> = ({ status }) => {
+const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage }) => {
   let bgColor = '';
   let textColor = '';
   
+  // Determine colors based on overall status
   switch (status) {
     case 'Completed':
       bgColor = 'bg-green-100';
@@ -28,9 +32,16 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status }) => {
   }
   
   return (
-    <span className={`px-2 py-1 rounded-full text-xs font-medium ${bgColor} ${textColor}`}>
-      {status}
-    </span>
+    <div className="flex flex-col space-y-1">
+      <span className={`px-2 py-1 rounded-full text-xs font-medium ${bgColor} ${textColor} inline-flex items-center`}>
+        {status}
+      </span>
+      {stage && (
+        <span className="text-xs text-gray-500 ml-1">
+          Stage: {stage}
+        </span>
+      )}
+    </div>
   );
 };
 

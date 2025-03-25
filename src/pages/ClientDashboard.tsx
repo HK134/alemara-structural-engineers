@@ -1,11 +1,11 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Calendar, Clock, FileText, MessageSquare, Wrench, HelpCircle } from "lucide-react";
+import { Calendar, Clock, FileText, MessageSquare, Wrench, HelpCircle, CheckCircle, FileCheck, Package } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 import ClientDashboardHeader from '@/components/ClientDashboardHeader';
 import ProjectStatus from '@/components/ProjectStatus';
 
@@ -13,30 +13,68 @@ const ClientDashboard = () => {
   const { isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Mock data for client projects
+  // Mock data for client projects with stages
   const projects = [
     {
       id: "W-25-001",
       name: "Home Extension Survey",
       status: "In Progress",
+      stage: "Site Visit",
       due: "2024-08-15",
       lastUpdated: "2024-07-28",
+      progress: 33,
+      isArchitect: false,
     },
     {
       id: "W-25-002",
       name: "Structural Assessment",
       status: "Completed",
+      stage: "Final Package",
       due: "2024-07-10",
       lastUpdated: "2024-07-09",
+      progress: 100,
+      isArchitect: false,
     },
     {
       id: "W-25-003",
       name: "Building Regulations",
       status: "Awaiting Info",
+      stage: "Schematic Submission",
       due: "2024-09-05",
       lastUpdated: "2024-07-20",
+      progress: 66,
+      isArchitect: true,
+    },
+    {
+      id: "W-25-004",
+      name: "Commercial Development",
+      status: "In Progress",
+      stage: "Schematic Submission",
+      due: "2024-10-15",
+      lastUpdated: "2024-07-30",
+      progress: 66,
+      isArchitect: true,
     }
   ];
+
+  // Filter projects where user is an architect
+  const architectProjects = projects.filter(project => project.isArchitect);
+  // Filter projects where user is a one-off client
+  const clientProjects = projects.filter(project => !project.isArchitect);
+
+  // Get stage icon based on project stage
+  const getStageIcon = (stage) => {
+    switch(stage) {
+      case 'Site Visit':
+        return <Calendar className="h-4 w-4 mr-1" />;
+      case 'Schematic Submission':
+        return <FileCheck className="h-4 w-4 mr-1" />;
+      case 'Final Package':
+        return <Package className="h-4 w-4 mr-1" />;
+      default:
+        return <CheckCircle className="h-4 w-4 mr-1" />;
+    }
+  };
 
   // Mock data for upcoming appointments
   const appointments = [
@@ -157,6 +195,9 @@ const ClientDashboard = () => {
           <Card>
             <CardHeader>
               <CardTitle>Your Projects</CardTitle>
+              <CardDescription>
+                Track the progress of your structural engineering projects
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
@@ -165,8 +206,9 @@ const ClientDashboard = () => {
                     <TableHead>Reference</TableHead>
                     <TableHead>Project</TableHead>
                     <TableHead>Status</TableHead>
+                    <TableHead>Stage</TableHead>
+                    <TableHead>Progress</TableHead>
                     <TableHead>Due Date</TableHead>
-                    <TableHead>Last Updated</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -175,9 +217,20 @@ const ClientDashboard = () => {
                     <TableRow key={project.id}>
                       <TableCell className="font-medium">{project.id}</TableCell>
                       <TableCell>{project.name}</TableCell>
-                      <TableCell><ProjectStatus status={project.status} /></TableCell>
+                      <TableCell><ProjectStatus status={project.status} stage={project.stage} /></TableCell>
+                      <TableCell>
+                        <div className="flex items-center">
+                          {getStageIcon(project.stage)}
+                          <span>{project.stage}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="w-full">
+                          <Progress value={project.progress} className="h-2" />
+                          <span className="text-xs text-gray-500 mt-1">{project.progress}%</span>
+                        </div>
+                      </TableCell>
                       <TableCell>{project.due}</TableCell>
-                      <TableCell>{project.lastUpdated}</TableCell>
                       <TableCell className="text-right">
                         <Button variant="ghost" size="sm" onClick={() => navigate(`/client/projects/${project.id}`)}>
                           View
@@ -189,6 +242,45 @@ const ClientDashboard = () => {
               </Table>
             </CardContent>
           </Card>
+
+          {architectProjects.length > 0 && (
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle>Architect Projects Overview</CardTitle>
+                <CardDescription>Projects where you're acting as an architect</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {architectProjects.map(project => (
+                    <Card key={project.id} className="overflow-hidden">
+                      <CardHeader className="p-4 pb-2">
+                        <CardTitle className="text-lg">{project.name}</CardTitle>
+                        <span className="text-xs text-gray-500">{project.id}</span>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-2">
+                        <div className="flex justify-between items-center mb-2">
+                          <ProjectStatus status={project.status} />
+                          <span className="text-xs">{project.due}</span>
+                        </div>
+                        <div className="mt-2">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-medium">{project.stage}</span>
+                            <span className="text-xs">{project.progress}%</span>
+                          </div>
+                          <Progress value={project.progress} className="h-2" />
+                        </div>
+                      </CardContent>
+                      <CardFooter className="p-4 pt-0">
+                        <Button variant="outline" size="sm" className="w-full" onClick={() => navigate(`/client/projects/${project.id}`)}>
+                          View Details
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </main>
     </div>
