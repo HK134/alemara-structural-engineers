@@ -34,6 +34,7 @@ import { toast } from 'sonner';
 import { Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import LeadAnalytics from '@/components/LeadAnalytics';
+import { generateOneDriveFolder } from '@/utils/oneDriveIntegration';
 
 // Types for form submissions
 type FormSubmission = {
@@ -160,7 +161,7 @@ const Admin = () => {
         secured: !currentStatus
       };
       
-      // If we're securing the project, generate a reference number
+      // If we're securing the project, generate a reference
       if (!currentStatus) {
         // Call the function to generate a reference
         const { data: refData, error: refError } = await supabase
@@ -169,6 +170,19 @@ const Admin = () => {
         if (refError) throw refError;
         
         updateData.project_reference = refData;
+        
+        // Create a new folder in OneDrive for this project
+        const customerName = selectedSubmission ? 
+          `${selectedSubmission.first_name} ${selectedSubmission.last_name}` : 
+          'Unknown Customer';
+        
+        try {
+          await generateOneDriveFolder(updateData.project_reference as string, customerName);
+          toast.success(`OneDrive folder created for project ${updateData.project_reference}`);
+        } catch (folderError) {
+          console.error("Failed to create OneDrive folder:", folderError);
+          toast.error("Project secured, but OneDrive folder creation failed");
+        }
       } else {
         // If unsecuring, remove the reference
         updateData.project_reference = null;
