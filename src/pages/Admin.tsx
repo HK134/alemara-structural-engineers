@@ -31,7 +31,7 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { toast } from 'sonner';
-import { Edit, Filter, LogOut, Map, MoreHorizontal, Search } from 'lucide-react';
+import { Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import LeadAnalytics from '@/components/LeadAnalytics';
 
@@ -48,6 +48,8 @@ type FormSubmission = {
   created_at: string;
   status: string;
   postcode: string;
+  secured: boolean;
+  project_reference: string | null;
 }
 
 const statusColors: Record<string, string> = {
@@ -151,6 +153,50 @@ const Admin = () => {
     }
   };
 
+  // Toggle secured status and generate reference if being secured
+  const toggleSecuredStatus = async (id: string, currentStatus: boolean) => {
+    try {
+      let updateData: { secured: boolean; project_reference?: string | null } = {
+        secured: !currentStatus
+      };
+      
+      // If we're securing the project, generate a reference number
+      if (!currentStatus) {
+        // Call the function to generate a reference
+        const { data: refData, error: refError } = await supabase
+          .rpc('generate_project_reference');
+          
+        if (refError) throw refError;
+        
+        updateData.project_reference = refData;
+      } else {
+        // If unsecuring, remove the reference
+        updateData.project_reference = null;
+      }
+      
+      const { error } = await supabase
+        .from('form_submissions')
+        .update(updateData)
+        .eq('id', id);
+        
+      if (error) throw error;
+      
+      toast.success(`Project ${!currentStatus ? 'secured' : 'unsecured'} successfully`);
+      refetch();
+      
+      if (selectedSubmission && selectedSubmission.id === id) {
+        setSelectedSubmission({
+          ...selectedSubmission, 
+          secured: !currentStatus,
+          project_reference: !currentStatus ? updateData.project_reference : null
+        });
+      }
+    } catch (error) {
+      console.error('Error toggling secured status:', error);
+      toast.error('Failed to update secured status');
+    }
+  };
+
   // Format date for display
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -232,14 +278,14 @@ const Admin = () => {
                           <TableHead>Name</TableHead>
                           <TableHead className="hidden md:table-cell">Email</TableHead>
                           <TableHead className="hidden md:table-cell">Phone</TableHead>
-                          <TableHead className="hidden md:table-cell">Service</TableHead>
+                          <TableHead className="hidden md:table-cell">Reference</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {submissions.map((submission) => (
-                          <TableRow key={submission.id}>
+                          <TableRow key={submission.id} className={submission.secured ? "bg-green-50" : ""}>
                             <TableCell className="font-medium">
                               {formatDate(submission.created_at)}
                             </TableCell>
@@ -252,8 +298,8 @@ const Admin = () => {
                             <TableCell className="hidden md:table-cell">
                               {submission.phone}
                             </TableCell>
-                            <TableCell className="hidden md:table-cell">
-                              {submission.service_type}
+                            <TableCell className="hidden md:table-cell font-medium">
+                              {submission.project_reference || "-"}
                             </TableCell>
                             <TableCell>
                               <Badge className={`${statusColors[submission.status] || 'bg-gray-500'}`}>
@@ -262,6 +308,18 @@ const Admin = () => {
                             </TableCell>
                             <TableCell className="text-right">
                               <div className="flex justify-end">
+                                <Button
+                                  variant="ghost" 
+                                  size="icon"
+                                  onClick={() => toggleSecuredStatus(submission.id, submission.secured)}
+                                  title={submission.secured ? "Unsecure project" : "Secure project"}
+                                  className="mr-1"
+                                >
+                                  {submission.secured ? 
+                                    <UnlockIcon size={16} className="text-orange-500" /> : 
+                                    <LockIcon size={16} className="text-green-500" />
+                                  }
+                                </Button>
                                 <Sheet>
                                   <SheetTrigger asChild>
                                     <Button
@@ -279,6 +337,13 @@ const Admin = () => {
                                       </SheetHeader>
                                       <div className="py-6">
                                         <div className="space-y-6">
+                                          {selectedSubmission.secured && selectedSubmission.project_reference && (
+                                            <div className="bg-green-50 p-3 rounded-md border border-green-100">
+                                              <h3 className="text-sm font-bold text-green-700">Project Reference</h3>
+                                              <p className="mt-1 text-lg font-bold">{selectedSubmission.project_reference}</p>
+                                            </div>
+                                          )}
+                                          
                                           <div>
                                             <h3 className="text-sm font-medium text-gray-500">Full Name</h3>
                                             <p className="mt-1 text-lg">{selectedSubmission.first_name} {selectedSubmission.last_name}</p>
@@ -299,24 +364,52 @@ const Admin = () => {
                                             <h3 className="text-sm font-medium text-gray-500">Message</h3>
                                             <p className="mt-1 text-lg whitespace-pre-wrap">{selectedSubmission.message || 'No message provided'}</p>
                                           </div>
-                                          <div>
-                                            <h3 className="text-sm font-medium text-gray-500">Status</h3>
-                                            <div className="mt-2">
-                                              <div className="flex flex-wrap gap-2">
-                                                {['new', 'contacted', 'closed', 'archived'].map((status) => (
-                                                  <Button
-                                                    key={status}
-                                                    variant={selectedSubmission.status === status ? "default" : "outline"}
-                                                    size="sm"
-                                                    onClick={() => updateStatus(selectedSubmission.id, status)}
-                                                    className="capitalize"
-                                                  >
-                                                    {status}
-                                                  </Button>
-                                                ))}
+                                          
+                                          <div className="flex space-x-2">
+                                            <div className="flex-1">
+                                              <h3 className="text-sm font-medium text-gray-500">Status</h3>
+                                              <div className="mt-2">
+                                                <div className="flex flex-wrap gap-2">
+                                                  {['new', 'contacted', 'closed', 'archived'].map((status) => (
+                                                    <Button
+                                                      key={status}
+                                                      variant={selectedSubmission.status === status ? "default" : "outline"}
+                                                      size="sm"
+                                                      onClick={() => updateStatus(selectedSubmission.id, status)}
+                                                      className="capitalize"
+                                                    >
+                                                      {status}
+                                                    </Button>
+                                                  ))}
+                                                </div>
+                                              </div>
+                                            </div>
+                                            
+                                            <div className="flex-1">
+                                              <h3 className="text-sm font-medium text-gray-500">Project Status</h3>
+                                              <div className="mt-2">
+                                                <Button
+                                                  variant={selectedSubmission.secured ? "default" : "outline"}
+                                                  size="sm"
+                                                  onClick={() => toggleSecuredStatus(selectedSubmission.id, selectedSubmission.secured)}
+                                                  className={selectedSubmission.secured ? "bg-green-600 hover:bg-green-700" : ""}
+                                                >
+                                                  {selectedSubmission.secured ? (
+                                                    <div className="flex items-center">
+                                                      <LockIcon size={14} className="mr-1" />
+                                                      Secured
+                                                    </div>
+                                                  ) : (
+                                                    <div className="flex items-center">
+                                                      <UnlockIcon size={14} className="mr-1" />
+                                                      Not Secured
+                                                    </div>
+                                                  )}
+                                                </Button>
                                               </div>
                                             </div>
                                           </div>
+                                          
                                           {selectedSubmission.postcode && (
                                             <div>
                                               <h3 className="text-sm font-medium text-gray-500">Postcode</h3>

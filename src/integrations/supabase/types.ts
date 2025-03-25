@@ -20,6 +20,8 @@ export type Database = {
           message: string | null
           phone: string
           postcode: string | null
+          project_reference: string | null
+          secured: boolean | null
           service_type: string
           status: string
         }
@@ -33,6 +35,8 @@ export type Database = {
           message?: string | null
           phone: string
           postcode?: string | null
+          project_reference?: string | null
+          secured?: boolean | null
           service_type: string
           status?: string
         }
@@ -46,6 +50,8 @@ export type Database = {
           message?: string | null
           phone?: string
           postcode?: string | null
+          project_reference?: string | null
+          secured?: boolean | null
           service_type?: string
           status?: string
         }
@@ -56,7 +62,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_project_reference: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
