@@ -31,7 +31,8 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { toast } from 'sonner';
-import { Edit, Filter, MoreHorizontal, Search } from 'lucide-react';
+import { Edit, Filter, LogOut, MoreHorizontal, Search } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Types for form submissions
 type FormSubmission = {
@@ -55,6 +56,7 @@ const statusColors: Record<string, string> = {
 };
 
 const Admin = () => {
+  const { logout } = useAuth();
   const [currentTab, setCurrentTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -160,7 +162,17 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-8">Lead Management Dashboard</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Lead Management Dashboard</h1>
+        <Button 
+          variant="outline" 
+          onClick={logout}
+          className="flex items-center gap-2"
+        >
+          <LogOut size={16} />
+          Logout
+        </Button>
+      </div>
 
       <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
         <div className="flex items-center w-full md:w-auto relative">
