@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -249,8 +248,8 @@ const EngineerDashboard = () => {
                               <div className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                                   <label className="text-right text-sm">Status</label>
-                                  <Select value={newStatus} onValueChange={setNewStatus} className="col-span-3">
-                                    <SelectTrigger>
+                                  <Select value={newStatus} onValueChange={setNewStatus}>
+                                    <SelectTrigger className="col-span-3">
                                       <SelectValue placeholder="Select status" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -262,8 +261,8 @@ const EngineerDashboard = () => {
                                 </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
                                   <label className="text-right text-sm">Stage</label>
-                                  <Select value={newStage} onValueChange={(value) => setNewStage(value as ProjectStage)} className="col-span-3">
-                                    <SelectTrigger>
+                                  <Select value={newStage} onValueChange={(value) => setNewStage(value as ProjectStage)}>
+                                    <SelectTrigger className="col-span-3">
                                       <SelectValue placeholder="Select stage" />
                                     </SelectTrigger>
                                     <SelectContent>
