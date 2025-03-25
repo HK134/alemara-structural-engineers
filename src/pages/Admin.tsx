@@ -19,6 +19,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -31,9 +38,10 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { toast } from 'sonner';
-import { Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon } from 'lucide-react';
+import { Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon, User } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import LeadAnalytics from '@/components/LeadAnalytics';
+import EngineerStats from '@/components/EngineerStats';
 import { generateOneDriveFolder } from '@/utils/oneDriveIntegration';
 
 // Types for form submissions
@@ -51,6 +59,16 @@ type FormSubmission = {
   postcode: string;
   secured: boolean;
   project_reference: string | null;
+  engineer_id: string | null;
+}
+
+// Type for engineers
+type Engineer = {
+  id: string;
+  name: string;
+  email: string;
+  active: boolean;
+  created_at: string;
 }
 
 const statusColors: Record<string, string> = {
@@ -66,8 +84,26 @@ const Admin = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
-  const [viewMode, setViewMode] = useState<'leads' | 'map'>('leads');
+  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers'>('leads');
   const itemsPerPage = 10;
+
+  // Fetch engineers
+  const { data: engineers, isLoading: engineersLoading } = useQuery({
+    queryKey: ['engineers'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('engineers')
+        .select('*')
+        .eq('active', true)
+        .order('name');
+        
+      if (error) {
+        throw new Error(`Error fetching engineers: ${error.message}`);
+      }
+      
+      return data as Engineer[];
+    }
+  });
 
   // Fetch form submissions
   const { data: submissions, isLoading, error, refetch } = useQuery({
@@ -211,6 +247,28 @@ const Admin = () => {
     }
   };
 
+  // Assign engineer to project
+  const assignEngineer = async (projectId: string, engineerId: string | null) => {
+    try {
+      const { error } = await supabase
+        .from('form_submissions')
+        .update({ engineer_id: engineerId })
+        .eq('id', projectId);
+        
+      if (error) throw error;
+      
+      toast.success(engineerId ? 'Engineer assigned to project' : 'Engineer unassigned from project');
+      refetch();
+      
+      if (selectedSubmission && selectedSubmission.id === projectId) {
+        setSelectedSubmission({...selectedSubmission, engineer_id: engineerId});
+      }
+    } catch (error) {
+      console.error('Error assigning engineer:', error);
+      toast.error('Failed to assign engineer');
+    }
+  };
+
   // Format date for display
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -223,12 +281,19 @@ const Admin = () => {
     });
   };
 
+  // Get engineer name by ID
+  const getEngineerName = (engineerId: string | null) => {
+    if (!engineerId) return 'Not assigned';
+    const engineer = engineers?.find(e => e.id === engineerId);
+    return engineer ? engineer.name : 'Unknown engineer';
+  };
+
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Lead Management Dashboard</h1>
         <div className="flex items-center gap-3">
-          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map')} className="mr-4">
+          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers')} className="mr-4">
             <TabsList>
               <TabsTrigger value="leads" className="flex items-center gap-2">
                 <Filter size={16} />
@@ -237,6 +302,10 @@ const Admin = () => {
               <TabsTrigger value="map" className="flex items-center gap-2">
                 <Map size={16} />
                 Map
+              </TabsTrigger>
+              <TabsTrigger value="engineers" className="flex items-center gap-2">
+                <User size={16} />
+                Engineers
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -294,6 +363,7 @@ const Admin = () => {
                           <TableHead className="hidden md:table-cell">Phone</TableHead>
                           <TableHead className="hidden md:table-cell">Reference</TableHead>
                           <TableHead>Status</TableHead>
+                          <TableHead>Engineer</TableHead>
                           <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -319,6 +389,17 @@ const Admin = () => {
                               <Badge className={`${statusColors[submission.status] || 'bg-gray-500'}`}>
                                 {submission.status}
                               </Badge>
+                            </TableCell>
+                            <TableCell>
+                              {submission.engineer_id ? (
+                                <Badge variant="outline" className="bg-slate-100">
+                                  {getEngineerName(submission.engineer_id)}
+                                </Badge>
+                              ) : (
+                                <Badge variant="outline" className="text-gray-500">
+                                  Unassigned
+                                </Badge>
+                              )}
                             </TableCell>
                             <TableCell className="text-right">
                               <div className="flex justify-end">
@@ -379,47 +460,69 @@ const Admin = () => {
                                             <p className="mt-1 text-lg whitespace-pre-wrap">{selectedSubmission.message || 'No message provided'}</p>
                                           </div>
                                           
-                                          <div className="flex space-x-2">
-                                            <div className="flex-1">
-                                              <h3 className="text-sm font-medium text-gray-500">Status</h3>
-                                              <div className="mt-2">
-                                                <div className="flex flex-wrap gap-2">
-                                                  {['new', 'contacted', 'closed', 'archived'].map((status) => (
-                                                    <Button
-                                                      key={status}
-                                                      variant={selectedSubmission.status === status ? "default" : "outline"}
-                                                      size="sm"
-                                                      onClick={() => updateStatus(selectedSubmission.id, status)}
-                                                      className="capitalize"
-                                                    >
-                                                      {status}
-                                                    </Button>
+                                          <div className="space-y-4">
+                                            <div className="flex flex-col">
+                                              <h3 className="text-sm font-medium text-gray-500 mb-2">Assigned Engineer</h3>
+                                              <Select
+                                                value={selectedSubmission.engineer_id || ''}
+                                                onValueChange={(value) => assignEngineer(selectedSubmission.id, value || null)}
+                                              >
+                                                <SelectTrigger className="w-full">
+                                                  <SelectValue placeholder="Select an engineer" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                  <SelectItem value="">Not Assigned</SelectItem>
+                                                  {engineers?.map((engineer) => (
+                                                    <SelectItem key={engineer.id} value={engineer.id}>
+                                                      {engineer.name}
+                                                    </SelectItem>
                                                   ))}
-                                                </div>
-                                              </div>
+                                                </SelectContent>
+                                              </Select>
                                             </div>
                                             
-                                            <div className="flex-1">
-                                              <h3 className="text-sm font-medium text-gray-500">Project Status</h3>
-                                              <div className="mt-2">
-                                                <Button
-                                                  variant={selectedSubmission.secured ? "default" : "outline"}
-                                                  size="sm"
-                                                  onClick={() => toggleSecuredStatus(selectedSubmission.id, selectedSubmission.secured)}
-                                                  className={selectedSubmission.secured ? "bg-green-600 hover:bg-green-700" : ""}
-                                                >
-                                                  {selectedSubmission.secured ? (
-                                                    <div className="flex items-center">
-                                                      <LockIcon size={14} className="mr-1" />
-                                                      Secured
-                                                    </div>
-                                                  ) : (
-                                                    <div className="flex items-center">
-                                                      <UnlockIcon size={14} className="mr-1" />
-                                                      Not Secured
-                                                    </div>
-                                                  )}
-                                                </Button>
+                                            <div className="flex space-x-2">
+                                              <div className="flex-1">
+                                                <h3 className="text-sm font-medium text-gray-500">Status</h3>
+                                                <div className="mt-2">
+                                                  <div className="flex flex-wrap gap-2">
+                                                    {['new', 'contacted', 'closed', 'archived'].map((status) => (
+                                                      <Button
+                                                        key={status}
+                                                        variant={selectedSubmission.status === status ? "default" : "outline"}
+                                                        size="sm"
+                                                        onClick={() => updateStatus(selectedSubmission.id, status)}
+                                                        className="capitalize"
+                                                      >
+                                                        {status}
+                                                      </Button>
+                                                    ))}
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                              <div className="flex-1">
+                                                <h3 className="text-sm font-medium text-gray-500">Project Status</h3>
+                                                <div className="mt-2">
+                                                  <Button
+                                                    variant={selectedSubmission.secured ? "default" : "outline"}
+                                                    size="sm"
+                                                    onClick={() => toggleSecuredStatus(selectedSubmission.id, selectedSubmission.secured)}
+                                                    className={selectedSubmission.secured ? "bg-green-600 hover:bg-green-700" : ""}
+                                                  >
+                                                    {selectedSubmission.secured ? (
+                                                      <div className="flex items-center">
+                                                        <LockIcon size={14} className="mr-1" />
+                                                        Secured
+                                                      </div>
+                                                    ) : (
+                                                      <div className="flex items-center">
+                                                        <UnlockIcon size={14} className="mr-1" />
+                                                        Not Secured
+                                                      </div>
+                                                    )}
+                                                  </Button>
+                                                </div>
                                               </div>
                                             </div>
                                           </div>
@@ -500,8 +603,10 @@ const Admin = () => {
             </TabsContent>
           </Tabs>
         </>
-      ) : (
+      ) : viewMode === 'map' ? (
         <LeadAnalytics />
+      ) : (
+        <EngineerStats />
       )}
     </div>
   );

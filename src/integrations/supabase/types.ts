@@ -9,10 +9,35 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      engineers: {
+        Row: {
+          active: boolean
+          created_at: string
+          email: string
+          id: string
+          name: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       form_submissions: {
         Row: {
           created_at: string
           email: string
+          engineer_id: string | null
           first_name: string
           form_type: string
           id: string
@@ -28,6 +53,7 @@ export type Database = {
         Insert: {
           created_at?: string
           email: string
+          engineer_id?: string | null
           first_name: string
           form_type: string
           id?: string
@@ -43,6 +69,7 @@ export type Database = {
         Update: {
           created_at?: string
           email?: string
+          engineer_id?: string | null
           first_name?: string
           form_type?: string
           id?: string
@@ -55,7 +82,15 @@ export type Database = {
           service_type?: string
           status?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "form_submissions_engineer_id_fkey"
+            columns: ["engineer_id"]
+            isOneToOne: false
+            referencedRelation: "engineers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -65,6 +100,15 @@ export type Database = {
       generate_project_reference: {
         Args: Record<PropertyKey, never>
         Returns: string
+      }
+      get_engineer_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          engineer_id: string
+          engineer_name: string
+          project_count: number
+          secured_count: number
+        }[]
       }
       get_status_counts: {
         Args: Record<PropertyKey, never>
