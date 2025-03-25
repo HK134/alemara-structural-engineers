@@ -14,6 +14,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import ClientDashboard from "./pages/ClientDashboard";
 import EngineerDashboard from "./pages/EngineerDashboard";
+import EngineerMessages from "./pages/EngineerMessages";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,11 @@ const App = () => (
             <Route path="/engineer" element={
               <ProtectedRoute>
                 <EngineerDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/engineer/messages" element={
+              <ProtectedRoute>
+                <EngineerMessages />
               </ProtectedRoute>
             } />
             <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />

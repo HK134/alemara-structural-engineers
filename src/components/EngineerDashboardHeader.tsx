@@ -11,11 +11,17 @@ import {
   LayoutDashboard,
   MessageSquare
 } from "lucide-react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const EngineerDashboardHeader = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Helper function to determine if a path is active
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -27,25 +33,45 @@ const EngineerDashboardHeader = () => {
           
           <div className="flex items-center space-x-2 md:space-x-4">
             {/* Project Dashboard Button */}
-            <Button variant="ghost" size="sm" className="flex items-center" onClick={() => navigate('/engineer')}>
+            <Button 
+              variant={isActive('/engineer') ? "default" : "ghost"} 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/engineer')}
+            >
               <LayoutDashboard className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Dashboard</span>
             </Button>
 
             {/* Reports Button */}
-            <Button variant="ghost" size="sm" className="flex items-center" onClick={() => navigate('/engineer/reports')}>
+            <Button 
+              variant={isActive('/engineer/reports') ? "default" : "ghost"} 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/engineer/reports')}
+            >
               <FileText className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Reports</span>
             </Button>
 
             {/* Schedule Button */}
-            <Button variant="ghost" size="sm" className="flex items-center" onClick={() => navigate('/engineer/schedule')}>
+            <Button 
+              variant={isActive('/engineer/schedule') ? "default" : "ghost"} 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/engineer/schedule')}
+            >
               <Calendar className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Schedule</span>
             </Button>
 
             {/* Messages Button */}
-            <Button variant="ghost" size="sm" className="flex items-center" onClick={() => navigate('/engineer/messages')}>
+            <Button 
+              variant={isActive('/engineer/messages') ? "default" : "ghost"} 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/engineer/messages')}
+            >
               <MessageSquare className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Messages</span>
             </Button>
