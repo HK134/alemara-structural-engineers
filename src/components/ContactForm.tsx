@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -5,7 +6,7 @@ import * as z from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2 } from 'lucide-react';
@@ -24,27 +25,27 @@ const serviceOptions = [
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Add postcode to form schema and form state
+  // Update form schema to reflect the new structure
   const formSchema = z.object({
-    firstName: z.string().min(2, "First name is required"),
-    lastName: z.string().min(2, "Last name is required"),
+    firstName: z.string().min(2, "Name is required"),
     email: z.string().email("Invalid email address"),
     phone: z.string().min(10, "Valid phone number is required"),
+    address: z.string().min(1, "Address is required"),
+    postcode: z.string().min(1, "Postcode is required"),
     serviceType: z.string().min(1, "Please select a service"),
     message: z.string().optional(),
-    postcode: z.string().min(1, "Postcode is required")
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
-      lastName: "",
       email: "",
       phone: "",
+      address: "",
+      postcode: "",
       serviceType: "",
       message: "",
-      postcode: ""
     },
   })
 
@@ -55,6 +56,7 @@ const ContactForm = () => {
       // Submit the form data to our email handler
       const result = await submitFormToEmail({
         ...data,
+        lastName: "", // We still pass an empty lastName for backend compatibility
         message: data.message || '',
       }, 'contact');
 
@@ -62,12 +64,12 @@ const ContactForm = () => {
         toast.success(result.message || "Thank you for your message! We'll be in touch soon.");
         form.reset({
           firstName: '',
-          lastName: '',
           email: '',
           phone: '',
+          address: '',
+          postcode: '',
           serviceType: '',
           message: '',
-          postcode: ''
         });
       } else {
         toast.error(result.message || "Sorry, there was a problem submitting your form.");
@@ -85,38 +87,21 @@ const ContactForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* First Name Field */}
+            {/* Name Field (formerly First Name) */}
             <FormField
               control={form.control}
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name*</FormLabel>
+                  <FormLabel>Name*</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your first name" {...field} />
+                    <Input placeholder="Enter your name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             
-            {/* Last Name Field */}
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last Name*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your last name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email Field */}
             <FormField
               control={form.control}
@@ -131,7 +116,9 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-            
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Phone Field */}
             <FormField
               control={form.control}
@@ -146,9 +133,7 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
             {/* Service Type Field */}
             <FormField
               control={form.control}
@@ -173,6 +158,23 @@ const ContactForm = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Address Field (new) */}
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address Line*</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter first line of address" {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

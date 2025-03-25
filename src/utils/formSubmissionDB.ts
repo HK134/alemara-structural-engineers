@@ -14,13 +14,14 @@ export const saveFormSubmissionToDatabase = async (formData: any, formType: stri
       .insert({
         form_type: formType,
         first_name: formData.firstName,
-        last_name: formData.lastName,
+        last_name: formData.lastName || '', // Support for empty lastName
         email: formData.email,
         phone: formData.phone,
         service_type: formData.serviceType || 'Not specified',
         message: formData.message || '',
         status: 'new',
-        postcode: formData.postcode || 'Unknown'
+        postcode: formData.postcode || '',
+        address: formData.address || '' // Add support for storing address
       })
       .select();
     
