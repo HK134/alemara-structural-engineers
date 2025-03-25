@@ -76,12 +76,12 @@ const EngineerDashboardHeader = () => {
               <span className="hidden md:inline">Schedule</span>
             </Button>
             
-            {/* Timesheet Button - NEW */}
+            {/* Timesheet Button - Fixed navigation path */}
             <Button 
               variant={isActive('/engineer/timesheet') ? "default" : "ghost"} 
               size="sm" 
               className="flex items-center" 
-              onClick={() => navigate('/engineer')}
+              onClick={() => navigate('/engineer/timesheet')}
             >
               <Clock className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Timesheet</span>

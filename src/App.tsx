@@ -18,6 +18,7 @@ import ClientDashboard from "./pages/ClientDashboard";
 import EngineerDashboard from "./pages/EngineerDashboard";
 import EngineerMessages from "./pages/EngineerMessages";
 import EngineerAvailability from "./pages/EngineerAvailability";
+import EngineerTimesheet from "./pages/EngineerTimesheet";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,11 @@ const App = () => (
             <Route path="/engineer/availability" element={
               <ProtectedRoute>
                 <EngineerAvailability />
+              </ProtectedRoute>
+            } />
+            <Route path="/engineer/timesheet" element={
+              <ProtectedRoute>
+                <EngineerTimesheet />
               </ProtectedRoute>
             } />
             

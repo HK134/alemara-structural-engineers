@@ -9,23 +9,31 @@ import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Calendar as CalendarIcon, Clock, FileText, Trash2, Edit, Plus, Calendar } from "lucide-react";
+import { Clock, FileText, Trash2, Plus, CalendarIcon, Calendar as CalendarIcon2 } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
+import { Database } from '@/integrations/supabase/types';
 
 type Timesheet = {
   id: string;
   engineer_id: string;
   project_id: string;
-  project_reference: string;
   date: string;
   hours: number;
   description: string;
   created_at: string;
+  project_reference?: string;
+}
+
+// Custom type for project data
+type Project = {
+  id: string;
+  project_reference: string;
+  status: string;
 }
 
 const EngineerTimesheet = () => {
@@ -57,24 +65,40 @@ const EngineerTimesheet = () => {
   const { data: timesheets = [], isLoading } = useQuery({
     queryKey: ['engineerTimesheets'],
     queryFn: async () => {
+      // First, create a custom join query
       const { data, error } = await supabase
         .from('engineer_timesheets')
-        .select('*, form_submissions(project_reference)')
+        .select(`
+          id, 
+          engineer_id, 
+          project_id, 
+          date, 
+          hours, 
+          description, 
+          created_at,
+          form_submissions (project_reference)
+        `)
         .order('date', { ascending: false });
       
       if (error) throw error;
       
       // Transform the data to include project_reference
-      return data.map((timesheet: any) => ({
+      return (data || []).map((timesheet: any) => ({
         ...timesheet,
         project_reference: timesheet.form_submissions?.project_reference || 'Unknown'
-      })) || [];
+      }));
     },
   });
   
   // Mutation to add a new timesheet entry
   const addTimesheetMutation = useMutation({
-    mutationFn: async (newTimesheet: Omit<Timesheet, 'id' | 'created_at'>) => {
+    mutationFn: async (newTimesheet: { 
+      engineer_id: string; 
+      project_id: string; 
+      date: string; 
+      hours: number; 
+      description: string;
+    }) => {
       const { data, error } = await supabase
         .from('engineer_timesheets')
         .insert([newTimesheet])
@@ -177,7 +201,7 @@ const EngineerTimesheet = () => {
       
       return entryDate >= startOfWeek && entryDate <= endOfWeek;
     })
-    .reduce((sum: number, entry: Timesheet) => sum + entry.hours, 0);
+    .reduce((sum: number, entry: Timesheet) => sum + Number(entry.hours), 0);
   
   // Calculate total hours for the current month
   const currentMonthTotal = timesheets
@@ -187,7 +211,7 @@ const EngineerTimesheet = () => {
       return entryDate.getMonth() === now.getMonth() && 
              entryDate.getFullYear() === now.getFullYear();
     })
-    .reduce((sum: number, entry: Timesheet) => sum + entry.hours, 0);
+    .reduce((sum: number, entry: Timesheet) => sum + Number(entry.hours), 0);
 
   return (
     <div className="space-y-6">
@@ -206,7 +230,7 @@ const EngineerTimesheet = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-lg font-medium">This Month</CardTitle>
-            <Calendar className="h-5 w-5 text-gray-500" />
+            <CalendarIcon2 className="h-5 w-5 text-gray-500" />
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold">{currentMonthTotal} hours</p>
@@ -275,7 +299,7 @@ const EngineerTimesheet = () => {
                     <SelectValue placeholder="Select a project" />
                   </SelectTrigger>
                   <SelectContent>
-                    {projects.map((project: any) => (
+                    {projects.map((project: Project) => (
                       <SelectItem key={project.id} value={project.id}>
                         {project.project_reference}
                       </SelectItem>

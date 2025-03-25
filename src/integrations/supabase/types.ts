@@ -9,6 +9,44 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      engineer_timesheets: {
+        Row: {
+          created_at: string
+          date: string
+          description: string
+          engineer_id: string
+          hours: number
+          id: string
+          project_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          description: string
+          engineer_id: string
+          hours: number
+          id?: string
+          project_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          description?: string
+          engineer_id?: string
+          hours?: number
+          id?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "engineer_timesheets_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "form_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       engineers: {
         Row: {
           active: boolean
