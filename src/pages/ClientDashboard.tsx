@@ -3,9 +3,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Calendar, Clock, FileText, MessageSquare } from "lucide-react";
+import { Calendar, Clock, FileText, MessageSquare, Wrench, HelpCircle } from "lucide-react";
 import ClientDashboardHeader from '@/components/ClientDashboardHeader';
 import ProjectStatus from '@/components/ProjectStatus';
 
@@ -48,6 +48,10 @@ const ClientDashboard = () => {
     }
   ];
 
+  const handleSupportClick = () => {
+    navigate('/#faq');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <ClientDashboardHeader />
@@ -80,6 +84,12 @@ const ClientDashboard = () => {
                 <p className="text-sm text-gray-500">No upcoming appointments</p>
               )}
             </CardContent>
+            <CardFooter>
+              <Button variant="outline" size="sm" onClick={() => navigate('/book-appointment')}>
+                <Calendar className="mr-2 h-4 w-4" />
+                Book New Visit
+              </Button>
+            </CardFooter>
           </Card>
           
           <Card>
@@ -89,8 +99,57 @@ const ClientDashboard = () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-500 mb-2">Need assistance with your projects?</p>
-              <Button size="sm" variant="outline">Contact Us</Button>
+              <div className="flex flex-col space-y-2">
+                <Button size="sm" variant="outline" onClick={handleSupportClick}>
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  FAQ / Help Center
+                </Button>
+                <Button size="sm" variant="outline" onClick={() => navigate('/#contact')}>
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  Contact Us
+                </Button>
+              </div>
             </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Contractor Services</CardTitle>
+              <CardDescription>Request professional contractors for your project</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-500 mb-4">
+                Our vetted contractors can implement all recommendations from your structural survey.
+                We coordinate the entire process for a seamless experience.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button variant="outline" className="w-full" onClick={() => navigate('/request-contractor')}>
+                <Wrench className="mr-2 h-4 w-4" />
+                Request Contractor Quote
+              </Button>
+            </CardFooter>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Book Another Visit</CardTitle>
+              <CardDescription>Schedule a follow-up or additional site visit</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-500 mb-4">
+                Need another assessment or a follow-up inspection? 
+                Our structural engineers are available for additional site visits.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button variant="outline" className="w-full" onClick={() => navigate('/book-appointment')}>
+                <Calendar className="mr-2 h-4 w-4" />
+                Schedule Site Visit
+              </Button>
+            </CardFooter>
           </Card>
         </div>
         
