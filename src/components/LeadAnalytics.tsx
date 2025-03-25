@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -28,8 +29,9 @@ const LeadAnalytics = () => {
       
       if (securedError) throw securedError;
 
-      // Get counts by status - fixed the group method issue
-      const { data: statusData, error: statusError } = await supabase.rpc('get_status_counts');
+      // Get counts by status using the RPC function
+      const { data: statusData, error: statusError } = await supabase
+        .rpc('get_status_counts');
       
       if (statusError) throw statusError;
 
@@ -47,7 +49,7 @@ const LeadAnalytics = () => {
       
       // Process the status counts from the RPC function
       if (statusData) {
-        statusData.forEach((item: any) => {
+        statusData.forEach((item) => {
           if (statusCounts.hasOwnProperty(item.status)) {
             statusCounts[item.status as keyof typeof statusCounts] = parseInt(item.count);
           }

@@ -66,6 +66,13 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_status_counts: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          status: string
+          count: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
