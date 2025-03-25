@@ -36,7 +36,7 @@ const ClientDashboardHeader = () => {
     <header className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center">
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
@@ -44,9 +44,8 @@ const ClientDashboardHeader = () => {
               width="auto"
               height="48"
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col ml-3">
               <h1 className="text-xl font-bold text-[#1A1F2C]">Client Dashboard</h1>
-              <span className="text-xs text-gray-500">London Structural Surveys</span>
             </div>
           </div>
           
@@ -162,8 +161,8 @@ const ClientDashboardHeader = () => {
       </div>
       <div className="bg-[#ea384c] py-1">
         <div className="container mx-auto">
-          <div className="flex items-center justify-end text-white text-xs px-4">
-            <span>London's trusted structural engineering experts</span>
+          <div className="flex items-center justify-center text-white text-xs px-4">
+            <span>London's trusted structural engineering experts - ready to help you with your project</span>
           </div>
         </div>
       </div>
