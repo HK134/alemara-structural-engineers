@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { FileText, User, CheckCircle, FileCheck, Package, Calendar, Clock, PieChart, BarChart, DollarSign } from "lucide-react";
 import EngineerDashboardHeader from '@/components/EngineerDashboardHeader';
 import ProjectStatus, { ProjectStage } from '@/components/ProjectStatus';
+import EngineerTimesheet from '@/components/EngineerTimesheet';
 
 const EngineerDashboard = () => {
   const navigate = useNavigate();
@@ -142,10 +143,11 @@ const EngineerDashboard = () => {
       
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="projects" className="w-full" onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-3 mb-8">
+          <TabsList className="grid grid-cols-4 mb-8">
             <TabsTrigger value="projects">My Projects</TabsTrigger>
             <TabsTrigger value="metrics">Performance Metrics</TabsTrigger>
             <TabsTrigger value="schedule">Site Visit Schedule</TabsTrigger>
+            <TabsTrigger value="timesheet">Timesheet</TabsTrigger>
           </TabsList>
           
           {/* Projects Tab */}
@@ -464,6 +466,11 @@ const EngineerDashboard = () => {
                 </div>
               </CardContent>
             </Card>
+          </TabsContent>
+          
+          {/* New Timesheet Tab */}
+          <TabsContent value="timesheet">
+            <EngineerTimesheet />
           </TabsContent>
         </Tabs>
       </main>

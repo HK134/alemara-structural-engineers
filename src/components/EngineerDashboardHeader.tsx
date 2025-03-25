@@ -10,7 +10,8 @@ import {
   Settings,
   LayoutDashboard,
   MessageSquare,
-  CalendarClock
+  CalendarClock,
+  Clock
 } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -75,7 +76,18 @@ const EngineerDashboardHeader = () => {
               <span className="hidden md:inline">Schedule</span>
             </Button>
             
-            {/* Availability Button - NEW */}
+            {/* Timesheet Button - NEW */}
+            <Button 
+              variant={isActive('/engineer/timesheet') ? "default" : "ghost"} 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/engineer')}
+            >
+              <Clock className="mr-2 h-4 w-4" />
+              <span className="hidden md:inline">Timesheet</span>
+            </Button>
+            
+            {/* Availability Button */}
             <Button 
               variant={isActive('/engineer/availability') ? "default" : "ghost"} 
               size="sm" 

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -142,7 +141,7 @@ const LeadsMap = () => {
       }
     } catch (error) {
       console.error('Error fetching leads:', error);
-      setError('Failed to load leads data. Please try again.');
+      setError(formatError(error));
       toast.error('Failed to load leads data');
     } finally {
       setLoading(false);
@@ -287,6 +286,17 @@ const LeadsMap = () => {
       padding: 50,
       maxZoom: 15
     });
+  };
+
+  const formatError = (error: any) => {
+    if (error && typeof error === 'object') {
+      if ('status' in error) {
+        return `Error ${error.status}: ${error.message || 'Unknown error'}`;
+      } else {
+        return error.message || 'Unknown error';
+      }
+    }
+    return 'Unknown error occurred';
   };
 
   if (isConfiguring) {
