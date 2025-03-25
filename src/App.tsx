@@ -12,6 +12,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
+import ClientDashboard from "./pages/ClientDashboard";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,11 @@ const App = () => (
             <Route path="/admin" element={
               <ProtectedRoute>
                 <Admin />
+              </ProtectedRoute>
+            } />
+            <Route path="/client" element={
+              <ProtectedRoute>
+                <ClientDashboard />
               </ProtectedRoute>
             } />
             <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />
