@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -21,6 +20,11 @@ type GeocodedLead = {
   longitude?: number;
   latitude?: number;
 };
+
+// Type for API errors that might include a status code
+interface ApiError extends Error {
+  status?: number;
+}
 
 // Try to get the token from localStorage if available
 const getStoredMapboxToken = () => {
@@ -289,11 +293,19 @@ const LeadsMap = () => {
     });
   };
 
-  const formatError = (error: any) => {
+  const formatError = (error: unknown): string => {
     if (error && typeof error === 'object') {
+      // Check if error has a message property
       if ('message' in error) {
-        return error.message || 'Unknown error';
+        return error.message as string || 'Unknown error';
       }
+      
+      // Check if it's an API error with status
+      if ('status' in error) {
+        const apiError = error as ApiError;
+        return `API Error ${apiError.status}: ${apiError.message || 'Unknown error'}`;
+      }
+      
       return 'Unknown error';
     }
     return 'Unknown error occurred';
