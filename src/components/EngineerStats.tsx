@@ -4,7 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Medal, Award } from 'lucide-react';
+import { Trophy, Medal, Award, Archive } from 'lucide-react';
+import { getProjectsEligibleForArchiving } from '@/utils/formSubmissionDB';
 
 // Define the type for engineer stats
 type EngineerStat = {
@@ -26,6 +27,15 @@ const EngineerStats = () => {
       }
       
       return data as EngineerStat[];
+    }
+  });
+
+  // Get projects eligible for archiving
+  const { data: archivableProjects } = useQuery({
+    queryKey: ['archivableProjects'],
+    queryFn: async () => {
+      const result = await getProjectsEligibleForArchiving();
+      return result.success ? result.data : [];
     }
   });
 
@@ -52,6 +62,23 @@ const EngineerStats = () => {
 
   return (
     <div className="space-y-6">
+      {archivableProjects && archivableProjects.length > 0 && (
+        <Card className="border-amber-500 border bg-amber-50">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Archive className="h-5 w-5 text-amber-600" />
+              Storage Management Notice
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-amber-800">
+              {archivableProjects.length} completed {archivableProjects.length === 1 ? 'project has' : 'projects have'} been completed for over 30 days.
+              These projects can be archived to OneDrive to optimize storage costs.
+            </p>
+          </CardContent>
+        </Card>
+      )}
+      
       <h2 className="text-2xl font-bold">Engineer Leaderboard</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
