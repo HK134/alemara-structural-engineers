@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -60,6 +59,9 @@ type FormSubmission = {
   secured: boolean;
   project_reference: string | null;
   engineer_id: string | null;
+  address: string | null;
+  completion_date: string | null;
+  archived_date: string | null;
 }
 
 // Type for engineers
@@ -105,10 +107,12 @@ const Admin = () => {
     }
   });
 
-  // Fetch form submissions
+  // Fetch form submissions with debugging
   const { data: submissions, isLoading, error, refetch } = useQuery({
     queryKey: ['formSubmissions', currentTab, searchQuery, currentPage],
     queryFn: async () => {
+      console.log("Fetching submissions with filters:", { currentTab, searchQuery, currentPage });
+      
       let query = supabase
         .from('form_submissions')
         .select('*');
@@ -131,12 +135,32 @@ const Admin = () => {
       const { data, error } = await query;
       
       if (error) {
+        console.error("Error fetching submissions:", error);
         throw new Error(`Error fetching submissions: ${error.message}`);
       }
       
+      console.log("Fetched submissions:", data?.length || 0, "results");
       return data as FormSubmission[];
     }
   });
+
+  // Debug hook to check for submissions on mount
+  useEffect(() => {
+    const checkSubmissions = async () => {
+      const { data, error } = await supabase
+        .from('form_submissions')
+        .select('*')
+        .limit(5);
+      
+      if (error) {
+        console.error("Debug check failed:", error);
+      } else {
+        console.log("Debug: Recent submissions in database:", data);
+      }
+    };
+    
+    checkSubmissions();
+  }, []);
 
   // Count total submissions (for pagination)
   const { data: totalCount } = useQuery({
@@ -159,9 +183,11 @@ const Admin = () => {
       const { count, error } = await query;
       
       if (error) {
+        console.error("Error counting submissions:", error);
         throw new Error(`Error counting submissions: ${error.message}`);
       }
       
+      console.log("Total count of submissions:", count);
       return count || 0;
     }
   });

@@ -35,6 +35,9 @@ export type Database = {
       }
       form_submissions: {
         Row: {
+          address: string | null
+          archived_date: string | null
+          completion_date: string | null
           created_at: string
           email: string
           engineer_id: string | null
@@ -51,6 +54,9 @@ export type Database = {
           status: string
         }
         Insert: {
+          address?: string | null
+          archived_date?: string | null
+          completion_date?: string | null
           created_at?: string
           email: string
           engineer_id?: string | null
@@ -67,6 +73,9 @@ export type Database = {
           status?: string
         }
         Update: {
+          address?: string | null
+          archived_date?: string | null
+          completion_date?: string | null
           created_at?: string
           email?: string
           engineer_id?: string | null

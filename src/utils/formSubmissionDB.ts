@@ -126,7 +126,10 @@ export const archiveCompletedProject = async (projectId: string, removeFromDatab
       // Just mark as archived
       const { error: updateError } = await supabase
         .from('form_submissions')
-        .update({ status: 'archived', archived_date: new Date().toISOString() })
+        .update({ 
+          status: 'archived', 
+          archived_date: new Date().toISOString() 
+        })
         .eq('id', projectId);
       
       if (updateError) {
