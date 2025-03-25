@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -9,6 +8,7 @@ import { Calendar, Clock, FileText, MessageSquare, Wrench, HelpCircle, CheckCirc
 import { Progress } from "@/components/ui/progress";
 import ClientDashboardHeader from '@/components/ClientDashboardHeader';
 import ProjectStatus, { ProjectStage } from '@/components/ProjectStatus';
+import InvoiceSection from '@/components/InvoiceSection';
 
 const ClientDashboard = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -297,6 +297,10 @@ const ClientDashboard = () => {
               </CardContent>
             </Card>
           )}
+        </div>
+        
+        <div className="grid grid-cols-1 gap-6 mb-8">
+          <InvoiceSection />
         </div>
       </main>
     </div>
