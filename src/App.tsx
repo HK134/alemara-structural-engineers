@@ -27,10 +27,14 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            {/* Public routes */}
             <Route path="/" element={<Index />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />
+            
+            {/* Protected backend routes */}
             <Route path="/admin" element={
               <ProtectedRoute>
                 <Admin />
@@ -56,8 +60,8 @@ const App = () => (
                 <EngineerAvailability />
               </ProtectedRoute>
             } />
-            <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            
+            {/* Catch-all route */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
