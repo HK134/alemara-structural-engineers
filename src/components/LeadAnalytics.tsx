@@ -200,9 +200,7 @@ const LeadAnalytics = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-96">
-            <LeadsMap />
-          </div>
+          <LeadsMap />
         </CardContent>
       </Card>
     </div>
