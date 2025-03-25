@@ -6,9 +6,10 @@ export type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Packag
 type ProjectStatusProps = {
   status: string;
   stage?: ProjectStage;
+  size?: 'sm' | 'md' | 'lg';
 };
 
-const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage }) => {
+const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage, size = 'md' }) => {
   let bgColor = '';
   let textColor = '';
   
@@ -30,10 +31,17 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage }) => {
       bgColor = 'bg-gray-100';
       textColor = 'text-gray-800';
   }
+
+  // Determine size classes
+  const sizeClasses = {
+    sm: 'text-xs px-1.5 py-0.5',
+    md: 'text-xs px-2 py-1',
+    lg: 'text-sm px-3 py-1.5'
+  };
   
   return (
     <div className="flex flex-col space-y-1">
-      <span className={`px-2 py-1 rounded-full text-xs font-medium ${bgColor} ${textColor} inline-flex items-center`}>
+      <span className={`rounded-full font-medium ${bgColor} ${textColor} inline-flex items-center ${sizeClasses[size]}`}>
         {status}
       </span>
       {stage && (
