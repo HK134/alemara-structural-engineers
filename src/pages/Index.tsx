@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 const Services = lazy(() => import('@/components/Services'));
 const WhyChooseUs = lazy(() => import('@/components/WhyChooseUs'));
 const Process = lazy(() => import('@/components/Process'));
+const CommonQuestions = lazy(() => import('@/components/CommonQuestions'));
 const AccreditationSection = lazy(() => import('@/components/AccreditationSection'));
 const Testimonials = lazy(() => import('@/components/Testimonials'));
 const FAQ = lazy(() => import('@/components/FAQ'));
@@ -25,6 +26,7 @@ const Index = () => {
           <Services />
           <WhyChooseUs />
           <Process />
+          <CommonQuestions />
           <AccreditationSection />
           <Testimonials />
           <ContactForm />
