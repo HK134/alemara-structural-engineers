@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Ruler, Certificate, CreditCard, TrendingUp, Home } from 'lucide-react';
+import { Clock, Ruler, Award, CreditCard, TrendingUp, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BookingDialog from './BookingDialog';
 import { Button } from './ui/button';
@@ -18,7 +18,7 @@ const questions = [
     answer: "Most surveys take 1-3 hours on site, with reports delivered within 48 hours of inspection."
   },
   {
-    icon: <Certificate className="h-8 w-8 text-[#ea384c]/80" />,
+    icon: <Award className="h-8 w-8 text-[#ea384c]/80" />,
     question: "Do I need planning permission for structural work?",
     answer: "Many internal structural alterations don't require planning permission but may need Building Regulations approval. We can advise on your specific case."
   },
