@@ -19,6 +19,11 @@ import EngineerDashboard from "./pages/EngineerDashboard";
 import EngineerMessages from "./pages/EngineerMessages";
 import EngineerAvailability from "./pages/EngineerAvailability";
 import EngineerTimesheet from "./pages/EngineerTimesheet";
+import EngineerInvoices from "./pages/EngineerInvoices";
+import EngineerProjectsMap from "./pages/EngineerProjectsMap";
+import EngineerCompanyPolicy from "./pages/EngineerCompanyPolicy";
+import EngineerClientEtiquette from "./pages/EngineerClientEtiquette";
+import EngineerLayout from "./components/EngineerLayout";
 
 const queryClient = new QueryClient();
 
@@ -51,26 +56,22 @@ const App = () => (
                 <ClientDashboard />
               </ProtectedRoute>
             } />
+            
+            {/* Engineer routes with sidebar layout */}
             <Route path="/engineer" element={
               <ProtectedRoute>
-                <EngineerDashboard />
+                <EngineerLayout />
               </ProtectedRoute>
-            } />
-            <Route path="/engineer/messages" element={
-              <ProtectedRoute>
-                <EngineerMessages />
-              </ProtectedRoute>
-            } />
-            <Route path="/engineer/availability" element={
-              <ProtectedRoute>
-                <EngineerAvailability />
-              </ProtectedRoute>
-            } />
-            <Route path="/engineer/timesheet" element={
-              <ProtectedRoute>
-                <EngineerTimesheet />
-              </ProtectedRoute>
-            } />
+            }>
+              <Route index element={<EngineerDashboard />} />
+              <Route path="messages" element={<EngineerMessages />} />
+              <Route path="availability" element={<EngineerAvailability />} />
+              <Route path="timesheet" element={<EngineerTimesheet />} />
+              <Route path="invoices" element={<EngineerInvoices />} />
+              <Route path="projects-map" element={<EngineerProjectsMap />} />
+              <Route path="company-policy" element={<EngineerCompanyPolicy />} />
+              <Route path="client-etiquette" element={<EngineerClientEtiquette />} />
+            </Route>
             
             {/* Catch-all route */}
             <Route path="*" element={<NotFound />} />
