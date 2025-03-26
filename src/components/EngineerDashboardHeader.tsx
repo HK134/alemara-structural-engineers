@@ -6,12 +6,9 @@ import {
   LogOut, 
   User, 
   Calendar, 
-  FileText, 
   Settings,
   LayoutDashboard,
-  MessageSquare,
   CalendarClock,
-  Clock
 } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -54,17 +51,6 @@ const EngineerDashboardHeader = () => {
               <span className="hidden md:inline">Dashboard</span>
             </Button>
 
-            {/* Reports Button */}
-            <Button 
-              variant={isActive('/engineer/reports') ? "default" : "ghost"} 
-              size="sm" 
-              className="flex items-center" 
-              onClick={() => navigate('/engineer/reports')}
-            >
-              <FileText className="mr-2 h-4 w-4" />
-              <span className="hidden md:inline">Reports</span>
-            </Button>
-
             {/* Schedule Button */}
             <Button 
               variant={isActive('/engineer/schedule') ? "default" : "ghost"} 
@@ -76,17 +62,6 @@ const EngineerDashboardHeader = () => {
               <span className="hidden md:inline">Schedule</span>
             </Button>
             
-            {/* Timesheet Button - Fixed navigation path */}
-            <Button 
-              variant={isActive('/engineer/timesheet') ? "default" : "ghost"} 
-              size="sm" 
-              className="flex items-center" 
-              onClick={() => navigate('/engineer/timesheet')}
-            >
-              <Clock className="mr-2 h-4 w-4" />
-              <span className="hidden md:inline">Timesheet</span>
-            </Button>
-            
             {/* Availability Button */}
             <Button 
               variant={isActive('/engineer/availability') ? "default" : "ghost"} 
@@ -96,17 +71,6 @@ const EngineerDashboardHeader = () => {
             >
               <CalendarClock className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Availability</span>
-            </Button>
-
-            {/* Messages Button */}
-            <Button 
-              variant={isActive('/engineer/messages') ? "default" : "ghost"} 
-              size="sm" 
-              className="flex items-center" 
-              onClick={() => navigate('/engineer/messages')}
-            >
-              <MessageSquare className="mr-2 h-4 w-4" />
-              <span className="hidden md:inline">Messages</span>
             </Button>
 
             {/* Profile Button */}
@@ -126,13 +90,6 @@ const EngineerDashboardHeader = () => {
               <LogOut className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Logout</span>
             </Button>
-          </div>
-        </div>
-      </div>
-      <div className="bg-[#ea384c] py-1">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-center text-white text-xs px-4">
-            <span>London's trusted structural engineering experts - ready to help you with your project</span>
           </div>
         </div>
       </div>
