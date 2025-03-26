@@ -78,11 +78,22 @@ const createPopupContent = (location: any) => {
   `;
 };
 
+// Define a type for our location objects to ensure type safety
+type ProjectLocation = {
+  id: number;
+  name: string;
+  client: string;
+  address: string;
+  postcode: string;
+  coordinates: [number, number]; // Explicitly typed as a tuple with two numbers
+  status: string;
+};
+
 const LeadsMap = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [loading, setLoading] = useState(true);
-  const [locations, setLocations] = useState(sampleLocations);
+  const [locations, setLocations] = useState<ProjectLocation[]>(sampleLocations as ProjectLocation[]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -117,9 +128,9 @@ const LeadsMap = () => {
           const popup = new mapboxgl.Popup({ offset: 25 })
             .setHTML(createPopupContent(location));
           
-          // Add marker to map
+          // Add marker to map - ensure coordinates are properly typed
           new mapboxgl.Marker(markerElement)
-            .setLngLat(location.coordinates)
+            .setLngLat(location.coordinates) // This is now properly typed as [number, number]
             .setPopup(popup)
             .addTo(map.current);
         });
