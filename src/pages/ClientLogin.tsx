@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 
 const ClientLogin = () => {
   const [email, setEmail] = useState('');
-  const [postcode, setPostcode] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { isAuthenticated, login } = useAuth();
   const location = useLocation();
@@ -23,17 +23,16 @@ const ClientLogin = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !postcode) {
-      toast.error('Please enter both email and postcode');
+    if (!email || !password) {
+      toast.error('Please enter both email and password');
       return;
     }
     
     setIsLoading(true);
     
     try {
-      // In a real implementation, we would use the postcode as password
-      // For now, we're using the same login method
-      const result = await login(email, postcode);
+      // Use the password instead of postcode
+      const result = await login(email, password);
       
       if (!result.success) {
         toast.error(result.message);
@@ -89,15 +88,15 @@ const ClientLogin = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="postcode" className="text-slate-800">Postcode</Label>
+              <Label htmlFor="password" className="text-slate-800">Password</Label>
               <div className="relative">
                 <LockKeyhole className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
                 <Input
-                  id="postcode"
-                  type="text"
-                  placeholder="Enter your postcode"
-                  value={postcode}
-                  onChange={(e) => setPostcode(e.target.value)}
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 border-slate-200 focus:border-slate-500"
                   required
                 />
