@@ -1,12 +1,24 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AdminSidebar from "@/components/AdminSidebar";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const AdminLayout = () => {
+  const [analyticsId, setAnalyticsId] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Get the analytics ID from localStorage
+    const storedAnalyticsId = localStorage.getItem("google_analytics_id");
+    if (storedAnalyticsId) {
+      setAnalyticsId(storedAnalyticsId);
+    }
+  }, []);
+
   return (
     <SidebarProvider defaultOpen={true}>
+      {analyticsId && <GoogleAnalytics measurementId={analyticsId} />}
       <div className="flex min-h-screen w-full">
         <AdminSidebar />
         <div className="flex-1 overflow-auto">

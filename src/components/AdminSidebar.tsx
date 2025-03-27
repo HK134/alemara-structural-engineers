@@ -24,7 +24,9 @@ import {
   FileText, 
   Map, 
   Settings,
-  Search
+  Search,
+  BarChart,
+  LineChart
 } from "lucide-react";
 
 export const AdminSidebar = () => {
@@ -112,6 +114,17 @@ export const AdminSidebar = () => {
                   >
                     <Map className="h-5 w-5" />
                     <span>Leads Map</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    isActive={isActive("/admin/analytics")} 
+                    tooltip="Website Analytics"
+                    onClick={() => navigate("/admin/analytics")}
+                  >
+                    <LineChart className="h-5 w-5" />
+                    <span>Website Analytics</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 

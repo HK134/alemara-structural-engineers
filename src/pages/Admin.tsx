@@ -37,7 +37,7 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { toast } from 'sonner';
-import { ChevronDown, ChevronUp, Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon, User, BarChart } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon, User, BarChart, LineChart } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import LeadAnalytics from '@/components/LeadAnalytics';
 import EngineerStats from '@/components/EngineerStats';
@@ -87,7 +87,7 @@ const Admin = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
-  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers' | 'seo'>('leads');
+  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers' | 'seo' | 'analytics'>('leads');
   const [expandedRows, setExpandedRows] = useState<{[key: string]: boolean}>({});
   const itemsPerPage = 10;
 
@@ -368,7 +368,7 @@ const Admin = () => {
           >
             Create Test Submission
           </Button>
-          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers' | 'seo')} className="mr-4">
+          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers' | 'seo' | 'analytics')} className="mr-4">
             <TabsList>
               <TabsTrigger value="leads" className="flex items-center gap-2">
                 <Filter size={16} />
@@ -385,6 +385,10 @@ const Admin = () => {
               <TabsTrigger value="seo" className="flex items-center gap-2">
                 <BarChart size={16} />
                 SEO
+              </TabsTrigger>
+              <TabsTrigger value="analytics" className="flex items-center gap-2">
+                <LineChart size={16} />
+                Analytics
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -735,7 +739,7 @@ const Admin = () => {
         <LeadAnalytics />
       ) : viewMode === 'engineers' ? (
         <EngineerStats />
-      ) : (
+      ) : viewMode === 'seo' ? (
         <div className="p-4 bg-gray-50 rounded-lg border">
           <h2 className="text-xl font-semibold mb-4">SEO Analytics</h2>
           <p className="mb-4">Track and analyze your website's SEO performance with our advanced tools.</p>
@@ -743,6 +747,17 @@ const Admin = () => {
             <Button className="flex items-center gap-2">
               <BarChart size={16} />
               Go to SEO Dashboard
+            </Button>
+          </Link>
+        </div>
+      ) : (
+        <div className="p-4 bg-gray-50 rounded-lg border">
+          <h2 className="text-xl font-semibold mb-4">Website Analytics</h2>
+          <p className="mb-4">Monitor your website performance with detailed visitor insights.</p>
+          <Link to="/admin/analytics">
+            <Button className="flex items-center gap-2">
+              <LineChart size={16} />
+              Go to Analytics Dashboard
             </Button>
           </Link>
         </div>

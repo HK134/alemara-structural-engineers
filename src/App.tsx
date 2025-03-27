@@ -27,6 +27,7 @@ import EngineerLayout from "./components/EngineerLayout";
 import AdminLayout from "./components/AdminLayout";
 import ClientLayout from "./components/ClientLayout";
 import SEO from "./pages/SEO";
+import Analytics from "./pages/Analytics";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
             }>
               <Route index element={<Admin />} />
               <Route path="seo" element={<SEO />} />
+              <Route path="analytics" element={<Analytics />} />
               {/* Additional admin routes can be added here */}
             </Route>
             
