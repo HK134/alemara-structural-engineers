@@ -24,6 +24,8 @@ import EngineerProjectsMap from "./pages/EngineerProjectsMap";
 import EngineerCompanyPolicy from "./pages/EngineerCompanyPolicy";
 import EngineerClientEtiquette from "./pages/EngineerClientEtiquette";
 import EngineerLayout from "./components/EngineerLayout";
+import AdminLayout from "./components/AdminLayout";
+import ClientLayout from "./components/ClientLayout";
 import SEO from "./pages/SEO";
 
 const queryClient = new QueryClient();
@@ -46,22 +48,26 @@ const App = () => (
             <Route path="/login" element={<Navigate to="/client-login" replace />} />
             <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />
             
-            {/* Protected backend routes */}
+            {/* Protected admin routes with sidebar layout */}
             <Route path="/admin" element={
               <ProtectedRoute>
-                <Admin />
+                <AdminLayout />
               </ProtectedRoute>
-            } />
-            <Route path="/admin/seo" element={
-              <ProtectedRoute>
-                <SEO />
-              </ProtectedRoute>
-            } />
+            }>
+              <Route index element={<Admin />} />
+              <Route path="seo" element={<SEO />} />
+              {/* Additional admin routes can be added here */}
+            </Route>
+            
+            {/* Protected client routes with sidebar layout */}
             <Route path="/client" element={
               <ProtectedRoute>
-                <ClientDashboard />
+                <ClientLayout />
               </ProtectedRoute>
-            } />
+            }>
+              <Route index element={<ClientDashboard />} />
+              {/* Additional client routes can be added here */}
+            </Route>
             
             {/* Engineer routes with sidebar layout */}
             <Route path="/engineer" element={
