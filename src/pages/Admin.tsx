@@ -37,15 +37,15 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { toast } from 'sonner';
-import { ChevronDown, ChevronUp, Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon, User } from 'lucide-react';
+import { ChevronDown, ChevronUp, Edit, Filter, LockIcon, LogOut, Map, MoreHorizontal, Search, UnlockIcon, User, BarChart } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import LeadAnalytics from '@/components/LeadAnalytics';
 import EngineerStats from '@/components/EngineerStats';
 import { generateOneDriveFolder } from '@/utils/oneDriveIntegration';
 import { createTestSubmission } from '@/utils/testDatabaseConnection';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Link } from 'react-router-dom';
 
-// Types for form submissions
 type FormSubmission = {
   id: string;
   form_type: string;
@@ -66,7 +66,6 @@ type FormSubmission = {
   archived_date: string | null;
 }
 
-// Type for engineers
 type Engineer = {
   id: string;
   name: string;
@@ -88,11 +87,10 @@ const Admin = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
-  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers'>('leads');
+  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers' | 'seo'>('leads');
   const [expandedRows, setExpandedRows] = useState<{[key: string]: boolean}>({});
   const itemsPerPage = 10;
 
-  // Fetch engineers
   const { data: engineers, isLoading: engineersLoading } = useQuery({
     queryKey: ['engineers'],
     queryFn: async () => {
@@ -110,7 +108,6 @@ const Admin = () => {
     }
   });
 
-  // Fetch form submissions with debugging
   const { data: submissions, isLoading, error, refetch } = useQuery({
     queryKey: ['formSubmissions', currentTab, searchQuery, currentPage],
     queryFn: async () => {
@@ -120,25 +117,21 @@ const Admin = () => {
         .from('form_submissions')
         .select('*');
 
-      // Apply status filter if not "all"
       if (currentTab !== 'all') {
         console.log(`Applying status filter: ${currentTab}`);
         query = query.eq('status', currentTab);
       }
 
-      // Apply search if provided
       if (searchQuery) {
         console.log(`Applying search query: ${searchQuery}`);
         query = query.or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%`);
       }
 
-      // Apply pagination
       const from = (currentPage - 1) * itemsPerPage;
       const to = from + itemsPerPage - 1;
       console.log(`Applying pagination: rows ${from} to ${to}`);
       query = query.range(from, to).order('created_at', { ascending: false });
 
-      // Execute query
       console.log("Executing Supabase query...");
       const { data, error } = await query;
       
@@ -154,7 +147,6 @@ const Admin = () => {
     retry: 2
   });
 
-  // Count total submissions (for pagination)
   const { data: totalCount } = useQuery({
     queryKey: ['formSubmissionsCount', currentTab, searchQuery],
     queryFn: async () => {
@@ -162,12 +154,10 @@ const Admin = () => {
         .from('form_submissions')
         .select('id', { count: 'exact' });
 
-      // Apply status filter if not "all"
       if (currentTab !== 'all') {
         query = query.eq('status', currentTab);
       }
 
-      // Apply search if provided
       if (searchQuery) {
         query = query.or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%`);
       }
@@ -184,7 +174,6 @@ const Admin = () => {
     }
   });
 
-  // Enhanced debug hook to check for submissions when component loads
   useEffect(() => {
     const checkSubmissions = async () => {
       console.log("Debug: Checking for submissions in database...");
@@ -218,7 +207,6 @@ const Admin = () => {
 
   const totalPages = totalCount ? Math.ceil(totalCount / itemsPerPage) : 1;
 
-  // Update submission status
   const updateStatus = async (id: string, newStatus: string) => {
     try {
       const { error } = await supabase
@@ -240,16 +228,13 @@ const Admin = () => {
     }
   };
 
-  // Toggle secured status and generate reference if being secured
   const toggleSecuredStatus = async (id: string, currentStatus: boolean) => {
     try {
       let updateData: { secured: boolean; project_reference?: string | null } = {
         secured: !currentStatus
       };
       
-      // If we're securing the project, generate a reference
       if (!currentStatus) {
-        // Call the function to generate a reference
         const { data: refData, error: refError } = await supabase
           .rpc('generate_project_reference');
           
@@ -257,7 +242,6 @@ const Admin = () => {
         
         updateData.project_reference = refData;
         
-        // Create a new folder in OneDrive for this project
         const customerName = selectedSubmission ? 
           `${selectedSubmission.first_name} ${selectedSubmission.last_name}` : 
           'Unknown Customer';
@@ -270,7 +254,6 @@ const Admin = () => {
           toast.error("Project secured, but OneDrive folder creation failed");
         }
       } else {
-        // If unsecuring, remove the reference
         updateData.project_reference = null;
       }
       
@@ -297,7 +280,6 @@ const Admin = () => {
     }
   };
 
-  // Function to create a test submission for debugging
   const handleCreateTestSubmission = async () => {
     try {
       toast.info("Creating test submission...");
@@ -316,7 +298,6 @@ const Admin = () => {
     }
   };
 
-  // Assign engineer to project
   const assignEngineer = async (projectId: string, engineerId: string | null) => {
     try {
       const { error } = await supabase
@@ -338,7 +319,6 @@ const Admin = () => {
     }
   };
 
-  // Format date for display
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', { 
@@ -350,21 +330,18 @@ const Admin = () => {
     });
   };
 
-  // Get engineer name by ID
   const getEngineerName = (engineerId: string | null) => {
     if (!engineerId) return 'Not assigned';
     const engineer = engineers?.find(e => e.id === engineerId);
     return engineer ? engineer.name : 'Unknown engineer';
   };
 
-  // Add a manual refresh button
   const handleManualRefresh = () => {
     console.log("Manual refresh requested");
     toast.info("Refreshing data...");
     refetch();
   };
 
-  // Toggle expanded state for a row
   const toggleRowExpanded = (id: string) => {
     setExpandedRows(prev => ({
       ...prev,
@@ -391,7 +368,7 @@ const Admin = () => {
           >
             Create Test Submission
           </Button>
-          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers')} className="mr-4">
+          <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'leads' | 'map' | 'engineers' | 'seo')} className="mr-4">
             <TabsList>
               <TabsTrigger value="leads" className="flex items-center gap-2">
                 <Filter size={16} />
@@ -404,6 +381,10 @@ const Admin = () => {
               <TabsTrigger value="engineers" className="flex items-center gap-2">
                 <User size={16} />
                 Engineers
+              </TabsTrigger>
+              <TabsTrigger value="seo" className="flex items-center gap-2">
+                <BarChart size={16} />
+                SEO
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -429,7 +410,7 @@ const Admin = () => {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  setCurrentPage(1); // Reset to first page on new search
+                  setCurrentPage(1);
                 }}
               />
             </div>
@@ -643,7 +624,7 @@ const Admin = () => {
                                             {selectedSubmission.postcode && (
                                               <div>
                                                 <h3 className="text-sm font-medium text-gray-500">Postcode</h3>
-                                                <p className="mt-1 text-lg">{selectedSubmission.postcode}</p>
+                                                <p className="mt-1 text-lg">{selectedSubmission.postcode || 'Not provided'}</p>
                                               </div>
                                             )}
                                           </div>
@@ -707,13 +688,11 @@ const Admin = () => {
                         
                         {Array.from({ length: totalPages }, (_, i) => i + 1)
                           .filter(page => {
-                            // Show first page, last page, current page, and pages around current
                             return page === 1 || 
                                    page === totalPages || 
                                    (page >= currentPage - 1 && page <= currentPage + 1);
                           })
                           .map((page, i, array) => {
-                            // Show ellipsis if there's a gap
                             if (i > 0 && array[i - 1] !== page - 1) {
                               return (
                                 <PaginationItem key={`ellipsis-${page}`}>
@@ -754,8 +733,19 @@ const Admin = () => {
         </>
       ) : viewMode === 'map' ? (
         <LeadAnalytics />
-      ) : (
+      ) : viewMode === 'engineers' ? (
         <EngineerStats />
+      ) : (
+        <div className="p-4 bg-gray-50 rounded-lg border">
+          <h2 className="text-xl font-semibold mb-4">SEO Analytics</h2>
+          <p className="mb-4">Track and analyze your website's SEO performance with our advanced tools.</p>
+          <Link to="/admin/seo">
+            <Button className="flex items-center gap-2">
+              <BarChart size={16} />
+              Go to SEO Dashboard
+            </Button>
+          </Link>
+        </div>
       )}
     </div>
   );

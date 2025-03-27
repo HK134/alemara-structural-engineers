@@ -24,6 +24,7 @@ import EngineerProjectsMap from "./pages/EngineerProjectsMap";
 import EngineerCompanyPolicy from "./pages/EngineerCompanyPolicy";
 import EngineerClientEtiquette from "./pages/EngineerClientEtiquette";
 import EngineerLayout from "./components/EngineerLayout";
+import SEO from "./pages/SEO";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,11 @@ const App = () => (
             <Route path="/admin" element={
               <ProtectedRoute>
                 <Admin />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/seo" element={
+              <ProtectedRoute>
+                <SEO />
               </ProtectedRoute>
             } />
             <Route path="/client" element={
