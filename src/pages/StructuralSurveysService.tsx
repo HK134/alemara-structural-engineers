@@ -1,13 +1,13 @@
 
 import React, { lazy, Suspense } from 'react';
 import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import Services from '@/components/Services';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
 import BookingDialog from "@/components/BookingDialog";
-import { Link } from "react-router-dom";
 
 // Lazy load components that are below the fold
-const ConstructionServices = lazy(() => import('@/components/ConstructionServices'));
 const WhyChooseUs = lazy(() => import('@/components/WhyChooseUs'));
 const Process = lazy(() => import('@/components/Process'));
 const CommonQuestions = lazy(() => import('@/components/CommonQuestions'));
@@ -19,13 +19,13 @@ const CTA = lazy(() => import('@/components/CTA'));
 const Footer = lazy(() => import('@/components/Footer'));
 const StickyBookingButton = lazy(() => import('@/components/StickyBookingButton'));
 
-const Index = () => {
+const StructuralSurveysService = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main>
         <section className="relative bg-[#1A1F2C] py-20 text-white">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
           
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-[url('/lovable-uploads/london-skyline-silhouette.png')] bg-repeat-x bg-bottom opacity-20"></div>
           
@@ -33,49 +33,49 @@ const Index = () => {
             <div className="max-w-3xl">
               <div className="flex items-center mb-4">
                 <MapPin className="text-[#ea384c] mr-2 h-5 w-5" />
-                <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full">London's Trusted Construction Engineers</span>
+                <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full">London's Trusted Structural Engineers</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                Expert Construction Engineering Services Across London
+                Expert Structural Engineering Surveys Across London
               </h1>
               <p className="text-xl md:text-2xl mb-8 text-gray-200">
-                From rear extensions and loft conversions to full renovations and new builds. Your vision, our expertise.
+                Get a certified structural assessment within 24 hours. We catch issues that RICS surveys miss, saving you thousands in repairs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <BookingDialog buttonText="Book a Consultation">
+                <BookingDialog>
                   <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg">
                     <span className="flex items-center">
-                      Book a Consultation
+                      Book a Structural Survey
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </span>
                   </Button>
                 </BookingDialog>
-                <Link to="/structural-surveys">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full">
-                    Structural Surveys
+                <a href="tel:02080049060">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full sm:w-auto">
+                    Call Us: 020 8004 9060
                   </Button>
-                </Link>
+                </a>
               </div>
               
               <div className="mt-12 bg-black bg-opacity-30 p-4 rounded-lg mb-10">
                 <div className="flex items-center text-[#ea384c] mb-2">
                   <Clock className="mr-2 h-5 w-5" />
-                  <span className="font-semibold">Full-service engineering firm specializing in London properties</span>
+                  <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
                 </div>
-                <p className="text-sm text-gray-300">Call us: 020 8004 9060</p>
+                <p className="text-sm text-gray-300">Serving all of Greater London for 10+ years</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div className="flex items-center">
                   <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>Rear Extensions</span>
+                  <span>London Property Specialists</span>
                 </div>
                 <div className="flex items-center">
                   <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>Loft Conversions</span>
+                  <span>Fast 48hr Report Delivery</span>
                 </div>
                 <div className="flex items-center">
                   <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>Complete Renovations</span>
+                  <span>Trusted by London Homebuyers</span>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@ const Index = () => {
         </section>
         
         <Suspense fallback={<div className="w-full h-20 bg-gray-100"></div>}>
-          <ConstructionServices />
+          <Services />
           <WhyChooseUs />
           <Process />
           <CommonQuestions />
@@ -102,4 +102,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default StructuralSurveysService;
