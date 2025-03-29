@@ -1,0 +1,49 @@
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+
+interface ProjectProps {
+  project: {
+    id: number;
+    title: string;
+    type: string;
+    image: string;
+    description: string;
+    completion: string;
+    featured?: boolean;
+    architect?: string;
+    location?: string;
+    images?: string[];
+    fullDescription?: string;
+  };
+}
+
+const PortfolioCard = ({ project }: ProjectProps) => {
+  return (
+    <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
+      <div className="h-56 overflow-hidden">
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="w-full h-full object-cover transition-transform hover:scale-105"
+        />
+      </div>
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-3">
+          <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] text-xs font-semibold px-2 py-1 rounded-full">
+            {project.type.charAt(0).toUpperCase() + project.type.slice(1)}
+          </span>
+          <span className="text-xs text-gray-500">{project.completion}</span>
+        </div>
+        <h3 className="text-xl font-semibold text-[#1A1F2C] mb-3">{project.title}</h3>
+        <p className="text-gray-600 mb-4">{project.description}</p>
+        <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white" asChild>
+          <Link to={`/portfolio/${project.id}`}>View Details</Link>
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default PortfolioCard;
