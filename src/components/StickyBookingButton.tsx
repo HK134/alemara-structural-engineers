@@ -23,7 +23,7 @@ const StickyBookingButton = () => {
             ) : (
               <>
                 <Calendar className="mr-2 h-5 w-5" />
-                <span className="font-medium">Book Survey</span>
+                <span className="font-medium">Book Engineer</span>
               </>
             )}
           </Button>

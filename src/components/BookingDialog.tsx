@@ -42,7 +42,7 @@ const formSchema = z.object({
   message: z.string().optional(),
 });
 
-const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: BookingDialogProps) => {
+const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: BookingDialogProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +69,7 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
       const result = await submitFormToEmail({
         ...data,
         lastName: "" // Pass empty lastName for backend compatibility
-      }, "Structural Survey Booking");
+      }, "Structural Engineering Service Request");
       
       if (result.success) {
         toast({
@@ -104,7 +104,7 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-[#1A1F2C]">Request a Structural Assessment</DialogTitle>
+          <DialogTitle className="text-xl font-bold text-[#1A1F2C]">Request a Structural Engineering Consultation</DialogTitle>
           <DialogDescription className="flex items-center text-sm">
             <Clock className="h-3 w-3 mr-1 text-[#ea384c]" />
             <span>Takes only 2 minutes</span>
@@ -184,12 +184,15 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
+                      <SelectItem value="structural-design">Structural Design & Calculations</SelectItem>
                       <SelectItem value="rics-follow">Post-RICS Survey Assessment</SelectItem>
                       <SelectItem value="crack">Crack Assessment</SelectItem>
+                      <SelectItem value="extension">Extension & Loft Design</SelectItem>
                       <SelectItem value="subsidence">Subsidence Investigation</SelectItem>
                       <SelectItem value="prepurchase">Pre-Purchase Structural Inspection</SelectItem>
                       <SelectItem value="party">Party Wall Assessment</SelectItem>
                       <SelectItem value="defect">Structural Defect Analysis</SelectItem>
+                      <SelectItem value="commercial">Commercial Project</SelectItem>
                       <SelectItem value="unsure">Not Sure - Need Advice</SelectItem>
                     </SelectContent>
                   </Select>
@@ -203,10 +206,10 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Survey" }: Bo
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Describe Your Structural Concerns</FormLabel>
+                  <FormLabel>Describe Your Project Requirements</FormLabel>
                   <FormControl>
                     <Textarea 
-                      placeholder="Please provide details about the structural issues or concerns you have..." 
+                      placeholder="Please provide details about your project or structural concerns..." 
                       className="h-20"
                       {...field} 
                     />

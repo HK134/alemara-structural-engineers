@@ -22,7 +22,7 @@ const CTA = () => {
                 <MapPin className="text-[#ea384c] mr-2 h-5 w-5" />
                 <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full">London Property Experts</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">London Buildings Require Specialised Structural Assessment</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">London Buildings Require Specialised Structural Engineering</h2>
               <p className="text-xl mb-6">
                 From historic Georgian architecture to modern developments, our London-based engineers understand the unique challenges of the capital's buildings:
               </p>
@@ -31,7 +31,7 @@ const CTA = () => {
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
                     <History className="h-3 w-3 text-white" />
                   </span>
-                  <span>10+ years of experience in London structural engineering</span>
+                  <span>5-10 years of experience in London structural engineering</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
@@ -49,7 +49,7 @@ const CTA = () => {
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
                     <Shield className="h-3 w-3 text-white" />
                   </span>
-                  <span>Basement and loft extension assessments</span>
+                  <span>Basement and loft extension design experts</span>
                 </li>
               </ul>
               <div className="flex items-center text-sm mb-6 bg-white/10 p-3 rounded">
@@ -57,10 +57,10 @@ const CTA = () => {
                 <span>We cover all London boroughs with same-week appointments available</span>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <BookingDialog buttonText="Book a London Property Inspection">
+                <BookingDialog buttonText="Book a Structural Engineer">
                   <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
                     <span className="relative z-10 flex items-center">
-                      Book a London Property Inspection
+                      Book a Structural Engineer
                       <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </span>
                     <span className="absolute inset-0 bg-white bg-opacity-20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
@@ -79,16 +79,16 @@ const CTA = () => {
                   <span className="text-2xl font-bold">97%</span>
                 </div>
                 <h3 className="text-xl font-semibold">London Client Satisfaction</h3>
-                <p className="text-sm text-gray-300">Based on over 1000 London property assessments</p>
+                <p className="text-sm text-gray-300">Based on over 1000 London property projects</p>
               </div>
               <div className="border-t border-white/20 pt-4">
-                <p className="italic text-gray-200 mb-3">"Alemara identified serious structural issues in our Islington Victorian terrace that our RICS survey missed."</p>
+                <p className="italic text-gray-200 mb-3">"Alemara delivered exceptional structural designs for our Islington property renovation that exceeded our expectations."</p>
                 <p className="font-semibold">— Michael T., Kensington</p>
               </div>
               <div className="mt-4 pt-4 border-t border-white/20">
                 <p className="text-center text-sm text-gray-300">Visit us at 6 Highbury Corner, London, N5 1RD</p>
                 <p className="text-center text-sm text-gray-300">Email: info@alemara.co.uk</p>
-                <p className="text-center text-sm text-gray-300 mt-1">Serving London for over 10 years</p>
+                <p className="text-center text-sm text-gray-300 mt-1">Serving London for over 5-10 years</p>
               </div>
             </div>
           </div>

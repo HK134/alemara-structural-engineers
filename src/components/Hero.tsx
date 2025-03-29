@@ -21,17 +21,17 @@ const Hero = () => {
             <span className="inline-block bg-[#ea384c] text-white text-sm font-semibold px-3 py-1 rounded-full">London's Trusted Structural Engineers</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Expert Structural Engineering Surveys Across London
+            Expert Structural Engineering Across London
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            Get a certified structural assessment within 24 hours. We catch issues that RICS surveys miss, saving you thousands in repairs.
+            Comprehensive structural design, assessment and consultancy services. From property surveys to complex engineering projects, we deliver expert solutions across Greater London.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <div className={`relative ${isMobile ? 'mb-8' : ''}`}>
               <BookingDialog>
                 <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg">
                   <span className="flex items-center">
-                    Book a Structural Survey
+                    Book a Structural Engineer
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </span>
                 </Button>
@@ -62,7 +62,7 @@ const Hero = () => {
           <div className="mt-12 bg-black bg-opacity-30 p-4 rounded-lg mb-10">
             <div className="flex items-center text-[#ea384c] mb-2">
               <Clock className="mr-2 h-5 w-5" />
-              <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
+              <span className="font-semibold">Limited Availability: Schedule your consultation this week for priority service</span>
             </div>
             <p className="text-sm text-gray-300">Serving all of Greater London for 5-10 years</p>
           </div>
@@ -73,11 +73,11 @@ const Hero = () => {
             </div>
             <div className="flex items-center">
               <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-              <span>Fast 48hr Report Delivery</span>
+              <span>Comprehensive Design Services</span>
             </div>
             <div className="flex items-center">
               <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-              <span>Trusted by London Homebuyers</span>
+              <span>Certified Civil Engineers</span>
             </div>
           </div>
         </div>
