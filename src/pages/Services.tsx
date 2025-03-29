@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -79,21 +78,21 @@ const structuralEngineeringServices = [
 
 const civilEngineeringServices = [
   {
-    icon: <Construction className="h-16 w-16 text-[#ea384c]" />,
+    icon: <Construction className="h-16 w-16 text-white" />,
     title: "Temporary Works Design",
     description: "Expert design of safe, efficient temporary structures for construction projects including excavation support, falsework, and formwork.",
     longDescription: "Our temporary works design service provides comprehensive engineering solutions for construction phase requirements. We design safe, efficient temporary structures including excavation support systems, scaffolding designs, falsework and formwork for concrete structures, propping systems for building alterations, and temporary access solutions. Our designs prioritize worker safety while optimizing construction efficiency and cost-effectiveness.",
     id: "temporary-works"
   },
   {
-    icon: <Workflow className="h-16 w-16 text-[#ea384c]" />,
+    icon: <Workflow className="h-16 w-16 text-white" />,
     title: "Civil & Infrastructure Design",
     description: "Specialized design services for drainage systems, highways, foundations, and other civil infrastructure components.",
     longDescription: "Our civil and infrastructure design service covers a wide range of essential project elements, from drainage systems and sustainable urban drainage solutions (SUDS) to highways design, foundations, and retaining structures. We provide detailed designs that ensure compliance with all relevant standards and regulations while promoting sustainable, efficient solutions.",
     id: "civil-infrastructure"
   },
   {
-    icon: <FileText className="h-16 w-16 text-[#ea384c]" />,
+    icon: <FileText className="h-16 w-16 text-white" />,
     title: "Design Assurance & Sign-off",
     description: "Independent checking and verification services for major infrastructure projects including HS2 and Hinkley Point.",
     longDescription: "Our design assurance and sign-off service provides independent verification of structural and civil engineering designs for major infrastructure projects. Our team of experienced engineers reviews designs against relevant standards, codes, and project requirements to ensure safety, efficiency, and compliance. We have extensive experience working on significant national projects including HS2 and Hinkley Point.",
@@ -250,57 +249,57 @@ const Services = () => {
           </div>
         </section>
 
-        <section id="part-2" className="py-16 bg-white">
+        <section id="part-2" className="py-20 bg-[#1A1F2C] text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Civil Engineering Major Projects</h2>
-              <p className="text-xl text-gray-700">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Civil Engineering Major Projects</h2>
+              <p className="text-xl text-gray-200">
                 Specialized engineering services for infrastructure and major construction projects
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
               {civilEngineeringServices.slice(0, 2).map((service, index) => (
-                <Card key={index} id={service.id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg">
+                <Card key={index} id={service.id} className="border-2 border-white/10 bg-white/5 backdrop-blur-sm hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg">
                   <CardHeader className="pb-2">
                     <div className="mb-4 flex justify-center">{service.icon}</div>
-                    <CardTitle className="text-xl text-[#1A1F2C]">{service.title}</CardTitle>
+                    <CardTitle className="text-xl text-white">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-gray-700 text-base mb-4">{service.description}</CardDescription>
+                    <CardDescription className="text-gray-200 text-base mb-4">{service.description}</CardDescription>
                     <Link to="/#contact">
-                      <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
+                      <Button variant="outline" className="text-white border-white hover:bg-white/10 p-0 h-auto font-semibold flex items-center">
                         Request This Service <ArrowRight className="ml-1 h-4 w-4" />
                       </Button>
                     </Link>
                   </CardContent>
                 </Card>
               ))}
-              
-              <Card id={civilEngineeringServices[2].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg md:col-span-3 mt-8">
-                <div className="flex flex-col md:flex-row">
-                  <div className="md:w-1/2 p-6">
-                    <div className="flex items-center mb-4">
-                      {civilEngineeringServices[2].icon}
-                      <h3 className="text-xl font-bold ml-4">{civilEngineeringServices[2].title}</h3>
-                    </div>
-                    <p className="mb-4">{civilEngineeringServices[2].description}</p>
-                    <p className="text-gray-700 mb-6">{civilEngineeringServices[2].longDescription}</p>
-                    <Link to="/#contact">
-                      <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
-                        Request This Service <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
+            </div>
+            
+            <div className="mt-12 rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+              <div className="flex flex-col md:flex-row">
+                <div className="md:w-1/2 p-8">
+                  <div className="flex items-center mb-6">
+                    {civilEngineeringServices[2].icon}
+                    <h3 className="text-2xl font-bold ml-4 text-white">{civilEngineeringServices[2].title}</h3>
                   </div>
-                  <div className="md:w-1/2">
-                    <img 
-                      src={civilEngineeringServices[2].image} 
-                      alt={civilEngineeringServices[2].title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <p className="mb-6 text-xl text-gray-200">{civilEngineeringServices[2].description}</p>
+                  <p className="text-gray-300 mb-8">{civilEngineeringServices[2].longDescription}</p>
+                  <Link to="/#contact">
+                    <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+                      Request This Service <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
-              </Card>
+                <div className="md:w-1/2">
+                  <img 
+                    src={civilEngineeringServices[2].image} 
+                    alt={civilEngineeringServices[2].title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
