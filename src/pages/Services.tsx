@@ -3,11 +3,64 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building, Search, AlertTriangle, Scale, Ruler, Wrench, Home, Warehouse, 
-  FileText, Construction, Hammer, Workflow, HardHat, Building2, ArrowRight, PencilRuler, ConstructionIcon } from "lucide-react";
+  FileText, Construction, Hammer, Workflow, HardHat, Building2, ArrowRight, PencilRuler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "London Structural Surveys",
+  "description": "Expert structural & civil engineering services in London for residential, commercial, and bespoke projects.",
+  "url": "https://londonstructuralsurveys.com/services",
+  "telephone": "02080049060",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "London",
+    "addressRegion": "Greater London",
+    "addressCountry": "UK"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "51.5074",
+    "longitude": "0.1278"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Engineering Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Residential Structural Engineering"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Commercial Structural Engineering"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Bespoke Design Projects"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Structural Surveys & Assessments"
+        }
+      }
+    ]
+  }
+};
 
 const structuralEngineeringServices = [
   {
@@ -107,7 +160,8 @@ const steelFabricationServices = [
     title: "Steel Fabrication & Installation",
     description: "End-to-end steel fabrication services including design, manufacturing, and on-site installation.",
     longDescription: "Our steel fabrication and installation service provides end-to-end solutions for structural steel requirements. From detailed connection design and steel member specification to manufacturing and on-site installation, our team ensures precision and quality at every stage. We specialize in both standard structural elements and bespoke fabrication for architecturally complex or visually exposed steelwork.",
-    id: "steel-fabrication"
+    id: "steel-fabrication",
+    image: "/lovable-uploads/be2ffdaf-904e-4449-b8bf-ba820e52e28f.png"
   }
 ];
 
@@ -122,10 +176,13 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Structural & Civil Engineering Services | London Structural Engineers</title>
-        <meta name="description" content="Expert structural engineering services in London - residential extensions, commercial buildings, bespoke designs, and structural surveys. Specialized in London properties." />
+        <title>Structural & Civil Engineering Services London | Alemara Engineers</title>
+        <meta name="description" content="Expert structural engineering services in London - residential extensions, commercial buildings, bespoke designs, and structural surveys. Specialist in London properties." />
         <meta name="keywords" content="structural engineering, London structural engineer, structural surveys, residential extensions, basement conversions, loft conversions, commercial building design, steel fabrication, civil engineering" />
         <link rel="canonical" href="https://londonstructuralsurveys.com/services" />
+        <script type="application/ld+json">
+          {JSON.stringify(localBusinessSchema)}
+        </script>
       </Helmet>
       
       <Navbar />
@@ -139,20 +196,20 @@ const Services = () => {
               </p>
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 <Button 
-                  onClick={() => scrollToSection('part-1')} 
+                  onClick={() => scrollToSection('structural-engineering')} 
                   className="bg-[#ea384c] hover:bg-[#d02e40] text-white"
                 >
                   Structural Engineering
                 </Button>
                 <Button 
-                  onClick={() => scrollToSection('part-2')} 
+                  onClick={() => scrollToSection('civil-engineering')} 
                   variant="outline" 
                   className="text-white border-white hover:bg-white/10"
                 >
                   Civil Engineering
                 </Button>
                 <Button 
-                  onClick={() => scrollToSection('part-3')} 
+                  onClick={() => scrollToSection('steel-fabrication')} 
                   variant="outline" 
                   className="text-white border-white hover:bg-white/10"
                 >
@@ -167,19 +224,19 @@ const Services = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <p className="text-lg text-gray-700 mb-6">
-                At London Structural Surveys, we provide comprehensive engineering solutions across a wide range of projects. 
+                At Alemara Structural Engineers, we provide comprehensive engineering solutions across a wide range of projects. 
                 Our team of chartered structural and civil engineers brings decades of collective experience to every project, 
                 ensuring technical excellence, regulatory compliance, and practical, cost-effective solutions.
               </p>
               <p className="text-lg text-gray-700">
-                Whether you're planning a home extension, developing a commercial property, or working on a major infrastructure project, 
+                Whether you're planning a <Link to="/services#residential-work" className="text-[#ea384c] hover:underline">home extension</Link>, developing a <Link to="/services#commercial" className="text-[#ea384c] hover:underline">commercial property</Link>, or working on a major infrastructure project, 
                 our engineering expertise will help you achieve your objectives safely, efficiently, and on budget.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="part-1" className="py-16 bg-gray-50">
+        <section id="structural-engineering" className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Structural Engineering Services</h2>
@@ -190,20 +247,20 @@ const Services = () => {
             
             <div className="grid grid-cols-1 gap-16">
               {structuralEngineeringServices.map((service, index) => (
-                <div key={index} id={service.id} className="border-b border-gray-200 pb-16 last:border-b-0">
+                <article key={index} id={service.id} className="border-b border-gray-200 pb-16 last:border-b-0">
                   <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}>
                     <div className="lg:w-1/2">
                       <div className="bg-white p-4 rounded-xl shadow-sm">
                         <div className="flex items-center mb-4">
                           <div className="mr-4">{service.icon}</div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-[#1A1F2C]">{service.title}</h3>
+                          <h2 className="text-2xl md:text-3xl font-bold text-[#1A1F2C]">{service.title}</h2>
                         </div>
                         <p className="text-xl text-gray-700 mb-6">{service.description}</p>
                         <p className="text-gray-600 mb-8">{service.longDescription}</p>
                         
                         {service.features && (
                           <div className="mb-8">
-                            <h4 className="text-xl font-semibold mb-4">Our Services Include:</h4>
+                            <h3 className="text-xl font-semibold mb-4">Our Services Include:</h3>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                               {service.features.map((feature, fidx) => (
                                 <li key={fidx} className="flex items-start">
@@ -236,20 +293,20 @@ const Services = () => {
                         }`}>
                           <img 
                             src={service.image} 
-                            alt={service.title} 
+                            alt={`${service.title} - London structural engineering services`} 
                             className="w-full h-full object-cover"
                           />
                         </div>
                       )}
                     </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="part-2" className="py-16 bg-[#1A1F2C] text-white">
+        <section id="civil-engineering" className="py-16 bg-[#1A1F2C] text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Civil Engineering Major Projects</h2>
@@ -259,11 +316,11 @@ const Services = () => {
             </div>
             
             <div className="grid grid-cols-1 gap-8">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <article className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="w-full h-[400px] md:h-[500px] bg-black flex items-center justify-center">
                   <img 
                     src={civilEngineeringServices[2].image} 
-                    alt="Major Engineering Projects"
+                    alt="Major Infrastructure Engineering Projects - HS2 and energy projects" 
                     className="w-full h-full object-cover object-center opacity-85 rounded-2xl transform scale-[0.98]"
                     style={{ objectPosition: 'center 30%' }}
                   />
@@ -282,42 +339,27 @@ const Services = () => {
                     </Button>
                   </Link>
                 </div>
-              </div>
+              </article>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                <Card className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300">
-                  <CardHeader className="pb-2">
-                    <div className="mb-4 bg-[#ea384c] p-3 rounded-full w-fit">
-                      {civilEngineeringServices[0].icon}
-                    </div>
-                    <CardTitle className="text-xl text-white">{civilEngineeringServices[0].title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-300 text-base mb-4">{civilEngineeringServices[0].description}</CardDescription>
-                    <Link to="/#contact">
-                      <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
-                        Request This Service <ArrowRight className="ml-1 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-                
-                <Card className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300">
-                  <CardHeader className="pb-2">
-                    <div className="mb-4 bg-[#ea384c] p-3 rounded-full w-fit">
-                      {civilEngineeringServices[1].icon}
-                    </div>
-                    <CardTitle className="text-xl text-white">{civilEngineeringServices[1].title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-gray-300 text-base mb-4">{civilEngineeringServices[1].description}</CardDescription>
-                    <Link to="/#contact">
-                      <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
-                        Request This Service <ArrowRight className="ml-1 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+                {civilEngineeringServices.slice(0, 2).map((service, index) => (
+                  <Card key={index} className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300">
+                    <CardHeader className="pb-2">
+                      <div className="mb-4 bg-[#ea384c] p-3 rounded-full w-fit">
+                        {service.icon}
+                      </div>
+                      <CardTitle className="text-xl text-white">{service.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-gray-300 text-base mb-4">{service.description}</CardDescription>
+                      <Link to="/#contact">
+                        <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
+                          Request This Service <ArrowRight className="ml-1 h-4 w-4" />
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
                 
                 <Card className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300 md:col-span-2 lg:col-span-1">
                   <CardHeader className="pb-2">
@@ -347,7 +389,7 @@ const Services = () => {
           </div>
         </section>
 
-        <section id="part-3" className="py-16 bg-gray-50">
+        <section id="steel-fabrication" className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Steel Fabrication & Installation</h2>
@@ -357,88 +399,95 @@ const Services = () => {
             </div>
             
             <div className="max-w-4xl mx-auto">
-              <Card id={steelFabricationServices[0].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg bg-white">
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row items-start gap-8">
-                    <div className="md:w-1/3 flex justify-center">
+              <article id={steelFabricationServices[0].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg bg-white p-8">
+                <div className="flex flex-col md:flex-row items-start gap-8">
+                  <div className="md:w-1/3 flex justify-center items-start">
+                    <div className="relative">
                       {steelFabricationServices[0].icon}
-                    </div>
-                    <div className="md:w-2/3">
-                      <h3 className="text-2xl font-bold mb-4">{steelFabricationServices[0].title}</h3>
-                      <p className="text-gray-700 text-lg mb-6">{steelFabricationServices[0].description}</p>
-                      <p className="text-gray-600 mb-6">{steelFabricationServices[0].longDescription}</p>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-                          <h4 className="font-semibold mb-2 text-[#1A1F2C]">Fabrication Services</h4>
-                          <ul className="space-y-1">
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Structural steel members</span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Architectural steel features</span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Bespoke connection details</span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>CE marked fabrication</span>
-                            </li>
-                          </ul>
-                        </div>
-                        
-                        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-                          <h4 className="font-semibold mb-2 text-[#1A1F2C]">Installation Services</h4>
-                          <ul className="space-y-1">
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Fully insured installation teams</span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Residential and commercial projects</span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Coordination with other trades</span>
-                            </li>
-                            <li className="flex items-start">
-                              <div className="mr-2 mt-1">
-                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                              </div>
-                              <span>Health & safety compliant</span>
-                            </li>
-                          </ul>
-                        </div>
+                      <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                        <img 
+                          src="/lovable-uploads/be2ffdaf-904e-4449-b8bf-ba820e52e28f.png" 
+                          alt="Steel fabrication detail" 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      
-                      <Link to="/#contact">
-                        <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
-                          Request Steel Services <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                      </Link>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="md:w-2/3">
+                    <h3 className="text-2xl font-bold mb-4">{steelFabricationServices[0].title}</h3>
+                    <p className="text-gray-700 text-lg mb-6">{steelFabricationServices[0].description}</p>
+                    <p className="text-gray-600 mb-6">{steelFabricationServices[0].longDescription}</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                      <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <h4 className="font-semibold mb-2 text-[#1A1F2C]">Fabrication Services</h4>
+                        <ul className="space-y-1">
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Structural steel members</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Architectural steel features</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Bespoke connection details</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>CE marked fabrication</span>
+                          </li>
+                        </ul>
+                      </div>
+                      
+                      <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <h4 className="font-semibold mb-2 text-[#1A1F2C]">Installation Services</h4>
+                        <ul className="space-y-1">
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Fully insured installation teams</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Residential and commercial projects</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Coordination with other trades</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="mr-2 mt-1">
+                              <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                            </div>
+                            <span>Health & safety compliant</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <Link to="/#contact">
+                      <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+                        Request Steel Services <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </section>
@@ -452,7 +501,7 @@ const Services = () => {
               </p>
               <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
                 <Link to="/#contact" className="flex items-center">
-                  Contact Us Today <ArrowRight className="ml-2 h-4 w-4" />
+                  Book a Consultation <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
