@@ -17,7 +17,10 @@ import {
   MapPin,
   Phone,
   ThumbsUp,
-  Star
+  Star,
+  Microscope,
+  FlaskConical,
+  Wrench
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -185,7 +188,7 @@ const StructuralSurveys = () => {
         {/* Services Cards */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">Our Structural Survey Services</h2>
                 <p className="text-lg text-gray-700">
@@ -193,7 +196,7 @@ const StructuralSurveys = () => {
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                   <CardHeader className="pb-2">
                     <div className="flex items-start gap-4">
@@ -317,6 +320,70 @@ const StructuralSurveys = () => {
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
                         <span>Remedial strategy development</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                  <CardHeader className="pb-2">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-[#ea384c]/10 p-3 rounded-lg">
+                        <FlaskConical className="h-6 w-6 text-[#ea384c]" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Material Testing</CardTitle>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Analysis of building materials to assess their condition, strength, and suitability for continued use or restoration.
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Concrete strength assessment</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Masonry and mortar analysis</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Timber condition assessment</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                  <CardHeader className="pb-2">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-[#ea384c]/10 p-3 rounded-lg">
+                        <Microscope className="h-6 w-6 text-[#ea384c]" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Dampness Investigations</CardTitle>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Comprehensive assessment of moisture-related issues affecting the structural integrity of buildings.
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Rising damp diagnosis</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Penetrating damp identification</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Waterproofing solutions</span>
                       </li>
                     </ul>
                   </CardContent>
