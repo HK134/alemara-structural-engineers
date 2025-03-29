@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -71,7 +72,7 @@ const structuralEngineeringServices = [
       "Floor and roof structure assessments",
       "Listed building structural surveys"
     ],
-    image: "/lovable-uploads/a071a48d-064e-41aa-b5d3-44b29e78d0b8.png",
+    image: "/lovable-uploads/8f1a8336-2983-4ee5-8e70-4663c95ced97.png",
     id: "structural-surveys"
   }
 ];
@@ -231,7 +232,7 @@ const Services = () => {
                           service.id === 'bespoke-design' 
                             ? 'w-[90%] h-[75%] self-center' 
                             : service.id === 'structural-surveys' 
-                            ? 'w-[90%] h-auto self-center' 
+                            ? 'w-[90%] h-[75%] self-center' 
                             : 'w-full'
                         }`}>
                           <img 
