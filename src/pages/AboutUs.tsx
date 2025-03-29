@@ -169,42 +169,6 @@ const AboutUs = () => {
           </div>
         </section>
         
-        {/* Our Workspace - Image Gallery */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-[#1A1F2C]">Our Workspace</h2>
-              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                Our modern offices provide the perfect environment for innovation and collaboration, enabling our team to deliver exceptional engineering solutions.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img 
-                  src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png" 
-                  alt="Alemara Office Interior" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img 
-                  src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png" 
-                  alt="Alemara Engineering Studio" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img 
-                  src="/lovable-uploads/1538283d-b9c2-4605-b325-82f813edfcba.png" 
-                  alt="Alemara Meeting Room" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-        
         {/* Get To Know Us - With Key Conversion Points */}
         <section className="py-20 overflow-hidden bg-white">
           <div className="container mx-auto px-4">
@@ -272,6 +236,42 @@ const AboutUs = () => {
                     Our designs maintain a perfect 100% approval rate with local building control authorities across all London boroughs.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Our Workspace - Image Gallery */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-[#1A1F2C]">Our Workspace</h2>
+              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Our modern offices provide the perfect environment for innovation and collaboration, enabling our team to deliver exceptional engineering solutions.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              <div className="rounded-lg overflow-hidden shadow-md h-64">
+                <img 
+                  src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png" 
+                  alt="Alemara Office Interior" 
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-md h-64">
+                <img 
+                  src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png" 
+                  alt="Alemara Engineering Studio" 
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-md h-64">
+                <img 
+                  src="/lovable-uploads/1538283d-b9c2-4605-b325-82f813edfcba.png" 
+                  alt="Alemara Meeting Room" 
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                />
               </div>
             </div>
           </div>
