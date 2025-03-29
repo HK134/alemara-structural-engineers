@@ -29,7 +29,7 @@ const Hero = () => {
                 </Button>
               </BookingDialog>
               <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                <span className="flex items-center bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-xs">
+                <span className="flex items-center bg-black bg-opacity-70 text-white px-2 py-1 rounded-full text-xs">
                   <Clock className="mr-1 h-3 w-3 text-[#ea384c]" />
                   Only takes 2 minutes
                 </span>
@@ -42,15 +42,7 @@ const Hero = () => {
             </a>
           </div>
           
-          <div className="mt-16">
-            <div className="flex items-center text-[#ea384c] mb-2">
-              <Clock className="mr-2 h-5 w-5" />
-              <span className="font-semibold">Limited Availability: Book your assessment this week for priority scheduling</span>
-            </div>
-            <p className="text-gray-300">Serving all of Greater London for 10+ years</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
             <div className="flex items-center">
               <Check className="text-[#ea384c] mr-2 h-5 w-5" />
               <span>London Property Specialists</span>
