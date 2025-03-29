@@ -259,13 +259,15 @@ const Services = () => {
             </div>
             
             <div className="grid grid-cols-1 gap-8">
-              <div className="relative rounded-xl overflow-hidden shadow-lg">
-                <img 
-                  src={civilEngineeringServices[2].image} 
-                  alt="Major Engineering Projects"
-                  className="w-full h-[400px] md:h-[500px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C] to-transparent opacity-90"></div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <div className="w-full h-[400px] md:h-[500px] bg-black">
+                  <img 
+                    src={civilEngineeringServices[2].image} 
+                    alt="Major Engineering Projects"
+                    className="w-full h-full object-cover opacity-90 mix-blend-normal"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
                   <h3 className="text-2xl md:text-3xl font-bold mb-4">Major Infrastructure Projects</h3>
                   <p className="text-gray-200 max-w-3xl mx-auto mb-6">
