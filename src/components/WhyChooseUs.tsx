@@ -60,7 +60,7 @@ const WhyChooseUs = () => {
             <div className="flex flex-col md:flex-row items-center justify-center bg-gray-50 p-4 rounded-lg border border-gray-100">
               <Award className="h-12 w-12 text-[#ea384c] mr-0 md:mr-4 mb-3 md:mb-0" />
               <div className="text-center md:text-left">
-                <h3 className="text-xl font-semibold text-[#1A1F2C]">Full Professional Indemnity Insurance Coverage</h3>
+                <h3 className="text-xl font-semibold text-[#1A1F2C]">Professional Indemnity Insurance Coverage</h3>
                 <p className="text-gray-700">Complete peace of mind when making decisions based on our expert assessment.</p>
               </div>
             </div>
