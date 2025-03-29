@@ -117,7 +117,7 @@ const StructuralSurveys = () => {
               <p className="text-xl mb-8">
                 Thorough structural assessments by chartered engineers who understand London's unique building challenges
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                 <BookingDialog>
                   <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40] text-white">
                     <span className="flex items-center">
@@ -132,26 +132,18 @@ const StructuralSurveys = () => {
                 </Button>
               </div>
               
-              <div className="mt-10 bg-black/30 py-6 px-4 rounded-lg backdrop-blur-sm">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="flex items-center justify-center">
-                    <div className="w-6 h-6 rounded-full bg-[#ea384c] flex items-center justify-center mr-3 flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg font-medium">Thorough Structural Analysis</span>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <div className="w-6 h-6 rounded-full bg-[#ea384c] flex items-center justify-center mr-3 flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg font-medium">48-Hour Report Delivery</span>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <div className="w-6 h-6 rounded-full bg-[#ea384c] flex items-center justify-center mr-3 flex-shrink-0">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-lg font-medium">10+ Years London Experience</span>
-                  </div>
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-medium mt-8 mb-3">
+                <div className="flex items-center">
+                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
+                  <span>Thorough Structural Analysis</span>
+                </div>
+                <div className="flex items-center">
+                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
+                  <span>48-Hour Report Delivery</span>
+                </div>
+                <div className="flex items-center">
+                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
+                  <span>10+ Years London Experience</span>
                 </div>
               </div>
             </div>
