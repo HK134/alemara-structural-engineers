@@ -107,7 +107,7 @@ const AboutUs = () => {
         <section className="relative h-[500px] overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="/lovable-uploads/b3d340a2-9f40-4ed6-8a83-02818fda1543.png" 
+              src="/lovable-uploads/caa3f88b-b26d-43c1-910a-e50410f3d3d8.png" 
               alt="Alemara Engineering Office" 
               className="w-full h-full object-cover"
             />
