@@ -1,8 +1,9 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Home, HardHat } from 'lucide-react';
+import { Building, Home, HardHat, Shield } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import PortfolioCard from '@/components/PortfolioCard';
 import { portfolioItems } from '@/components/PortfolioData';
