@@ -39,25 +39,6 @@ const Navbar = () => {
     };
   }, []);
 
-  const menuItems = [
-    { label: "Home", path: "/" },
-    {
-      label: "Services",
-      path: "/services",
-      submenu: [
-        { label: "Residential", path: "/services/residential" },
-        { label: "Commercial", path: "/services/commercial" },
-        { label: "Structural Surveys", path: "/services/structural-surveys" },
-        { label: "Civil Engineering", path: "/services/civil-engineering" },
-      ]
-    },
-    { label: "Portfolio", path: "/portfolio" },
-    { label: "Blog", path: "/blog" },
-    { label: "About Us", path: "/about" },
-    { label: "FAQ", path: "/faq" },
-    { label: "Contact", path: "/contact" },
-  ];
-
   return (
     <nav className={`${scrolled ? 'bg-[#1A1F2C]' : 'bg-[#1A1F2C]'} py-4 w-full z-50 sticky top-0 transition-all duration-300`}>
       <div className="container mx-auto flex items-center justify-between">
@@ -77,31 +58,13 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          {menuItems.map((item, index) => (
-            <div key={index} className="flex items-center">
-              <Link to={item.path} className="text-white hover:text-[#ea384c] transition-colors">
-                {item.label}
-              </Link>
-              {item.submenu && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="border-[#ea384c] text-[#ea384c]">
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="bg-[#1A1F2C] text-white border-gray-700">
-                    {item.submenu.map((subItem, subIndex) => (
-                      <DropdownMenuItem key={subIndex} className="px-4 py-2">
-                        <Link to={subItem.path} className="text-white hover:text-[#ea384c] transition-colors">
-                          {subItem.label}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-            </div>
-          ))}
+          <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
+          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
+          <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
+          <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
+          <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</a>
+          <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</a>
+          
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
               <div className="flex items-center mb-1">
@@ -134,31 +97,12 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
-                {menuItems.map((item, index) => (
-                  <div key={index} className="flex items-center">
-                    <Link to={item.path} className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">
-                      {item.label}
-                    </Link>
-                    {item.submenu && (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="outline" className="border-[#ea384c] text-[#ea384c]">
-                            <ChevronDown className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="bg-[#1A1F2C] text-white border-gray-700">
-                          {item.submenu.map((subItem, subIndex) => (
-                            <DropdownMenuItem key={subIndex} className="px-4 py-2">
-                              <Link to={subItem.path} className="text-white hover:text-[#ea384c] transition-colors">
-                                {subItem.label}
-                              </Link>
-                            </DropdownMenuItem>
-                          ))}
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
-                  </div>
-                ))}
+                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
+                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
+                <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
+                <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
+                <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</a>
+                <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</a>
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />

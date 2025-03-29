@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -30,11 +31,10 @@ import SEO from "./pages/SEO";
 import Analytics from "./pages/Analytics";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio"; 
-import ProjectDetail from "./pages/ProjectDetail";
+import ProjectDetail from "./pages/ProjectDetail"; // Add the new page
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AboutUs from "./pages/AboutUs";
-import FAQ from "./pages/FAQ";
 
 // Import residential service pages
 import LoftConversions from "./pages/residential/LoftConversions";
@@ -65,11 +65,10 @@ const App = () => (
             <Route path="/terms" element={<Terms />} />
             <Route path="/services" element={<Services />} />
             <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:id" element={<ProjectDetail />} />
+            <Route path="/portfolio/:id" element={<ProjectDetail />} /> {/* Add the new route */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/faq" element={<FAQ />} />
             
             {/* Service category pages */}
             <Route path="/services/residential" element={<Residential />} />
@@ -95,6 +94,7 @@ const App = () => (
               <Route index element={<Admin />} />
               <Route path="seo" element={<SEO />} />
               <Route path="analytics" element={<Analytics />} />
+              {/* Additional admin routes can be added here */}
             </Route>
             
             {/* Protected client routes with sidebar layout */}
@@ -104,6 +104,7 @@ const App = () => (
               </ProtectedRoute>
             }>
               <Route index element={<ClientDashboard />} />
+              {/* Additional client routes can be added here */}
             </Route>
             
             {/* Engineer routes with sidebar layout */}
