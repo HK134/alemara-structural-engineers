@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building, Search, AlertTriangle, Scale, Ruler, Wrench, Home, Warehouse, PencilRuler, ArrowRight } from "lucide-react";
+import { Home, Search, Building2, ArrowRight, Warehouse, PencilRuler, Building } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -9,38 +9,38 @@ const serviceItems = [
   {
     icon: <Home className="h-10 w-10 text-[#ea384c]" />,
     title: "Residential Structural Engineering",
-    description: "Expert structural design and calculations for loft conversions, extensions, basements, and internal reconfigurations in London homes.",
+    description: "Expert structural design and calculations for home renovations, alterations, and extensions across London properties.",
     link: "/services#residential-work"
   },
   {
+    icon: <Building2 className="h-10 w-10 text-[#ea384c]" />,
+    title: "Loft Conversions",
+    description: "Specialized structural engineering for loft extensions, dormer windows, and roof alterations to maximize your London property's potential.",
+    link: "/services/residential/loft-conversions"
+  },
+  {
+    icon: <Building2 className="h-10 w-10 text-[#ea384c]" />,
+    title: "Rear Extensions",
+    description: "Comprehensive structural design for side returns, rear, and wrap-around extensions, including foundations and load-bearing solutions.",
+    link: "/services/residential/extensions"
+  },
+  {
+    icon: <Building className="h-10 w-10 text-[#ea384c]" />,
+    title: "Structural Surveys",
+    description: "Detailed structural inspections, including crack assessment, movement analysis and subsidence investigations for London properties.",
+    link: "/services#structural-surveys"
+  },
+  {
     icon: <Warehouse className="h-10 w-10 text-[#ea384c]" />,
-    title: "Commercial Structural Engineering",
-    description: "Comprehensive structural design services for new builds, hotels, restaurants, retail spaces and office developments.",
+    title: "Commercial Projects",
+    description: "Comprehensive structural design services for commercial buildings, retail spaces, offices, and mixed-use developments across London.",
     link: "/services#commercial"
   },
   {
     icon: <PencilRuler className="h-10 w-10 text-[#ea384c]" />,
-    title: "Bespoke Design Projects",
-    description: "Innovative structural solutions for unconventional and architecturally challenging projects, including fabrication design and bespoke connection details.",
+    title: "Bespoke Designs",
+    description: "Innovative structural solutions for unconventional and architecturally challenging projects, including fabrication design and custom details.",
     link: "/services#bespoke-design"
-  },
-  {
-    icon: <Building className="h-10 w-10 text-[#ea384c]" />,
-    title: "Post-RICS Structural Surveys",
-    description: "Detailed follow-up inspections after initial RICS surveys to investigate specific structural concerns highlighted in homebuyer reports.",
-    link: "/services#structural-surveys"
-  },
-  {
-    icon: <AlertTriangle className="h-10 w-10 text-[#ea384c]" />,
-    title: "Crack Assessment",
-    description: "Expert analysis of cracks in walls, floors and ceilings to determine their cause, severity and the appropriate remedial action required.",
-    link: "/services#structural-surveys"
-  },
-  {
-    icon: <Scale className="h-10 w-10 text-[#ea384c]" />,
-    title: "Bulging Walls & Movement Analysis",
-    description: "Expert assessment of wall bulging, leaning structures and building movement issues common in London period properties, with detailed remediation advice.",
-    link: "/services#structural-surveys"
   }
 ];
 
@@ -51,8 +51,8 @@ const Services = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">London Structural & Civil Engineering Services</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            We provide specialist engineering design and assessment services for London properties, 
-            from Victorian terraces to modern commercial developments.
+            We provide specialist engineering design and assessment services for London 
+            properties, from Victorian terraces to modern commercial developments.
           </p>
         </div>
         
