@@ -122,21 +122,15 @@ const StructuralSurveys = () => {
               
               <div className="flex justify-center gap-x-12 mb-10">
                 <div className="flex items-center">
-                  <div className="bg-[#ea384c]/20 rounded-full p-1 mr-2">
-                    <CheckCircle className="text-[#ea384c] h-5 w-5" />
-                  </div>
+                  <CheckCircle className="text-[#ea384c] mr-2 h-5 w-5" />
                   <span>Thorough Analysis</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="bg-[#ea384c]/20 rounded-full p-1 mr-2">
-                    <CheckCircle className="text-[#ea384c] h-5 w-5" />
-                  </div>
+                  <CheckCircle className="text-[#ea384c] mr-2 h-5 w-5" />
                   <span>48-Hour Reports</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="bg-[#ea384c]/20 rounded-full p-1 mr-2">
-                    <CheckCircle className="text-[#ea384c] h-5 w-5" />
-                  </div>
+                  <CheckCircle className="text-[#ea384c] mr-2 h-5 w-5" />
                   <span>10+ Years Experience</span>
                 </div>
               </div>
