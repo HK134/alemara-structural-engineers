@@ -21,11 +21,14 @@ interface ProjectProps {
 }
 
 const PortfolioCard = ({ project }: ProjectProps) => {
+  // Get the first image from the project.images array if available, otherwise use the main image
+  const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
+  
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
       <div className="h-56 overflow-hidden relative">
         <img 
-          src={project.image} 
+          src={displayImage} 
           alt={project.title} 
           className="w-full h-full object-cover transition-transform hover:scale-105"
           onError={(e) => {

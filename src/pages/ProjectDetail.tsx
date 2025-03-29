@@ -6,9 +6,16 @@ import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ArrowLeft, ArrowRight, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Shield, ExternalLink, X } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import { portfolioItems } from '@/components/PortfolioData';
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -67,14 +74,23 @@ const ProjectDetail = () => {
         {/* Project details */}
         <section className="py-16 bg-white border-b border-gray-100">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Main project image */}
               <div>
                 <img 
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-auto rounded-lg shadow-lg"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    console.error(`Failed to load image: ${target.src}`);
+                    target.onerror = null;
+                    target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                  }}
                 />
               </div>
+              
+              {/* Project info */}
               <div>
                 <div className="flex items-center gap-4 mb-4">
                   <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] text-sm font-semibold px-3 py-1 rounded-full">
@@ -113,12 +129,45 @@ const ProjectDetail = () => {
               </div>
             )}
             
-            {/* Image gallery */}
+            {/* Image gallery with carousel */}
             {project.images && project.images.length > 0 && (
               <div className="mt-12">
                 <h4 className="text-xl font-semibold mb-6 text-center">Project Gallery</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {project.images.map((image: string, index: number) => (
+                
+                {/* Image Carousel */}
+                <div className="max-w-4xl mx-auto px-10">
+                  <Carousel className="w-full">
+                    <CarouselContent>
+                      {project.images.map((image: string, index: number) => (
+                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                          <div 
+                            className="p-1 h-full aspect-[4/3]"
+                            onClick={() => setSelectedImage(image)}
+                          >
+                            <div className="h-full overflow-hidden rounded-lg cursor-pointer">
+                              <img 
+                                src={image} 
+                                alt={`${project.title} - Image ${index + 1}`}
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.onerror = null;
+                                  target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden md:flex" />
+                    <CarouselNext className="hidden md:flex" />
+                  </Carousel>
+                </div>
+                
+                {/* Thumbnail gallery for smaller screens and as alternative */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                  {project.images.slice(0, 8).map((image: string, index: number) => (
                     <div 
                       key={index} 
                       className="aspect-[4/3] overflow-hidden rounded-lg shadow-md cursor-pointer"
@@ -128,6 +177,11 @@ const ProjectDetail = () => {
                         src={image} 
                         alt={`${project.title} - Image ${index + 1}`} 
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                        }}
                       />
                     </div>
                   ))}
@@ -137,23 +191,23 @@ const ProjectDetail = () => {
             
             {/* Image lightbox/modal */}
             <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
-              <DialogContent className="max-w-4xl p-1 bg-black border-none">
+              <DialogContent className="max-w-5xl p-2 bg-black border-none">
                 {selectedImage && (
                   <div className="relative">
                     <img 
                       src={selectedImage} 
                       alt="Project image" 
-                      className="w-full h-auto"
+                      className="w-full h-auto max-h-[80vh] object-contain"
                     />
-                    <div className="absolute top-0 right-0 p-2">
-                      <button 
-                        className="bg-white/20 hover:bg-white/40 text-white rounded-full p-2 transition-colors"
-                        onClick={() => setSelectedImage(null)}
-                      >
-                        <span className="sr-only">Close</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                      </button>
-                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon" 
+                      className="absolute top-2 right-2 bg-black/20 hover:bg-black/40 text-white rounded-full"
+                      onClick={() => setSelectedImage(null)}
+                    >
+                      <X className="h-4 w-4" />
+                      <span className="sr-only">Close</span>
+                    </Button>
                   </div>
                 )}
               </DialogContent>
@@ -184,7 +238,7 @@ const ProjectDetail = () => {
           </div>
         </section>
         
-        {/* Project delivery guarantee */}
+        {/* Project delivery guarantee section */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
