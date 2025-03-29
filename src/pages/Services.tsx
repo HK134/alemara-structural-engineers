@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -235,7 +236,7 @@ const Services = () => {
                     
                     <div className="lg:w-1/2 flex items-center">
                       {service.image && (
-                        <div className={`rounded-xl overflow-hidden shadow-md w-full ${service.id === 'structural-surveys' ? 'h-[90%] self-start' : ''}`}>
+                        <div className={`rounded-xl overflow-hidden shadow-md w-full ${service.id === 'bespoke-design' ? 'h-[75%] self-center' : service.id === 'structural-surveys' ? 'h-[90%] self-start' : ''}`}>
                           <img 
                             src={service.image} 
                             alt={service.title} 
