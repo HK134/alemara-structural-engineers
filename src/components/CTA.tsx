@@ -31,7 +31,7 @@ const CTA = () => {
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
                     <History className="h-3 w-3 text-white" />
                   </span>
-                  <span>5-10 years of experience in London structural engineering</span>
+                  <span>10 years of experience in London structural engineering</span>
                 </li>
                 <li className="flex items-start">
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
@@ -49,7 +49,7 @@ const CTA = () => {
                   <span className="bg-[#ea384c] rounded-full p-1 mr-3 mt-1">
                     <Shield className="h-3 w-3 text-white" />
                   </span>
-                  <span>Basement and loft extension design experts</span>
+                  <span>100% approval rate with all London building control authorities</span>
                 </li>
               </ul>
               <div className="flex items-center text-sm mb-6 bg-white/10 p-3 rounded">
@@ -88,7 +88,7 @@ const CTA = () => {
               <div className="mt-4 pt-4 border-t border-white/20">
                 <p className="text-center text-sm text-gray-300">Visit us at 6 Highbury Corner, London, N5 1RD</p>
                 <p className="text-center text-sm text-gray-300">Email: info@alemara.co.uk</p>
-                <p className="text-center text-sm text-gray-300 mt-1">Serving London for over 5-10 years</p>
+                <p className="text-center text-sm text-gray-300 mt-1">Serving London for over 10 years</p>
               </div>
             </div>
           </div>

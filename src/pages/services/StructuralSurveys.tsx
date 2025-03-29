@@ -63,7 +63,7 @@ const faqItems = [
   },
   {
     question: "What credentials do your structural engineers have?",
-    answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have 5-10 years of experience in structural assessments of residential and commercial properties across London."
+    answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have 10 years of experience in structural assessments of residential and commercial properties across London."
   }
 ];
 
@@ -129,7 +129,7 @@ const StructuralSurveys = () => {
               <Clock className="text-[#ea384c] mr-3 h-6 w-6" />
               <span className="font-semibold text-xl text-[#ea384c]">Limited Availability: Book your assessment this week for priority scheduling</span>
             </div>
-            <p className="text-gray-300 ml-9">Serving all of Greater London for 5-10 years</p>
+            <p className="text-gray-300 ml-9">Serving all of Greater London for 10 years</p>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@ const StructuralSurveys = () => {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>5-10 Years Experience</span>
+                  <span>10 Years Experience</span>
                 </div>
               </div>
               
@@ -202,7 +202,7 @@ const StructuralSurveys = () => {
                 <div className="md:w-1/3 bg-gray-50 p-6 rounded-lg shadow-sm">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center">
-                      <div className="text-[#ea384c] text-3xl font-bold">5-10</div>
+                      <div className="text-[#ea384c] text-3xl font-bold">10</div>
                       <div className="text-gray-600 text-sm">Years Experience</div>
                     </div>
                     <div className="text-center">
@@ -588,7 +588,7 @@ const StructuralSurveys = () => {
                     </div>
                   </div>
                   <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">Certified Structural Engineers</h3>
-                  <p className="text-gray-600">All surveys conducted by certified engineers with 5-10 years experience</p>
+                  <p className="text-gray-600">All surveys conducted by certified engineers with 10 years experience</p>
                 </div>
                 
                 <div className="bg-white p-6 rounded-lg shadow-sm text-center">
