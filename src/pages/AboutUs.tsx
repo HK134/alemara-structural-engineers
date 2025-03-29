@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from "react-helmet";
 import Navbar from '@/components/Navbar';
@@ -64,13 +65,25 @@ const AboutUs = () => {
       name: "Nasrin",
       role: "Senior Structural Engineer",
       image: "",
-      bio: "Nasrin's specialized knowledge in seismic design and dynamic analysis has been instrumental in our work on sensitive structures and high-rise buildings."
+      bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures."
     },
     {
       name: "Mirsad",
       role: "Senior Structural Engineer",
       image: "",
-      bio: "With over 20 years of experience, Mirsad's expertise in foundation engineering and soil-structure interaction has been invaluable for our complex urban projects."
+      bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions."
+    },
+    {
+      name: "Sam",
+      role: "Senior Structural Engineer",
+      image: "",
+      bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions."
+    },
+    {
+      name: "Ahmed",
+      role: "Senior Structural Engineer",
+      image: "",
+      bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space."
     }
   ];
 
