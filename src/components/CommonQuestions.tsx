@@ -35,7 +35,31 @@ const questions = [
   {
     icon: <Home className="h-8 w-8 text-[#ea384c]/80" />,
     question: "How soon can you start on my project?",
-    answer: "We typically schedule new projects within 1-2 weeks. For urgent matters, we offer expedited services with potential same-week appointments based on availability."
+    answer: "We typically schedule new projects within the same week. For urgent matters, we offer expedited services with potential next-day appointments based on availability."
+  }
+];
+
+const blogPosts = [
+  {
+    title: "5 Things to Consider Before Starting a Loft Conversion",
+    excerpt: "Planning a loft conversion? Our structural engineers share the key considerations to ensure success.",
+    date: "June 15, 2023",
+    slug: "/blog/loft-conversion-considerations",
+    image: "/lovable-uploads/bb746e6a-6105-42d2-81e9-1c0805d61938.png"
+  },
+  {
+    title: "Understanding Building Regulations for House Extensions",
+    excerpt: "Navigate the complexities of building regulations with our expert guide for homeowners.",
+    date: "May 22, 2023",
+    slug: "/blog/building-regulations-for-extensions",
+    image: "/lovable-uploads/551ecc30-f655-4a5d-8c6a-775bbc45da9e.png"
+  },
+  {
+    title: "Structural Issues in Period Properties: What to Look For",
+    excerpt: "Own a period property? Learn to identify common structural issues before they become major problems.",
+    date: "April 10, 2023",
+    slug: "/blog/period-property-structural-issues",
+    image: "/lovable-uploads/30f1d92e-b72a-4c9c-9edd-e07196399814.png"
   }
 ];
 
@@ -69,6 +93,54 @@ const CommonQuestions = () => {
               <p className="text-gray-600 ml-16">{item.answer}</p>
             </div>
           ))}
+        </div>
+        
+        {/* Blog Section */}
+        <div className="my-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">
+              Structural Engineering Insights
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Expert advice and knowledge from our engineering team
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post, index) => (
+              <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-sm text-[#ea384c] mb-2">{post.date}</p>
+                  <h3 className="text-xl font-bold text-[#1A1F2C] mb-2">{post.title}</h3>
+                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                  <Button 
+                    variant="link" 
+                    className="text-[#ea384c] p-0 hover:text-[#ea384c]/80"
+                    onClick={() => navigate(post.slug)}
+                  >
+                    Read more <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button 
+              variant="outline"
+              className="border-[#ea384c] text-[#ea384c] hover:bg-[#ea384c] hover:text-white"
+              onClick={() => navigate('/blog')}
+            >
+              View all articles
+            </Button>
+          </div>
         </div>
         
         <div className="bg-[#1A1F2C] rounded-lg p-8 md:p-10 relative overflow-hidden">
