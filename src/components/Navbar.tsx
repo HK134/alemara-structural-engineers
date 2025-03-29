@@ -58,39 +58,13 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors">About Us</Link>
-          
-          {/* Services Dropdown Menu */}
-          <div className="relative">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="text-white hover:text-[#ea384c] transition-colors flex items-center">
-                  Services <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-[#1A1F2C] border-gray-700 text-white min-w-[200px]">
-                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
-                  <Link to="/services" className="w-full px-2 py-1">All Services</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
-                  <Link to="/services/residential" className="w-full px-2 py-1">Residential</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
-                  <Link to="/services/commercial" className="w-full px-2 py-1">Commercial</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
-                  <Link to="/services/structural-surveys" className="w-full px-2 py-1">Structural Surveys</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
-                  <Link to="/services/civil-engineering" className="w-full px-2 py-1">Civil Engineering</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          
-          <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors">Our Process</a>
-          <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors">Testimonials</a>
+          <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
+          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
+          <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
+          <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
           <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</a>
+          <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</a>
+          
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
               <div className="flex items-center mb-1">
@@ -123,15 +97,12 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
-                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About Us</Link>
-                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">All Services</Link>
-                <Link to="/services/residential" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Residential</Link>
-                <Link to="/services/commercial" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Commercial</Link>
-                <Link to="/services/structural-surveys" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Structural Surveys</Link>
-                <Link to="/services/civil-engineering" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Civil Engineering</Link>
-                <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Our Process</a>
-                <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Testimonials</a>
+                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
+                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
+                <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
+                <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
                 <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</a>
+                <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</a>
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
