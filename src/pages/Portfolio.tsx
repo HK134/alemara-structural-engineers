@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Building, Home, Buildings, HardHat, Shield } from 'lucide-react';
+import { Building, Home, Building2, HardHat, Shield } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 
 const portfolioItems = [
@@ -123,7 +123,7 @@ const Portfolio = () => {
                     <span>Commercial</span>
                   </TabsTrigger>
                   <TabsTrigger value="multi-residential" className="flex items-center gap-2">
-                    <Buildings className="h-4 w-4" />
+                    <Building2 className="h-4 w-4" />
                     <span>Multi-Residential</span>
                   </TabsTrigger>
                   <TabsTrigger value="civil" className="flex items-center gap-2">
