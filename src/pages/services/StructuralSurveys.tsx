@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -379,29 +380,29 @@ const StructuralSurveys = () => {
                   <CardHeader className="pb-2">
                     <div className="flex items-start gap-4">
                       <div className="bg-[#ea384c]/10 p-3 rounded-lg">
-                        <Microscope className="h-6 w-6 text-[#ea384c]" />
+                        <CalendarClock className="h-6 w-6 text-[#ea384c]" />
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Dampness Investigations</CardTitle>
+                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Post-RICS Surveys</CardTitle>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Comprehensive assessment of moisture-related issues affecting the structural integrity of buildings.
+                      Detailed follow-up assessments when RICS surveys identify potential structural concerns requiring specialist investigation.
                     </p>
                     <ul className="mt-4 space-y-2">
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Rising damp diagnosis</span>
+                        <span>Investigation of RICS highlighted issues</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Penetrating damp identification</span>
+                        <span>Detailed technical assessment</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Waterproofing solutions</span>
+                        <span>Specific repair recommendations</span>
                       </li>
                     </ul>
                   </CardContent>
