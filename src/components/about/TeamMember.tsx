@@ -23,7 +23,11 @@ const TeamMember = ({ name, role, image, bio, email }: TeamMemberProps) => {
         <div className="relative w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-[#ea384c]/20">
           {image ? (
             <Avatar className="w-full h-full">
-              <AvatarImage src={image} alt={`${name} - ${role}`} className="object-cover" />
+              <AvatarImage 
+                src={image} 
+                alt={`${name} - ${role}`} 
+                className="object-cover scale-125" // Increased scale to make the image larger
+              />
               <AvatarFallback className="bg-[#ea384c]/10 text-[#ea384c] text-2xl">
                 {name.charAt(0)}
               </AvatarFallback>
