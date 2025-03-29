@@ -39,18 +39,11 @@ const Navbar = () => {
     };
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   return (
     <nav className={`${scrolled ? 'bg-[#1A1F2C]' : 'bg-[#1A1F2C]'} py-4 w-full z-50 sticky top-0 transition-all duration-300`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
-          <button onClick={scrollToTop} className="focus:outline-none">
+          <Link to="/" className="focus:outline-none">
             <img 
               src="/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png" 
               alt="London Structural Surveys" 
@@ -59,7 +52,7 @@ const Navbar = () => {
               height="64"
               loading="eager"
             />
-          </button>
+          </Link>
           <div className="hidden md:block ml-2">
             <span className="text-xs text-gray-400">Serving Greater London</span>
           </div>

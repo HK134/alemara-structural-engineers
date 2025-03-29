@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Calendar, Phone, X, CirclePlus } from "lucide-react";
+import { Calendar, X, CirclePlus } from "lucide-react";
 import BookingDialog from "./BookingDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -47,15 +47,6 @@ const StickyBookingButton = () => {
         </PopoverContent>
       </Popover>
       
-      <a href="tel:02080049060" className={`${isMobile ? 'hidden' : 'block'}`}>
-        <Button 
-          size="lg" 
-          className="bg-[#1A1F2C]/90 hover:bg-[#1A1F2C] text-white rounded-full shadow-lg group transition-all duration-300 hover:scale-105"
-        >
-          <Phone className="mr-2 h-5 w-5" />
-          <span className="font-medium">Call Us</span>
-        </Button>
-      </a>
       <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
         <span className="bg-black/60 text-white text-xs px-2 py-1 rounded-full">
           Takes 2 mins
