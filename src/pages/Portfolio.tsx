@@ -1,11 +1,13 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Building, Home, Building2, HardHat, Shield } from 'lucide-react';
+import { Building, Home, Building2, HardHat, Shield, ArrowLeft, ArrowRight } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const portfolioItems = [
   {
@@ -21,7 +23,7 @@ const portfolioItems = [
       '/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png',
       '/lovable-uploads/166ee5b4-8ac0-46c2-9263-76801c951d68.png',
       '/lovable-uploads/62838626-e1ef-4f46-b6bb-a32e7377b8ad.png',
-      '/lovable-uploads/50ac03f3-8f8c-4231-a2cf-95af7347b69b.png',
+      '/lovable-uploads/50ac03f3-8f8c-4231-a2cf-95af7347b8ad.png',
       '/lovable-uploads/85e76aa6-f5d7-45d2-b062-f699968e882e.png',
       '/lovable-uploads/ec396354-e997-4369-ae73-f2c0793ff32f.png',
       '/lovable-uploads/0dfcb21d-fb3b-4178-b3d5-c4fd7069db52.png',
@@ -116,6 +118,8 @@ The project also included new foundations, underpinning of garden walls and stai
 ];
 
 const Portfolio = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -244,9 +248,9 @@ const Portfolio = () => {
               <Card>
                 <CardContent className="p-6">
                   <h4 className="text-xl font-semibold mb-4">Project Overview</h4>
-                  <p className="text-gray-700 whitespace-pre-line">Rees + Lee Architects had successfully obtained planning approval from Hammersmith & Fulham Council for this intricate basement extension and internal layout restructuring scheme in the Barons Court conservation area. The unique project proposed a zinc clad box below a new roof terrace requiring a box frame design.
-
-The project also included new foundations, underpinning of garden walls and staircase. Prior to providing a final structural package, we visited the site to inspect the existing structure and discuss our ideas with the architect and the client. Following the site visit, a schematic structural design was provided, and once confirmed, the final full package was released.</p>
+                  <p className="text-gray-700 whitespace-pre-line">
+                    {portfolioItems[0].fullDescription}
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -254,9 +258,13 @@ The project also included new foundations, underpinning of garden walls and stai
             {/* Image gallery */}
             <div className="mt-12">
               <h4 className="text-xl font-semibold mb-6 text-center">Project Gallery</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {portfolioItems[0].images && portfolioItems[0].images.map((image, index) => (
-                  <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
+                  <div 
+                    key={index} 
+                    className="aspect-[4/3] overflow-hidden rounded-lg shadow-md cursor-pointer"
+                    onClick={() => setSelectedImage(image)}
+                  >
                     <img 
                       src={image} 
                       alt={`Baron's Court Project - Image ${index + 1}`} 
@@ -265,6 +273,40 @@ The project also included new foundations, underpinning of garden walls and stai
                   </div>
                 ))}
               </div>
+            </div>
+            
+            {/* Image lightbox/modal */}
+            <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+              <DialogContent className="max-w-4xl p-1 bg-black border-none">
+                {selectedImage && (
+                  <div className="relative">
+                    <img 
+                      src={selectedImage} 
+                      alt="Project image" 
+                      className="w-full h-auto"
+                    />
+                    <div className="absolute top-0 right-0 p-2">
+                      <button 
+                        className="bg-white/20 hover:bg-white/40 text-white rounded-full p-2 transition-colors"
+                        onClick={() => setSelectedImage(null)}
+                      >
+                        <span className="sr-only">Close</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </DialogContent>
+            </Dialog>
+            
+            {/* Navigation buttons */}
+            <div className="flex justify-between mt-12">
+              <Button variant="outline" className="flex items-center gap-2">
+                <ArrowLeft size={16} /> Previous Project
+              </Button>
+              <Button variant="outline" className="flex items-center gap-2">
+                Next Project <ArrowRight size={16} />
+              </Button>
             </div>
           </div>
         </section>
