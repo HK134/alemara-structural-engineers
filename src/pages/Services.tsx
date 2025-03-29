@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -69,12 +70,30 @@ const structuralEngineeringServices = [
     description: "Expert structural design for lofts, extensions, basements, and internal reconfigurations in London homes.",
     longDescription: "Our residential structural engineering services cover everything from loft conversions and extensions to basement excavations and internal reconfigurations. We provide detailed structural calculations, drawings and specifications for Building Regulations approval, ensuring your home renovation or extension is both structurally sound and compliant with all regulations. Our engineers understand London's diverse housing stock, from Victorian terraces to modern apartments, and provide tailored solutions for each property type.",
     features: [
-      "Loft conversions and roof alterations",
-      "Side and rear extensions",
-      "Basement excavations and conversions",
-      "Internal wall removals",
-      "Floor strengthening",
-      "Structural opening formations"
+      {
+        title: "Loft conversions and roof alterations",
+        link: "/services/residential/loft-conversions"
+      },
+      {
+        title: "Side and rear extensions",
+        link: "/services/residential/extensions"
+      },
+      {
+        title: "Basement excavations and conversions",
+        link: "/services/residential/basements"
+      },
+      {
+        title: "Internal wall removals",
+        link: "/services/residential/internal-alterations"
+      },
+      {
+        title: "Floor strengthening",
+        link: "/services/residential/floor-strengthening"
+      },
+      {
+        title: "Structural opening formations",
+        link: "/services/residential/structural-openings"
+      }
     ],
     image: "/lovable-uploads/551ecc30-f655-4a5d-8c6a-775bbc45da9e.png",
     id: "residential-work"
@@ -261,13 +280,19 @@ const Services = () => {
                         {service.features && (
                           <div className="mb-8">
                             <h3 className="text-xl font-semibold mb-4">Our Services Include:</h3>
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {service.features.map((feature, fidx) => (
-                                <li key={fidx} className="flex items-start">
-                                  <div className="mr-2 mt-1">
-                                    <div className="h-4 w-4 rounded-full bg-[#ea384c]"></div>
+                                <li key={fidx} className="flex items-start group">
+                                  <div className="mr-2 mt-1.5">
+                                    <div className="h-4 w-4 rounded-full bg-[#ea384c] group-hover:scale-110 transition-all"></div>
                                   </div>
-                                  <span>{feature}</span>
+                                  {feature.link ? (
+                                    <Link to={feature.link} className="text-[#1A1F2C] hover:text-[#ea384c] transition-colors">
+                                      {feature.title}
+                                    </Link>
+                                  ) : (
+                                    <span>{feature.title}</span>
+                                  )}
                                 </li>
                               ))}
                             </ul>
@@ -417,6 +442,16 @@ const Services = () => {
                     <h3 className="text-2xl font-bold mb-4">{steelFabricationServices[0].title}</h3>
                     <p className="text-gray-700 text-lg mb-6">{steelFabricationServices[0].description}</p>
                     <p className="text-gray-600 mb-6">{steelFabricationServices[0].longDescription}</p>
+                    
+                    <div className="grid grid-cols-1 mb-6">
+                      <div className="w-full rounded-lg overflow-hidden shadow-md">
+                        <img 
+                          src="/lovable-uploads/be2ffdaf-904e-4449-b8bf-ba820e52e28f.png" 
+                          alt="Steel fabrication project by Alemara Engineers" 
+                          className="w-full h-auto object-cover"
+                        />
+                      </div>
+                    </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                       <div className="bg-gray-50 p-4 rounded-lg shadow-sm">

@@ -31,6 +31,10 @@ import SEO from "./pages/SEO";
 import Analytics from "./pages/Analytics";
 import Services from "./pages/Services";
 
+// Import residential service pages
+import LoftConversions from "./pages/residential/LoftConversions";
+import Extensions from "./pages/residential/Extensions";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -49,6 +53,11 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/services" element={<Services />} />
+            
+            {/* Residential service pages */}
+            <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
+            <Route path="/services/residential/extensions" element={<Extensions />} />
+            
             <Route path="/admin-login" element={<Login />} />
             <Route path="/client-login" element={<ClientLogin />} />
             <Route path="/engineer-login" element={<EngineerLogin />} />
