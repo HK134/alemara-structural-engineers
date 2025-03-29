@@ -13,7 +13,7 @@ const Navbar = () => {
       <nav className="bg-[#1A1F2C] text-white">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
+            {/* Logo with Link to home page */}
             <Link to="/" className="flex items-center">
               <img src="/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png" alt="Alemara Engineers Logo" className="h-12 mr-2" />
               <div className="flex flex-col">
