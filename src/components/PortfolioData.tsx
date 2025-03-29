@@ -29,13 +29,13 @@ The project also included new foundations, underpinning of garden walls and stai
 The extension incorporated modern design elements while preserving the character of this Victorian property. The kitchen features a white marble island contrasting with navy blue cabinetry, while original decorative ceiling moldings were preserved throughout the renovation. The project successfully blends contemporary living spaces with the building's historic features.`
   },
   
-  // Hinkley Point C project (NEW)
+  // Hinkley Point C project
   {
     id: 11,
     title: 'Hinkley Point C Nuclear Power Station',
     type: 'civil',
     image: '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
-    description: 'Structural engineering and temporary works design for the UK's first new nuclear power station in a generation, ensuring compliance and safety across this landmark energy infrastructure project.',
+    description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation, ensuring compliance and safety across this landmark energy infrastructure project.',
     completion: 'Ongoing (Project started 2016)',
     client: 'EDF Energy',
     location: 'Somerset, UK',

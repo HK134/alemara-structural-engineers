@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Award } from 'lucide-react';
+import { ArrowRight, Award, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 
@@ -17,7 +17,7 @@ const portfolioItems = [
     title: 'Hinkley Point C Nuclear Power Station',
     type: 'Civil',
     image: '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
-    description: 'Structural engineering and temporary works design for the UK's first new nuclear power station in a generation.'
+    description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation.'
   },
   {
     id: 5,
