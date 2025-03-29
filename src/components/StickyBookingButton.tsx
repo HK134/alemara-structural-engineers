@@ -1,24 +1,52 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Calendar, Phone } from "lucide-react";
+import { Calendar, Phone, X, CirclePlus } from "lucide-react";
 import BookingDialog from "./BookingDialog";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const StickyBookingButton = () => {
   const isMobile = useIsMobile();
+  const [isFormOpen, setIsFormOpen] = useState(false);
   
   return (
     <div className="fixed bottom-6 right-6 z-50 animate-fade-in flex flex-col gap-2">
-      <BookingDialog>
-        <Button 
-          size="lg" 
-          className="bg-[#ea384c]/90 hover:bg-[#ea384c] text-white rounded-full shadow-lg group transition-all duration-300 hover:scale-105"
-        >
-          <Calendar className="mr-2 h-5 w-5" />
-          <span className="font-medium">Book Survey</span>
-        </Button>
-      </BookingDialog>
+      <Popover open={isFormOpen} onOpenChange={setIsFormOpen}>
+        <PopoverTrigger asChild>
+          <Button 
+            size="lg" 
+            className="bg-[#ea384c]/90 hover:bg-[#ea384c] text-white rounded-full shadow-lg group transition-all duration-300 hover:scale-105"
+          >
+            {isFormOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <>
+                <Calendar className="mr-2 h-5 w-5" />
+                <span className="font-medium">Book Survey</span>
+              </>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0 w-[340px] border-2 border-[#ea384c]/20" side="top" align="end">
+          <div className="bg-white rounded-md overflow-hidden shadow-xl">
+            <div className="p-4 bg-[#ea384c]/10">
+              <h3 className="text-lg font-semibold text-[#1A1F2C]">Quick Booking Form</h3>
+              <p className="text-sm text-gray-600">Complete in under 1 minute</p>
+            </div>
+            <BookingDialog>
+              <Button 
+                size="lg" 
+                className="w-full bg-[#ea384c] hover:bg-[#ea384c]/90 text-white py-6 rounded-none"
+              >
+                <CirclePlus className="mr-2 h-5 w-5" />
+                <span className="font-medium">Open Full Booking Form</span>
+              </Button>
+            </BookingDialog>
+          </div>
+        </PopoverContent>
+      </Popover>
+      
       <a href="tel:02080049060" className={`${isMobile ? 'hidden' : 'block'}`}>
         <Button 
           size="lg" 

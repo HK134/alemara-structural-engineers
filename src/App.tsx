@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import StickyBookingButton from "@/components/StickyBookingButton";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -39,6 +40,9 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          {/* The StickyBookingButton is now outside of the Routes, so it appears on all pages */}
+          <StickyBookingButton />
+          
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Index />} />

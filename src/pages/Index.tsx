@@ -14,7 +14,6 @@ const FAQ = lazy(() => import('@/components/FAQ'));
 const ContactForm = lazy(() => import('@/components/ContactForm'));
 const CTA = lazy(() => import('@/components/CTA'));
 const Footer = lazy(() => import('@/components/Footer'));
-const StickyBookingButton = lazy(() => import('@/components/StickyBookingButton'));
 
 const Index = () => {
   return (
@@ -36,7 +35,6 @@ const Index = () => {
       </main>
       <Suspense fallback={<div className="w-full h-10 bg-[#1A1F2C]"></div>}>
         <Footer />
-        <StickyBookingButton />
       </Suspense>
     </div>
   );
