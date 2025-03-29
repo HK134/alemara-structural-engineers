@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -10,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-// Part 1: Structural Engineering Services
 const structuralEngineeringServices = [
   {
     icon: <Home className="h-16 w-16 text-[#ea384c]" />,
@@ -78,7 +76,6 @@ const structuralEngineeringServices = [
   }
 ];
 
-// Part 2: Civil Engineering Major Projects
 const civilEngineeringServices = [
   {
     icon: <Construction className="h-16 w-16 text-[#ea384c]" />,
@@ -104,7 +101,6 @@ const civilEngineeringServices = [
   }
 ];
 
-// Part 3: Steel Fabrication
 const steelFabricationServices = [
   {
     icon: <Hammer className="h-16 w-16 text-[#ea384c]" />,
@@ -116,7 +112,6 @@ const steelFabricationServices = [
 ];
 
 const Services = () => {
-  // Function to handle smooth scrolling to section
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -135,7 +130,6 @@ const Services = () => {
       
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="bg-[#1A1F2C] py-20 text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
@@ -169,7 +163,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Introduction */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
@@ -186,7 +179,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Part 1: Structural Engineering Services */}
         <section id="part-1" className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
@@ -199,7 +191,6 @@ const Services = () => {
             <div className="grid grid-cols-1 gap-16">
               {structuralEngineeringServices.map((service, index) => (
                 <div key={index} id={service.id} className="border-b border-gray-200 pb-16 last:border-b-0">
-                  {/* Alternate layout between left/right alignment */}
                   <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}>
                     <div className="lg:w-1/2">
                       <div className="bg-white p-4 rounded-xl shadow-sm">
@@ -234,9 +225,15 @@ const Services = () => {
                       </div>
                     </div>
                     
-                    <div className="lg:w-1/2 flex items-center">
+                    <div className="lg:w-1/2 flex items-center justify-center">
                       {service.image && (
-                        <div className={`rounded-xl overflow-hidden shadow-md w-full ${service.id === 'bespoke-design' ? 'h-[75%] self-center' : service.id === 'structural-surveys' ? 'h-[90%] self-start' : ''}`}>
+                        <div className={`rounded-xl overflow-hidden shadow-md ${
+                          service.id === 'bespoke-design' 
+                            ? 'w-[90%] h-[75%] self-center' 
+                            : service.id === 'structural-surveys' 
+                            ? 'w-[90%] h-auto self-center' 
+                            : 'w-full'
+                        }`}>
                           <img 
                             src={service.image} 
                             alt={service.title} 
@@ -252,7 +249,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Part 2: Civil Engineering Services */}
         <section id="part-2" className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
@@ -262,7 +258,6 @@ const Services = () => {
               </p>
             </div>
             
-            {/* Services in a grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
               {civilEngineeringServices.slice(0, 2).map((service, index) => (
                 <Card key={index} id={service.id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg">
@@ -281,7 +276,6 @@ const Services = () => {
                 </Card>
               ))}
               
-              {/* Third service with image and description side by side */}
               <Card id={civilEngineeringServices[2].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg md:col-span-3 mt-8">
                 <div className="flex flex-col md:flex-row">
                   <div className="md:w-1/2 p-6">
@@ -310,7 +304,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Part 3: Steel Fabrication */}
         <section id="part-3" className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
@@ -407,7 +400,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Call to Action */}
         <section className="bg-[#1A1F2C] py-16 text-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
