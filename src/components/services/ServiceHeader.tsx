@@ -11,6 +11,16 @@ const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
   return (
     <section className="bg-[#1A1F2C] py-20 text-white">
       <div className="container mx-auto px-4">
+        <div className="flex justify-center mb-6">
+          <nav className="flex flex-wrap gap-6 justify-center mb-8">
+            <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors font-medium">About</Link>
+            <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors font-medium">Services</Link>
+            <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors font-medium">Portfolio</Link>
+            <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors font-medium">Blog</Link>
+            <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors font-medium">FAQ</a>
+            <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors font-medium">Contact</a>
+          </nav>
+        </div>
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Comprehensive Structural & Civil Engineering Services</h1>
           <p className="text-xl mb-8">
