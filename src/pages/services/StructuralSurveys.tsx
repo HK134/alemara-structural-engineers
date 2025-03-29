@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -133,18 +132,26 @@ const StructuralSurveys = () => {
                 </Button>
               </div>
               
-              <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="flex items-center justify-center">
-                  <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>Thorough Structural Analysis</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>48-Hour Report Delivery</span>
-                </div>
-                <div className="flex items-center justify-center">
-                  <Check className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>10+ Years London Experience</span>
+              <div className="mt-10 bg-black/30 py-6 px-4 rounded-lg backdrop-blur-sm">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-[#ea384c] flex items-center justify-center mr-3 flex-shrink-0">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-lg font-medium">Thorough Structural Analysis</span>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-[#ea384c] flex items-center justify-center mr-3 flex-shrink-0">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-lg font-medium">48-Hour Report Delivery</span>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-[#ea384c] flex items-center justify-center mr-3 flex-shrink-0">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-lg font-medium">10+ Years London Experience</span>
+                  </div>
                 </div>
               </div>
             </div>
