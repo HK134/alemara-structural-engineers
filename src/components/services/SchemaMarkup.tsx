@@ -6,9 +6,9 @@ const SchemaMarkup = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "London Structural Surveys",
-    "description": "Expert structural & civil engineering services in London for residential, commercial, and bespoke projects.",
-    "url": "https://londonstructuralsurveys.com/services",
+    "name": "Alemara Engineers - London Structural Surveys",
+    "description": "Expert structural & civil engineering services in London for residential, commercial, and structural survey projects.",
+    "url": "https://londonstructuralsurveys.com/services/structural-surveys",
     "telephone": "02080049060",
     "address": {
       "@type": "PostalAddress",
@@ -23,34 +23,34 @@ const SchemaMarkup = () => {
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Engineering Services",
+      "name": "Structural Survey Services",
       "itemListElement": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Residential Structural Engineering"
+            "name": "Pre-Purchase Structural Surveys"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Commercial Structural Engineering"
+            "name": "Crack Assessment"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Bespoke Design Projects"
+            "name": "Subsidence Investigations"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Structural Surveys & Assessments"
+            "name": "Timber Defect Analysis"
           }
         }
       ]
@@ -59,10 +59,10 @@ const SchemaMarkup = () => {
 
   return (
     <Helmet>
-      <title>Structural & Civil Engineering Services London | Alemara Engineers</title>
-      <meta name="description" content="Expert structural engineering services in London - residential extensions, commercial buildings, bespoke designs, and structural surveys. Specialist in London properties." />
-      <meta name="keywords" content="structural engineering, London structural engineer, structural surveys, residential extensions, basement conversions, loft conversions, commercial building design, steel fabrication, civil engineering" />
-      <link rel="canonical" href="https://londonstructuralsurveys.com/services" />
+      <title>Expert Structural Surveys London | Alemara Engineers</title>
+      <meta name="description" content="Professional structural survey reports for London homeowners, buyers and landlords. Detailed inspections by certified engineers with fast 48-hour delivery." />
+      <meta name="keywords" content="structural surveys London, structural engineer London, structural inspections, property survey, engineer reports, building inspection, crack assessment, subsidence, certified structural engineer" />
+      <link rel="canonical" href="https://londonstructuralsurveys.com/services/structural-surveys" />
       <script type="application/ld+json">
         {JSON.stringify(localBusinessSchema)}
       </script>

@@ -11,6 +11,7 @@ import ServiceCTA from '@/components/services/ServiceCTA';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Clock } from "lucide-react";
 import BookingDialog from '@/components/BookingDialog';
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const scrollToSection = (sectionId: string) => {
@@ -89,6 +90,35 @@ const Services = () => {
         </section>
         
         <ServiceIntro />
+        
+        {/* Quick Service Links */}
+        <section className="py-8 bg-gray-100">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/services/structural-surveys">
+                <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white">
+                  Structural Surveys
+                </Button>
+              </Link>
+              <Link to="/services/residential">
+                <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white">
+                  Residential Engineering
+                </Button>
+              </Link>
+              <Link to="/services/commercial">
+                <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white">
+                  Commercial Engineering
+                </Button>
+              </Link>
+              <Link to="/services/civil-engineering">
+                <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white">
+                  Civil Engineering
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+        
         <StructuralEngineeringServices />
         <CivilEngineeringServices />
         <SteelFabricationServices />
