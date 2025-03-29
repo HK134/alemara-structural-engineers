@@ -21,10 +21,11 @@ export const portfolioItems = [
     ],
     fullDescription: `Rees + Lee Architects had successfully obtained planning approval from Hammersmith & Fulham Council for this intricate basement extension and internal layout restructuring scheme in the Barons Court conservation area. The unique project proposed a zinc clad box below a new roof terrace requiring a box frame design.
 
-The project also included new foundations, underpinning of garden walls and staircase. Prior to providing a final structural package, we visited the site to inspect the existing structure and discuss our ideas with the architect and the client. Following the site visit, a schematic structural design was provided, and once confirmed, the final full package was released.`
+The project also included new foundations, underpinning of garden walls and staircase. Prior to providing a final structural package, we visited the site to inspect the existing structure and discuss our ideas with the architect and the client. Following the site visit, a schematic structural design was provided, and once confirmed, the final full package was released.
+
+The extension incorporated modern design elements while preserving the character of this Victorian property. The kitchen features a white marble island contrasting with navy blue cabinetry, while original decorative ceiling moldings were preserved throughout the renovation. The project successfully blends contemporary living spaces with the building's historic features.`
   },
   
-  // Existing projects
   // Residential projects
   {
     id: 2,

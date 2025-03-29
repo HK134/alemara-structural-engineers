@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { ExternalLink } from 'lucide-react';
 
 interface ProjectProps {
   project: {
@@ -22,11 +23,17 @@ interface ProjectProps {
 const PortfolioCard = ({ project }: ProjectProps) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
-      <div className="h-56 overflow-hidden">
+      <div className="h-56 overflow-hidden relative">
         <img 
           src={project.image} 
           alt={project.title} 
           className="w-full h-full object-cover transition-transform hover:scale-105"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            console.error(`Failed to load image: ${target.src}`);
+            target.onerror = null;
+            target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+          }}
         />
       </div>
       <div className="p-6">
@@ -37,9 +44,12 @@ const PortfolioCard = ({ project }: ProjectProps) => {
           <span className="text-xs text-gray-500">{project.completion}</span>
         </div>
         <h3 className="text-xl font-semibold text-[#1A1F2C] mb-3">{project.title}</h3>
-        <p className="text-gray-600 mb-4">{project.description}</p>
-        <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white" asChild>
-          <Link to={`/portfolio/${project.id}`}>View Details</Link>
+        <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>
+        <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white flex items-center gap-2" asChild>
+          <Link to={`/portfolio/${project.id}`}>
+            View Details
+            <ExternalLink size={16} />
+          </Link>
         </Button>
       </div>
     </div>
