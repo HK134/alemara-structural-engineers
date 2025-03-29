@@ -9,6 +9,7 @@ import ProjectInfo from '@/components/project/ProjectInfo';
 import ProjectGallery from '@/components/project/ProjectGallery';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import ProjectGuarantee from '@/components/project/ProjectGuarantee';
+import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -50,6 +51,31 @@ const ProjectDetail = () => {
     );
   }
 
+  // Check if this is a major infrastructure project (HS2 or Hinkley Point)
+  const isMajorInfrastructure = 
+    project.id === 11 || // Hinkley Point C
+    project.id === 12;   // HS2
+
+  if (isMajorInfrastructure) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">
+          <InfrastructureProjectDetail project={project} />
+          
+          {/* Navigation buttons */}
+          <div className="container mx-auto px-4 py-8">
+            <ProjectNavigation prevProject={prevProject} nextProject={nextProject} />
+          </div>
+          
+          <ServiceCTA />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Standard project display for non-infrastructure projects
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

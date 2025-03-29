@@ -61,6 +61,37 @@ Documentation and Reporting: We provided comprehensive documentation and detaile
 Through our commitment to quality and detailed oversight, we ensured that all temporary works met both safety and regulatory requirements, contributing to the project's timely and successful delivery. Our involvement in Hinkley Point C demonstrates our capability to deliver integrated structural engineering solutions for complex, large-scale infrastructure projects of national significance.`
   },
   
+  // HS2 High Speed Rail project (NEW)
+  {
+    id: 12,
+    title: 'HS2 High Speed Rail Infrastructure',
+    type: 'civil',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    description: 'Engineering and assurance services for key HS2 packages across London and Central areas, delivering innovative solutions for this transformative rail infrastructure project.',
+    completion: 'Ongoing',
+    client: 'High Speed Two (HS2) Ltd',
+    location: 'London & Central England',
+    images: [
+      'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+      'https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80&w=800&h=500'
+    ],
+    fullDescription: `Our team plays an ongoing role in the HS2 project, delivering expert structural engineering and assurance services for key packages across London and Central areas, including C1, C2, and C3. Our involvement showcases our ability to manage complex, large-scale projects and maintain the highest standards of engineering excellence. Our key contributions include:
+
+Temporary Works Design: Developing and managing comprehensive temporary works designs tailored to the needs of various construction phases, ensuring stability and compliance across multiple work packages.
+
+Site-Wide Coordination: Overseeing coordination efforts across multiple site areas, facilitating seamless integration and efficient workflow between different contractors and engineering teams.
+
+Structural Inspections: Conducting thorough on-site inspections to confirm construction adherence to approved designs, drawings, and safety standards throughout the project lifecycle.
+
+Quality Assurance: Implementing stringent quality assurance processes to ensure all works met project specifications, regulatory standards, and client expectations for this nationally significant infrastructure.
+
+Compliance Oversight: Ensuring all engineering solutions adhered to industry regulations and HS2 project specifications as well as the undertakings and assurances in place for stakeholders and local communities.
+
+Detailed Reporting: Providing clear documentation and detailed reports to track progress and maintain transparency with project stakeholders, ensuring accountability at every stage.
+
+Our work on the HS2 project underscores our expertise in delivering innovative, cost-effective engineering solutions while prioritising safety, compliance, and efficiency. Through our dedicated approach, we support the successful progression of critical infrastructure works, reinforcing our reputation as a trusted engineering partner for large-scale projects of national importance.`
+  },
+  
   // Residential projects
   {
     id: 2,

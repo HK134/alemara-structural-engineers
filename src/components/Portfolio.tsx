@@ -20,11 +20,11 @@ const portfolioItems = [
     description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation.'
   },
   {
-    id: 5,
-    title: 'Commercial Office Building - City of London',
-    type: 'Commercial',
-    image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80&w=600&h=400',
-    description: 'Structural assessment and remediation strategy for an 8-storey office building with subsidence concerns.'
+    id: 12,
+    title: 'HS2 High Speed Rail Infrastructure',
+    type: 'Civil',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    description: 'Expert engineering and assurance services for key HS2 packages across London and Central areas, delivering innovative solutions for the UK\'s new high-speed rail network.'
   }
 ];
 
