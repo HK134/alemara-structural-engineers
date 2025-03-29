@@ -8,6 +8,7 @@ import { Building, Search, AlertTriangle, Scale, Ruler, Wrench, Home, Warehouse,
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 // Part 1: Structural Engineering Services
 const structuralEngineeringServices = [
@@ -198,7 +199,8 @@ const Services = () => {
             <div className="grid grid-cols-1 gap-16">
               {structuralEngineeringServices.map((service, index) => (
                 <div key={index} id={service.id} className="border-b border-gray-200 pb-16 last:border-b-0">
-                  <div className="flex flex-col lg:flex-row gap-8">
+                  {/* Alternate layout between left/right alignment */}
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}>
                     <div className="lg:w-1/2">
                       <div className="bg-white p-4 rounded-xl shadow-sm">
                         <div className="flex items-center mb-4">
@@ -234,12 +236,14 @@ const Services = () => {
                     
                     <div className="lg:w-1/2">
                       {service.image && (
-                        <div className="h-full">
-                          <img 
-                            src={service.image} 
-                            alt={service.title} 
-                            className="w-full h-full object-cover rounded-xl shadow-md"
-                          />
+                        <div className="rounded-xl overflow-hidden shadow-md">
+                          <AspectRatio ratio={16/9}>
+                            <img 
+                              src={service.image} 
+                              alt={service.title} 
+                              className="w-full h-full object-cover"
+                            />
+                          </AspectRatio>
                         </div>
                       )}
                     </div>
@@ -260,8 +264,9 @@ const Services = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {civilEngineeringServices.map((service, index) => (
+            {/* Services in a grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+              {civilEngineeringServices.slice(0, 2).map((service, index) => (
                 <Card key={index} id={service.id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg">
                   <CardHeader className="pb-2">
                     <div className="mb-4 flex justify-center">{service.icon}</div>
@@ -277,21 +282,34 @@ const Services = () => {
                   </CardContent>
                 </Card>
               ))}
-            </div>
-            
-            {/* Feature Image for Civil Engineering */}
-            <div className="mt-16">
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img 
-                  src="/lovable-uploads/bb746e6a-6105-42d2-81e9-1c0805d61938.png" 
-                  alt="Major Civil Engineering Project" 
-                  className="w-full h-auto object-cover"
-                />
-                <div className="bg-[#1A1F2C] text-white p-6">
-                  <h3 className="text-2xl font-bold mb-2">Major Infrastructure Expertise</h3>
-                  <p>Our civil engineering team has extensive experience working on significant national infrastructure projects, including HS2 and Hinkley Point, providing specialist design and assurance services.</p>
+              
+              {/* Third service with image and description side by side */}
+              <Card id={civilEngineeringServices[2].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg md:col-span-3 mt-8">
+                <div className="flex flex-col md:flex-row">
+                  <div className="md:w-1/2 p-6">
+                    <div className="flex items-center mb-4">
+                      {civilEngineeringServices[2].icon}
+                      <h3 className="text-xl font-bold ml-4">{civilEngineeringServices[2].title}</h3>
+                    </div>
+                    <p className="mb-4">{civilEngineeringServices[2].description}</p>
+                    <p className="text-gray-700 mb-6">{civilEngineeringServices[2].longDescription}</p>
+                    <Link to="/#contact">
+                      <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+                        Request This Service <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="md:w-1/2">
+                    <AspectRatio ratio={4/3} className="h-full">
+                      <img 
+                        src={civilEngineeringServices[2].image} 
+                        alt={civilEngineeringServices[2].title}
+                        className="w-full h-full object-cover"
+                      />
+                    </AspectRatio>
+                  </div>
                 </div>
-              </div>
+              </Card>
             </div>
           </div>
         </section>
@@ -307,84 +325,86 @@ const Services = () => {
             </div>
             
             <div className="max-w-4xl mx-auto">
-              <Card id={steelFabricationServices[0].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg">
-                <CardHeader className="pb-2">
-                  <div className="flex items-center">
-                    <div className="mr-4">{steelFabricationServices[0].icon}</div>
-                    <CardTitle className="text-2xl text-[#1A1F2C]">{steelFabricationServices[0].title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 text-lg mb-6">{steelFabricationServices[0].description}</p>
-                  <p className="text-gray-600 mb-6">{steelFabricationServices[0].longDescription}</p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-white p-4 rounded-lg shadow-sm">
-                      <h4 className="font-semibold mb-2 text-[#1A1F2C]">Fabrication Services</h4>
-                      <ul className="space-y-1">
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Structural steel members</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Architectural steel features</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Bespoke connection details</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>CE marked fabrication</span>
-                        </li>
-                      </ul>
+              <Card id={steelFabricationServices[0].id} className="border-2 hover:border-[#ea384c] transition-all duration-300 hover:shadow-lg bg-white">
+                <CardContent className="p-8">
+                  <div className="flex flex-col md:flex-row items-start gap-8">
+                    <div className="md:w-1/3 flex justify-center">
+                      {steelFabricationServices[0].icon}
                     </div>
-                    
-                    <div className="bg-white p-4 rounded-lg shadow-sm">
-                      <h4 className="font-semibold mb-2 text-[#1A1F2C]">Installation Services</h4>
-                      <ul className="space-y-1">
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Fully insured installation teams</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Residential and commercial projects</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Coordination with other trades</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="mr-2 mt-1">
-                            <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
-                          </div>
-                          <span>Health & safety compliant</span>
-                        </li>
-                      </ul>
+                    <div className="md:w-2/3">
+                      <h3 className="text-2xl font-bold mb-4">{steelFabricationServices[0].title}</h3>
+                      <p className="text-gray-700 text-lg mb-6">{steelFabricationServices[0].description}</p>
+                      <p className="text-gray-600 mb-6">{steelFabricationServices[0].longDescription}</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                          <h4 className="font-semibold mb-2 text-[#1A1F2C]">Fabrication Services</h4>
+                          <ul className="space-y-1">
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Structural steel members</span>
+                            </li>
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Architectural steel features</span>
+                            </li>
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Bespoke connection details</span>
+                            </li>
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>CE marked fabrication</span>
+                            </li>
+                          </ul>
+                        </div>
+                        
+                        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                          <h4 className="font-semibold mb-2 text-[#1A1F2C]">Installation Services</h4>
+                          <ul className="space-y-1">
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Fully insured installation teams</span>
+                            </li>
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Residential and commercial projects</span>
+                            </li>
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Coordination with other trades</span>
+                            </li>
+                            <li className="flex items-start">
+                              <div className="mr-2 mt-1">
+                                <div className="h-3 w-3 rounded-full bg-[#ea384c]"></div>
+                              </div>
+                              <span>Health & safety compliant</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      <Link to="/#contact">
+                        <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+                          Request Steel Services <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
-                  
-                  <Link to="/#contact">
-                    <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
-                      Request Steel Services <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
                 </CardContent>
               </Card>
             </div>
@@ -414,3 +434,4 @@ const Services = () => {
 };
 
 export default Services;
+
