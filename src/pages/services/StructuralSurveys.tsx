@@ -105,9 +105,11 @@ const StructuralSurveys = () => {
       </div>
       
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-[#1A1F2C] py-20 text-white">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')] bg-cover bg-center opacity-20 top-0 left-0 right-0 h-[100vh] max-h-[650px]"></div>
+        {/* Hero Section - Updated to fix the awkward blue area */}
+        <section className="relative py-20 bg-gradient-to-b from-[#1A1F2C] to-[#2A303C] text-white">
+          {/* Overlay with gradient */}
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C]/90 to-[#1A1F2C]"></div>
           
           <div className="container mx-auto px-4 relative z-10 pt-8 max-w-[1400px]">
             <div className="max-w-4xl mx-auto text-center">
