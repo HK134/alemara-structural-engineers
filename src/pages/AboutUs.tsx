@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import AccreditationSection from '@/components/AccreditationSection';
 import TeamMember from '@/components/about/TeamMember';
 import ServiceCTA from '@/components/services/ServiceCTA';
-import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle, Certificate } from 'lucide-react';
+import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle, Medal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
@@ -204,7 +204,7 @@ const AboutUs = () => {
                 <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center mb-4">
                     <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
-                      <Certificate className="h-6 w-6 text-[#ea384c]" />
+                      <Medal className="h-6 w-6 text-[#ea384c]" />
                     </div>
                     <h3 className="text-xl font-semibold text-[#1A1F2C]">Chartered Members of IStructE</h3>
                   </div>
