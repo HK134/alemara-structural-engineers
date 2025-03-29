@@ -1,22 +1,39 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Calendar, X, CirclePlus } from "lucide-react";
+import { Calendar, X } from "lucide-react";
 import BookingDialog from "./BookingDialog";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const StickyBookingButton = () => {
-  const isMobile = useIsMobile();
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  
+  // Add lazy loading behavior - only show after scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  if (!isVisible) return null;
   
   return (
-    <div className="fixed bottom-6 right-6 z-50 animate-fade-in flex flex-col gap-2">
+    <div className="fixed bottom-6 right-6 z-50 animate-fade-in">
       <Popover open={isFormOpen} onOpenChange={setIsFormOpen}>
         <PopoverTrigger asChild>
           <Button 
             size="lg" 
             className="bg-[#ea384c]/90 hover:bg-[#ea384c] text-white rounded-full shadow-lg group transition-all duration-300 hover:scale-105"
+            aria-label="Book a structural engineer"
           >
             {isFormOpen ? (
               <X className="h-5 w-5" />
@@ -39,8 +56,7 @@ const StickyBookingButton = () => {
                 size="lg" 
                 className="w-full bg-[#ea384c] hover:bg-[#ea384c]/90 text-white py-6 rounded-none"
               >
-                <CirclePlus className="mr-2 h-5 w-5" />
-                <span className="font-medium">Open Full Booking Form</span>
+                <span className="font-medium">Open Booking Form</span>
               </Button>
             </BookingDialog>
           </div>

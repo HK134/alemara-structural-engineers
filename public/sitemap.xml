@@ -3,104 +3,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://londonstructuralsurveys.com/</loc>
-    <lastmod>2023-09-30</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/about-us</loc>
-    <lastmod>2023-09-30</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/services</loc>
-    <lastmod>2024-03-30</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://londonstructuralsurveys.com/services#residential-work</loc>
-    <lastmod>2024-03-30</lastmod>
+    <loc>https://londonstructuralsurveys.com/services/residential</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://londonstructuralsurveys.com/services#commercial</loc>
-    <lastmod>2024-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services#bespoke-design</loc>
-    <lastmod>2024-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/structural-surveys</loc>
-    <lastmod>2024-05-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services#steel-fabrication</loc>
-    <lastmod>2024-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services#civil-engineering</loc>
-    <lastmod>2024-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Residential Service Pages -->
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/residential/loft-conversions</loc>
-    <lastmod>2024-04-28</lastmod>
+    <loc>https://londonstructuralsurveys.com/services/commercial</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/services/residential/extensions</loc>
-    <lastmod>2024-04-28</lastmod>
+    <lastmod>2024-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/residential/loft-conversions</loc>
+    <lastmod>2024-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/structural-surveys</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://londonstructuralsurveys.com/services/residential/basements</loc>
-    <lastmod>2024-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/residential/internal-alterations</loc>
-    <lastmod>2024-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/residential/floor-strengthening</loc>
-    <lastmod>2024-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/residential/structural-openings</loc>
-    <lastmod>2024-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://londonstructuralsurveys.com/privacy-policy</loc>
-    <lastmod>2023-09-30</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/terms</loc>
-    <lastmod>2023-09-30</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

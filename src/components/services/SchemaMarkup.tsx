@@ -6,7 +6,7 @@ const SchemaMarkup = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "London Structural Surveys",
+    "name": "Alemara Structural Engineers",
     "description": "Expert structural & civil engineering services in London for residential, commercial, and bespoke projects.",
     "url": "https://londonstructuralsurveys.com/services",
     "telephone": "02080049060",
