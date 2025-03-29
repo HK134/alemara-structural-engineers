@@ -26,7 +26,7 @@ const TeamMember = ({ name, role, image, bio, email }: TeamMemberProps) => {
               <AvatarImage 
                 src={image} 
                 alt={`${name} - ${role}`} 
-                className="object-cover scale-125" // Increased scale to make the image larger
+                className="object-cover scale-150" // Increased scale from 125 to 150 to make images larger
               />
               <AvatarFallback className="bg-[#ea384c]/10 text-[#ea384c] text-2xl">
                 {name.charAt(0)}

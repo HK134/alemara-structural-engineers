@@ -16,7 +16,7 @@ const AboutUs = () => {
       name: "Hayder",
       role: "Practice Manager",
       image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
-      bio: "With over 15 years in structural engineering management, Hayder oversees our practice operations, ensuring clients receive exceptional service and technical excellence.",
+      bio: "With over 10 years in structural engineering management, Hayder oversees our practice operations and leads the major projects division, ensuring clients receive exceptional service and technical excellence.",
       email: "hayder@alemara.co.uk"
     },
     {
