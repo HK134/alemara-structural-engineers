@@ -31,8 +31,9 @@ import SEO from "./pages/SEO";
 import Analytics from "./pages/Analytics";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio"; 
-import Blog from "./pages/Blog"; // Import the Blog page
-import BlogPost from "./pages/BlogPost"; // Import the BlogPost page
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import AboutUs from "./pages/AboutUs"; // Add the import for AboutUs page
 
 // Import residential service pages
 import LoftConversions from "./pages/residential/LoftConversions";
@@ -63,8 +64,9 @@ const App = () => (
             <Route path="/terms" element={<Terms />} />
             <Route path="/services" element={<Services />} />
             <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/blog" element={<Blog />} /> {/* Add the Blog route */}
-            <Route path="/blog/:slug" element={<BlogPost />} /> {/* Add the BlogPost route with slug parameter */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/about" element={<AboutUs />} /> {/* Add the AboutUs route */}
             
             {/* Service category pages */}
             <Route path="/services/residential" element={<Residential />} />
@@ -80,7 +82,6 @@ const App = () => (
             <Route path="/client-login" element={<ClientLogin />} />
             <Route path="/engineer-login" element={<EngineerLogin />} />
             <Route path="/login" element={<Navigate to="/client-login" replace />} />
-            <Route path="/about" element={<Navigate to="/#why-choose-us" replace />} />
             
             {/* Protected admin routes with sidebar layout */}
             <Route path="/admin" element={
