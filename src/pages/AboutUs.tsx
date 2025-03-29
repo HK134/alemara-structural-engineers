@@ -125,28 +125,22 @@ const AboutUs = () => {
             </div>
           </div>
         </section>
-        
-        {/* Introduction & Mission */}
-        <section className="py-20 bg-white">
+          
+        {/* Stats Bar */}
+        <section className="bg-[#1A1F2C] text-white py-10">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <div className="flex items-center mb-4">
-                <Building className="h-6 w-6 text-[#ea384c] mr-3" />
-                <h2 className="text-3xl font-bold text-[#1A1F2C]">Who We Are</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center p-6 border-b md:border-b-0 md:border-r border-white/20">
+                <div className="text-5xl font-bold mb-2">1000+</div>
+                <div className="text-xl">Successful Projects</div>
               </div>
-              
-              <div className="prose prose-lg max-w-none">
-                <p>
-                  Established with a vision to bridge creative architecture with practical engineering, Alemara Structural Engineers has grown to become one of London's most respected structural engineering consultancies. Our team of chartered engineers brings decades of combined expertise to every project we undertake, from residential extensions to large-scale commercial developments.
-                </p>
-                
-                <p>
-                  Our approach is defined by three core principles: technical excellence, innovative thinking, and client partnership. We believe that structural engineering is not just about calculations and compliance—it's about enabling great design while ensuring safety, longevity, and value.
-                </p>
-                
-                <p>
-                  Based in central London, our practice serves clients across Greater London and the Southeast, with a strong reputation for delivering both technically sophisticated and beautifully realized projects.
-                </p>
+              <div className="text-center p-6 border-b md:border-b-0 md:border-r border-white/20">
+                <div className="text-5xl font-bold mb-2">10</div>
+                <div className="text-xl">Years of Experience</div>
+              </div>
+              <div className="text-center p-6">
+                <div className="text-5xl font-bold mb-2">100%</div>
+                <div className="text-xl">Building Control Approval</div>
               </div>
             </div>
           </div>
@@ -220,89 +214,6 @@ const AboutUs = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-          
-        {/* Stats Bar */}
-        <section className="bg-[#1A1F2C] text-white py-10">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-6 border-b md:border-b-0 md:border-r border-white/20">
-                <div className="text-5xl font-bold mb-2">1000+</div>
-                <div className="text-xl">Successful Projects</div>
-              </div>
-              <div className="text-center p-6 border-b md:border-b-0 md:border-r border-white/20">
-                <div className="text-5xl font-bold mb-2">10</div>
-                <div className="text-xl">Years of Experience</div>
-              </div>
-              <div className="text-center p-6">
-                <div className="text-5xl font-bold mb-2">100%</div>
-                <div className="text-xl">Building Control Approval</div>
-              </div>
-            </div>
-          </div>
-        </section>
-          
-        {/* Our Mission and Vision - Alternating Layout */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            {/* Mission Section */}
-            <div className="flex flex-col lg:flex-row items-center gap-10 mb-24">
-              {/* Left Image - Asymmetric Shape */}
-              <div className="w-full lg:w-1/2 relative">
-                <div className="aspect-[4/3] rounded-tr-[100px] rounded-bl-[100px] overflow-hidden shadow-xl">
-                  <img 
-                    src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png"
-                    alt="Alemara Engineering Workspace" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                {/* Decorative Element */}
-                <div className="absolute -bottom-5 -left-5 w-20 h-20 rounded-full bg-[#ea384c]/20 -z-10"></div>
-              </div>
-              
-              {/* Right Content */}
-              <div className="w-full lg:w-1/2">
-                <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">Our mission</h2>
-                <div className="space-y-4 text-gray-700">
-                  <p>
-                    Our mission is to simplify structural engineering process for our clients with complete, sustainable solutions from design to installation. 
-                  </p>
-                  <p>
-                    By leveraging innovative technology, we streamline processes, reduce complexities, and deliver efficient, high-quality results that prioritize client satisfaction.
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Vision Section - Reversed Layout */}
-            <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
-              {/* Left Content */}
-              <div className="w-full lg:w-1/2">
-                <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">Our vision</h2>
-                <div className="space-y-4 text-gray-700">
-                  <p>
-                    Our vision is to redefine structural engineering through innovation, sustainability, and a client-first approach. We aim to be the trusted partner for end-to-end engineering solutions that drive efficiency and excellence.
-                  </p>
-                  <p>
-                    With continuous growth and dedication, we strive to surpass current standards and set new ones, shaping a future where engineering is smarter, greener, and more accessible.
-                  </p>
-                </div>
-              </div>
-              
-              {/* Right Image - Unique Shape */}
-              <div className="w-full lg:w-1/2 relative flex justify-end">
-                <div className="aspect-[4/3] rounded-tl-[100px] rounded-br-[100px] overflow-hidden shadow-xl">
-                  <img 
-                    src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png"
-                    alt="Alemara Office Design" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                {/* Decorative Element */}
-                <div className="absolute -top-5 -right-5 w-20 h-20 rounded-full bg-[#ea384c]/20 -z-10"></div>
               </div>
             </div>
           </div>
