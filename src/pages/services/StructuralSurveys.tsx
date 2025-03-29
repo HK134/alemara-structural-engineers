@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -90,16 +89,6 @@ const StructuralSurveys = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
-      {/* Limited Availability Banner */}
-      <div className="bg-[#ea384c] py-4 text-white">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex items-center justify-center text-white text-sm">
-            <Clock className="h-4 w-4 mr-2" />
-            <span>We respond to all enquiries within 4 hours during business hours</span>
-          </div>
-        </div>
-      </div>
       
       <main className="flex-grow">
         {/* Hero Section */}
