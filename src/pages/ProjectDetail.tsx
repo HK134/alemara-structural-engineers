@@ -31,6 +31,7 @@ const ProjectDetail = () => {
       
       if (currentProject) {
         setProject(currentProject);
+        console.log("Project images:", currentProject.images);
         
         // Find previous and next projects
         const currentIndex = portfolioItems.findIndex(item => item.id === parseInt(id));
@@ -78,7 +79,7 @@ const ProjectDetail = () => {
               {/* Main project image */}
               <div>
                 <img 
-                  src={project.image} 
+                  src={project.images && project.images.length > 0 ? project.images[0] : project.image} 
                   alt={project.title} 
                   className="w-full h-auto rounded-lg shadow-lg"
                   onError={(e) => {
@@ -151,6 +152,7 @@ const ProjectDetail = () => {
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
+                                  console.error(`Failed to load image for ${index}:`, target.src);
                                   target.onerror = null;
                                   target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
                                 }}
@@ -179,6 +181,7 @@ const ProjectDetail = () => {
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
+                          console.error(`Failed to load image for thumbnail ${index}:`, target.src);
                           target.onerror = null;
                           target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
                         }}
@@ -198,6 +201,12 @@ const ProjectDetail = () => {
                       src={selectedImage} 
                       alt="Project image" 
                       className="w-full h-auto max-h-[80vh] object-contain"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        console.error(`Failed to load lightbox image:`, target.src);
+                        target.onerror = null;
+                        target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                      }}
                     />
                     <Button
                       variant="ghost"
