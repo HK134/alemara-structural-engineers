@@ -156,11 +156,11 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="bg-[#1A1F2C] text-white py-4 relative z-40">
+      <div className="bg-[#ea384c] py-4 relative z-40">
         <div className="container mx-auto">
           <div className="flex items-center justify-center text-white text-sm">
-            <Clock className="h-4 w-4 mr-2 text-[#ea384c]" />
-            <span className="font-medium">Limited Availability: Book your assessment this week for priority scheduling</span>
+            <Clock className="h-4 w-4 mr-2" />
+            <span>We respond to all enquiries within 4 hours during business hours</span>
           </div>
         </div>
       </div>
