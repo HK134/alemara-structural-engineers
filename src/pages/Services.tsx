@@ -234,16 +234,14 @@ const Services = () => {
                       </div>
                     </div>
                     
-                    <div className="lg:w-1/2">
+                    <div className="lg:w-1/2 flex items-center">
                       {service.image && (
-                        <div className="rounded-xl overflow-hidden shadow-md">
-                          <AspectRatio ratio={16/9}>
-                            <img 
-                              src={service.image} 
-                              alt={service.title} 
-                              className="w-full h-full object-cover"
-                            />
-                          </AspectRatio>
+                        <div className={`rounded-xl overflow-hidden shadow-md ${service.id === 'bespoke-design' ? 'max-w-md mx-auto' : 'w-full'}`}>
+                          <img 
+                            src={service.image} 
+                            alt={service.title} 
+                            className="w-full h-auto object-cover"
+                          />
                         </div>
                       )}
                     </div>
@@ -300,13 +298,11 @@ const Services = () => {
                     </Link>
                   </div>
                   <div className="md:w-1/2">
-                    <AspectRatio ratio={4/3} className="h-full">
-                      <img 
-                        src={civilEngineeringServices[2].image} 
-                        alt={civilEngineeringServices[2].title}
-                        className="w-full h-full object-cover"
-                      />
-                    </AspectRatio>
+                    <img 
+                      src={civilEngineeringServices[2].image} 
+                      alt={civilEngineeringServices[2].title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </Card>
@@ -434,4 +430,3 @@ const Services = () => {
 };
 
 export default Services;
-
