@@ -9,6 +9,7 @@ import StickyBookingButton from '@/components/StickyBookingButton';
 const Services = lazy(() => import('@/components/Services'));
 const WhyChooseUs = lazy(() => import('@/components/WhyChooseUs'));
 const Process = lazy(() => import('@/components/Process'));
+const Portfolio = lazy(() => import('@/components/Portfolio')); // Add Portfolio component
 const CommonQuestions = lazy(() => import('@/components/CommonQuestions'));
 const AccreditationSection = lazy(() => import('@/components/AccreditationSection'));
 const Testimonials = lazy(() => import('@/components/Testimonials'));
@@ -29,6 +30,7 @@ const Index = () => {
             <Services />
             <WhyChooseUs />
             <Process />
+            <Portfolio /> {/* Add Portfolio component here */}
             <CommonQuestions />
             <AccreditationSection />
             <Testimonials />

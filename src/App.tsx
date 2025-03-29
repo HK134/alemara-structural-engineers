@@ -30,6 +30,7 @@ import ClientLayout from "./components/ClientLayout";
 import SEO from "./pages/SEO";
 import Analytics from "./pages/Analytics";
 import Services from "./pages/Services";
+import Portfolio from "./pages/Portfolio"; // Import the new Portfolio page
 
 // Import residential service pages
 import LoftConversions from "./pages/residential/LoftConversions";
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/portfolio" element={<Portfolio />} /> {/* Add the new Portfolio route */}
             
             {/* Service category pages */}
             <Route path="/services/residential" element={<Residential />} />
