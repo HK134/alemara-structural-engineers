@@ -6,7 +6,7 @@ const reasons = [
   {
     icon: <GraduationCap className="h-12 w-12 text-[#ea384c]" />,
     title: "Certified Structural Engineers",
-    description: "Our team consists of experienced certified structural engineers with specialist knowledge in building pathology and defect diagnosis."
+    description: "Our engineers are certified members of the Institution of Structural Engineers, the world's largest professional body dedicated to structural engineering."
   },
   {
     icon: <History className="h-12 w-12 text-[#ea384c]" />,
