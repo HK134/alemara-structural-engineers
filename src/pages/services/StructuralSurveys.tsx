@@ -347,38 +347,6 @@ const StructuralSurveys = () => {
                   <CardHeader className="pb-2">
                     <div className="flex items-start gap-4">
                       <div className="bg-[#ea384c]/10 p-3 rounded-lg">
-                        <FlaskConical className="h-6 w-6 text-[#ea384c]" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Material Testing</CardTitle>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">
-                      Analysis of building materials to assess their condition, strength, and suitability for continued use or restoration.
-                    </p>
-                    <ul className="mt-4 space-y-2">
-                      <li className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Concrete strength assessment</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Masonry and mortar analysis</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Timber condition assessment</span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                  <CardHeader className="pb-2">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-[#ea384c]/10 p-3 rounded-lg">
                         <Wrench className="h-6 w-6 text-[#ea384c]" />
                       </div>
                       <div>
