@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from "react-helmet";
 import Navbar from '@/components/Navbar';
@@ -17,73 +16,85 @@ const AboutUs = () => {
       name: "Hayder",
       role: "Practice Manager",
       image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
-      bio: "With over 15 years in structural engineering management, Hayder oversees our practice operations, ensuring clients receive exceptional service and technical excellence."
+      bio: "With over 15 years in structural engineering management, Hayder oversees our practice operations, ensuring clients receive exceptional service and technical excellence.",
+      email: "hayder@alemara.co.uk"
     },
     {
       name: "Matheos",
       role: "Chartered Structural Engineer",
       image: "/lovable-uploads/fdcd7944-f4b5-4001-89a1-17adf6b188df.png",
-      bio: "Matheos specializes in complex residential renovations and extensions, bringing creative structural solutions that balance design ambition with technical feasibility."
+      bio: "Matheos specializes in complex residential renovations and extensions, bringing creative structural solutions that balance design ambition with technical feasibility.",
+      email: "matheos@alemara.co.uk"
     },
     {
       name: "Dr. Hassan",
       role: "Principal Civil Engineer",
       image: "/lovable-uploads/357c7682-51ff-4501-9504-dfa32e250d61.png",
-      bio: "With a PhD in Civil Engineering and extensive research background, Dr. Hassan leads our infrastructure projects and provides expert consultation on challenging technical problems."
+      bio: "With a PhD in Civil Engineering and extensive research background, Dr. Hassan leads our infrastructure projects and provides expert consultation on challenging technical problems.",
+      email: "hassan@alemara.co.uk"
     },
     {
       name: "Neil",
       role: "Chartered Structural Engineer",
       image: "/lovable-uploads/0fa16540-97de-43ea-8d62-de381379aaab.png",
-      bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects."
+      bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects.",
+      email: "neil@alemara.co.uk"
     },
     {
       name: "Zoë",
       role: "Operations Manager",
       image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
-      bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule."
+      bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
+      email: "zoe@alemara.co.uk"
     },
     {
       name: "Mitch",
       role: "Construction Manager",
       image: "/lovable-uploads/a8a0964f-22e7-423b-bf2c-8222396bd389.png",
-      bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects."
+      bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
+      email: "mitch@alemara.co.uk"
     },
     {
       name: "Jaya",
       role: "Senior Structural Engineer",
       image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
-      bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London."
+      bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
+      email: "jaya@alemara.co.uk"
     },
     {
       name: "Hassanien",
       role: "Project Manager",
       image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
-      bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards."
+      bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
+      email: "hassanien@alemara.co.uk"
     },
     {
       name: "Nasrin",
       role: "Senior Structural Engineer",
       image: "",
-      bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures."
+      bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
+      email: "nasrin@alemara.co.uk"
     },
     {
       name: "Mirsad",
       role: "Senior Structural Engineer",
       image: "",
-      bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions."
+      bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
+      email: "mirsad@alemara.co.uk"
     },
     {
       name: "Sam",
       role: "Senior Structural Engineer",
       image: "",
-      bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions."
+      bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
+      email: "sam@alemara.co.uk"
     },
     {
       name: "Ahmed",
       role: "Senior Structural Engineer",
       image: "",
-      bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space."
+      bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
+      email: "ahmed@alemara.co.uk"
     }
   ];
 
@@ -371,6 +382,7 @@ const AboutUs = () => {
                   role={member.role}
                   image={member.image}
                   bio={member.bio}
+                  email={member.email}
                 />
               ))}
             </div>
