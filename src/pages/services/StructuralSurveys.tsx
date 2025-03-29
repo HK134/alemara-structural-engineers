@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -14,6 +13,7 @@ import {
   Clock, 
   Image, 
   Check,
+  CheckCircle,
   MapPin,
   Phone,
   ThumbsUp,
@@ -37,6 +37,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Process from '@/components/Process';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import BookingDialog from '@/components/BookingDialog';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const faqItems = [
   {
@@ -115,26 +116,32 @@ const StructuralSurveys = () => {
                 <span className="text-[#ea384c] font-semibold text-sm">LONDON'S SPECIALIST STRUCTURAL ENGINEERS</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Expert Structural Surveys & Inspections</h1>
-              <p className="text-xl mb-4">
+              <p className="text-xl mb-6">
                 Thorough structural assessments by chartered engineers who understand London's unique building challenges
               </p>
               
-              <div className="flex justify-center gap-x-8 mb-8 mt-2">
+              <div className="flex justify-center gap-x-12 mb-10">
                 <div className="flex items-center">
-                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
-                  <span className="text-sm">Thorough Analysis</span>
+                  <div className="bg-[#ea384c]/20 rounded-full p-1 mr-2">
+                    <CheckCircle className="text-[#ea384c] h-5 w-5" />
+                  </div>
+                  <span>Thorough Analysis</span>
                 </div>
                 <div className="flex items-center">
-                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
-                  <span className="text-sm">48-Hour Reports</span>
+                  <div className="bg-[#ea384c]/20 rounded-full p-1 mr-2">
+                    <CheckCircle className="text-[#ea384c] h-5 w-5" />
+                  </div>
+                  <span>48-Hour Reports</span>
                 </div>
                 <div className="flex items-center">
-                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
-                  <span className="text-sm">10+ Years Experience</span>
+                  <div className="bg-[#ea384c]/20 rounded-full p-1 mr-2">
+                    <CheckCircle className="text-[#ea384c] h-5 w-5" />
+                  </div>
+                  <span>10+ Years Experience</span>
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <BookingDialog>
                   <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40] text-white">
                     <span className="flex items-center">
