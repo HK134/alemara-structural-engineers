@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -371,6 +370,38 @@ const StructuralSurveys = () => {
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
                         <span>Timber condition assessment</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                  <CardHeader className="pb-2">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-[#ea384c]/10 p-3 rounded-lg">
+                        <Wrench className="h-6 w-6 text-[#ea384c]" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Structural Assessments</CardTitle>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Comprehensive evaluation of building structures to determine their condition, safety, and compliance with current regulations.
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Load-bearing capacity analysis</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Structural element inspection</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
+                        <span>Safety and compliance evaluation</span>
                       </li>
                     </ul>
                   </CardContent>
