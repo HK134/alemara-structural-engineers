@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 const portfolioItems = [
   {
     id: 1,
-    title: 'Structural Reinforcement - Kensington',
+    title: 'Basement Extension - Baron\'s Court',
     type: 'Residential',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=600&h=400',
-    description: 'Complete basement reinforcement for a Victorian property, including steel beam installation and load-bearing wall modifications.'
+    image: '/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png',
+    description: 'Intricate basement extension with zinc clad box design, underpinning of garden walls, and internal layout restructuring in a conservation area.'
   },
   {
     id: 2,
