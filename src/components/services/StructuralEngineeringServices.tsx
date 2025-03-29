@@ -90,7 +90,7 @@ const structuralEngineeringServices: StructuralServiceItem[] = [
     icon: <Building className="h-16 w-16 text-[#ea384c]" />,
     title: "Structural Surveys & Assessments",
     description: "Comprehensive structural inspection services including crack assessment, pre-purchase structural checks, bulging wall analysis and subsidence investigations.",
-    longDescription: "Our structural survey and assessment services provide thorough evaluations of existing buildings to identify potential structural issues and recommend appropriate remedial actions. Led by experienced chartered structural engineers, our surveys combine visual inspections with advanced diagnostic techniques when necessary. We specialize in London's diverse building stock, from historic Georgian and Victorian properties to modern developments, providing clear, jargon-free reports that explain findings and recommendations in detail.",
+    longDescription: "Our structural survey and assessment services provide thorough evaluations of existing buildings to identify potential structural issues and recommend appropriate remedial actions. Led by experienced certified structural engineers, our surveys combine visual inspections with advanced diagnostic techniques when necessary. We specialize in London's diverse building stock, from historic Georgian and Victorian properties to modern developments, providing clear, jargon-free reports that explain findings and recommendations in detail.",
     features: [
       "Crack assessment and monitoring",
       "Pre-purchase structural inspections",

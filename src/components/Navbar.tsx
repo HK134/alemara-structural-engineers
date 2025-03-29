@@ -102,7 +102,7 @@ const Navbar = () => {
             <div className="mr-4">
               <div className="flex items-center mb-1">
                 <Shield className="h-4 w-4 text-[#ea384c] mr-1" />
-                <span className="text-xs text-white font-semibold">IStructE ENDORSED</span>
+                <span className="text-xs text-white font-semibold">CERTIFIED ENGINEERS</span>
               </div>
               <a href="tel:02080049060" className="block">
                 <div className="bg-[#ea384c] text-white px-4 py-2 rounded-md flex items-center justify-center">
@@ -142,7 +142,7 @@ const Navbar = () => {
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
-                    <span className="text-xs text-white font-semibold">IStructE ENDORSED</span>
+                    <span className="text-xs text-white font-semibold">CERTIFIED ENGINEERS</span>
                   </div>
                   <a href="tel:02080049060" className="block px-4">
                     <div className="bg-[#ea384c] text-white px-4 py-2 rounded-md flex items-center justify-center">

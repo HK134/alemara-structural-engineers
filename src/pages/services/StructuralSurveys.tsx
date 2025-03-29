@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/Navbar';
@@ -64,7 +63,7 @@ const faqItems = [
   },
   {
     question: "What credentials do your structural engineers have?",
-    answer: "All our structural engineers are chartered members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have a minimum of 10 years of experience in structural assessments of residential and commercial properties across London."
+    answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have 5-10 years of experience in structural assessments of residential and commercial properties across London."
   }
 ];
 
@@ -94,7 +93,7 @@ const StructuralSurveys = () => {
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Expert Structural Surveys London | Alemara Engineering</title>
-        <meta name="description" content="Professional structural survey reports for London homeowners, buyers and landlords. Our chartered engineers provide detailed assessments and practical solutions within 48 hours." />
+        <meta name="description" content="Professional structural survey reports for London homeowners, buyers and landlords. Our certified engineers provide detailed assessments and practical solutions within 48 hours." />
         <link rel="canonical" href="https://londonstructuralsurveys.com/services/structural-surveys" />
         <script type="application/ld+json">
           {`
@@ -130,7 +129,7 @@ const StructuralSurveys = () => {
               <Clock className="text-[#ea384c] mr-3 h-6 w-6" />
               <span className="font-semibold text-xl text-[#ea384c]">Limited Availability: Book your assessment this week for priority scheduling</span>
             </div>
-            <p className="text-gray-300 ml-9">Serving all of Greater London for 10+ years</p>
+            <p className="text-gray-300 ml-9">Serving all of Greater London for 5-10 years</p>
           </div>
         </div>
       </div>
@@ -147,7 +146,7 @@ const StructuralSurveys = () => {
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Expert Structural Surveys & Inspections</h1>
               <p className="text-xl mb-6">
-                Thorough structural assessments by chartered engineers who understand London's unique building challenges
+                Thorough structural assessments by certified engineers who understand London's unique building challenges
               </p>
               
               <div className="flex justify-center gap-x-12 mb-10">
@@ -161,7 +160,7 @@ const StructuralSurveys = () => {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="text-[#ea384c] mr-2 h-5 w-5" />
-                  <span>10+ Years Experience</span>
+                  <span>5-10 Years Experience</span>
                 </div>
               </div>
               
@@ -192,7 +191,7 @@ const StructuralSurveys = () => {
                   <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">Why Choose Our Structural Surveys?</h2>
                   <p className="text-lg text-gray-700 mb-6">
                     Our structural survey services provide property owners, buyers, and managers with detailed assessments
-                    of building structures. Our chartered engineers have extensive experience with London's diverse building
+                    of building structures. Our certified engineers have extensive experience with London's diverse building
                     stock, from historic Georgian and Victorian properties to modern developments.
                   </p>
                   <p className="text-lg text-gray-700">
@@ -203,7 +202,7 @@ const StructuralSurveys = () => {
                 <div className="md:w-1/3 bg-gray-50 p-6 rounded-lg shadow-sm">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center">
-                      <div className="text-[#ea384c] text-3xl font-bold">10+</div>
+                      <div className="text-[#ea384c] text-3xl font-bold">5-10</div>
                       <div className="text-gray-600 text-sm">Years Experience</div>
                     </div>
                     <div className="text-center">
@@ -588,8 +587,8 @@ const StructuralSurveys = () => {
                       <Shield className="h-8 w-8 text-[#ea384c]" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">Chartered Structural Engineers</h3>
-                  <p className="text-gray-600">All surveys conducted by certified engineers with minimum 10 years experience</p>
+                  <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">Certified Structural Engineers</h3>
+                  <p className="text-gray-600">All surveys conducted by certified engineers with 5-10 years experience</p>
                 </div>
                 
                 <div className="bg-white p-6 rounded-lg shadow-sm text-center">
@@ -661,7 +660,7 @@ const StructuralSurveys = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-6">Concerned About Your Property?</h2>
               <p className="text-xl mb-8">
-                Our team of chartered structural engineers is ready to inspect your property and provide expert advice.
+                Our team of certified structural engineers is ready to inspect your property and provide expert advice.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <BookingDialog>
@@ -680,7 +679,7 @@ const StructuralSurveys = () => {
               <div className="mt-8 p-4 bg-white/10 rounded-lg">
                 <div className="flex items-center justify-center text-sm">
                   <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
-                  <span>All surveys conducted by chartered structural engineers</span>
+                  <span>All surveys conducted by certified structural engineers</span>
                 </div>
               </div>
             </div>
@@ -694,4 +693,3 @@ const StructuralSurveys = () => {
 };
 
 export default StructuralSurveys;
-
