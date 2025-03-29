@@ -92,10 +92,15 @@ const StructuralSurveys = () => {
       <Navbar />
       
       {/* Limited Availability Banner */}
-      <div className="bg-[#ea384c] py-2 text-white text-center">
-        <div className="container mx-auto px-4 flex items-center justify-center gap-2">
-          <CalendarClock className="h-4 w-4" />
-          <p className="text-sm font-medium">Limited availability this week - only <span className="font-bold">3 slots left</span> for structural surveys in London</p>
+      <div className="bg-[#1A1F2C] py-4 text-white">
+        <div className="container mx-auto px-4 max-w-[1400px]">
+          <div className="flex flex-col items-start">
+            <div className="flex items-center mb-2">
+              <Clock className="text-[#ea384c] mr-3 h-6 w-6" />
+              <span className="font-semibold text-xl text-[#ea384c]">Limited Availability: Book your assessment this week for priority scheduling</span>
+            </div>
+            <p className="text-gray-300 ml-9">Serving all of Greater London for 10+ years</p>
+          </div>
         </div>
       </div>
       
