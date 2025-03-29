@@ -1,9 +1,8 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Home, Building2, HardHat, Shield } from 'lucide-react';
+import { Building, Home, HardHat } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import PortfolioCard from '@/components/PortfolioCard';
 import { portfolioItems } from '@/components/PortfolioData';
@@ -31,7 +30,7 @@ const Portfolio = () => {
             
             <Tabs defaultValue="all" className="w-full">
               <div className="flex justify-center mb-12">
-                <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   <TabsTrigger value="all" className="flex items-center gap-2">
                     <Building className="h-4 w-4" />
                     <span>All Projects</span>
@@ -43,10 +42,6 @@ const Portfolio = () => {
                   <TabsTrigger value="commercial" className="flex items-center gap-2">
                     <Building className="h-4 w-4" />
                     <span>Commercial</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="multi-residential" className="flex items-center gap-2">
-                    <Building2 className="h-4 w-4" />
-                    <span>Multi-Residential</span>
                   </TabsTrigger>
                   <TabsTrigger value="civil" className="flex items-center gap-2">
                     <HardHat className="h-4 w-4" />
@@ -74,14 +69,6 @@ const Portfolio = () => {
               <TabsContent value="commercial" className="mt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {portfolioItems.filter(item => item.type === 'commercial').map(item => (
-                    <PortfolioCard key={item.id} project={item} />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="multi-residential" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {portfolioItems.filter(item => item.type === 'multi-residential').map(item => (
                     <PortfolioCard key={item.id} project={item} />
                   ))}
                 </div>
