@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -114,10 +115,26 @@ const StructuralSurveys = () => {
                 <span className="text-[#ea384c] font-semibold text-sm">LONDON'S SPECIALIST STRUCTURAL ENGINEERS</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Expert Structural Surveys & Inspections</h1>
-              <p className="text-xl mb-8">
+              <p className="text-xl mb-4">
                 Thorough structural assessments by chartered engineers who understand London's unique building challenges
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              
+              <div className="flex justify-center gap-x-8 mb-8 mt-2">
+                <div className="flex items-center">
+                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
+                  <span className="text-sm">Thorough Analysis</span>
+                </div>
+                <div className="flex items-center">
+                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
+                  <span className="text-sm">48-Hour Reports</span>
+                </div>
+                <div className="flex items-center">
+                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
+                  <span className="text-sm">10+ Years Experience</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
                 <BookingDialog>
                   <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40] text-white">
                     <span className="flex items-center">
@@ -130,21 +147,6 @@ const StructuralSurveys = () => {
                     Call 020 8004 9060
                   </a>
                 </Button>
-              </div>
-              
-              <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-medium mt-8 mb-3">
-                <div className="flex items-center">
-                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
-                  <span>Thorough Structural Analysis</span>
-                </div>
-                <div className="flex items-center">
-                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
-                  <span>48-Hour Report Delivery</span>
-                </div>
-                <div className="flex items-center">
-                  <Check className="text-[#ea384c] mr-1 h-4 w-4" />
-                  <span>10+ Years London Experience</span>
-                </div>
               </div>
             </div>
           </div>
