@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -73,7 +72,7 @@ const structuralEngineeringServices = [
       "Floor and roof structure assessments",
       "Listed building structural surveys"
     ],
-    image: "/lovable-uploads/be2ffdaf-904e-4449-b8bf-ba820e52e28f.png",
+    image: "/lovable-uploads/a071a48d-064e-41aa-b5d3-44b29e78d0b8.png",
     id: "structural-surveys"
   }
 ];
@@ -236,11 +235,11 @@ const Services = () => {
                     
                     <div className="lg:w-1/2 flex items-center">
                       {service.image && (
-                        <div className={`rounded-xl overflow-hidden shadow-md ${service.id === 'bespoke-design' ? 'max-w-md mx-auto' : 'w-full'}`}>
+                        <div className={`rounded-xl overflow-hidden shadow-md w-full ${service.id === 'structural-surveys' ? 'h-[90%] self-start' : ''}`}>
                           <img 
                             src={service.image} 
                             alt={service.title} 
-                            className="w-full h-auto object-cover"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       )}
