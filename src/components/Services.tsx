@@ -1,38 +1,46 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building, Search, AlertTriangle, Scale, Ruler, Wrench } from "lucide-react";
+import { Building, Search, AlertTriangle, Scale, Ruler, Wrench, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const serviceItems = [
   {
     icon: <Building className="h-10 w-10 text-[#ea384c]" />,
     title: "Post-RICS Structural Surveys",
-    description: "Detailed follow-up inspections after initial RICS surveys to investigate specific structural concerns highlighted in homebuyer reports."
+    description: "Detailed follow-up inspections after initial RICS surveys to investigate specific structural concerns highlighted in homebuyer reports.",
+    link: "/services#post-rics"
   },
   {
     icon: <AlertTriangle className="h-10 w-10 text-[#ea384c]" />,
     title: "Crack Assessment",
-    description: "Expert analysis of cracks in walls, floors and ceilings to determine their cause, severity and the appropriate remedial action required."
+    description: "Expert analysis of cracks in walls, floors and ceilings to determine their cause, severity and the appropriate remedial action required.",
+    link: "/services#crack-assessment"
   },
   {
     icon: <Search className="h-10 w-10 text-[#ea384c]" />,
     title: "Subsidence Investigations",
-    description: "Comprehensive assessment of potential subsidence issues, including soil analysis, monitoring, and detailed recommendations for stabilisation."
+    description: "Comprehensive assessment of potential subsidence issues, including soil analysis, monitoring, and detailed recommendations for stabilisation.",
+    link: "/services#subsidence"
   },
   {
     icon: <Ruler className="h-10 w-10 text-[#ea384c]" />,
     title: "Pre-Purchase Structural Inspections",
-    description: "Thorough structural assessments before property purchase to identify potential issues that may affect structural integrity and value."
+    description: "Thorough structural assessments before property purchase to identify potential issues that may affect structural integrity and value.",
+    link: "/services#pre-purchase"
   },
   {
     icon: <Scale className="h-10 w-10 text-[#ea384c]" />,
     title: "Bulging Walls & Movement Analysis",
-    description: "Expert assessment of wall bulging, leaning structures and building movement issues common in London period properties, with detailed remediation advice."
+    description: "Expert assessment of wall bulging, leaning structures and building movement issues common in London period properties, with detailed remediation advice.",
+    link: "/services#bulging-walls"
   },
   {
     icon: <Wrench className="h-10 w-10 text-[#ea384c]" />,
     title: "Structural Defect Analysis",
-    description: "Specialised investigation of specific structural defects, identifying root causes and providing detailed remediation strategies."
+    description: "Specialised investigation of specific structural defects, identifying root causes and providing detailed remediation strategies.",
+    link: "/services#defect-analysis"
   }
 ];
 
@@ -56,10 +64,23 @@ const Services = () => {
                 <CardTitle className="text-xl text-[#1A1F2C]">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-gray-700 text-base">{service.description}</CardDescription>
+                <CardDescription className="text-gray-700 text-base mb-4">{service.description}</CardDescription>
+                <Link to={service.link}>
+                  <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
+                    Read More <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="text-center mt-12">
+          <Link to="/services">
+            <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
+              View All Services <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

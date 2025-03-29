@@ -28,6 +28,7 @@ import AdminLayout from "./components/AdminLayout";
 import ClientLayout from "./components/ClientLayout";
 import SEO from "./pages/SEO";
 import Analytics from "./pages/Analytics";
+import Services from "./pages/Services";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/admin-login" element={<Login />} />
             <Route path="/client-login" element={<ClientLogin />} />
             <Route path="/engineer-login" element={<EngineerLogin />} />

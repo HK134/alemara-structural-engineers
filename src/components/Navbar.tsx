@@ -52,7 +52,7 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex items-center space-x-6">
           <a href="/#why-choose-us" className="text-white hover:text-[#ea384c] transition-colors">About Us</a>
-          <a href="/#services" className="text-white hover:text-[#ea384c] transition-colors">Services</a>
+          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
           <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors">Our Process</a>
           <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors">Testimonials</a>
           <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</a>
@@ -89,7 +89,7 @@ const Navbar = () => {
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
                 <a href="/#why-choose-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About Us</a>
-                <a href="/#services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</a>
+                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
                 <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Our Process</a>
                 <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Testimonials</a>
                 <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</a>
