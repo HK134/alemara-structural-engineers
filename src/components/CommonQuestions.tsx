@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Ruler, Award, CreditCard, TrendingUp, Home } from 'lucide-react';
+import { Calculator, Clock, Award, CreditCard, Building, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BookingDialog from './BookingDialog';
 import { Button } from './ui/button';
@@ -8,34 +8,34 @@ import { ArrowRight, Phone } from 'lucide-react';
 
 const questions = [
   {
-    icon: <Ruler className="h-8 w-8 text-[#ea384c]/80" />,
-    question: "How much does a structural survey cost?",
-    answer: "Our structural surveys start from £450 depending on property size and complexity. Contact us for a precise quote."
+    icon: <Calculator className="h-8 w-8 text-[#ea384c]/80" />,
+    question: "How much will my structural project cost?",
+    answer: "We evaluate and provide the most viable cost-effective solution tailored to suit your project and requirements. Every project is unique - contact us for a personalized quote."
   },
   {
     icon: <Clock className="h-8 w-8 text-[#ea384c]/80" />,
-    question: "How long does a survey take to complete?",
+    question: "How long does a structural survey take to complete?",
     answer: "Most surveys take 1-3 hours on site, with reports delivered within 48 hours of inspection."
   },
   {
     icon: <Award className="h-8 w-8 text-[#ea384c]/80" />,
-    question: "Do I need planning permission for structural work?",
-    answer: "Many internal structural alterations don't require planning permission but may need Building Regulations approval. We can advise on your specific case."
+    question: "What qualifications do your engineers have?",
+    answer: "All our engineers are chartered members of either IStructE or ICE with extensive experience in London properties. We maintain full professional indemnity insurance for your peace of mind."
   },
   {
     icon: <CreditCard className="h-8 w-8 text-[#ea384c]/80" />,
-    question: "What payment methods do you accept?",
-    answer: "We accept bank transfers, credit/debit cards and can provide invoicing options for estate agents and solicitors."
+    question: "What happens after I receive my structural designs?",
+    answer: "We provide comprehensive support throughout your project, including contractor liaison, site visits during construction, and assistance with building control submissions and approvals."
   },
   {
-    icon: <TrendingUp className="h-8 w-8 text-[#ea384c]/80" />,
-    question: "What value can a structural report add?",
-    answer: "Our reports can help negotiate property prices, reassure mortgage lenders, and provide accurate repair costs for budgeting."
+    icon: <Building className="h-8 w-8 text-[#ea384c]/80" />,
+    question: "Can you work with complex or heritage buildings?",
+    answer: "Yes, we specialize in both modern and historic London properties. Our team has extensive experience with listed buildings, conservation areas, and properties with unique structural challenges."
   },
   {
     icon: <Home className="h-8 w-8 text-[#ea384c]/80" />,
-    question: "What types of properties do you survey?",
-    answer: "We survey all residential properties across London, from Victorian terraces to modern apartments and commercial buildings."
+    question: "How soon can you start on my project?",
+    answer: "We typically schedule new projects within 1-2 weeks. For urgent matters, we offer expedited services with potential same-week appointments based on availability."
   }
 ];
 
@@ -47,10 +47,10 @@ const CommonQuestions = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">
-            Common Questions About Structural Surveys
+            Common Questions About Our Structural Services
           </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Find quick answers to questions about our structural engineering services
+            Find quick answers to questions about our structural engineering expertise
           </p>
         </div>
         
