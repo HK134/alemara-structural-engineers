@@ -1,4 +1,6 @@
+
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
@@ -90,6 +92,34 @@ const testimonials = [
 const StructuralSurveys = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Expert Structural Surveys London | Alemara Engineering</title>
+        <meta name="description" content="Professional structural survey reports for London homeowners, buyers and landlords. Our chartered engineers provide detailed assessments and practical solutions within 48 hours." />
+        <link rel="canonical" href="https://londonstructuralsurveys.com/services/structural-surveys" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "name": "Structural Surveys",
+              "provider": {
+                "@type": "ProfessionalService",
+                "name": "Alemara Engineering",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "London",
+                  "addressRegion": "Greater London",
+                  "addressCountry": "UK"
+                }
+              },
+              "description": "Expert structural inspections and reports for London properties, providing detailed assessments of structural integrity, defect analysis, and repair recommendations.",
+              "areaServed": "London",
+              "serviceType": "Structural Engineering Survey"
+            }
+          `}
+        </script>
+      </Helmet>
+      
       <Navbar />
       
       {/* Limited Availability Banner */}
@@ -451,7 +481,7 @@ const StructuralSurveys = () => {
             
             <div className="text-center mt-12">
               <p className="text-gray-700 mb-4">Still have questions about our structural surveys?</p>
-              <a href="/#contact" className="text-[#ea384c] hover:underline font-semibold">Contact our structural engineers directly</a>
+              <Link to="/contact" className="text-[#ea384c] hover:underline font-semibold">Contact our structural engineers directly</Link>
             </div>
           </div>
         </section>
@@ -602,6 +632,29 @@ const StructuralSurveys = () => {
           </div>
         </section>
         
+        {/* Related Pages Links */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4 max-w-[1400px]">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-2xl font-bold text-[#1A1F2C] mb-6">Related Services</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Link to="/services/residential/loft-conversions" className="block p-4 border border-gray-200 rounded-lg hover:border-[#ea384c] hover:shadow-md transition-all">
+                  <h3 className="font-semibold text-[#1A1F2C] mb-2">Loft Conversions</h3>
+                  <p className="text-gray-600 text-sm">Structural design for loft and attic conversions</p>
+                </Link>
+                <Link to="/services/residential/extensions" className="block p-4 border border-gray-200 rounded-lg hover:border-[#ea384c] hover:shadow-md transition-all">
+                  <h3 className="font-semibold text-[#1A1F2C] mb-2">Home Extensions</h3>
+                  <p className="text-gray-600 text-sm">Structural engineering for residential extensions</p>
+                </Link>
+                <Link to="/services/residential/internal-alterations" className="block p-4 border border-gray-200 rounded-lg hover:border-[#ea384c] hover:shadow-md transition-all">
+                  <h3 className="font-semibold text-[#1A1F2C] mb-2">Internal Alterations</h3>
+                  <p className="text-gray-600 text-sm">Load-bearing wall removal and internal remodeling</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+        
         {/* Call to Action */}
         <section className="bg-[#1A1F2C] py-16 text-white">
           <div className="container mx-auto px-4 max-w-[1400px]">
@@ -641,3 +694,4 @@ const StructuralSurveys = () => {
 };
 
 export default StructuralSurveys;
+
