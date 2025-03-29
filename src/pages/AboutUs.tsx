@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from "react-helmet";
 import Navbar from '@/components/Navbar';
@@ -6,7 +5,7 @@ import Footer from '@/components/Footer';
 import AccreditationSection from '@/components/AccreditationSection';
 import TeamMember from '@/components/about/TeamMember';
 import ServiceCTA from '@/components/services/ServiceCTA';
-import { Building, Users, Award, Target, ArrowRight } from 'lucide-react';
+import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle, Certificate } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
@@ -182,37 +181,72 @@ const AboutUs = () => {
           </div>
         </section>
         
-        {/* Get To Know Us - Creative Asymmetric Section */}
-        <section className="py-20 overflow-hidden">
+        {/* Get To Know Us - With Key Conversion Points */}
+        <section className="py-20 overflow-hidden bg-white">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-              {/* Left Content */}
-              <div className="w-full lg:w-1/2">
-                <h2 className="text-4xl lg:text-5xl font-bold text-[#1A1F2C] mb-6">Get to know us</h2>
-                <div className="space-y-4 text-gray-700">
-                  <p>
-                    Alemara is a team of former engineers from leading structural and civil engineering firms, bringing years of top-tier industry experience to every project.
-                  </p>
-                  <p>
-                    For over ten years, we have been driven by a vision to offer exceptional structural design services at competitive prices.
-                  </p>
-                  <p>
-                    Over time, we expanded to provide a one-stop service, covering everything from initial design to fabrication and installation.
-                  </p>
-                  <p>
-                    Our commitment to excellence and comprehensive solutions ensures that our clients receive the highest quality outcomes for their residential, commercial, and infrastructure projects.
-                  </p>
-                </div>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl font-bold text-[#1A1F2C] mb-6 text-center">Get to know us</h2>
+              
+              <div className="space-y-4 text-gray-700 mb-10">
+                <p className="text-lg">
+                  Alemara is a team of former engineers from leading structural and civil engineering firms, bringing years of top-tier industry experience to every project.
+                </p>
+                <p className="text-lg">
+                  For over ten years, we have been driven by a vision to offer exceptional structural design services at competitive prices.
+                </p>
+                <p className="text-lg">
+                  Our commitment to excellence and comprehensive solutions ensures that our clients receive the highest quality outcomes for their residential, commercial, and infrastructure projects.
+                </p>
               </div>
               
-              {/* Right Image - Circular Crop */}
-              <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-[#ea384c]/20 shadow-xl transform lg:-translate-y-6">
-                  <img 
-                    src="/lovable-uploads/9ae2a80a-0d46-4983-95d1-acc383d040ac.png"
-                    alt="Historical Engineering in London" 
-                    className="w-full h-full object-cover"
-                  />
+              {/* Key Conversion Points */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
+                      <Certificate className="h-6 w-6 text-[#ea384c]" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-[#1A1F2C]">Chartered Members of IStructE</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    Our engineers are chartered members of the Institution of Structural Engineers, the world's largest professional body dedicated to structural engineering.
+                  </p>
+                </div>
+                
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
+                      <Shield className="h-6 w-6 text-[#ea384c]" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-[#1A1F2C]">£10M Professional Indemnity</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    We carry comprehensive £10 million professional indemnity insurance coverage, giving our clients complete peace of mind.
+                  </p>
+                </div>
+                
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
+                      <Clock className="h-6 w-6 text-[#ea384c]" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-[#1A1F2C]">Fast 48-Hour Turnaround</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    For urgent projects, we offer expedited 48-hour turnaround options to keep your project on schedule without compromising quality.
+                  </p>
+                </div>
+                
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
+                      <CheckCircle className="h-6 w-6 text-[#ea384c]" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-[#1A1F2C]">100% Approval Rate</h3>
+                  </div>
+                  <p className="text-gray-600">
+                    Our designs maintain a perfect 100% approval rate with local building control authorities across all London boroughs.
+                  </p>
                 </div>
               </div>
             </div>
@@ -220,7 +254,7 @@ const AboutUs = () => {
         </section>
         
         {/* Expertise & Value Proposition */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="flex items-center mb-4">
@@ -300,7 +334,7 @@ const AboutUs = () => {
         </section>
         
         {/* Meet the Team */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-6">
               <div className="flex items-center justify-center mb-4">
