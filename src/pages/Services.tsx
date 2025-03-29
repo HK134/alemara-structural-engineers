@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,6 +8,9 @@ import StructuralEngineeringServices from '@/components/services/StructuralEngin
 import CivilEngineeringServices from '@/components/services/CivilEngineeringServices';
 import SteelFabricationServices from '@/components/services/SteelFabricationServices';
 import ServiceCTA from '@/components/services/ServiceCTA';
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Check, Clock } from "lucide-react";
+import BookingDialog from '@/components/BookingDialog';
 
 const Services = () => {
   const scrollToSection = (sectionId: string) => {

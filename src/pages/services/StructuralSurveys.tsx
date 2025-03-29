@@ -19,10 +19,11 @@ import {
   ThumbsUp,
   Star,
   Microscope,
-  FlaskConical,
   Wrench,
   CalendarClock,
-  Calendar
+  Calendar,
+  GanttChart,
+  AreaChart
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -61,7 +62,7 @@ const faqItems = [
   },
   {
     question: "What credentials do your structural engineers have?",
-    answer: "All our structural engineers are chartered members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have a minimum of 10 years of experience in structural assessments of residential and commercial properties across London."
+    answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have a minimum of 10 years of experience in structural assessments of residential and commercial properties across London."
   }
 ];
 
@@ -163,7 +164,7 @@ const StructuralSurveys = () => {
                   <h2 className="text-3xl font-bold text-[#1A1F2C] mb-4">Why Choose Our Structural Surveys?</h2>
                   <p className="text-lg text-gray-700 mb-6">
                     Our structural survey services provide property owners, buyers, and managers with detailed assessments
-                    of building structures. Our chartered engineers have extensive experience with London's diverse building
+                    of building structures. Our certified engineers have extensive experience with London's diverse building
                     stock, from historic Georgian and Victorian properties to modern developments.
                   </p>
                   <p className="text-lg text-gray-700">
@@ -348,29 +349,29 @@ const StructuralSurveys = () => {
                   <CardHeader className="pb-2">
                     <div className="flex items-start gap-4">
                       <div className="bg-[#ea384c]/10 p-3 rounded-lg">
-                        <FlaskConical className="h-6 w-6 text-[#ea384c]" />
+                        <GanttChart className="h-6 w-6 text-[#ea384c]" />
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Material Testing</CardTitle>
+                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Structural Monitoring</CardTitle>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Analysis of building materials to assess their condition, strength, and suitability for continued use or restoration.
+                      Long-term monitoring of building movement and structural changes to assess progressive issues and inform remediation.
                     </p>
                     <ul className="mt-4 space-y-2">
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Concrete strength assessment</span>
+                        <span>Installation of monitoring equipment</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Masonry and mortar analysis</span>
+                        <span>Regular data collection and analysis</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Timber condition assessment</span>
+                        <span>Trend analysis and recommendations</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -380,29 +381,29 @@ const StructuralSurveys = () => {
                   <CardHeader className="pb-2">
                     <div className="flex items-start gap-4">
                       <div className="bg-[#ea384c]/10 p-3 rounded-lg">
-                        <Microscope className="h-6 w-6 text-[#ea384c]" />
+                        <AreaChart className="h-6 w-6 text-[#ea384c]" />
                       </div>
                       <div>
-                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Dampness Investigations</CardTitle>
+                        <CardTitle className="text-xl font-semibold text-[#1A1F2C]">Structural Analysis</CardTitle>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Comprehensive assessment of moisture-related issues affecting the structural integrity of buildings.
+                      Computational analysis of building structures to assess load capacity, stress points, and structural safety.
                     </p>
                     <ul className="mt-4 space-y-2">
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Rising damp diagnosis</span>
+                        <span>Finite element analysis</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Penetrating damp identification</span>
+                        <span>Load capacity assessments</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Check className="h-5 w-5 text-[#ea384c] flex-shrink-0 mt-0.5" />
-                        <span>Waterproofing solutions</span>
+                        <span>Safety factor calculations</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -559,7 +560,7 @@ const StructuralSurveys = () => {
                       <Shield className="h-8 w-8 text-[#ea384c]" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">Chartered Structural Engineers</h3>
+                  <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">Certified Structural Engineers</h3>
                   <p className="text-gray-600">All surveys conducted by certified engineers with minimum 10 years experience</p>
                 </div>
                 
@@ -609,7 +610,7 @@ const StructuralSurveys = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-6">Concerned About Your Property?</h2>
               <p className="text-xl mb-8">
-                Our team of chartered structural engineers is ready to inspect your property and provide expert advice.
+                Our team of certified structural engineers is ready to inspect your property and provide expert advice.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <BookingDialog>
@@ -628,7 +629,7 @@ const StructuralSurveys = () => {
               <div className="mt-8 p-4 bg-white/10 rounded-lg">
                 <div className="flex items-center justify-center text-sm">
                   <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
-                  <span>All surveys conducted by chartered structural engineers</span>
+                  <span>All surveys conducted by certified structural engineers</span>
                 </div>
               </div>
             </div>
