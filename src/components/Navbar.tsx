@@ -62,7 +62,7 @@ const Navbar = () => {
           <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
           <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
           <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
-          <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</a>
+          <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</Link>
           <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</a>
           
           <div className="border-l border-gray-600 pl-6 flex items-center">
@@ -101,7 +101,7 @@ const Navbar = () => {
                 <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
                 <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
                 <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
-                <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</a>
+                <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</Link>
                 <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</a>
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
