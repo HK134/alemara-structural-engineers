@@ -29,6 +29,38 @@ The project also included new foundations, underpinning of garden walls and stai
 The extension incorporated modern design elements while preserving the character of this Victorian property. The kitchen features a white marble island contrasting with navy blue cabinetry, while original decorative ceiling moldings were preserved throughout the renovation. The project successfully blends contemporary living spaces with the building's historic features.`
   },
   
+  // Hinkley Point C project (NEW)
+  {
+    id: 11,
+    title: 'Hinkley Point C Nuclear Power Station',
+    type: 'civil',
+    image: '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
+    description: 'Structural engineering and temporary works design for the UK's first new nuclear power station in a generation, ensuring compliance and safety across this landmark energy infrastructure project.',
+    completion: 'Ongoing (Project started 2016)',
+    client: 'EDF Energy',
+    location: 'Somerset, UK',
+    images: [
+      '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
+      '/lovable-uploads/904ee744-116b-4b23-88b0-7ed09a50bd30.png',
+      '/lovable-uploads/52b66580-4ba5-4df1-be13-e95d9792b851.png'
+    ],
+    fullDescription: `As part of the engineering team for the landmark Hinkley Point C nuclear power station project, our structural engineering practice delivered critical expertise for this transformative UK energy infrastructure initiative.
+
+Our work focused on ensuring the highest standards of structural engineering and compliance, contributing to the project's milestones through meticulous planning and execution. Key aspects of our involvement included:
+
+Temporary Works Design: We created and oversaw robust, compliant designs for temporary structures to support ongoing construction activities, accommodating the project's unique scale and safety requirements.
+
+Site Coordination: Our team collaborated with multiple construction partners to coordinate temporary works across various areas, ensuring seamless integration with existing infrastructure and utility systems in this complex environment.
+
+Structural Inspections: We conducted detailed on-site inspections to verify that construction aligned with approved designs and specifications, ensuring quality and safety at every stage of this critical national infrastructure project.
+
+Compliance Assurance: Our engineers performed comprehensive quality assurance checks to guarantee adherence to project drawings, specifications, and the stringent industry standards required for nuclear facilities.
+
+Documentation and Reporting: We provided comprehensive documentation and detailed reporting to track project progress and ensure complete transparency throughout the construction process.
+
+Through our commitment to quality and detailed oversight, we ensured that all temporary works met both safety and regulatory requirements, contributing to the project's timely and successful delivery. Our involvement in Hinkley Point C demonstrates our capability to deliver integrated structural engineering solutions for complex, large-scale infrastructure projects of national significance.`
+  },
+  
   // Residential projects
   {
     id: 2,
@@ -73,11 +105,11 @@ The extension incorporated modern design elements while preserving the character
     completion: 'June 2023'
   },
   
-  // Multi-residential projects
+  // Former Multi-residential projects - changed to residential
   {
     id: 7,
     title: 'Apartment Complex - Canary Wharf',
-    type: 'multi-residential',
+    type: 'residential',
     image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Comprehensive structural calculations and design for a new 12-unit apartment complex, including foundation specifications.',
     completion: 'April 2023'
@@ -85,7 +117,7 @@ The extension incorporated modern design elements while preserving the character
   {
     id: 8,
     title: 'Student Accommodation - Greenwich',
-    type: 'multi-residential',
+    type: 'residential',
     image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Structural design for a 40-unit student accommodation building, focusing on efficient space utilization and safety compliance.',
     completion: 'July 2023'

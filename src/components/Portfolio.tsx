@@ -13,18 +13,18 @@ const portfolioItems = [
     description: 'Intricate basement extension with zinc clad box design, underpinning of garden walls, and internal layout restructuring in a conservation area.'
   },
   {
-    id: 2,
+    id: 11,
+    title: 'Hinkley Point C Nuclear Power Station',
+    type: 'Civil',
+    image: '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
+    description: 'Structural engineering and temporary works design for the UK's first new nuclear power station in a generation.'
+  },
+  {
+    id: 5,
     title: 'Commercial Office Building - City of London',
     type: 'Commercial',
     image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80&w=600&h=400',
     description: 'Structural assessment and remediation strategy for an 8-storey office building with subsidence concerns.'
-  },
-  {
-    id: 3,
-    title: 'Apartment Complex - Canary Wharf',
-    type: 'Multi-residential',
-    image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=600&h=400',
-    description: 'Comprehensive structural calculations and design for a new 12-unit apartment complex, including foundation specifications.'
   }
 ];
 
