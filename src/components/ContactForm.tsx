@@ -90,189 +90,200 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
-      {isSuccess ? (
-        <div className="bg-green-50 p-8 rounded-lg border border-green-100 text-center">
-          <div className="flex justify-center mb-4">
-            <div className="bg-green-100 p-3 rounded-full">
-              <CheckCircle className="h-8 w-8 text-green-600" />
-            </div>
-          </div>
-          <h3 className="text-xl font-semibold text-green-800 mb-2">Thank You!</h3>
-          <p className="text-green-700 mb-4">
-            Your message has been successfully submitted. One of our structural engineers will contact you within 24 hours.
+    <section id="contact" className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Get in touch with our team of expert structural engineers. We'll respond to all inquiries within 4 hours during business hours.
           </p>
-          <Button 
-            variant="outline" 
-            onClick={() => setIsSuccess(false)}
-            className="hover:bg-green-100"
-          >
-            Submit Another Inquiry
-          </Button>
         </div>
-      ) : (
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name Field */}
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name*</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              {/* Email Field */}
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email*</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="Enter your email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Phone Field */}
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone*</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your phone number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              {/* Service Type Field */}
-              <FormField
-                control={form.control}
-                name="serviceType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Service Required*</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a service" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {serviceOptions.map((service) => (
-                          <SelectItem key={service.value} value={service.value}>
-                            {service.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Address Field */}
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address Line*</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter first line of address" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              {/* Postcode Field */}
-              <FormField
-                control={form.control}
-                name="postcode"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Postcode*</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your postcode" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            {/* Message Field */}
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Please provide any additional information about your requirements" 
-                      className="min-h-[120px]" 
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="bg-blue-50 p-4 rounded-lg text-sm text-blue-800 flex items-start mb-6">
-              <div className="mr-2 mt-0.5">
-                <CheckCircle className="h-4 w-4 text-blue-600" />
+        
+        <div className="w-full max-w-3xl mx-auto">
+          {isSuccess ? (
+            <div className="bg-green-50 p-8 rounded-lg border border-green-100 text-center">
+              <div className="flex justify-center mb-4">
+                <div className="bg-green-100 p-3 rounded-full">
+                  <CheckCircle className="h-8 w-8 text-green-600" />
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Privacy Notice</p>
-                <p>Your information is securely protected and will only be used to respond to your inquiry.</p>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
+              <h3 className="text-xl font-semibold text-green-800 mb-2">Thank You!</h3>
+              <p className="text-green-700 mb-4">
+                Your message has been successfully submitted. One of our structural engineers will contact you within 24 hours.
+              </p>
               <Button 
-                type="submit" 
-                className="w-full md:w-auto bg-[#ea384c] hover:bg-[#d02e40]" 
-                disabled={isSubmitting}
-                size="lg"
+                variant="outline" 
+                onClick={() => setIsSuccess(false)}
+                className="hover:bg-green-100"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  "Submit Inquiry"
-                )}
+                Submit Another Inquiry
               </Button>
             </div>
-          </form>
-        </Form>
-      )}
-    </div>
+          ) : (
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Name Field */}
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  {/* Email Field */}
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email*</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="Enter your email" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Phone Field */}
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your phone number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  {/* Service Type Field */}
+                  <FormField
+                    control={form.control}
+                    name="serviceType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Service Required*</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a service" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {serviceOptions.map((service) => (
+                              <SelectItem key={service.value} value={service.value}>
+                                {service.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Address Field */}
+                  <FormField
+                    control={form.control}
+                    name="address"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Address Line*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter first line of address" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  {/* Postcode Field */}
+                  <FormField
+                    control={form.control}
+                    name="postcode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Postcode*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your postcode" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Message Field */}
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message (Optional)</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Please provide any additional information about your requirements" 
+                          className="min-h-[120px]" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="bg-blue-50 p-4 rounded-lg text-sm text-blue-800 flex items-start mb-6">
+                  <div className="mr-2 mt-0.5">
+                    <CheckCircle className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Privacy Notice</p>
+                    <p>Your information is securely protected and will only be used to respond to your inquiry.</p>
+                  </div>
+                </div>
+
+                <div className="flex justify-center">
+                  <Button 
+                    type="submit" 
+                    className="w-full md:w-auto bg-[#ea384c] hover:bg-[#d02e40]" 
+                    disabled={isSubmitting}
+                    size="lg"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit Inquiry"
+                    )}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          )}
+        </div>
+      </div>
+    </section>
   );
 };
 
