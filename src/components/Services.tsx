@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building, Search, AlertTriangle, Scale, Ruler, Wrench, Home, Warehouse, PencilRuler, ArrowRight } from "lucide-react";
+import { Building, Search, AlertTriangle, Scale, Ruler, Wrench, Home, Warehouse, PencilRuler, ArrowRight, Hammer, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -10,38 +10,38 @@ const serviceItems = [
     icon: <Home className="h-10 w-10 text-[#ea384c]" />,
     title: "Residential Structural Engineering",
     description: "Expert structural design and calculations for loft conversions, extensions, basements, and internal reconfigurations in London homes.",
-    link: "/services#residential-work"
+    link: "/services/residential"
   },
   {
-    icon: <Warehouse className="h-10 w-10 text-[#ea384c]" />,
-    title: "Commercial Structural Engineering",
-    description: "Comprehensive structural design services for new builds, hotels, restaurants, retail spaces and office developments.",
-    link: "/services#commercial"
+    icon: <Building2 className="h-10 w-10 text-[#ea384c]" />,
+    title: "Loft Conversions & Extensions",
+    description: "Specialized structural solutions for expanding your London home, including structural calculations, designs and Party Wall advice.",
+    link: "/services/residential/loft-conversions"
   },
   {
-    icon: <PencilRuler className="h-10 w-10 text-[#ea384c]" />,
-    title: "Bespoke Design Projects",
-    description: "Innovative structural solutions for unconventional and architecturally challenging projects, including fabrication design and bespoke connection details.",
-    link: "/services#bespoke-design"
+    icon: <Hammer className="h-10 w-10 text-[#ea384c]" />,
+    title: "Internal Alterations",
+    description: "Safe removal of internal walls, floor strengthening, and opening up spaces in period London properties with careful structural consideration.",
+    link: "/services/residential#internal-alterations"
   },
   {
     icon: <Building className="h-10 w-10 text-[#ea384c]" />,
-    title: "Post-RICS Structural Surveys",
+    title: "Structural Surveys",
     description: "Detailed follow-up inspections after initial RICS surveys to investigate specific structural concerns highlighted in homebuyer reports.",
-    link: "/services#structural-surveys"
+    link: "/services/structural-surveys"
   },
   {
     icon: <AlertTriangle className="h-10 w-10 text-[#ea384c]" />,
     title: "Crack Assessment",
     description: "Expert analysis of cracks in walls, floors and ceilings to determine their cause, severity and the appropriate remedial action required.",
-    link: "/services#structural-surveys"
+    link: "/services/structural-surveys"
   },
   {
-    icon: <Scale className="h-10 w-10 text-[#ea384c]" />,
-    title: "Bulging Walls & Movement Analysis",
-    description: "Expert assessment of wall bulging, leaning structures and building movement issues common in London period properties, with detailed remediation advice.",
-    link: "/services#structural-surveys"
-  }
+    icon: <Warehouse className="h-10 w-10 text-[#ea384c]" />,
+    title: "Commercial Structural Engineering",
+    description: "Comprehensive structural design services for new builds, hotels, restaurants, retail spaces and office developments.",
+    link: "/services/commercial"
+  },
 ];
 
 const Services = () => {
@@ -75,12 +75,19 @@ const Services = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12">
-          <Link to="/services">
-            <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
-              View All Engineering Services <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+        <div className="mt-16 text-center">
+          <h3 className="text-2xl font-bold text-[#1A1F2C] mb-6">Residential Engineering Specialists</h3>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+            Our team specializes in London's unique residential properties, from Victorian terraces to modern apartments. 
+            We understand the specific challenges of London homes and provide tailored structural solutions.
+          </p>
+          <div className="text-center mt-8">
+            <Link to="/services/residential">
+              <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
+                Explore Residential Services <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
