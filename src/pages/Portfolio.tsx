@@ -8,15 +8,13 @@ import ServiceCTA from '@/components/services/ServiceCTA';
 import { Card, CardContent } from "@/components/ui/card";
 
 const portfolioItems = [
-  // Featured project - Baron's Court
   {
-    id: 10,
+    id: 1,
     title: 'Basement Extension & Layout Restructuring - Baron\'s Court',
     type: 'residential',
     image: '/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png',
     description: 'Intricate basement extension with zinc clad box design, underpinning of garden walls, and comprehensive internal layout restructuring within a conservation area.',
     completion: 'March 2023',
-    featured: true,
     architect: 'Rees + Lee Architects',
     location: 'Barons Court, London',
     images: [
@@ -38,7 +36,7 @@ The project also included new foundations, underpinning of garden walls and stai
   // Existing projects
   // Residential projects
   {
-    id: 1,
+    id: 2,
     title: 'Structural Reinforcement - Kensington',
     type: 'residential',
     image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
@@ -46,7 +44,7 @@ The project also included new foundations, underpinning of garden walls and stai
     completion: 'January 2023'
   },
   {
-    id: 2,
+    id: 3,
     title: 'Loft Conversion - Richmond',
     type: 'residential',
     image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
@@ -54,7 +52,7 @@ The project also included new foundations, underpinning of garden walls and stai
     completion: 'March 2023'
   },
   {
-    id: 3,
+    id: 4,
     title: 'Side Return Extension - Islington',
     type: 'residential',
     image: 'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?auto=format&fit=crop&q=80&w=800&h=500',
@@ -64,7 +62,7 @@ The project also included new foundations, underpinning of garden walls and stai
   
   // Commercial projects
   {
-    id: 4,
+    id: 5,
     title: 'Commercial Office Building - City of London',
     type: 'commercial',
     image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80&w=800&h=500',
@@ -72,7 +70,7 @@ The project also included new foundations, underpinning of garden walls and stai
     completion: 'February 2023'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Retail Space Conversion - Shoreditch',
     type: 'commercial',
     image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500',
@@ -82,7 +80,7 @@ The project also included new foundations, underpinning of garden walls and stai
   
   // Multi-residential projects
   {
-    id: 6,
+    id: 7,
     title: 'Apartment Complex - Canary Wharf',
     type: 'multi-residential',
     image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
@@ -90,7 +88,7 @@ The project also included new foundations, underpinning of garden walls and stai
     completion: 'April 2023'
   },
   {
-    id: 7,
+    id: 8,
     title: 'Student Accommodation - Greenwich',
     type: 'multi-residential',
     image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
@@ -100,7 +98,7 @@ The project also included new foundations, underpinning of garden walls and stai
   
   // Civil engineering projects
   {
-    id: 8,
+    id: 9,
     title: 'Bridge Reinforcement - Hammersmith',
     type: 'civil',
     image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500',
@@ -108,7 +106,7 @@ The project also included new foundations, underpinning of garden walls and stai
     completion: 'January 2023'
   },
   {
-    id: 9,
+    id: 10,
     title: 'Flood Defense System - Richmond Riverside',
     type: 'civil',
     image: 'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?auto=format&fit=crop&q=80&w=800&h=500',
@@ -118,8 +116,6 @@ The project also included new foundations, underpinning of garden walls and stai
 ];
 
 const Portfolio = () => {
-  const featuredProject = portfolioItems.find(item => item.featured);
-  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -133,82 +129,6 @@ const Portfolio = () => {
             </p>
           </div>
         </section>
-        
-        {/* Featured Project */}
-        {featuredProject && (
-          <section className="py-16 bg-white border-b border-gray-100">
-            <div className="container mx-auto px-4">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Featured Project</h2>
-              <p className="text-gray-600 text-center mb-12">Our latest structural engineering challenge</p>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <img 
-                    src={featuredProject.image} 
-                    alt={featuredProject.title} 
-                    className="w-full h-auto rounded-lg shadow-lg"
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] text-sm font-semibold px-3 py-1 rounded-full">
-                      {featuredProject.type.charAt(0).toUpperCase() + featuredProject.type.slice(1)}
-                    </span>
-                    <span className="text-sm text-gray-500">{featuredProject.completion}</span>
-                  </div>
-                  
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{featuredProject.title}</h3>
-                  <p className="text-lg mb-6">{featuredProject.description}</p>
-                  
-                  {featuredProject.architect && (
-                    <div className="mb-2">
-                      <span className="font-semibold">Architect:</span> {featuredProject.architect}
-                    </div>
-                  )}
-                  
-                  {featuredProject.location && (
-                    <div className="mb-6">
-                      <span className="font-semibold">Location:</span> {featuredProject.location}
-                    </div>
-                  )}
-                  
-                  <Button className="bg-[#1A1F2C] hover:bg-[#ea384c]">
-                    View Project Details
-                  </Button>
-                </div>
-              </div>
-              
-              {featuredProject.fullDescription && (
-                <div className="mt-12 max-w-4xl mx-auto">
-                  <Card>
-                    <CardContent className="p-6">
-                      <h4 className="text-xl font-semibold mb-4">Project Overview</h4>
-                      <p className="text-gray-700 whitespace-pre-line">{featuredProject.fullDescription}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              )}
-              
-              {/* Image gallery */}
-              {featuredProject.images && featuredProject.images.length > 1 && (
-                <div className="mt-12">
-                  <h4 className="text-xl font-semibold mb-6 text-center">Project Gallery</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {featuredProject.images.slice(1, 7).map((image, index) => (
-                      <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
-                        <img 
-                          src={image} 
-                          alt={`${featuredProject.title} - Image ${index + 2}`} 
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
         
         {/* Portfolio filters */}
         <section className="py-12 bg-gray-50">
@@ -244,7 +164,7 @@ const Portfolio = () => {
               
               <TabsContent value="all" className="mt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {portfolioItems.filter(item => !item.featured).map(item => (
+                  {portfolioItems.map(item => (
                     <PortfolioCard key={item.id} project={item} />
                   ))}
                 </div>
@@ -252,7 +172,7 @@ const Portfolio = () => {
               
               <TabsContent value="residential" className="mt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {portfolioItems.filter(item => item.type === 'residential' && !item.featured).map(item => (
+                  {portfolioItems.filter(item => item.type === 'residential').map(item => (
                     <PortfolioCard key={item.id} project={item} />
                   ))}
                 </div>
@@ -282,6 +202,70 @@ const Portfolio = () => {
                 </div>
               </TabsContent>
             </Tabs>
+          </div>
+        </section>
+        
+        {/* Project details for Baron's Court */}
+        <section id="project-barons-court" className="py-16 bg-white border-b border-gray-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Project Detail</h2>
+            <p className="text-gray-600 text-center mb-12">Basement Extension & Layout Restructuring - Baron's Court</p>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <img 
+                  src="/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png" 
+                  alt="Baron's Court Basement Extension" 
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+              </div>
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] text-sm font-semibold px-3 py-1 rounded-full">
+                    Residential
+                  </span>
+                  <span className="text-sm text-gray-500">March 2023</span>
+                </div>
+                
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">Basement Extension & Layout Restructuring - Baron's Court</h3>
+                <p className="text-lg mb-6">Intricate basement extension with zinc clad box design, underpinning of garden walls, and comprehensive internal layout restructuring within a conservation area.</p>
+                
+                <div className="mb-2">
+                  <span className="font-semibold">Architect:</span> Rees + Lee Architects
+                </div>
+                
+                <div className="mb-6">
+                  <span className="font-semibold">Location:</span> Barons Court, London
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-12 max-w-4xl mx-auto">
+              <Card>
+                <CardContent className="p-6">
+                  <h4 className="text-xl font-semibold mb-4">Project Overview</h4>
+                  <p className="text-gray-700 whitespace-pre-line">Rees + Lee Architects had successfully obtained planning approval from Hammersmith & Fulham Council for this intricate basement extension and internal layout restructuring scheme in the Barons Court conservation area. The unique project proposed a zinc clad box below a new roof terrace requiring a box frame design.
+
+The project also included new foundations, underpinning of garden walls and staircase. Prior to providing a final structural package, we visited the site to inspect the existing structure and discuss our ideas with the architect and the client. Following the site visit, a schematic structural design was provided, and once confirmed, the final full package was released.</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Image gallery */}
+            <div className="mt-12">
+              <h4 className="text-xl font-semibold mb-6 text-center">Project Gallery</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {portfolioItems[0].images && portfolioItems[0].images.map((image, index) => (
+                  <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
+                    <img 
+                      src={image} 
+                      alt={`Baron's Court Project - Image ${index + 1}`} 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
         
@@ -350,7 +334,11 @@ const PortfolioCard = ({ project }: ProjectProps) => {
         <h3 className="text-xl font-semibold text-[#1A1F2C] mb-3">{project.title}</h3>
         <p className="text-gray-600 mb-4">{project.description}</p>
         <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white">
-          View Details
+          {project.id === 1 ? (
+            <a href="#project-barons-court">View Details</a>
+          ) : (
+            <span>View Details</span>
+          )}
         </Button>
       </div>
     </div>
