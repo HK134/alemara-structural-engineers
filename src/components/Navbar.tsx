@@ -1,9 +1,23 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Clock, Shield, MapPin, Menu } from "lucide-react";
+import { Phone, Clock, Shield, MapPin, Menu, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +66,35 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex items-center space-x-6">
           <a href="/#why-choose-us" className="text-white hover:text-[#ea384c] transition-colors">About Us</a>
-          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
+          
+          {/* Services Dropdown Menu */}
+          <div className="relative">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-white hover:text-[#ea384c] transition-colors flex items-center">
+                  Services <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-[#1A1F2C] border-gray-700 text-white min-w-[200px]">
+                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
+                  <Link to="/services" className="w-full px-2 py-1">All Services</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
+                  <Link to="/services/residential" className="w-full px-2 py-1">Residential</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
+                  <Link to="/services/commercial" className="w-full px-2 py-1">Commercial</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
+                  <Link to="/services/structural-surveys" className="w-full px-2 py-1">Structural Surveys</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-700 focus:bg-gray-700">
+                  <Link to="/services/civil-engineering" className="w-full px-2 py-1">Civil Engineering</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          
           <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors">Our Process</a>
           <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors">Testimonials</a>
           <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</a>
@@ -89,7 +131,11 @@ const Navbar = () => {
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
                 <a href="/#why-choose-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About Us</a>
-                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
+                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">All Services</Link>
+                <Link to="/services/residential" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Residential</Link>
+                <Link to="/services/commercial" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Commercial</Link>
+                <Link to="/services/structural-surveys" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Structural Surveys</Link>
+                <Link to="/services/civil-engineering" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 pl-8">- Civil Engineering</Link>
                 <a href="/#process" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Our Process</a>
                 <a href="/#testimonials" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Testimonials</a>
                 <a href="/#faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</a>

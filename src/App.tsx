@@ -35,6 +35,12 @@ import Services from "./pages/Services";
 import LoftConversions from "./pages/residential/LoftConversions";
 import Extensions from "./pages/residential/Extensions";
 
+// Import service category pages
+import Residential from "./pages/services/Residential";
+import Commercial from "./pages/services/Commercial";
+import StructuralSurveys from "./pages/services/StructuralSurveys";
+import CivilEngineering from "./pages/services/CivilEngineering";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,6 +59,12 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/services" element={<Services />} />
+            
+            {/* Service category pages */}
+            <Route path="/services/residential" element={<Residential />} />
+            <Route path="/services/commercial" element={<Commercial />} />
+            <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
+            <Route path="/services/civil-engineering" element={<CivilEngineering />} />
             
             {/* Residential service pages */}
             <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
