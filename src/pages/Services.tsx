@@ -249,79 +249,96 @@ const Services = () => {
           </div>
         </section>
 
-        <section id="part-2" className="py-16 bg-[#E5EEF6] text-[#1A1F2C]">
+        <section id="part-2" className="py-16 bg-[#1A1F2C] text-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center mb-10">
+            <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Civil Engineering Major Projects</h2>
-              <p className="text-xl text-gray-700">
+              <p className="text-xl text-gray-300">
                 Specialized engineering services for infrastructure and major construction projects
               </p>
             </div>
             
-            <div className="max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-1">
-                  <Card className="h-full border border-gray-200 hover:border-[#ea384c] hover:shadow-md transition-all duration-300">
-                    <CardHeader className="pb-2">
-                      <div className="mb-4">
-                        <Construction className="h-12 w-12 text-[#ea384c]" />
-                      </div>
-                      <CardTitle className="text-xl">{civilEngineeringServices[0].title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-gray-700 text-base mb-4">{civilEngineeringServices[0].description}</CardDescription>
-                      <Link to="/#contact">
-                        <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
-                          Request This Service <ArrowRight className="ml-1 h-4 w-4" />
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                <div className="lg:col-span-1 order-first lg:order-none">
-                  <div className="h-full rounded-xl overflow-hidden shadow-md">
-                    <img 
-                      src={civilEngineeringServices[2].image} 
-                      alt="Major Engineering Projects"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                
-                <div className="lg:col-span-1">
-                  <Card className="h-full border border-gray-200 hover:border-[#ea384c] hover:shadow-md transition-all duration-300">
-                    <CardHeader className="pb-2">
-                      <div className="mb-4">
-                        <Workflow className="h-12 w-12 text-[#ea384c]" />
-                      </div>
-                      <CardTitle className="text-xl">{civilEngineeringServices[1].title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-gray-700 text-base mb-4">{civilEngineeringServices[1].description}</CardDescription>
-                      <Link to="/#contact">
-                        <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
-                          Request This Service <ArrowRight className="ml-1 h-4 w-4" />
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
+            <div className="grid grid-cols-1 gap-8">
+              <div className="relative rounded-xl overflow-hidden shadow-lg">
+                <img 
+                  src={civilEngineeringServices[2].image} 
+                  alt="Major Engineering Projects"
+                  className="w-full h-[400px] md:h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C] to-transparent opacity-90"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4">Major Infrastructure Projects</h3>
+                  <p className="text-gray-200 max-w-3xl mx-auto mb-6">
+                    Our civil engineering team provides comprehensive design, verification, and technical assurance 
+                    services for major infrastructure projects throughout the UK, including High Speed 2 (HS2), 
+                    highways schemes, and energy infrastructure.
+                  </p>
+                  <Link to="/#contact">
+                    <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
+                      Inquire About Major Projects <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
               
-              <div className="mt-10 text-center">
-                <Card className="border border-gray-200 bg-white/80 max-w-2xl mx-auto p-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <FileText className="h-10 w-10 text-[#ea384c] mr-3" />
-                    <h3 className="text-xl font-bold">{civilEngineeringServices[2].title}</h3>
-                  </div>
-                  <p className="mb-6 text-gray-700">{civilEngineeringServices[2].longDescription}</p>
-                  <Link to="/#contact">
-                    <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center mx-auto">
-                      Request This Service <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <Card className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300">
+                  <CardHeader className="pb-2">
+                    <div className="mb-4 bg-[#ea384c] p-3 rounded-full w-fit">
+                      {civilEngineeringServices[0].icon}
+                    </div>
+                    <CardTitle className="text-xl text-white">{civilEngineeringServices[0].title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-gray-300 text-base mb-4">{civilEngineeringServices[0].description}</CardDescription>
+                    <Link to="/#contact">
+                      <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
+                        Request This Service <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </CardContent>
                 </Card>
+                
+                <Card className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300">
+                  <CardHeader className="pb-2">
+                    <div className="mb-4 bg-[#ea384c] p-3 rounded-full w-fit">
+                      {civilEngineeringServices[1].icon}
+                    </div>
+                    <CardTitle className="text-xl text-white">{civilEngineeringServices[1].title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-gray-300 text-base mb-4">{civilEngineeringServices[1].description}</CardDescription>
+                    <Link to="/#contact">
+                      <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
+                        Request This Service <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+                
+                <Card className="bg-white/10 border-none text-white shadow-md hover:bg-white/15 transition-all duration-300 md:col-span-2 lg:col-span-1">
+                  <CardHeader className="pb-2">
+                    <div className="mb-4 bg-[#ea384c] p-3 rounded-full w-fit">
+                      <FileText className="h-16 w-16 text-white" />
+                    </div>
+                    <CardTitle className="text-xl text-white">{civilEngineeringServices[2].title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-gray-300 text-base mb-4">{civilEngineeringServices[2].description}</CardDescription>
+                    <Link to="/#contact">
+                      <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
+                        Request This Service <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <div className="text-center mt-8">
+                <p className="text-gray-300 mb-6 max-w-3xl mx-auto">
+                  Our civil engineering experts have worked on numerous high-profile infrastructure projects across the UK,
+                  bringing their specialized knowledge and expertise to ensure successful outcomes.
+                </p>
               </div>
             </div>
           </div>
