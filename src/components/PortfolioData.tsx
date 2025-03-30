@@ -1,14 +1,16 @@
+
 export const portfolioItems = [
   {
     id: 1,
     title: 'Structural Engineering for Carlton Road Extension - South West London',
     type: 'residential',
-    image: '/lovable-uploads/96cb7441-1400-49aa-b4ac-57a2b03e7408.png',
+    image: '/lovable-uploads/9326d963-dcc2-414f-863a-1a4434c73874.png',
     description: 'Comprehensive structural engineering for a sophisticated rear extension and internal refurbishment in South West London, featuring bespoke steel support solutions and specialized foundation design.',
     completion: 'March 2023',
     architect: 'REES Architects',
     location: 'South West London',
     images: [
+      '/lovable-uploads/9326d963-dcc2-414f-863a-1a4434c73874.png', // New exterior garden view
       '/lovable-uploads/09330978-2a68-4d71-b0d3-a50251b5fe27.png', // Outdoor terrace area
       '/lovable-uploads/fcd17dbc-67a5-411f-94fd-dca2567d5856.png', // Kitchen with marble island
       '/lovable-uploads/673642a0-9a4f-46a0-b407-9ce5ff9aec86.png', // Dining area with kitchen view

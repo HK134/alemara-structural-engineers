@@ -9,7 +9,7 @@ const portfolioItems = [
     id: 1,
     title: 'Structural Engineering for Carlton Road Extension',
     type: 'Residential',
-    image: '/lovable-uploads/96cb7441-1400-49aa-b4ac-57a2b03e7408.png',
+    image: '/lovable-uploads/9326d963-dcc2-414f-863a-1a4434c73874.png',
     description: 'Comprehensive structural engineering for a sophisticated rear extension featuring steel support solutions and specialized foundation design.'
   },
   {
