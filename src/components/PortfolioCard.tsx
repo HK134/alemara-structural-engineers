@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -35,7 +36,11 @@ const PortfolioCard = ({
   return <>
       <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
         <div className="h-56 overflow-hidden relative">
-          
+          <img 
+            src={displayImage} 
+            alt={project.title} 
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="p-6">
           <div className="flex items-center justify-between mb-3">

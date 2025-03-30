@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -35,11 +36,17 @@ const ProjectModal = ({
           <div className="md:w-1/2 h-[300px] md:h-auto relative bg-gray-100">
             <Carousel className="w-full h-full">
               <CarouselContent className="h-full">
-                {project.images?.map((img, index) => <CarouselItem key={index} className="h-full">
+                {project.images?.map((img, index) => (
+                  <CarouselItem key={index} className="h-full">
                     <div className="h-full w-full">
-                      
+                      <img 
+                        src={img}
+                        alt={`${project.title} - Image ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                  </CarouselItem>)}
+                  </CarouselItem>
+                ))}
               </CarouselContent>
               <CarouselPrevious className="left-2" />
               <CarouselNext className="right-2" />

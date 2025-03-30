@@ -1,3 +1,4 @@
+
 export const portfolioItems = [
   {
     id: 13,
@@ -30,7 +31,9 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     useModal: true,
     images: [
       '/lovable-uploads/91b012ae-e548-4165-9472-d996b4394182.png',
-      '/lovable-uploads/80b6be3e-a48e-4da3-a3e0-4059e0303b14.png'
+      '/lovable-uploads/80b6be3e-a48e-4da3-a3e0-4059e0303b14.png',
+      '/lovable-uploads/0244bb8b-c5a3-4899-b617-68420c70fe55.png',
+      '/lovable-uploads/fa64eaca-cde8-4637-9e53-17ed12384fa0.png'
     ],
     fullDescription: `A 3,000ft² carpet warehouse was transformed into a 500-capacity club space and bar. The concept focused on providing the area with the best possible acoustics.
 
