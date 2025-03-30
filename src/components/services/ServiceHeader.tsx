@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Home, Warehouse, PencilRuler, Building, Search } from "lucide-react";
 
@@ -8,36 +8,33 @@ interface ServiceHeaderProps {
 }
 
 const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
+  const [hoveredCategory, setHoveredCategory] = useState("residential-work");
+  
   const serviceCategories = [
     {
       id: "residential-work",
       name: "Residential",
       icon: <Home className="h-6 w-6 mb-2" />,
-      color: "bg-[#ea384c]"
     },
     {
       id: "commercial",
       name: "Commercial",
       icon: <Warehouse className="h-6 w-6 mb-2" />,
-      color: "bg-[#1A1F2C]"
     },
     {
       id: "bespoke-design",
       name: "Bespoke Design",
       icon: <PencilRuler className="h-6 w-6 mb-2" />,
-      color: "bg-[#1A1F2C]"
     },
     {
       id: "structural-surveys",
       name: "Surveys",
       icon: <Search className="h-6 w-6 mb-2" />,
-      color: "bg-[#1A1F2C]"
     },
     {
       id: "civil-engineering",
       name: "Civil",
       icon: <Building className="h-6 w-6 mb-2" />,
-      color: "bg-[#1A1F2C]"
     }
   ];
 
@@ -55,7 +52,10 @@ const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
               <button
                 key={category.id}
                 onClick={() => scrollToSection(category.id)}
-                className={`${category.color} text-white p-4 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center justify-center h-28`}
+                onMouseEnter={() => setHoveredCategory(category.id)}
+                className={`${hoveredCategory === category.id ? 'bg-[#ea384c]' : 'bg-[#1A1F2C]'} 
+                  text-white p-4 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg 
+                  flex flex-col items-center justify-center h-28 border border-white/10`}
               >
                 {category.icon}
                 <span className="font-medium">{category.name}</span>
