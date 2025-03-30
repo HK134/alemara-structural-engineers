@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Image, Crane } from 'lucide-react';
+import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Image, Construction } from 'lucide-react';
 
 interface InfrastructureProjectInfoProps {
   project: {
@@ -106,7 +106,7 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
           <div className="mb-16 overflow-hidden">
             <div className="bg-gradient-to-r from-[#1A1F2C] to-[#2d3748] p-6 rounded-t-lg">
               <div className="flex items-center gap-3">
-                <Crane className="h-7 w-7 text-[#ea384c]" />
+                <Construction className="h-7 w-7 text-[#ea384c]" />
                 <h3 className="text-xl font-bold text-white">Big Carl: Engineering Marvel</h3>
               </div>
             </div>
