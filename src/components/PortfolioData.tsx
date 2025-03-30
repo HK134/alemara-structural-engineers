@@ -34,12 +34,13 @@ The extension incorporated modern design elements while preserving the character
     id: 11,
     title: 'Hinkley Point C Nuclear Power Station',
     type: 'civil',
-    image: '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
+    image: '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
     description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation, ensuring compliance and safety across this landmark energy infrastructure project.',
     completion: 'Ongoing (Project started 2016)',
     client: 'EDF Energy',
     location: 'Somerset, UK',
     images: [
+      '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
       '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
       '/lovable-uploads/904ee744-116b-4b23-88b0-7ed09a50bd30.png',
       '/lovable-uploads/52b66580-4ba5-4df1-be13-e95d9792b851.png'

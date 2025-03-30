@@ -16,7 +16,7 @@ const portfolioItems = [
     id: 11,
     title: 'Hinkley Point C Nuclear Power Station',
     type: 'Civil',
-    image: '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
+    image: '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
     description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation.'
   },
   {

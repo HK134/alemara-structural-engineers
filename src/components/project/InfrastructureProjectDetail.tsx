@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building } from 'lucide-react';
+import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Image } from 'lucide-react';
 
 interface InfrastructureProjectInfoProps {
   project: {
@@ -43,7 +43,7 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
     <div className="bg-white">
       {/* Hero banner with gradient overlay */}
       <div 
-        className="w-full h-[400px] relative overflow-hidden" 
+        className="w-full h-[500px] relative overflow-hidden" 
         style={{
           background: `linear-gradient(to right, ${colorScheme.accent} 0%, ${colorScheme.primary} 100%)`
         }}
@@ -100,6 +100,24 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
             </CardContent>
           </Card>
         </div>
+
+        {/* Featured Image Section */}
+        {project.id === 11 && (
+          <div className="mb-16 rounded-lg overflow-hidden shadow-xl">
+            <div className="bg-[#1A1F2C] p-4 flex items-center">
+              <Image className="mr-2 h-5 w-5 text-white" />
+              <h3 className="text-lg font-semibold text-white">Night Construction Operations</h3>
+            </div>
+            <img 
+              src="/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png" 
+              alt="Hinkley Point C Night Construction" 
+              className="w-full h-auto object-cover"
+            />
+            <div className="bg-gray-50 p-4 text-sm text-gray-600 italic">
+              Night view of the Hinkley Point C construction site showing extensive crane operations and reinforcement work
+            </div>
+          </div>
+        )}
 
         {/* Project overview */}
         <div className="mb-16">
