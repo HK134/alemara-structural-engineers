@@ -1,4 +1,3 @@
-
 export const portfolioItems = [
   {
     id: 13,
@@ -55,24 +54,13 @@ The unique challenges of this project required innovative approaches to structur
     id: 1,
     title: 'Structural Engineering for Carlton Road Extension - South West London',
     type: 'residential',
-    image: '/lovable-uploads/9326d963-dcc2-414f-863a-1a4434c73874.png',
+    image: '/lovable-uploads/a962fd8a-7fe5-446e-8d03-9be35e0cef64.png',
     description: 'Comprehensive structural engineering for a sophisticated rear extension and internal refurbishment in South West London, featuring bespoke steel support solutions and specialized foundation design.',
     completion: 'March 2023',
     architect: 'REES Architects',
     location: 'South West London',
     images: [
-      '/lovable-uploads/9326d963-dcc2-414f-863a-1a4434c73874.png', // New exterior garden view
-      '/lovable-uploads/09330978-2a68-4d71-b0d3-a50251b5fe27.png', // Outdoor terrace area
-      '/lovable-uploads/fcd17dbc-67a5-411f-94fd-dca2567d5856.png', // Kitchen with marble island
-      '/lovable-uploads/673642a0-9a4f-46a0-b407-9ce5ff9aec86.png', // Dining area with kitchen view
-      '/lovable-uploads/96372f48-1560-4d63-a525-4a3d49c595a1.png', // Kitchen island and living area view
-      '/lovable-uploads/6e69f990-7a32-421b-98c2-3819c92f699a.png', // Exterior with basement windows
-      '/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png',
-      '/lovable-uploads/9646bf6e-a9b9-414e-b271-0137b3c089ba.png',
-      '/lovable-uploads/f17905f2-7909-49b7-b0d1-e38841352d6d.png',
-      '/lovable-uploads/0cc9f650-b763-44eb-9e29-3b6b63be14cf.png',
-      '/lovable-uploads/20a348a8-8663-4abc-81c0-e28f98a9fa5a.png',
-      '/lovable-uploads/2024c9e0-f09e-481b-b051-2aa5231cbcbc.png',
+      '/lovable-uploads/a962fd8a-7fe5-446e-8d03-9be35e0cef64.png'
     ],
     fullDescription: `Based in South West London, this property required a comprehensive rear extension and internal refurbishment. The project architecture and management were successfully led by REES Architects, with our structural engineering team providing critical support throughout the development process.
 
