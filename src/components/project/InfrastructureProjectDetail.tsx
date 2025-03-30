@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,7 @@ interface InfrastructureProjectInfoProps {
     location?: string;
     fullDescription?: string;
     images?: string[];
+    imageAlt?: string[];
   };
 }
 
@@ -51,6 +53,14 @@ const InfrastructureProjectDetail = ({
     setLightboxCaption(caption);
   };
 
+  // Get alt text for an image
+  const getImageAlt = (index: number) => {
+    if (project.imageAlt && project.imageAlt[index]) {
+      return project.imageAlt[index];
+    }
+    return `${project.title} - Image ${index + 1}`;
+  };
+
   return (
     <div className="bg-white">
       {/* Hero banner with gradient overlay */}
@@ -60,11 +70,14 @@ const InfrastructureProjectDetail = ({
         {project.images && project.images.length > 0 && (
           <img 
             src={project.images[0]} 
-            alt={project.title} 
+            alt={getImageAlt(0)} 
             className="w-full h-full object-cover opacity-40" 
             style={{
               objectPosition: 'center 30%'
-            }} 
+            }}
+            loading="eager"
+            width="1920"
+            height="1080"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
@@ -126,7 +139,42 @@ const InfrastructureProjectDetail = ({
           </Card>
         </div>
 
-        {/* Project overview integrated with images */}
+        {/* HS2 project special gallery */}
+        {isHS2 && (
+          <div className="mb-16">
+            <div className="flex items-center mb-8">
+              <Construction className="mr-3 h-7 w-7" style={{
+                color: colorScheme.primary
+              }} />
+              <h2 className="text-2xl md:text-3xl font-bold">Project Gallery</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              <ProjectImageCard 
+                image="/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png" 
+                title="HS2 Construction Site" 
+                caption="Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development" 
+                onClick={() => openLightbox(
+                  "/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png", 
+                  "Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development"
+                )} 
+                className="h-96" 
+              />
+              <ProjectImageCard 
+                image="/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png" 
+                title="HS2 Bridge Construction" 
+                caption="HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system" 
+                onClick={() => openLightbox(
+                  "/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png", 
+                  "HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system"
+                )} 
+                className="h-96" 
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Project overview integrated with images for Hinkley Point */}
         {project.id === 11 && (
           <div className="mb-16">
             <div className="flex items-center mb-8">
@@ -206,13 +254,6 @@ const InfrastructureProjectDetail = ({
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Technical details with smaller images */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-              
-              
-              
             </div>
           </div>
         )}

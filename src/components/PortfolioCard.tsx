@@ -17,6 +17,7 @@ interface ProjectProps {
     architect?: string;
     location?: string;
     images?: string[];
+    imageAlt?: string[];
     fullDescription?: string;
     useModal?: boolean;
   };
@@ -30,6 +31,11 @@ const PortfolioCard = ({
 
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
+  
+  // Get alt text for better accessibility and SEO
+  const imageAlt = project.imageAlt && project.imageAlt.length > 0 
+    ? project.imageAlt[0] 
+    : `${project.title} - ${project.type} structural engineering project`;
 
   const handleViewDetails = (e: React.MouseEvent) => {
     if (project.useModal) {
@@ -49,7 +55,7 @@ const PortfolioCard = ({
           )}
           <img 
             src={displayImage} 
-            alt={project.title} 
+            alt={imageAlt} 
             className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             loading="lazy"
             onLoad={() => setImageLoaded(true)}
@@ -58,6 +64,8 @@ const PortfolioCard = ({
               const target = e.target as HTMLImageElement;
               target.src = '/placeholder.svg';
             }}
+            width="400"
+            height="300"
           />
         </div>
         <div className="p-6">

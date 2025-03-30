@@ -1,3 +1,4 @@
+
 export const portfolioItems = [
   {
     id: 13,
@@ -105,19 +106,25 @@ Documentation and Reporting: We provided comprehensive documentation and detaile
 Through our commitment to quality and detailed oversight, we ensured that all temporary works met both safety and regulatory requirements, contributing to the project's timely and successful delivery. Our involvement in Hinkley Point C demonstrates our capability to deliver integrated structural engineering solutions for complex, large-scale infrastructure projects of national significance.`
   },
   
-  // HS2 High Speed Rail project (NEW)
+  // HS2 High Speed Rail project (Updated with new images)
   {
     id: 12,
     title: 'HS2 High Speed Rail Infrastructure',
     type: 'civil',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    image: '/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png', // Updated main image
     description: 'Engineering and assurance services for key HS2 packages across London and Central areas, delivering innovative solutions for this transformative rail infrastructure project.',
     completion: 'Ongoing',
     client: 'High Speed Two (HS2) Ltd',
     location: 'London & Central England',
     images: [
-      'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
-      'https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80&w=800&h=500'
+      '/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png', // Aerial construction site view
+      '/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png', // Bridge span construction
+      'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500'
+    ],
+    imageAlt: [
+      'Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development in an urban setting',
+      'HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system',
+      'High speed rail track infrastructure'
     ],
     fullDescription: `Our team plays an ongoing role in the HS2 project, delivering expert structural engineering and assurance services for key packages across London and Central areas, including C1, C2, and C3. Our involvement showcases our ability to manage complex, large-scale projects and maintain the highest standards of engineering excellence. Our key contributions include:
 

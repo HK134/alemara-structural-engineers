@@ -115,7 +115,11 @@ const ProjectDetail = () => {
             
             {/* Project Gallery */}
             {project.images && project.images.length > 0 && (
-              <ProjectGallery images={project.images} title={project.title} />
+              <ProjectGallery 
+                images={project.images} 
+                title={project.title}
+                imageAlt={project.imageAlt}
+              />
             )}
             
             {/* Navigation buttons */}

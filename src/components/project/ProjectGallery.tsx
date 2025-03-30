@@ -14,14 +14,23 @@ import {
 interface ProjectGalleryProps {
   images: string[];
   title: string;
+  imageAlt?: string[];
 }
 
-const ProjectGallery = ({ images, title }: ProjectGalleryProps) => {
+const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   if (!images || images.length === 0) {
     return null;
   }
+
+  // Get alt text for an image
+  const getImageAlt = (index: number) => {
+    if (imageAlt && imageAlt[index]) {
+      return imageAlt[index];
+    }
+    return `${title} - Image ${index + 1}`;
+  };
 
   return (
     <div className="mt-12">
@@ -40,8 +49,11 @@ const ProjectGallery = ({ images, title }: ProjectGalleryProps) => {
                   <div className="h-full overflow-hidden rounded-lg cursor-pointer">
                     <img 
                       src={image} 
-                      alt={`${title} - Image ${index + 1}`}
+                      alt={getImageAlt(index)}
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
+                      loading="lazy"
+                      width="400"
+                      height="300"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         console.error(`Failed to load image for ${index}:`, target.src);
@@ -69,8 +81,11 @@ const ProjectGallery = ({ images, title }: ProjectGalleryProps) => {
           >
             <img 
               src={image} 
-              alt={`${title} - Image ${index + 1}`} 
+              alt={getImageAlt(index)} 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+              width="200"
+              height="150"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 console.error(`Failed to load image for thumbnail ${index}:`, target.src);

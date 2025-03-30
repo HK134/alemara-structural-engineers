@@ -1,6 +1,7 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://londonstructuralsurveys.com/</loc>
     <lastmod>2024-06-10</lastmod>
@@ -79,12 +80,32 @@
     <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png</image:loc>
+      <image:title>Hinkley Point C Nuclear Power Station</image:title>
+      <image:caption>Aerial view of the Hinkley Point C nuclear power station construction site</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png</image:loc>
+      <image:title>Big Carl Crane at Hinkley Point C</image:title>
+      <image:caption>The world's largest land-based crane operating at Hinkley Point C</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio/12</loc>
     <lastmod>2024-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png</image:loc>
+      <image:title>HS2 Construction Site Aerial View</image:title>
+      <image:caption>Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development in an urban setting</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png</image:loc>
+      <image:title>HS2 Bridge Construction</image:title>
+      <image:caption>HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/privacy-policy</loc>
