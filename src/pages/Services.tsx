@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SchemaMarkup from '@/components/services/SchemaMarkup';
@@ -11,12 +11,30 @@ import SteelFabricationServices from '@/components/services/SteelFabricationServ
 import ServiceCTA from '@/components/services/ServiceCTA';
 
 const Services = () => {
+  // Create refs for smooth scrolling with offset
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Add offset for the sticky navbar
+      const navbarHeight = 120; // Approximate height of navbar
+      const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
+
+  // Check if there's a hash in the URL when the component mounts
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        scrollToSection(id);
+      }, 500); // Small delay to ensure page is fully loaded
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
