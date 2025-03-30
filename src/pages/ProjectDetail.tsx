@@ -10,6 +10,8 @@ import ProjectGallery from '@/components/project/ProjectGallery';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import ProjectGuarantee from '@/components/project/ProjectGuarantee';
 import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
+import ProjectStructuredData from '@/components/project/ProjectStructuredData';
+import { Helmet } from 'react-helmet';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -24,7 +26,6 @@ const ProjectDetail = () => {
       
       if (currentProject) {
         setProject(currentProject);
-        console.log("Project images:", currentProject.images);
         
         // Find previous and next projects
         const currentIndex = portfolioItems.findIndex(item => item.id === parseInt(id));
@@ -51,6 +52,9 @@ const ProjectDetail = () => {
     );
   }
 
+  const pageTitle = `${project.title} | London Structural Surveys Project`;
+  const pageDescription = project.description?.substring(0, 160);
+
   // Check if this is a major infrastructure project (HS2 or Hinkley Point)
   const isMajorInfrastructure = 
     project.id === 11 || // Hinkley Point C
@@ -59,6 +63,13 @@ const ProjectDetail = () => {
   if (isMajorInfrastructure) {
     return (
       <div className="min-h-screen flex flex-col">
+        <Helmet>
+          <title>{pageTitle}</title>
+          <meta name="description" content={pageDescription} />
+          <meta name="keywords" content={`${project.type} engineering, ${project.title}, structural engineering project, London`} />
+          <link rel="canonical" href={`https://londonstructuralsurveys.com/portfolio/${project.id}`} />
+        </Helmet>
+        <ProjectStructuredData project={project} />
         <Navbar />
         <main className="flex-grow">
           <InfrastructureProjectDetail project={project} />
@@ -78,6 +89,13 @@ const ProjectDetail = () => {
   // Standard project display for non-infrastructure projects
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={`${project.type} engineering, ${project.title}, structural engineering project, London`} />
+        <link rel="canonical" href={`https://londonstructuralsurveys.com/portfolio/${project.id}`} />
+      </Helmet>
+      <ProjectStructuredData project={project} />
       <Navbar />
       <main className="flex-grow">
         {/* Hero section */}

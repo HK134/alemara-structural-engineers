@@ -26,6 +26,7 @@ const PortfolioCard = ({
   project
 }: ProjectProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
@@ -39,11 +40,24 @@ const PortfolioCard = ({
 
   return <>
       <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
-        <div className="h-56 overflow-hidden relative">
+        <div className="h-56 overflow-hidden relative bg-gray-100">
+          {/* Show placeholder while image is loading */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-8 h-8 border-4 border-gray-200 border-t-[#ea384c] rounded-full animate-spin"></div>
+            </div>
+          )}
           <img 
             src={displayImage} 
             alt={project.title} 
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            loading="lazy"
+            onLoad={() => setImageLoaded(true)}
+            onError={(e) => {
+              setImageLoaded(true);
+              const target = e.target as HTMLImageElement;
+              target.src = '/placeholder.svg';
+            }}
           />
         </div>
         <div className="p-6">
@@ -56,15 +70,33 @@ const PortfolioCard = ({
           <h3 className="text-xl font-semibold text-[#1A1F2C] mb-3">{project.title}</h3>
           <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>
           
-          {project.useModal ? <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white flex items-center gap-2" onClick={handleViewDetails}>
+          {project.useModal ? (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white flex items-center gap-2" 
+              onClick={handleViewDetails}
+              aria-label={`View details for ${project.title}`}
+            >
               View Details
               <Maximize2 size={16} />
-            </Button> : <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white flex items-center gap-2" asChild>
-              <Link to={`/portfolio/${project.id}`}>
+            </Button>
+          ) : (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white flex items-center gap-2" 
+              asChild
+            >
+              <Link 
+                to={`/portfolio/${project.id}`}
+                aria-label={`View details for ${project.title}`}
+              >
                 View Details
                 <ExternalLink size={16} />
               </Link>
-            </Button>}
+            </Button>
+          )}
         </div>
       </div>
       
