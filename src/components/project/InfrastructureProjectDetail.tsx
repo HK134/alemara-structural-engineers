@@ -1,9 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Image, Construction } from 'lucide-react';
+import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Construction } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import ProjectImageCard from './ProjectImageCard';
+import ImageLightbox from './ImageLightbox';
 
 interface InfrastructureProjectInfoProps {
   project: {
@@ -22,6 +24,10 @@ interface InfrastructureProjectInfoProps {
 }
 
 const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps) => {
+  // State for lightbox
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [lightboxCaption, setLightboxCaption] = useState<string | undefined>(undefined);
+  
   // Determine if it's HS2 project
   const isHS2 = project.title.includes('HS2');
   
@@ -39,6 +45,12 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
         accent: '#1A1F2C',
         light: '#ffebee'
       };
+      
+  // Function to open lightbox
+  const openLightbox = (image: string, caption?: string) => {
+    setLightboxImage(image);
+    setLightboxCaption(caption);
+  };
 
   return (
     <div className="bg-white">
@@ -110,110 +122,168 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
               <h2 className="text-2xl md:text-3xl font-bold">Project Overview</h2>
             </div>
             
-            {/* Big Carl Feature - Integrated into overview */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              <div className="relative overflow-hidden rounded-lg shadow-lg">
-                <div className="bg-gradient-to-r from-[#1A1F2C] to-[#2d3748] p-4 flex items-center">
-                  <Construction className="h-6 w-6 text-[#ea384c] mr-2" />
-                  <h3 className="text-xl font-bold text-white">Big Carl: Engineering Marvel</h3>
-                </div>
-                <img 
-                  src="/lovable-uploads/6320697a-0d20-42e1-8e87-feecbcee1a71.png" 
-                  alt="Big Carl crane at Hinkley Point C" 
-                  className="w-full h-[300px] object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-[#00a8e8] bg-opacity-90 p-4">
-                  <p className="text-white font-medium text-sm">
-                    Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity super heavy lift ring crane operating on 96 individual wheels on 6km of rails.
-                  </p>
-                </div>
+            {/* Header section with first image and introductory text */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+              <div className="prose prose-lg max-w-none">
+                <p className="text-xl font-medium mb-6 text-gray-800">
+                  As part of the engineering team for the landmark Hinkley Point C nuclear power station project, 
+                  our structural engineering practice delivered critical expertise for this transformative UK energy 
+                  infrastructure initiative.
+                </p>
+                <p className="mb-4 text-gray-700">
+                  Our work focused on ensuring the highest standards of structural engineering and compliance,
+                  contributing to the project's milestones through meticulous planning and execution.
+                </p>
+                {project.fullDescription?.split('\n\n').slice(0, 1).map((paragraph, index) => (
+                  <p key={index} className="mb-4 text-gray-700">{paragraph}</p>
+                ))}
               </div>
               
-              <div className="prose prose-lg max-w-none">
-                <p className="mb-4 text-gray-700">
-                  This massive engineering marvel is a critical component in the construction of Hinkley Point C, enabling the precise placement of enormous prefabricated components and significantly reducing on-site construction time.
-                </p>
-                <p className="mb-4 text-gray-700">
-                  Our structural engineering team worked closely with crane specialists to ensure the rail foundation design could support the immense weight and operational requirements.
-                </p>
-                {project.fullDescription?.split('\n\n').slice(0, 2).map((paragraph, index) => (
-                  <p key={index} className="mb-4 text-gray-700">
-                    {paragraph}
-                  </p>
-                ))}
+              <ProjectImageCard
+                image="/lovable-uploads/8caa03e5-01f0-4867-8d9d-7495530700ca.png"
+                title="Hinkley Point C Aerial View"
+                caption="Aerial view of the Hinkley Point C nuclear power station construction site"
+                onClick={() => openLightbox(
+                  "/lovable-uploads/8caa03e5-01f0-4867-8d9d-7495530700ca.png",
+                  "Aerial view of the Hinkley Point C nuclear power station construction site"
+                )}
+              />
+            </div>
+            
+            {/* Big Carl Feature with striking image */}
+            <div className="my-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="lg:col-span-8">
+                  <ProjectImageCard
+                    image="/lovable-uploads/56cd7d73-5120-46f9-a393-08bcaf0cde80.png"
+                    title="Big Carl crane at night"
+                    caption="Big Carl, the world's largest land based crane illuminated during night operations"
+                    onClick={() => openLightbox(
+                      "/lovable-uploads/56cd7d73-5120-46f9-a393-08bcaf0cde80.png",
+                      "Big Carl, the world's largest land based crane illuminated during night operations"
+                    )}
+                    className="h-full"
+                  />
+                </div>
+                <div className="lg:col-span-4">
+                  <div className="bg-[#1A1F2C] rounded-lg p-5 h-full flex flex-col">
+                    <div className="flex items-center mb-4">
+                      <Construction className="h-6 w-6 text-[#ea384c] mr-2" />
+                      <h3 className="text-xl font-bold text-white">Big Carl: Engineering Marvel</h3>
+                    </div>
+                    <p className="text-white/90 mb-4">
+                      Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity super heavy 
+                      lift ring crane operating on 96 individual wheels on 6km of rails.
+                    </p>
+                    <p className="text-white/90 mb-4">
+                      This massive engineering marvel is a critical component in the construction of Hinkley Point C, enabling 
+                      the precise placement of enormous prefabricated components.
+                    </p>
+                    <div className="mt-auto">
+                      <Button 
+                        className="w-full mt-4" 
+                        style={{ backgroundColor: colorScheme.primary }}
+                        onClick={() => openLightbox(
+                          "/lovable-uploads/56cd7d73-5120-46f9-a393-08bcaf0cde80.png", 
+                          "Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity super heavy lift ring crane"
+                        )}
+                      >
+                        View Full Image
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             
-            {/* Night Construction & More Text Content - Side by side */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              <div className="prose prose-lg max-w-none order-2 lg:order-1">
-                {project.fullDescription?.split('\n\n').slice(2, 4).map((paragraph, index) => (
+            {/* Technical details with smaller images */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              <div>
+                <h3 className="text-xl font-bold mb-4">Engineering Challenges</h3>
+                <p className="mb-4 text-gray-700">
+                  Our structural engineering team worked closely with crane specialists to ensure the rail 
+                  foundation design could support the immense weight and operational requirements.
+                </p>
+                {project.fullDescription?.split('\n\n').slice(1, 3).map((paragraph, index) => (
                   <p key={index} className="mb-4 text-gray-700">
                     {paragraph}
                   </p>
                 ))}
-                <div className="bg-gray-50 p-5 border-l-4 rounded-r-lg" style={{ borderLeftColor: colorScheme.primary }}>
+                
+                <div className="bg-gray-50 p-5 border-l-4 rounded-r-lg mt-6" style={{ borderLeftColor: colorScheme.primary }}>
                   <h4 className="font-bold text-lg mb-2">Technical Highlights</h4>
                   <ul className="list-disc pl-5 space-y-2">
                     <li>Specialized rail foundation design for 5,000-tonne capacity</li>
                     <li>Structural analysis for precision component placement</li>
                     <li>Safety and compliance with UK nuclear regulations</li>
+                    <li>Innovation in temporary works design</li>
                   </ul>
                 </div>
               </div>
               
-              <div className="relative overflow-hidden rounded-lg shadow-lg order-1 lg:order-2">
-                <div className="bg-[#1A1F2C] p-4 flex items-center">
-                  <Image className="h-5 w-5 text-white mr-2" />
-                  <h3 className="text-lg font-semibold text-white">Night Construction Operations</h3>
-                </div>
-                <img 
-                  src="/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png" 
-                  alt="Hinkley Point C Night Construction" 
-                  className="w-full h-[300px] object-cover"
+              <div className="grid grid-cols-2 gap-4">
+                <ProjectImageCard
+                  image="/lovable-uploads/9f574bde-b7be-4a18-8760-5edd68bf7e6c.png"
+                  title="Concrete pouring operations"
+                  caption="An estimated 3 million tonnes of concrete used in construction"
+                  onClick={() => openLightbox(
+                    "/lovable-uploads/9f574bde-b7be-4a18-8760-5edd68bf7e6c.png",
+                    "An estimated three million tonnes of concrete and 230,000 tonnes of steel reinforcement will be used in the construction process"
+                  )}
                 />
-                <Button 
-                  className="absolute bottom-4 right-4" 
-                  style={{ backgroundColor: colorScheme.primary }}
-                >
-                  View Full Gallery
-                </Button>
+                <ProjectImageCard
+                  image="/lovable-uploads/6eb7d425-c26c-436b-8e5c-54c3b05c0ff1.png" 
+                  title="Reactor building with dome"
+                  caption="Completed reactor building with installed dome"
+                  onClick={() => openLightbox(
+                    "/lovable-uploads/6eb7d425-c26c-436b-8e5c-54c3b05c0ff1.png",
+                    "Hinkley Point C - Helping Britain Achieve Net Zero"
+                  )}
+                />
               </div>
             </div>
             
-            {/* New image with final text content */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="relative overflow-hidden rounded-lg shadow-lg h-full">
-                <img 
-                  src="/lovable-uploads/6870975b-6e71-4ef6-b9c4-2b9d4ecdc463.png" 
-                  alt="Construction site aerial view" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm p-4">
-                  <p className="text-white text-sm">
-                    Aerial view showcasing the scale of the Hinkley Point C construction site
+            {/* Final section with panoramic image */}
+            <div className="relative rounded-lg overflow-hidden mb-8">
+              <ProjectImageCard
+                image="/lovable-uploads/8caa03e5-01f0-4867-8d9d-7495530700ca.png"
+                title="Site panorama"
+                caption=""
+                onClick={() => openLightbox(
+                  "/lovable-uploads/8caa03e5-01f0-4867-8d9d-7495530700ca.png",
+                  "Panoramic view of the Hinkley Point C construction site"
+                )}
+                className="aspect-[21/9]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center p-8">
+                <div className="max-w-lg text-white">
+                  <h3 className="text-2xl font-bold mb-4">Project Impact</h3>
+                  <p className="mb-3">
+                    Our contribution to this landmark infrastructure project demonstrates our capability 
+                    to deliver engineering excellence on the largest and most complex energy projects in the UK.
                   </p>
+                  <div className="flex flex-wrap gap-2 mt-6">
+                    <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
+                      Nuclear Construction
+                    </Badge>
+                    <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
+                      Heavy Lifting
+                    </Badge>
+                    <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
+                      Engineering Design
+                    </Badge>
+                  </div>
                 </div>
               </div>
-              
-              <div className="prose prose-lg max-w-none">
-                {project.fullDescription?.split('\n\n').slice(4).map((paragraph, index) => (
-                  <p key={index} className="mb-4 text-gray-700">
-                    {paragraph}
-                  </p>
-                ))}
-                <div className="flex items-center gap-2 mt-6">
-                  <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
-                    Nuclear Construction
-                  </Badge>
-                  <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
-                    Heavy Lifting
-                  </Badge>
-                  <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
-                    Engineering Design
-                  </Badge>
-                </div>
-              </div>
+            </div>
+            
+            {/* Last part of the full description */}
+            <div className="prose prose-lg max-w-none mt-8">
+              {project.fullDescription?.split('\n\n').slice(4).map((paragraph, index) => (
+                <p key={index} className="mb-4 text-gray-700">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         )}
@@ -315,6 +385,19 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
           </div>
         </div>
       </div>
+      
+      {/* Lightbox for full-size images */}
+      {lightboxImage && (
+        <ImageLightbox 
+          isOpen={!!lightboxImage}
+          onClose={() => {
+            setLightboxImage(null);
+            setLightboxCaption(undefined);
+          }}
+          image={lightboxImage}
+          caption={lightboxCaption}
+        />
+      )}
     </div>
   );
 };
