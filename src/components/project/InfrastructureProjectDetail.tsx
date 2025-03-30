@@ -225,7 +225,7 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
                 <ProjectImageCard
                   image="/lovable-uploads/9f574bde-b7be-4a18-8760-5edd68bf7e6c.png"
                   title="Concrete pouring operations"
-                  caption="An estimated 3 million tonnes of concrete used in construction"
+                  caption="3 million tonnes of concrete used in construction"
                   onClick={() => openLightbox(
                     "/lovable-uploads/9f574bde-b7be-4a18-8760-5edd68bf7e6c.png",
                     "An estimated three million tonnes of concrete and 230,000 tonnes of steel reinforcement will be used in the construction process"
