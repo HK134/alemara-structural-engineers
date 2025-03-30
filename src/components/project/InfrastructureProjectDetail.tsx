@@ -242,49 +242,6 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
                 />
               </div>
             </div>
-            
-            {/* Final section with panoramic image */}
-            <div className="relative rounded-lg overflow-hidden mb-8">
-              <ProjectImageCard
-                image="/lovable-uploads/8caa03e5-01f0-4867-8d9d-7495530700ca.png"
-                title="Site panorama"
-                caption=""
-                onClick={() => openLightbox(
-                  "/lovable-uploads/8caa03e5-01f0-4867-8d9d-7495530700ca.png",
-                  "Panoramic view of the Hinkley Point C construction site"
-                )}
-                className="aspect-[21/9]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center p-8">
-                <div className="max-w-lg text-white">
-                  <h3 className="text-2xl font-bold mb-4">Project Impact</h3>
-                  <p className="mb-3">
-                    Our contribution to this landmark infrastructure project demonstrates our capability 
-                    to deliver engineering excellence on the largest and most complex energy projects in the UK.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-6">
-                    <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
-                      Nuclear Construction
-                    </Badge>
-                    <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
-                      Heavy Lifting
-                    </Badge>
-                    <Badge className="px-3 py-1 text-sm" style={{ backgroundColor: colorScheme.accent, color: 'white' }}>
-                      Engineering Design
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Last part of the full description */}
-            <div className="prose prose-lg max-w-none mt-8">
-              {project.fullDescription?.split('\n\n').slice(4).map((paragraph, index) => (
-                <p key={index} className="mb-4 text-gray-700">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
           </div>
         )}
 
@@ -377,9 +334,7 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
               <p className="text-gray-700">
                 Our work on this project underscores our expertise in delivering innovative, 
                 cost-effective engineering solutions while prioritising safety, compliance, 
-                and efficiency. Through our dedicated approach, we support the successful 
-                progression of critical infrastructure works, reinforcing our reputation 
-                as a trusted engineering partner for large-scale projects.
+                and efficiency.
               </p>
             </div>
           </div>
