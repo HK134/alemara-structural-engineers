@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, MapPin } from 'lucide-react';
+
 interface ProjectModalProps {
   project: {
     id: number;
@@ -20,15 +21,18 @@ interface ProjectModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }
+
 const ProjectModal = ({
   project,
   isOpen,
   onOpenChange
 }: ProjectModalProps) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  
   const handleImageChange = (index: number) => {
     setActiveImageIndex(index);
   };
+  
   return <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white">
         <div className="flex flex-col md:flex-row h-full max-h-[85vh]">
@@ -84,4 +88,5 @@ const ProjectModal = ({
       </DialogContent>
     </Dialog>;
 };
+
 export default ProjectModal;

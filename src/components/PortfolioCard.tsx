@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Maximize2 } from 'lucide-react';
 import ProjectModal from './project/ProjectModal';
+
 interface ProjectProps {
   project: {
     id: number;
@@ -20,6 +21,7 @@ interface ProjectProps {
     useModal?: boolean;
   };
 }
+
 const PortfolioCard = ({
   project
 }: ProjectProps) => {
@@ -27,12 +29,14 @@ const PortfolioCard = ({
 
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
+
   const handleViewDetails = (e: React.MouseEvent) => {
     if (project.useModal) {
       e.preventDefault();
       setIsModalOpen(true);
     }
   };
+
   return <>
       <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
         <div className="h-56 overflow-hidden relative">
@@ -68,4 +72,5 @@ const PortfolioCard = ({
       {project.useModal && <ProjectModal project={project} isOpen={isModalOpen} onOpenChange={setIsModalOpen} />}
     </>;
 };
+
 export default PortfolioCard;
