@@ -35,7 +35,9 @@ const ProjectStructuredData = ({ project }: ProjectStructuredDataProps) => {
       return [{
         "@type": "ImageObject",
         "url": getAbsoluteUrl(project.image),
-        "caption": project.title
+        "caption": project.title,
+        "width": 800,
+        "height": 600
       }];
     }
 
@@ -44,7 +46,9 @@ const ProjectStructuredData = ({ project }: ProjectStructuredDataProps) => {
       "url": getAbsoluteUrl(img),
       "caption": project.imageAlt && project.imageAlt[index] 
         ? project.imageAlt[index] 
-        : `${project.title} - Project Image ${index + 1}`
+        : `${project.title} - Project Image ${index + 1}`,
+      "width": 1200,
+      "height": 800
     }));
   };
 
@@ -64,7 +68,9 @@ const ProjectStructuredData = ({ project }: ProjectStructuredDataProps) => {
       "name": "London Structural Surveys",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://londonstructuralsurveys.com/logo.png"
+        "url": "https://londonstructuralsurveys.com/logo.png",
+        "width": 600,
+        "height": 60
       }
     },
     "mainEntityOfPage": {
@@ -73,7 +79,7 @@ const ProjectStructuredData = ({ project }: ProjectStructuredDataProps) => {
     }
   };
 
-  // Add project-specific schema markup
+  // Add project-specific schema markup for better SEO
   const projectData = {
     "@context": "https://schema.org",
     "@type": "Project",
@@ -93,7 +99,13 @@ const ProjectStructuredData = ({ project }: ProjectStructuredDataProps) => {
   if (project.location) {
     projectData["location"] = {
       "@type": "Place",
-      "name": project.location
+      "name": project.location,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": project.location,
+        "addressRegion": "London",
+        "addressCountry": "UK"
+      }
     };
   }
 

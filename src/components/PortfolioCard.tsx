@@ -64,8 +64,8 @@ const PortfolioCard = ({
               const target = e.target as HTMLImageElement;
               target.src = '/placeholder.svg';
             }}
-            width="400"
-            height="300"
+            width="600"
+            height="400"
           />
         </div>
         <div className="p-6">

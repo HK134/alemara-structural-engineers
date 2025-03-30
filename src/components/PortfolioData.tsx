@@ -1,5 +1,30 @@
-
 export const portfolioItems = [
+  {
+    id: 2,
+    title: 'Victoria Park Project - East London',
+    type: 'residential',
+    image: '/lovable-uploads/fa21af38-1a78-442b-96ae-bd95f059efbd.png',
+    description: 'Structural refurbishment of a Victorian property with timber design solutions for open plan living space, addressing sloping floors and fragile supports.',
+    completion: 'June 2023',
+    architect: 'REES Architects',
+    location: 'Victoria Park, East London',
+    images: [
+      '/lovable-uploads/fa21af38-1a78-442b-96ae-bd95f059efbd.png',
+      '/lovable-uploads/7dc7395a-dc6a-47a0-8e29-7eacc817d202.png'
+    ],
+    imageAlt: [
+      'Modern open plan living space with white kitchen and blue sofa after structural refurbishment',
+      'Contemporary kitchen with dark feature wall, glass windows showing staircase, and marble countertops'
+    ],
+    fullDescription: `This property required a full internal refurbishment. The original condition was poor with numerous structural issues, including sloping floors and fragile timber supports. We provided a very cost-effective timber design solution to remedy the problems and allow for openings within load bearing walls to create an open plan living space. The architecture and project management were successfully led by REES Architects.
+
+Our structural engineering team conducted a comprehensive assessment of the property's condition, identifying critical weaknesses in the floor joists and wall supports. The challenge was to create an open, contemporary living space while addressing the underlying structural deficiencies without exceeding the client's budget.
+
+By implementing an innovative timber reinforcement system, we were able to level the floors and strengthen the existing structure without the higher costs associated with steel beam installations. Our design incorporated laminated timber beams positioned strategically to distribute loads effectively, allowing for the safe removal of internal walls.
+
+The successful completion of this project demonstrates our expertise in finding cost-efficient structural solutions for period properties while enabling modern, open-plan living arrangements. The finished home now features a bright, flowing space with strengthened floors and walls that will maintain their structural integrity for decades to come.`
+  },
+  
   {
     id: 13,
     title: 'Warrington Crescent - Maida Vale',
@@ -20,6 +45,7 @@ As a Grade II listed building, our engineering approach required careful conside
 
 The mezzanine design utilized lightweight timber construction techniques that minimized load impact on the existing structure, while the new roof opening was engineered to maintain structural integrity and comply with conservation guidelines. Our timber-focused approach not only reduced costs but also aligned with sustainable building practices and heritage conservation principles.`
   },
+  
   {
     id: 14,
     title: 'Acoustic Club Conversion - Warehouse Project',
@@ -51,6 +77,7 @@ Our structural engineering solutions included:
 
 The unique challenges of this project required innovative approaches to structural design while ensuring compliance with both building safety regulations and acoustic performance standards. The resulting space successfully combines technical excellence with a striking visual aesthetic.`
   },
+  
   {
     id: 1,
     title: 'Structural Engineering for Carlton Road Extension - South West London',
