@@ -47,12 +47,6 @@ const Portfolio = () => {
                   src={item.image} 
                   alt={item.title} 
                   className="w-full h-full object-cover transition-transform hover:scale-105"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    console.error(`Failed to load image: ${target.src}`);
-                    target.onerror = null;
-                    target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
-                  }}
                 />
               </div>
               <div className="p-6">

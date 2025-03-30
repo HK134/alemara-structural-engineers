@@ -22,13 +22,6 @@ export const portfolioItems = [
       '/lovable-uploads/0cc9f650-b763-44eb-9e29-3b6b63be14cf.png',
       '/lovable-uploads/20a348a8-8663-4abc-81c0-e28f98a9fa5a.png',
       '/lovable-uploads/2024c9e0-f09e-481b-b051-2aa5231cbcbc.png',
-      // Adding the newly uploaded images
-      '/lovable-uploads/5c9a9185-56f6-4ceb-87eb-97b6f7965690.png', // Garden view with cherry blossom tree
-      '/lovable-uploads/354b4a16-5a84-46a0-971a-d783b20b07b5.png', // Interior sunken seating area with garden view
-      '/lovable-uploads/1252c441-a685-415b-ac91-2508e0d7c123.png', // Kitchen island with barstools
-      '/lovable-uploads/eeadeed1-ae61-4dcb-9e75-0e6e1711397b.png', // Dining area with pendant lights and garden view
-      '/lovable-uploads/03988493-c782-4fe5-8c0f-0e1920512e6d.png', // Construction phase - steel beam installation
-      '/lovable-uploads/ec11f355-1515-4929-a918-4762bc7f21f9.png', // Construction phase - exterior view
     ],
     fullDescription: `Based in South West London, this property required a comprehensive rear extension and internal refurbishment. The project architecture and management were successfully led by REES Architects, with our structural engineering team providing critical support throughout the development process.
 
@@ -184,4 +177,3 @@ Our work on the HS2 project underscores our expertise in delivering innovative, 
     completion: 'August 2023'
   }
 ];
-

@@ -23,7 +23,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
       {/* Main project image */}
       <div>
         <img 
-          src={project.image} 
+          src="/lovable-uploads/ca957454-931f-4053-a311-48b41b77a359.png" 
           alt={project.title} 
           className="w-full h-auto rounded-lg shadow-lg"
           onError={(e) => {
