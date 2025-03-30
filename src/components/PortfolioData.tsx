@@ -1,6 +1,26 @@
 
 export const portfolioItems = [
   {
+    id: 13,
+    title: 'Warrington Crescent - Maida Vale',
+    type: 'residential',
+    image: '/lovable-uploads/30776726-2624-43e4-96cb-7e92c1ea5b8a.png',
+    description: 'Structural engineering for reconfiguration of a top floor flat within a grade II listed building, including mezzanine design and timber structural elements.',
+    completion: 'September 2023',
+    architect: 'XAMI Architects',
+    location: 'Maida Vale, London',
+    images: [
+      '/lovable-uploads/30776726-2624-43e4-96cb-7e92c1ea5b8a.png'
+    ],
+    fullDescription: `Based in Maida Vale this project involved reconfiguring a top floor flat within a six storey grade II listed building. The redevelopment included a mezzanine, forming a new opening in the mansard roof and demolishing walls below the mezzanine level to create an open living space. 
+
+Structural elements introduced into the project consisted mainly of timber design to minimise associated costs for the client. The project architecture and management were successfully led by XAMI Architects.
+
+As a Grade II listed building, our engineering approach required careful consideration of the property's heritage features while implementing modern structural solutions. Working closely with conservation officers and the architects, we developed timber structural solutions that were sympathetic to the building's character while fulfilling the client's requirements for open plan living.
+
+The mezzanine design utilized lightweight timber construction techniques that minimized load impact on the existing structure, while the new roof opening was engineered to maintain structural integrity and comply with conservation guidelines. Our timber-focused approach not only reduced costs but also aligned with sustainable building practices and heritage conservation principles.`
+  },
+  {
     id: 1,
     title: 'Structural Engineering for Carlton Road Extension - South West London',
     type: 'residential',

@@ -18,12 +18,15 @@ interface ProjectInfoProps {
 }
 
 const ProjectInfo = ({ project }: ProjectInfoProps) => {
+  // Get the first image from the project.images array if available, otherwise use the main image
+  const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
+  
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       {/* Main project image */}
       <div>
         <img 
-          src="/lovable-uploads/ca957454-931f-4053-a311-48b41b77a359.png" 
+          src={displayImage}
           alt={project.title} 
           className="w-full h-auto rounded-lg shadow-lg"
           onError={(e) => {

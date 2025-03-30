@@ -3,32 +3,16 @@ import React from 'react';
 import { ArrowRight, Award, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-
-const portfolioItems = [
-  {
-    id: 1,
-    title: 'Structural Engineering for Carlton Road Extension',
-    type: 'Residential',
-    image: '/lovable-uploads/9326d963-dcc2-414f-863a-1a4434c73874.png',
-    description: 'Comprehensive structural engineering for a sophisticated rear extension featuring steel support solutions and specialized foundation design.'
-  },
-  {
-    id: 11,
-    title: 'Hinkley Point C Nuclear Power Station',
-    type: 'Civil',
-    image: '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
-    description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation.'
-  },
-  {
-    id: 12,
-    title: 'HS2 High Speed Rail Infrastructure',
-    type: 'Civil',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Expert engineering and assurance services for key HS2 packages across London and Central areas, delivering innovative solutions for the UK\'s new high-speed rail network.'
-  }
-];
+import { portfolioItems } from './PortfolioData';
 
 const Portfolio = () => {
+  // Get first 3 projects for preview
+  const previewProjects = [
+    portfolioItems.find(item => item.id === 13), // Warrington Crescent (new project)
+    portfolioItems.find(item => item.id === 1),  // Carlton Road
+    portfolioItems.find(item => item.id === 11)  // Hinkley Point C
+  ].filter(Boolean);
+
   return (
     <section id="portfolio" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -40,23 +24,31 @@ const Portfolio = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {portfolioItems.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1">
+          {previewProjects.map((item) => (
+            <div key={item?.id} className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1">
               <div className="h-48 overflow-hidden">
                 <img 
-                  src={item.image} 
-                  alt={item.title} 
+                  src={item?.images && item.images.length > 0 ? item.images[0] : item?.image} 
+                  alt={item?.title} 
                   className="w-full h-full object-cover transition-transform hover:scale-105"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                  }}
                 />
               </div>
               <div className="p-6">
                 <div className="flex items-center mb-3">
                   <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] text-xs font-semibold px-2 py-1 rounded-full">
-                    {item.type}
+                    {item?.type.charAt(0).toUpperCase() + item?.type.slice(1)}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">{item.title}</h3>
-                <p className="text-gray-600 mb-4">{item.description}</p>
+                <h3 className="text-xl font-semibold text-[#1A1F2C] mb-2">{item?.title}</h3>
+                <p className="text-gray-600 mb-4 line-clamp-2">{item?.description}</p>
+                <Button variant="outline" size="sm" className="text-[#1A1F2C] hover:bg-[#ea384c] hover:text-white" asChild>
+                  <Link to={`/portfolio/${item?.id}`}>View Project</Link>
+                </Button>
               </div>
             </div>
           ))}
