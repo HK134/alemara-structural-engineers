@@ -9,9 +9,9 @@ import PortfolioCard from './PortfolioCard';
 const Portfolio = () => {
   // Get specific projects for preview
   const previewProjects = [
+    portfolioItems.find(item => item.id === 15), // Halcyon Gallery (new project)
     portfolioItems.find(item => item.id === 14), // New Club project
     portfolioItems.find(item => item.id === 13), // Warrington Crescent
-    portfolioItems.find(item => item.id === 1),  // Carlton Road
   ].filter(Boolean);
 
   return (

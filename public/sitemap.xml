@@ -1,9 +1,10 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://londonstructuralsurveys.com/</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2024-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -51,9 +52,14 @@
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2024-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/2af65380-85a4-471b-8571-e5e94646b7c0.png</image:loc>
+      <image:title>Halcyon Gallery - Persian Pergola Ceiling</image:title>
+      <image:caption>Colorful glass installation ceiling at Halcyon Gallery with visitor walking through illuminated corridor</image:caption>
+    </image:image>
   </url>
   <!-- Portfolio Item URLs -->
   <url>

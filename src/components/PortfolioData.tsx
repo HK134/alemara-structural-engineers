@@ -1,4 +1,35 @@
+
 export const portfolioItems = [
+  {
+    id: 15,
+    title: 'Halcyon Gallery - New Bond Street',
+    type: 'commercial',
+    image: '/lovable-uploads/2af65380-85a4-471b-8571-e5e94646b7c0.png',
+    description: 'Bespoke structural design for the Persian Pergola ceiling at the Chihuly Now exhibition, creating a safe and immersive artistic experience for gallery visitors.',
+    completion: 'April 2024',
+    architect: 'Halcyon Gallery',
+    location: 'New Bond Street, London',
+    useModal: true,
+    images: [
+      '/lovable-uploads/2af65380-85a4-471b-8571-e5e94646b7c0.png'
+    ],
+    imageAlt: [
+      'Colorful glass installation ceiling at Halcyon Gallery with visitor walking through illuminated corridor'
+    ],
+    fullDescription: `This bespoke design was commissioned as part of the new exhibition at the New Bond Street Halcyon Gallery. We were involved in creating the structural support for the beautiful Persian Pergola ceiling as part of the Chihuly Now exhibition, led by master artist Dale Chihuly. 
+
+The bespoke structural design to support the ceiling was required to create maximum space and ensure the safety of visitors while they walk beneath the ceiling or when they stop to take photos of the immersive canopy of colour, form and light.
+
+Our engineering team worked closely with the gallery curators and installation specialists to design a support structure that would:
+
+1. Provide adequate strength to hold the delicate glass artwork safely
+2. Remain visually unobtrusive to maintain the artistic integrity of the installation
+3. Meet all safety requirements for public exhibition spaces
+4. Allow for the unique lighting conditions needed to showcase the vibrant colors and forms
+
+This project demonstrates our ability to combine technical structural engineering with sensitive artistic requirements, creating a solution that prioritizes both safety and aesthetics in a high-profile cultural venue.`
+  },
+  
   {
     id: 2,
     title: 'Victoria Park Project - East London',
