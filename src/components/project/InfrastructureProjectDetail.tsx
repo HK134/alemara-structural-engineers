@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -170,12 +169,12 @@ const InfrastructureProjectDetail = ({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-8">
                   <ProjectImageCard 
-                    image="/lovable-uploads/f137bae0-012c-411c-8206-b394cddb7073.png" 
-                    title="Hinkley Point C Construction" 
-                    caption="Aerial view of Hinkley Point C construction showing the reactor building with dome and Big Carl crane" 
+                    image="/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png" 
+                    title="Big Carl Crane at Hinkley Point C" 
+                    caption="Aerial view of Big Carl, the world's largest land-based crane, operating at Hinkley Point C" 
                     onClick={() => openLightbox(
-                      "/lovable-uploads/f137bae0-012c-411c-8206-b394cddb7073.png", 
-                      "Hinkley Point C - Helping Britain Achieve Net Zero"
+                      "/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png", 
+                      "Big Carl - The world's largest land-based crane at Hinkley Point C"
                     )} 
                     className="h-full" 
                   />
@@ -187,8 +186,8 @@ const InfrastructureProjectDetail = ({
                       <h3 className="text-xl font-bold text-white">Big Carl: Engineering Marvel</h3>
                     </div>
                     <p className="text-white/90 mb-4">
-                      Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity super heavy 
-                      lift ring crane operating on 96 individual wheels on 6km of rails.
+                      Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity 
+                      super heavy lift ring crane operating on 96 individual wheels on 6km of rails.
                     </p>
                     <p className="text-white/90 mb-4">
                       This massive engineering marvel is a critical component in the construction of Hinkley Point C, enabling 
@@ -198,8 +197,8 @@ const InfrastructureProjectDetail = ({
                       <Button className="w-full mt-4" style={{
                         backgroundColor: colorScheme.primary
                       }} onClick={() => openLightbox(
-                        "/lovable-uploads/f137bae0-012c-411c-8206-b394cddb7073.png", 
-                        "Hinkley Point C - Helping Britain Achieve Net Zero"
+                        "/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png", 
+                        "Big Carl - The world's largest land-based crane at Hinkley Point C"
                       )}>
                         View Full Image
                       </Button>
