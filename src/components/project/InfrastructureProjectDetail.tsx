@@ -150,17 +150,17 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
               />
             </div>
             
-            {/* Big Carl Feature with striking image */}
+            {/* Big Carl Feature with new image */}
             <div className="my-12">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-8">
                   <ProjectImageCard
-                    image="/lovable-uploads/56cd7d73-5120-46f9-a393-08bcaf0cde80.png"
-                    title="Big Carl crane at night"
-                    caption="Big Carl, the world's largest land based crane illuminated during night operations"
+                    image="/lovable-uploads/68a803f8-745d-4d4a-a3e1-a2dd44831eb3.png"
+                    title="Hinkley Point C Construction"
+                    caption="Aerial view of Hinkley Point C construction showing the reactor building with dome and Big Carl crane"
                     onClick={() => openLightbox(
-                      "/lovable-uploads/56cd7d73-5120-46f9-a393-08bcaf0cde80.png",
-                      "Big Carl, the world's largest land based crane illuminated during night operations"
+                      "/lovable-uploads/68a803f8-745d-4d4a-a3e1-a2dd44831eb3.png",
+                      "Hinkley Point C - Helping Britain Achieve Net Zero"
                     )}
                     className="h-full"
                   />
@@ -184,8 +184,8 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
                         className="w-full mt-4" 
                         style={{ backgroundColor: colorScheme.primary }}
                         onClick={() => openLightbox(
-                          "/lovable-uploads/56cd7d73-5120-46f9-a393-08bcaf0cde80.png", 
-                          "Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity super heavy lift ring crane"
+                          "/lovable-uploads/68a803f8-745d-4d4a-a3e1-a2dd44831eb3.png", 
+                          "Hinkley Point C - Helping Britain Achieve Net Zero"
                         )}
                       >
                         View Full Image
