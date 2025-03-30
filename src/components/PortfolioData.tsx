@@ -41,6 +41,7 @@ The extension incorporated modern design elements while preserving the character
     location: 'Somerset, UK',
     images: [
       '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
+      '/lovable-uploads/6320697a-0d20-42e1-8e87-feecbcee1a71.png', // Big Carl crane image
       '/lovable-uploads/78aae323-ad21-46fa-abd5-8c2dec8c742b.png',
       '/lovable-uploads/904ee744-116b-4b23-88b0-7ed09a50bd30.png',
       '/lovable-uploads/52b66580-4ba5-4df1-be13-e95d9792b851.png'

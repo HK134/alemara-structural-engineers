@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Image } from 'lucide-react';
+import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Image, Crane } from 'lucide-react';
 
 interface InfrastructureProjectInfoProps {
   project: {
@@ -101,7 +101,37 @@ const InfrastructureProjectDetail = ({ project }: InfrastructureProjectInfoProps
           </Card>
         </div>
 
-        {/* Featured Image Section */}
+        {/* Big Carl Feature Section */}
+        {project.id === 11 && (
+          <div className="mb-16 overflow-hidden">
+            <div className="bg-gradient-to-r from-[#1A1F2C] to-[#2d3748] p-6 rounded-t-lg">
+              <div className="flex items-center gap-3">
+                <Crane className="h-7 w-7 text-[#ea384c]" />
+                <h3 className="text-xl font-bold text-white">Big Carl: Engineering Marvel</h3>
+              </div>
+            </div>
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/6320697a-0d20-42e1-8e87-feecbcee1a71.png" 
+                alt="Big Carl crane at Hinkley Point C" 
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-[#00a8e8] bg-opacity-90 p-4 text-white font-semibold text-center">
+                Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity super heavy lift ring crane operating on 96 individual wheels on 6km of rails.
+              </div>
+            </div>
+            <div className="bg-gray-100 p-6 rounded-b-lg border-t-4 border-[#00a8e8]">
+              <p className="text-gray-700">
+                This massive engineering marvel is a critical component in the construction of Hinkley Point C, 
+                enabling the precise placement of enormous prefabricated components and significantly reducing 
+                on-site construction time. Our structural engineering team worked closely with crane specialists 
+                to ensure the rail foundation design could support the immense weight and operational requirements.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Featured Night Construction Image Section */}
         {project.id === 11 && (
           <div className="mb-16 rounded-lg overflow-hidden shadow-xl">
             <div className="bg-[#1A1F2C] p-4 flex items-center">
