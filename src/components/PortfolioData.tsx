@@ -3,18 +3,16 @@ export const portfolioItems = [
     id: 2,
     title: 'Victoria Park Project - East London',
     type: 'residential',
-    image: '/lovable-uploads/fa21af38-1a78-442b-96ae-bd95f059efbd.png',
+    image: '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png',
     description: 'Structural refurbishment of a Victorian property with timber design solutions for open plan living space, addressing sloping floors and fragile supports.',
     completion: 'June 2023',
     architect: 'REES Architects',
     location: 'Victoria Park, East London',
     images: [
-      '/lovable-uploads/fa21af38-1a78-442b-96ae-bd95f059efbd.png',
-      '/lovable-uploads/7dc7395a-dc6a-47a0-8e29-7eacc817d202.png'
+      '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png'
     ],
     imageAlt: [
-      'Modern open plan living space with white kitchen and blue sofa after structural refurbishment',
-      'Contemporary kitchen with dark feature wall, glass windows showing staircase, and marble countertops'
+      'Modern bright open plan living space with blue sofa, dining table, and white kitchen after structural refurbishment'
     ],
     fullDescription: `This property required a full internal refurbishment. The original condition was poor with numerous structural issues, including sloping floors and fragile timber supports. We provided a very cost-effective timber design solution to remedy the problems and allow for openings within load bearing walls to create an open plan living space. The architecture and project management were successfully led by REES Architects.
 

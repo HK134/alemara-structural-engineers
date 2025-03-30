@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -60,6 +59,9 @@ const ProjectDetail = () => {
     project.id === 11 || // Hinkley Point C
     project.id === 12;   // HS2
 
+  // Victoria Park Project (id: 2) should only show the single image, no gallery
+  const isVictoriaParkProject = project.id === 2;
+
   if (isMajorInfrastructure) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -113,13 +115,31 @@ const ProjectDetail = () => {
           <div className="container mx-auto px-4">
             <ProjectInfo project={project} />
             
-            {/* Project Gallery */}
-            {project.images && project.images.length > 0 && (
+            {/* Victoria Park Project (ID 2) should not show the gallery */}
+            {/* Only show gallery for projects with multiple images */}
+            {!isVictoriaParkProject && project.images && project.images.length > 1 && (
               <ProjectGallery 
                 images={project.images} 
                 title={project.title}
                 imageAlt={project.imageAlt}
               />
+            )}
+            
+            {/* For Victoria Park Project, show single image instead */}
+            {isVictoriaParkProject && project.images && project.images.length > 0 && (
+              <div className="mt-12 max-w-4xl mx-auto">
+                <img 
+                  src={project.images[0]}
+                  alt={project.imageAlt ? project.imageAlt[0] : `${project.title} - Open plan living space`}
+                  className="w-full h-auto rounded-lg shadow-md"
+                  width="1200"
+                  height="800"
+                  loading="lazy"
+                />
+                <p className="text-center text-gray-500 mt-4 text-sm italic">
+                  {project.imageAlt ? project.imageAlt[0] : "Open plan living space after structural refurbishment"}
+                </p>
+              </div>
             )}
             
             {/* Navigation buttons */}

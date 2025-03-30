@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -59,18 +58,13 @@
   <!-- Portfolio Item URLs -->
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio/2</loc>
-    <lastmod>2024-06-17</lastmod>
+    <lastmod>2024-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/fa21af38-1a78-442b-96ae-bd95f059efbd.png</image:loc>
+      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png</image:loc>
       <image:title>Victoria Park Project - Open Plan Living</image:title>
-      <image:caption>Modern open plan living space with white kitchen and blue sofa after structural refurbishment</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/7dc7395a-dc6a-47a0-8e29-7eacc817d202.png</image:loc>
-      <image:title>Victoria Park Project - Kitchen</image:title>
-      <image:caption>Contemporary kitchen with dark feature wall, glass windows showing staircase, and marble countertops</image:caption>
+      <image:caption>Modern bright open plan living space with blue sofa, dining table, and white kitchen after structural refurbishment</image:caption>
     </image:image>
   </url>
   <url>
