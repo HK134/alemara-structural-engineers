@@ -20,6 +20,35 @@ As a Grade II listed building, our engineering approach required careful conside
 The mezzanine design utilized lightweight timber construction techniques that minimized load impact on the existing structure, while the new roof opening was engineered to maintain structural integrity and comply with conservation guidelines. Our timber-focused approach not only reduced costs but also aligned with sustainable building practices and heritage conservation principles.`
   },
   {
+    id: 14,
+    title: 'Acoustic Club Conversion - Warehouse Project',
+    type: 'commercial',
+    image: '/lovable-uploads/91b012ae-e548-4165-9472-d996b4394182.png',
+    description: 'Transformation of a 3,000ft² carpet warehouse into a 500-capacity club with optimized acoustic design featuring an innovative floating floor system.',
+    completion: 'November 2023',
+    location: 'East London',
+    useModal: true,
+    images: [
+      '/lovable-uploads/91b012ae-e548-4165-9472-d996b4394182.png',
+      '/lovable-uploads/80b6be3e-a48e-4da3-a3e0-4059e0303b14.png'
+    ],
+    fullDescription: `A 3,000ft² carpet warehouse was transformed into a 500-capacity club space and bar. The concept focused on providing the area with the best possible acoustics.
+
+The main area of the club was designed as a standalone structure in an internal space, so the entire floor was lifted from the ground and dampeners were used to distance it from the floor below.
+
+This meant that none of the structure was allowed to rely on the external walls, which meant very little outside noise came in and less noise escaped, providing the perfect environment for recording studios and the club.
+
+Our structural engineering solutions included:
+
+1. Custom-designed acoustic isolation systems
+2. Floating floor construction with vibration dampening mechanisms
+3. Independent structural framework that avoided load-bearing on exterior walls
+4. Sound-absorbing materials integration
+5. Strategic placement of support columns to maximize open space while maintaining structural integrity
+
+The unique challenges of this project required innovative approaches to structural design while ensuring compliance with both building safety regulations and acoustic performance standards. The resulting space successfully combines technical excellence with a striking visual aesthetic.`
+  },
+  {
     id: 1,
     title: 'Structural Engineering for Carlton Road Extension - South West London',
     type: 'residential',
