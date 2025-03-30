@@ -4,13 +4,13 @@ export const portfolioItems = [
     id: 13,
     title: 'Warrington Crescent - Maida Vale',
     type: 'residential',
-    image: '/lovable-uploads/30776726-2624-43e4-96cb-7e92c1ea5b8a.png',
+    image: '/lovable-uploads/cee52b7d-0b5a-4493-af50-49e2e4a3f007.png',
     description: 'Structural engineering for reconfiguration of a top floor flat within a grade II listed building, including mezzanine design and timber structural elements.',
     completion: 'September 2023',
     architect: 'XAMI Architects',
     location: 'Maida Vale, London',
     images: [
-      '/lovable-uploads/30776726-2624-43e4-96cb-7e92c1ea5b8a.png'
+      '/lovable-uploads/cee52b7d-0b5a-4493-af50-49e2e4a3f007.png'
     ],
     fullDescription: `Based in Maida Vale this project involved reconfiguring a top floor flat within a six storey grade II listed building. The redevelopment included a mezzanine, forming a new opening in the mansard roof and demolishing walls below the mezzanine level to create an open living space. 
 
@@ -197,3 +197,4 @@ Our work on the HS2 project underscores our expertise in delivering innovative, 
     completion: 'August 2023'
   }
 ];
+
