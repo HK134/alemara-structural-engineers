@@ -1,14 +1,13 @@
-
 export const portfolioItems = [
   {
     id: 1,
-    title: 'Basement Extension & Layout Restructuring - Baron\'s Court',
+    title: 'Structural Engineering for Carlton Road Extension - South West London',
     type: 'residential',
-    image: '/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png',
-    description: 'Intricate basement extension with zinc clad box design, underpinning of garden walls, and comprehensive internal layout restructuring within a conservation area.',
+    image: '/lovable-uploads/96cb7441-1400-49aa-b4ac-57a2b03e7408.png',
+    description: 'Comprehensive structural engineering for a sophisticated rear extension and internal refurbishment in South West London, featuring bespoke steel support solutions and specialized foundation design.',
     completion: 'March 2023',
-    architect: 'Rees + Lee Architects',
-    location: 'Barons Court, London',
+    architect: 'REES Architects',
+    location: 'South West London',
     images: [
       '/lovable-uploads/09330978-2a68-4d71-b0d3-a50251b5fe27.png', // Outdoor terrace area
       '/lovable-uploads/fcd17dbc-67a5-411f-94fd-dca2567d5856.png', // Kitchen with marble island
@@ -22,11 +21,13 @@ export const portfolioItems = [
       '/lovable-uploads/20a348a8-8663-4abc-81c0-e28f98a9fa5a.png',
       '/lovable-uploads/2024c9e0-f09e-481b-b051-2aa5231cbcbc.png',
     ],
-    fullDescription: `Rees + Lee Architects had successfully obtained planning approval from Hammersmith & Fulham Council for this intricate basement extension and internal layout restructuring scheme in the Barons Court conservation area. The unique project proposed a zinc clad box below a new roof terrace requiring a box frame design.
+    fullDescription: `Based in South West London, this property required a comprehensive rear extension and internal refurbishment. The project architecture and management were successfully led by REES Architects, with our structural engineering team providing critical support throughout the development process.
 
-The project also included new foundations, underpinning of garden walls and staircase. Prior to providing a final structural package, we visited the site to inspect the existing structure and discuss our ideas with the architect and the client. Following the site visit, a schematic structural design was provided, and once confirmed, the final full package was released.
+The technically challenging rear extension design incorporated sophisticated structural elements including lateral stabilisation of the existing walls and strategic support of the structure above. Our engineers implemented a Universal Column (UC) steel beam solution that ensured structural integrity while maintaining the architect's aesthetic vision.
 
-The extension incorporated modern design elements while preserving the character of this Victorian property. The kitchen features a white marble island contrasting with navy blue cabinetry, while original decorative ceiling moldings were preserved throughout the renovation. The project successfully blends contemporary living spaces with the building's historic features.`
+This residential transformation also featured specialized foundation engineering for a sunken seating area, which necessitated the design of a robust retaining wall system with detailed bar bending schedules. Our structural calculations accounted for soil pressure and drainage requirements, ensuring long-term stability and compliance with building regulations.
+
+Throughout the project, we collaborated closely with the architects and contractors to overcome site-specific challenges and deliver engineering solutions that balanced technical requirements with design aspirations. The successful completion of this project demonstrates our expertise in residential structural engineering and our commitment to realizing complex architectural visions through innovative structural design.`
   },
   
   // Hinkley Point C project

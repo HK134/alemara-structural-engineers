@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 const portfolioItems = [
   {
     id: 1,
-    title: 'Basement Extension - Baron\'s Court',
+    title: 'Structural Engineering for Carlton Road Extension',
     type: 'Residential',
-    image: '/lovable-uploads/cafbd1f2-5b5f-43be-863d-d27c2cf90647.png',
-    description: 'Intricate basement extension with zinc clad box design, underpinning of garden walls, and internal layout restructuring in a conservation area.'
+    image: '/lovable-uploads/96cb7441-1400-49aa-b4ac-57a2b03e7408.png',
+    description: 'Comprehensive structural engineering for a sophisticated rear extension featuring steel support solutions and specialized foundation design.'
   },
   {
     id: 11,
