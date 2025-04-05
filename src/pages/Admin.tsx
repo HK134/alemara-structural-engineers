@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -285,6 +286,60 @@ const Admin = () => {
       ...prev,
       [id]: !prev[id]
     }));
+  };
+
+  // Add the missing toggleSecuredStatus function
+  const toggleSecuredStatus = async (id: string, currentStatus: boolean) => {
+    try {
+      // Generate a project reference if securing for the first time
+      let updateData: any = { secured: !currentStatus };
+      
+      if (!currentStatus) {
+        // If we're securing it for the first time, generate a reference
+        const { data: projectRef } = await supabase.rpc('generate_project_reference');
+        if (projectRef) {
+          updateData.project_reference = projectRef;
+        }
+      }
+      
+      const { error } = await supabase
+        .from('form_submissions')
+        .update(updateData)
+        .eq('id', id);
+        
+      if (error) throw error;
+      
+      toast.success(currentStatus ? 'Project unlocked' : 'Project secured');
+      refetch();
+      
+      if (selectedSubmission && selectedSubmission.id === id) {
+        setSelectedSubmission({
+          ...selectedSubmission, 
+          secured: !currentStatus,
+          project_reference: !currentStatus && updateData.project_reference ? 
+            updateData.project_reference : selectedSubmission.project_reference
+        });
+      }
+    } catch (error) {
+      console.error('Error toggling secured status:', error);
+      toast.error('Failed to update project status');
+    }
+  };
+
+  // Add the correct handler for creating test submissions
+  const handleCreateTestSubmission = async () => {
+    try {
+      const result = await createTestSubmission();
+      if (result.success) {
+        toast.success('Test submission created successfully');
+        refetch();
+      } else {
+        toast.error('Failed to create test submission');
+      }
+    } catch (error) {
+      console.error('Error creating test submission:', error);
+      toast.error('Failed to create test submission');
+    }
   };
 
   return (

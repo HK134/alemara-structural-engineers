@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import EngineerDashboardHeader from '@/components/EngineerDashboardHeader';
@@ -6,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from '@/contexts/AuthContext';
 
 const EngineerDashboard = () => {
-  const { user } = useAuth();
+  const { userRole } = useAuth();
   
   return (
     <div className="container mx-auto p-6">

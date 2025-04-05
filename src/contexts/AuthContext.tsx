@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -20,15 +19,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userRole, setUserRole] = useState<'admin' | 'engineer' | 'client' | null>(null);
 
   useEffect(() => {
-    // Check if there's an existing session
     const checkSession = async () => {
       try {
         const { data } = await supabase.auth.getSession();
         setIsAuthenticated(!!data.session);
         
-        // Check if the user is an engineer
         if (data.session?.user) {
-          // Check for engineer by email
           const { data: engineerData, error: engineerError } = await supabase
             .from('engineers')
             .select('*')
@@ -38,7 +34,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (engineerData) {
             setUserRole('engineer');
           } else {
-            // Default to admin for now
             setUserRole('admin');
           }
         }
@@ -49,14 +44,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     };
 
-    // Subscribe to auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       const isAuthed = !!session;
       setIsAuthenticated(isAuthed);
       
-      // Determine user role when auth state changes
       if (session?.user) {
-        // Check if this is an engineer
         const checkUserRole = async () => {
           const { data: engineerData } = await supabase
             .from('engineers')
@@ -67,7 +59,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (engineerData) {
             setUserRole('engineer');
           } else {
-            // Default to admin for now
             setUserRole('admin');
           }
         };
@@ -114,7 +105,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const engineerLogin = async (email: string, password: string) => {
     try {
-      // Check if the email exists in the engineers table
       const { data: engineerData, error: engineerError } = await supabase
         .from('engineers')
         .select('*')
@@ -127,16 +117,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { success: false, message: 'Engineer account not found or inactive' };
       }
       
-      // Now try to authenticate
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) {
-        // If user doesn't exist in auth, we'll try to sign them up
         if (error.message.includes('Invalid login credentials')) {
-          // Try to sign up the engineer with provided credentials
           const { error: signUpError } = await supabase.auth.signUp({
             email,
             password,
@@ -147,7 +134,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             return { success: false, message: signUpError.message };
           }
           
-          // Try logging in again after signup
           const { error: retryLoginError } = await supabase.auth.signInWithPassword({
             email,
             password,

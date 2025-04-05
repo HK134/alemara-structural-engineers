@@ -1,75 +1,100 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getEngineerProjects } from '@/utils/formSubmissionDB';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ClipboardCheck, Clock, Eye, FileText, MapPin, Phone, RefreshCw, User } from "lucide-react";
 import { toast } from 'sonner';
 
+type Project = {
+  id: string;
+  form_type: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  service_type: string;
+  message: string | null;
+  created_at: string;
+  status: string;
+  postcode: string;
+  secured: boolean;
+  project_reference: string | null;
+  address: string | null;
+};
+
 const EngineerProjects = () => {
-  const { userId, userRole } = useAuth();
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const { userRole } = useAuth();
+  const [activeTab, setActiveTab] = useState<string>('all');
   
-  // Fetch the engineer information first
-  const { data: engineerInfo } = useQuery({
-    queryKey: ['engineerInfo', userId],
-    queryFn: async () => {
-      if (!userId) return null;
-      
-      const { data, error } = await supabase
-        .from('engineers')
-        .select('*')
-        .eq('id', userId)
-        .single();
-      
-      if (error) {
-        console.error("Error fetching engineer info:", error);
-        return null;
+  // Get the engineer ID from Supabase auth session
+  const [engineerId, setEngineerId] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // Fetch the engineer's ID based on their email
+    const getEngineerProfile = async () => {
+      try {
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError || !sessionData.session) {
+          console.error("Error fetching session:", sessionError);
+          return;
+        }
+        
+        const userEmail = sessionData.session.user.email;
+        
+        if (userEmail) {
+          const { data, error } = await supabase
+            .from('engineers')
+            .select('id')
+            .eq('email', userEmail)
+            .single();
+            
+          if (error) {
+            console.error("Error fetching engineer profile:", error);
+            return;
+          }
+          
+          if (data) {
+            setEngineerId(data.id);
+          }
+        }
+      } catch (error) {
+        console.error("Error in getEngineerProfile:", error);
       }
-      
-      return data;
-    },
-    enabled: !!userId && userRole === 'engineer'
-  });
-  
-  // Then fetch the projects assigned to this engineer
+    };
+    
+    getEngineerProfile();
+  }, []);
+
   const { data: projects, isLoading, error, refetch } = useQuery({
-    queryKey: ['engineerProjects', userId],
+    queryKey: ['engineerProjects', engineerId, activeTab],
     queryFn: async () => {
-      if (!userId) return [];
+      if (!engineerId) return [];
       
-      const result = await getEngineerProjects(userId);
+      const result = await getEngineerProjects(engineerId);
       
       if (!result.success) {
-        throw new Error('Failed to fetch engineer projects');
+        throw new Error("Failed to fetch projects");
       }
       
-      return result.data || [];
+      let filteredProjects = result.data || [];
+      
+      // Apply client-side filtering based on the active tab
+      if (activeTab !== 'all') {
+        filteredProjects = filteredProjects.filter(project => project.status === activeTab);
+      }
+      
+      return filteredProjects as Project[];
     },
-    enabled: !!userId && userRole === 'engineer'
+    enabled: !!engineerId, // Only run query when engineerId is available
+    refetchOnWindowFocus: true,
   });
-  
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', { 
@@ -79,312 +104,144 @@ const EngineerProjects = () => {
     });
   };
 
-  const statusColors: Record<string, string> = {
-    'new': 'bg-blue-500',
-    'contacted': 'bg-yellow-500',
-    'live': 'bg-purple-500',
-    'closed': 'bg-green-500',
-    'archived': 'bg-gray-500'
-  };
+  if (!engineerId) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Your Projects</CardTitle>
+          <CardDescription>Loading engineer profile...</CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
 
-  const handleRefresh = () => {
-    refetch();
-    toast.success('Projects refreshed');
-  };
-  
   if (isLoading) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Your Assigned Projects</CardTitle>
+          <CardTitle>Your Projects</CardTitle>
           <CardDescription>Loading projects...</CardDescription>
         </CardHeader>
       </Card>
     );
   }
-  
+
   if (error) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Your Assigned Projects</CardTitle>
-          <CardDescription className="text-red-500">
-            Error loading projects. Please try again.
-          </CardDescription>
+          <CardTitle>Your Projects</CardTitle>
+          <CardDescription className="text-red-500">Error loading projects. Please try again.</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={handleRefresh} variant="outline" size="sm">
-            <RefreshCw className="mr-2 h-4 w-4" /> Retry
-          </Button>
+          <Button onClick={() => refetch()}>Retry</Button>
         </CardContent>
       </Card>
     );
   }
-  
-  if (!projects || projects.length === 0) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Your Assigned Projects</CardTitle>
-          <CardDescription>
-            You don't have any projects assigned yet.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="text-center py-8">
-          <p className="text-muted-foreground mb-4">
-            Projects will appear here when the admin assigns them to you.
-          </p>
-          <Button onClick={handleRefresh} variant="outline" size="sm">
-            <RefreshCw className="mr-2 h-4 w-4" /> Refresh
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
-  
+
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <div>
-          <CardTitle>Your Assigned Projects</CardTitle>
-          <CardDescription>
-            You have {projects.length} active projects assigned
-          </CardDescription>
-        </div>
-        <Button onClick={handleRefresh} variant="outline" size="icon">
-          <RefreshCw className="h-4 w-4" />
-        </Button>
+      <CardHeader>
+        <CardTitle>Your Projects</CardTitle>
+        <CardDescription>View and manage your assigned projects</CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="all" className="w-full">
+        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-4">
             <TabsTrigger value="all">All Projects</TabsTrigger>
             <TabsTrigger value="live">Live</TabsTrigger>
-            <TabsTrigger value="secured">Secured</TabsTrigger>
+            <TabsTrigger value="closed">Completed</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="all">
-            <div className="rounded-md border overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Reference</TableHead>
-                    <TableHead>Client</TableHead>
-                    <TableHead>Service</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {projects.map((project) => (
-                    <TableRow key={project.id} className={project.secured ? "bg-slate-50" : ""}>
-                      <TableCell className="font-medium">
-                        {project.project_reference || "-"}
-                      </TableCell>
-                      <TableCell>
+          <TabsContent value={activeTab} className="space-y-4">
+            {projects && projects.length > 0 ? (
+              projects.map(project => (
+                <div 
+                  key={project.id} 
+                  className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="font-semibold">
                         {project.first_name} {project.last_name}
-                      </TableCell>
-                      <TableCell>{project.service_type}</TableCell>
-                      <TableCell>{formatDate(project.created_at)}</TableCell>
-                      <TableCell>
-                        <Badge className={statusColors[project.status] || 'bg-gray-500'}>
-                          {project.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Sheet>
-                          <SheetTrigger asChild>
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedProject(project)}>
-                              <Eye className="h-4 w-4" />
-                            </Button>
-                          </SheetTrigger>
-                          {selectedProject && (
-                            <SheetContent>
-                              <SheetHeader>
-                                <SheetTitle>Project Details</SheetTitle>
-                              </SheetHeader>
-                              <div className="space-y-6 py-6">
-                                {selectedProject.project_reference && (
-                                  <div className="bg-slate-50 p-3 rounded-md border">
-                                    <h3 className="text-sm font-semibold">Project Reference</h3>
-                                    <p className="text-lg font-bold">{selectedProject.project_reference}</p>
-                                  </div>
-                                )}
-                                
-                                <div className="space-y-4">
-                                  <div>
-                                    <h3 className="text-sm font-semibold flex items-center">
-                                      <User className="mr-2 h-4 w-4 text-slate-500" /> Client
-                                    </h3>
-                                    <p className="text-base mt-1">
-                                      {selectedProject.first_name} {selectedProject.last_name}
-                                    </p>
-                                  </div>
-                                  
-                                  <div>
-                                    <h3 className="text-sm font-semibold flex items-center">
-                                      <Phone className="mr-2 h-4 w-4 text-slate-500" /> Contact
-                                    </h3>
-                                    <p className="text-base mt-1">
-                                      {selectedProject.phone}
-                                    </p>
-                                    <p className="text-sm text-slate-500">
-                                      {selectedProject.email}
-                                    </p>
-                                  </div>
-                                  
-                                  {selectedProject.address && (
-                                    <div>
-                                      <h3 className="text-sm font-semibold flex items-center">
-                                        <MapPin className="mr-2 h-4 w-4 text-slate-500" /> Location
-                                      </h3>
-                                      <p className="text-base mt-1">
-                                        {selectedProject.address}
-                                      </p>
-                                      {selectedProject.postcode && (
-                                        <p className="text-sm text-slate-500">
-                                          {selectedProject.postcode}
-                                        </p>
-                                      )}
-                                    </div>
-                                  )}
-                                  
-                                  <div>
-                                    <h3 className="text-sm font-semibold flex items-center">
-                                      <Clock className="mr-2 h-4 w-4 text-slate-500" /> Date Submitted
-                                    </h3>
-                                    <p className="text-base mt-1">
-                                      {formatDate(selectedProject.created_at)}
-                                    </p>
-                                  </div>
-                                  
-                                  <div>
-                                    <h3 className="text-sm font-semibold flex items-center">
-                                      <FileText className="mr-2 h-4 w-4 text-slate-500" /> Service Type
-                                    </h3>
-                                    <p className="text-base mt-1">
-                                      {selectedProject.service_type}
-                                    </p>
-                                  </div>
-                                  
-                                  <div>
-                                    <h3 className="text-sm font-semibold flex items-center">
-                                      <ClipboardCheck className="mr-2 h-4 w-4 text-slate-500" /> Status
-                                    </h3>
-                                    <div className="mt-2">
-                                      <Badge className={statusColors[selectedProject.status] || 'bg-gray-500'}>
-                                        {selectedProject.status}
-                                      </Badge>
-                                      {selectedProject.secured && (
-                                        <Badge variant="outline" className="ml-2 bg-green-50 text-green-700 border-green-200">
-                                          Secured
-                                        </Badge>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                                
-                                {selectedProject.message && (
-                                  <div className="mt-6">
-                                    <h3 className="text-sm font-semibold mb-2">Client Message</h3>
-                                    <div className="bg-slate-50 p-4 rounded-md border text-sm whitespace-pre-wrap">
-                                      {selectedProject.message}
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            </SheetContent>
-                          )}
-                        </Sheet>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="live">
-            <div className="rounded-md border overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Reference</TableHead>
-                    <TableHead>Client</TableHead>
-                    <TableHead>Service</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {projects
-                    .filter(project => project.status === 'live')
-                    .map((project) => (
-                      <TableRow key={project.id} className={project.secured ? "bg-slate-50" : ""}>
-                        <TableCell className="font-medium">
-                          {project.project_reference || "-"}
-                        </TableCell>
-                        <TableCell>
-                          {project.first_name} {project.last_name}
-                        </TableCell>
-                        <TableCell>{project.service_type}</TableCell>
-                        <TableCell>{formatDate(project.created_at)}</TableCell>
-                        <TableCell className="text-right">
-                          <Sheet>
-                            <SheetTrigger asChild>
-                              <Button variant="ghost" size="sm" onClick={() => setSelectedProject(project)}>
-                                <Eye className="h-4 w-4" />
-                              </Button>
-                            </SheetTrigger>
-                          </Sheet>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="secured">
-            <div className="rounded-md border overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Reference</TableHead>
-                    <TableHead>Client</TableHead>
-                    <TableHead>Service</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {projects
-                    .filter(project => project.secured)
-                    .map((project) => (
-                      <TableRow key={project.id} className="bg-slate-50">
-                        <TableCell className="font-medium">
-                          {project.project_reference}
-                        </TableCell>
-                        <TableCell>
-                          {project.first_name} {project.last_name}
-                        </TableCell>
-                        <TableCell>{project.service_type}</TableCell>
-                        <TableCell>{formatDate(project.created_at)}</TableCell>
-                        <TableCell className="text-right">
-                          <Sheet>
-                            <SheetTrigger asChild>
-                              <Button variant="ghost" size="sm" onClick={() => setSelectedProject(project)}>
-                                <Eye className="h-4 w-4" />
-                              </Button>
-                            </SheetTrigger>
-                          </Sheet>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </div>
+                        {project.project_reference && (
+                          <span className="ml-2 text-sm text-gray-600">
+                            (Ref: {project.project_reference})
+                          </span>
+                        )}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {project.service_type} • {formatDate(project.created_at)}
+                      </p>
+                    </div>
+                    <Badge 
+                      className={
+                        project.status === 'live' ? 'bg-purple-500' :
+                        project.status === 'closed' ? 'bg-green-500' : 
+                        'bg-gray-500'
+                      }
+                    >
+                      {project.status}
+                    </Badge>
+                  </div>
+                  
+                  <div className="mt-2">
+                    <p className="text-sm">
+                      <span className="font-medium">Email:</span> {project.email}
+                    </p>
+                    <p className="text-sm">
+                      <span className="font-medium">Phone:</span> {project.phone}
+                    </p>
+                    {project.address && (
+                      <p className="text-sm">
+                        <span className="font-medium">Address:</span> {project.address}
+                      </p>
+                    )}
+                    {project.postcode && (
+                      <p className="text-sm">
+                        <span className="font-medium">Postcode:</span> {project.postcode}
+                      </p>
+                    )}
+                  </div>
+                  
+                  {project.message && (
+                    <div className="mt-3 p-2 bg-gray-50 rounded border text-sm">
+                      <p className="font-medium mb-1">Client Message:</p>
+                      <p className="whitespace-pre-wrap">{project.message}</p>
+                    </div>
+                  )}
+                  
+                  <div className="mt-4 flex space-x-2">
+                    <Button variant="outline" size="sm">View Details</Button>
+                    {project.status === 'live' && (
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          toast.info("This feature will be implemented soon");
+                        }}
+                      >
+                        Mark as Complete
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-8 text-gray-500">
+                <p>No projects found.</p>
+                {activeTab !== 'all' && (
+                  <Button 
+                    variant="link" 
+                    onClick={() => setActiveTab('all')}
+                    className="mt-2"
+                  >
+                    View all projects
+                  </Button>
+                )}
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </CardContent>
