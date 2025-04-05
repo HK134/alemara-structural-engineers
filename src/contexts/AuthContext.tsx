@@ -7,7 +7,9 @@ type AuthContextType = {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
+  engineerLogin: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
   logout: () => Promise<void>;
+  userRole: 'admin' | 'engineer' | 'client' | null;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -15,6 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [userRole, setUserRole] = useState<'admin' | 'engineer' | 'client' | null>(null);
 
   useEffect(() => {
     // Check if there's an existing session
@@ -22,6 +25,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         const { data } = await supabase.auth.getSession();
         setIsAuthenticated(!!data.session);
+        
+        // Check if the user is an engineer
+        if (data.session?.user) {
+          // Check for engineer by email
+          const { data: engineerData, error: engineerError } = await supabase
+            .from('engineers')
+            .select('*')
+            .eq('email', data.session.user.email)
+            .single();
+            
+          if (engineerData) {
+            setUserRole('engineer');
+          } else {
+            // Default to admin for now
+            setUserRole('admin');
+          }
+        }
       } catch (error) {
         console.error("Error checking session:", error);
       } finally {
@@ -33,6 +53,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       const isAuthed = !!session;
       setIsAuthenticated(isAuthed);
+      
+      // Determine user role when auth state changes
+      if (session?.user) {
+        // Check if this is an engineer
+        const checkUserRole = async () => {
+          const { data: engineerData } = await supabase
+            .from('engineers')
+            .select('*')
+            .eq('email', session.user.email)
+            .single();
+            
+          if (engineerData) {
+            setUserRole('engineer');
+          } else {
+            // Default to admin for now
+            setUserRole('admin');
+          }
+        };
+        
+        checkUserRole();
+      } else {
+        setUserRole(null);
+      }
+      
       setIsLoading(false);
       
       if (event === 'SIGNED_IN') {
@@ -68,9 +112,71 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const engineerLogin = async (email: string, password: string) => {
+    try {
+      // Check if the email exists in the engineers table
+      const { data: engineerData, error: engineerError } = await supabase
+        .from('engineers')
+        .select('*')
+        .eq('email', email)
+        .eq('active', true)
+        .single();
+        
+      if (engineerError || !engineerData) {
+        console.error("Engineer not found:", engineerError?.message);
+        return { success: false, message: 'Engineer account not found or inactive' };
+      }
+      
+      // Now try to authenticate
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        // If user doesn't exist in auth, we'll try to sign them up
+        if (error.message.includes('Invalid login credentials')) {
+          // Try to sign up the engineer with provided credentials
+          const { error: signUpError } = await supabase.auth.signUp({
+            email,
+            password,
+          });
+          
+          if (signUpError) {
+            console.error("Engineer signup error:", signUpError.message);
+            return { success: false, message: signUpError.message };
+          }
+          
+          // Try logging in again after signup
+          const { error: retryLoginError } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+          });
+          
+          if (retryLoginError) {
+            console.error("Engineer login retry error:", retryLoginError.message);
+            return { success: false, message: retryLoginError.message };
+          }
+          
+          return { success: true, message: 'Engineer account created and logged in successfully' };
+        }
+        
+        console.error("Engineer login error:", error.message);
+        return { success: false, message: error.message };
+      }
+      
+      setUserRole('engineer');
+      return { success: true, message: 'Engineer login successful' };
+    } catch (error) {
+      console.error('Engineer login error:', error);
+      return { success: false, message: 'An unexpected error occurred' };
+    }
+  };
+
   const logout = async () => {
     try {
       await supabase.auth.signOut();
+      setUserRole(null);
     } catch (error) {
       console.error('Logout error:', error);
       toast.error('Failed to log out');
@@ -78,7 +184,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, engineerLogin, logout, userRole }}>
       {children}
     </AuthContext.Provider>
   );

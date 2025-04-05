@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -89,7 +88,7 @@ const App = () => (
             
             {/* Protected admin routes with sidebar layout */}
             <Route path="/admin" element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['admin']}>
                 <AdminLayout />
               </ProtectedRoute>
             }>
@@ -101,7 +100,7 @@ const App = () => (
             
             {/* Protected client routes with sidebar layout */}
             <Route path="/client" element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['client']}>
                 <ClientLayout />
               </ProtectedRoute>
             }>
@@ -111,7 +110,7 @@ const App = () => (
             
             {/* Engineer routes with sidebar layout */}
             <Route path="/engineer" element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['engineer']}>
                 <EngineerLayout />
               </ProtectedRoute>
             }>

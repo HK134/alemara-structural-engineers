@@ -4,10 +4,11 @@ import { useAuth } from '@/contexts/AuthContext';
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
+  allowedRoles?: ('admin' | 'engineer' | 'client')[];
 };
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { isAuthenticated, isLoading } = useAuth();
+const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
+  const { isAuthenticated, isLoading, userRole } = useAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -20,8 +21,34 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!isAuthenticated) {
-    // Redirect to login page if not authenticated, saving the current location
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    // Determine which login page to redirect to based on the current path
+    let loginPath = "/login";
+    
+    if (location.pathname.startsWith("/engineer")) {
+      loginPath = "/engineer-login";
+    } else if (location.pathname.startsWith("/client")) {
+      loginPath = "/client-login";
+    } else if (location.pathname.startsWith("/admin")) {
+      loginPath = "/admin-login";
+    }
+    
+    // Redirect to appropriate login page, saving the current location
+    return <Navigate to={loginPath} state={{ from: location }} replace />;
+  }
+
+  // If roles are specified, check if the user has the required role
+  if (allowedRoles && userRole && !allowedRoles.includes(userRole)) {
+    // Redirect based on user's role
+    if (userRole === 'admin') {
+      return <Navigate to="/admin" replace />;
+    } else if (userRole === 'engineer') {
+      return <Navigate to="/engineer" replace />;
+    } else if (userRole === 'client') {
+      return <Navigate to="/client" replace />;
+    }
+    
+    // Fallback if something goes wrong
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
