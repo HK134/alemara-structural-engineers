@@ -160,16 +160,16 @@ const EngineerLogin = () => {
   const randomMessage = inspirationalMessages[Math.floor(Math.random() * inspirationalMessages.length)];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 p-4 flex items-center justify-center overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-800 to-purple-900 p-4 flex items-center justify-center overflow-hidden relative">
       {/* Enhanced background elements with more modern touch */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/20 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/4 animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-500/20 rounded-full filter blur-3xl translate-y-1/3 -translate-x-1/3 animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/20 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/4 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/20 rounded-full filter blur-3xl translate-y-1/3 -translate-x-1/3 animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-indigo-500/15 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
         
         {/* Additional modern elements */}
-        <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-purple-500/10 rounded-full filter blur-2xl animate-pulse" style={{animationDelay: '3s'}}></div>
-        <div className="absolute top-2/3 right-1/4 w-56 h-56 bg-cyan-500/15 rounded-full filter blur-2xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-violet-500/15 rounded-full filter blur-2xl animate-pulse" style={{animationDelay: '3s'}}></div>
+        <div className="absolute top-2/3 right-1/4 w-56 h-56 bg-blue-500/15 rounded-full filter blur-2xl animate-pulse" style={{animationDelay: '4s'}}></div>
         
         {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px] opacity-10"></div>
@@ -178,17 +178,17 @@ const EngineerLogin = () => {
       <div className="container max-w-md z-10">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-white mb-2 flex justify-center items-center gap-2">
-            <Rocket className="h-8 w-8 text-emerald-400" />
+            <Rocket className="h-8 w-8 text-indigo-300" />
             <span>Engineer Portal</span>
           </h1>
-          <p className="text-emerald-300 text-sm italic">{randomMessage}</p>
+          <p className="text-indigo-200 text-sm italic">{randomMessage}</p>
         </div>
         
         <Card className="backdrop-blur-lg bg-white/90 border-0 shadow-xl overflow-hidden relative">
           {/* Enhanced decorative elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-200 to-teal-300 rounded-bl-full opacity-20"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-200 to-emerald-200 rounded-tr-full opacity-20"></div>
-          <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-gradient-to-tl from-purple-200 to-emerald-200 rounded-tl-full opacity-10"></div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-200 to-purple-300 rounded-bl-full opacity-20"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-200 to-indigo-200 rounded-tr-full opacity-20"></div>
+          <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-gradient-to-tl from-violet-200 to-indigo-200 rounded-tl-full opacity-10"></div>
           
           <CardHeader className="space-y-1 text-center relative z-10">
             <div className="flex justify-center w-full">
@@ -205,12 +205,12 @@ const EngineerLogin = () => {
               Innovation begins with your expertise
             </CardDescription>
             
-            <div className="mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
+            <div className="mt-4 p-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-100">
               <div className="flex items-center gap-2 mb-1">
-                <Brain size={18} className="text-emerald-600" />
-                <span className="text-sm font-medium text-emerald-700">Engineer Excellence Hub</span>
+                <Brain size={18} className="text-indigo-600" />
+                <span className="text-sm font-medium text-indigo-700">Engineer Excellence Hub</span>
               </div>
-              <p className="text-xs text-emerald-600">
+              <p className="text-xs text-indigo-600">
                 "Bringing structural integrity to every project, and innovative solutions to every challenge."
               </p>
             </div>
@@ -231,20 +231,20 @@ const EngineerLogin = () => {
                       placeholder="your@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="border-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pl-3"
+                      className="border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 pl-3"
                       required
                     />
                     <Shield className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                   </div>
                 </div>
                 
-                <div className="mt-4 p-4 bg-gradient-to-r from-slate-50 to-blue-50 rounded-lg border border-slate-100">
+                <div className="mt-4 p-4 bg-gradient-to-r from-slate-50 to-indigo-50 rounded-lg border border-slate-100">
                   <div className="flex items-center gap-2 mb-2 text-slate-700">
-                    <Zap size={18} className="text-amber-500" />
+                    <Zap size={18} className="text-violet-500" />
                     <span className="text-sm font-medium">First time logging in?</span>
                   </div>
                   <p className="text-sm text-slate-600">
-                    Enter your engineering email and we'll send you secure login credentials.
+                    Enter your email and we'll send you secure login credentials.
                     Only authorized Alemara engineers can access this portal.
                   </p>
                 </div>
@@ -252,14 +252,14 @@ const EngineerLogin = () => {
               <CardFooter>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-lg py-5 shadow-lg relative overflow-hidden group"
                   disabled={isLoading}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {isLoading ? 'Processing...' : 'Request Access'}
                     {!isLoading && <Sparkles className="h-4 w-4 animate-pulse" />}
                   </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
               </CardFooter>
             </form>
@@ -294,16 +294,16 @@ const EngineerLogin = () => {
                       placeholder="Enter the password from your email"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="border-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pl-3"
+                      className="border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 pl-3"
                       required
                     />
                     <Shield className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                   </div>
                 </div>
                 
-                <div className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-lg border border-blue-100">
+                <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-violet-50 rounded-lg border border-indigo-100">
                   <div className="flex items-center gap-2 mb-2 text-slate-700">
-                    <Info size={18} className="text-blue-500" />
+                    <Info size={18} className="text-indigo-500" />
                     <span className="text-sm font-medium">Check your email</span>
                   </div>
                   <p className="text-sm text-slate-600">
@@ -315,19 +315,19 @@ const EngineerLogin = () => {
               <CardFooter className="flex-col space-y-2">
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-lg py-5 shadow-lg relative overflow-hidden group"
                   disabled={isLoading}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {isLoading ? 'Connecting...' : 'Access Engineering Tools'}
                     {!isLoading && <Sparkles className="h-4 w-4 animate-pulse" />}
                   </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
                 <Button 
                   type="button" 
                   variant="ghost"
-                  className="text-slate-600 hover:text-emerald-700"
+                  className="text-slate-600 hover:text-indigo-700"
                   onClick={() => setStep('email')}
                   disabled={isLoading}
                 >
