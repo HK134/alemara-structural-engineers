@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from 'sonner';
-import { Key, User, Info, Sparkles } from 'lucide-react';
+import { Key, User, Info, Sparkles, Lightbulb, Rocket, Brain } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { sendLoginCredentialsEmail, isAuthorizedEngineer } from '@/utils/engineerEmailService';
 
@@ -147,143 +147,179 @@ const EngineerLogin = () => {
     return <Navigate to="/admin" replace />;
   }
 
+  // Rotating inspirational messages for engineers
+  const inspirationalMessages = [
+    "Engineering dreams into reality, one calculation at a time",
+    "Where precision meets passion and innovation knows no bounds",
+    "Building tomorrow's world with today's brilliance",
+    "Your expertise transforms blueprints into landmarks",
+    "Turning complex challenges into elegant solutions"
+  ];
+  
+  // Select a random message
+  const randomMessage = inspirationalMessages[Math.floor(Math.random() * inspirationalMessages.length)];
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4">
-      {/* Top decorative shape */}
-      <div className="absolute top-0 right-0 w-full h-32 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-b-[30%] transform skew-y-1 z-0"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 p-4 flex items-center justify-center overflow-hidden relative">
+      {/* Quirky background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/20 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-500/20 rounded-full filter blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl"></div>
+      </div>
       
-      <Card className="w-full max-w-md bg-white/95 backdrop-blur-sm shadow-xl border-0 z-10">
-        <CardHeader className="space-y-1 text-center pb-0">
-          <div className="flex justify-center w-full">
-            <img 
-              src="/lovable-uploads/6680eb37-5f4f-4000-abea-88ccf4675de9.png" 
-              alt="Alemara Engineering" 
-              className="h-16 mb-2"
-              width="auto"
-              height="64"
-            />
-          </div>
-          <CardTitle className="text-2xl font-bold text-slate-800">Engineer Portal</CardTitle>
-          <CardDescription className="text-slate-600">
-            Access to excellence and innovation
-          </CardDescription>
-          
-          <div className="mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
-            <div className="flex items-center gap-2 mb-1">
-              <Sparkles size={18} className="text-emerald-600" />
-              <span className="text-sm font-medium text-emerald-700">Your expertise builds tomorrow's world</span>
-            </div>
-            <p className="text-xs text-emerald-600 italic">
-              "Excellence in every calculation, innovation in every design, and precision in every detail."
-            </p>
-          </div>
-        </CardHeader>
+      <div className="container max-w-md z-10">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-white mb-2 flex justify-center items-center gap-2">
+            <Rocket className="h-8 w-8 text-emerald-400" />
+            <span>Engineer Portal</span>
+          </h1>
+          <p className="text-emerald-300 text-sm italic">{randomMessage}</p>
+        </div>
         
-        {step === 'email' ? (
-          <form onSubmit={handleRequestAccess}>
-            <CardContent className="space-y-4 pt-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-800">Email</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
-                    required
-                  />
-                </div>
+        <Card className="backdrop-blur-lg bg-white/90 border-0 shadow-xl overflow-hidden relative">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-200 to-teal-300 rounded-bl-full opacity-20"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-200 to-emerald-200 rounded-tr-full opacity-20"></div>
+          
+          <CardHeader className="space-y-1 text-center relative z-10">
+            <div className="flex justify-center w-full">
+              <div className="relative bg-white/80 p-2 rounded-lg shadow-md mb-2 inline-block">
+                <img 
+                  src="/lovable-uploads/6680eb37-5f4f-4000-abea-88ccf4675de9.png" 
+                  alt="Alemara Engineering" 
+                  className="h-12 w-auto"
+                />
               </div>
-              
-              <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <div className="flex items-center gap-2 mb-2 text-slate-700">
-                  <Info size={18} />
-                  <span className="text-sm font-medium">First time login?</span>
-                </div>
-                <p className="text-sm text-slate-600">
-                  Enter your email address to request access. If you're authorized, 
-                  we'll send login details to your email address.
-                </p>
+            </div>
+            <CardTitle className="text-2xl font-bold text-slate-800">Engineer Access</CardTitle>
+            <CardDescription className="text-slate-600">
+              Innovation begins with your expertise
+            </CardDescription>
+            
+            <div className="mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
+              <div className="flex items-center gap-2 mb-1">
+                <Brain size={18} className="text-emerald-600" />
+                <span className="text-sm font-medium text-emerald-700">Engineer Excellence Hub</span>
               </div>
-            </CardContent>
-            <CardFooter>
-              <Button 
-                type="submit" 
-                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-6"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Processing...' : 'Request Access'}
-              </Button>
-            </CardFooter>
-          </form>
-        ) : (
-          <form onSubmit={handleLogin}>
-            <CardContent className="space-y-4 pt-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-800">Email</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
-                  <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    disabled
-                    className="pl-10 border-slate-200 bg-slate-50"
-                  />
+              <p className="text-xs text-emerald-600">
+                "Bringing structural integrity to every project, and innovative solutions to every challenge."
+              </p>
+            </div>
+          </CardHeader>
+          
+          {step === 'email' ? (
+            <form onSubmit={handleRequestAccess}>
+              <CardContent className="space-y-4 pt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-slate-800 flex items-center gap-2">
+                    <User size={14} />
+                    <span>Engineering Email</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="border-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pl-3"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-slate-800">Password</Label>
-                <div className="relative">
-                  <Key className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter the password sent to your email"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
-                    required
-                  />
+                
+                <div className="mt-4 p-4 bg-gradient-to-r from-slate-50 to-blue-50 rounded-lg border border-slate-100">
+                  <div className="flex items-center gap-2 mb-2 text-slate-700">
+                    <Lightbulb size={18} className="text-amber-500" />
+                    <span className="text-sm font-medium">First time logging in?</span>
+                  </div>
+                  <p className="text-sm text-slate-600">
+                    Enter your engineering email and we'll send you secure login credentials.
+                    Only authorized Alemara engineers can access this portal.
+                  </p>
                 </div>
-              </div>
-              
-              <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <div className="flex items-center gap-2 mb-2 text-slate-700">
-                  <Info size={18} />
-                  <span className="text-sm font-medium">Check your email</span>
+              </CardContent>
+              <CardFooter>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Processing...' : 'Request Access'}
+                </Button>
+              </CardFooter>
+            </form>
+          ) : (
+            <form onSubmit={handleLogin}>
+              <CardContent className="space-y-4 pt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-slate-800 flex items-center gap-2">
+                    <User size={14} />
+                    <span>Email</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      disabled
+                      className="border-slate-200 bg-slate-50 pl-3"
+                    />
+                  </div>
                 </div>
-                <p className="text-sm text-slate-600">
-                  We've sent your login credentials to {email}. 
-                  Please check your inbox and enter the password provided.
-                </p>
-              </div>
-            </CardContent>
-            <CardFooter className="flex-col space-y-2">
-              <Button 
-                type="submit" 
-                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-6"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Connecting...' : 'Access Engineer Tools'}
-              </Button>
-              <Button 
-                type="button" 
-                variant="ghost"
-                className="text-slate-600"
-                onClick={() => setStep('email')}
-                disabled={isLoading}
-              >
-                Back to email entry
-              </Button>
-            </CardFooter>
-          </form>
-        )}
-      </Card>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-slate-800 flex items-center gap-2">
+                    <Key size={14} />
+                    <span>Password</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Enter the password from your email"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="border-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pl-3"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-lg border border-blue-100">
+                  <div className="flex items-center gap-2 mb-2 text-slate-700">
+                    <Info size={18} className="text-blue-500" />
+                    <span className="text-sm font-medium">Check your email</span>
+                  </div>
+                  <p className="text-sm text-slate-600">
+                    We've sent your secure login credentials to {email}. 
+                    Please check your inbox and enter the password provided.
+                  </p>
+                </div>
+              </CardContent>
+              <CardFooter className="flex-col space-y-2">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Connecting...' : 'Access Engineering Tools'}
+                </Button>
+                <Button 
+                  type="button" 
+                  variant="ghost"
+                  className="text-slate-600 hover:text-emerald-700"
+                  onClick={() => setStep('email')}
+                  disabled={isLoading}
+                >
+                  Back to email entry
+                </Button>
+              </CardFooter>
+            </form>
+          )}
+        </Card>
+      </div>
     </div>
   );
 };
