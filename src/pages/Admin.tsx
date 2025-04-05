@@ -45,6 +45,7 @@ import { generateOneDriveFolder } from '@/utils/oneDriveIntegration';
 import { createTestSubmission } from '@/utils/testDatabaseConnection';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Link } from 'react-router-dom';
+import { assignEngineerToProject, unassignEngineerFromProject } from '@/utils/formSubmissionDB';
 
 type FormSubmission = {
   id: string;
@@ -77,6 +78,7 @@ type Engineer = {
 const statusColors: Record<string, string> = {
   'new': 'bg-blue-500',
   'contacted': 'bg-yellow-500',
+  'live': 'bg-purple-500',
   'closed': 'bg-green-500',
   'archived': 'bg-gray-500'
 };
@@ -228,94 +230,30 @@ const Admin = () => {
     }
   };
 
-  const toggleSecuredStatus = async (id: string, currentStatus: boolean) => {
-    try {
-      let updateData: { secured: boolean; project_reference?: string | null } = {
-        secured: !currentStatus
-      };
-      
-      if (!currentStatus) {
-        const { data: refData, error: refError } = await supabase
-          .rpc('generate_project_reference');
-          
-        if (refError) throw refError;
-        
-        updateData.project_reference = refData;
-        
-        const customerName = selectedSubmission ? 
-          `${selectedSubmission.first_name} ${selectedSubmission.last_name}` : 
-          'Unknown Customer';
-        
-        try {
-          await generateOneDriveFolder(updateData.project_reference as string, customerName);
-          toast.success(`OneDrive folder created for project ${updateData.project_reference}`);
-        } catch (folderError) {
-          console.error("Failed to create OneDrive folder:", folderError);
-          toast.error("Project secured, but OneDrive folder creation failed");
-        }
-      } else {
-        updateData.project_reference = null;
-      }
-      
-      const { error } = await supabase
-        .from('form_submissions')
-        .update(updateData)
-        .eq('id', id);
-        
-      if (error) throw error;
-      
-      toast.success(`Project ${!currentStatus ? 'secured' : 'unsecured'} successfully`);
-      refetch();
-      
-      if (selectedSubmission && selectedSubmission.id === id) {
-        setSelectedSubmission({
-          ...selectedSubmission, 
-          secured: !currentStatus,
-          project_reference: !currentStatus ? updateData.project_reference : null
-        });
-      }
-    } catch (error) {
-      console.error('Error toggling secured status:', error);
-      toast.error('Failed to update secured status');
-    }
-  };
-
-  const handleCreateTestSubmission = async () => {
-    try {
-      toast.info("Creating test submission...");
-      const result = await createTestSubmission();
-      
-      if (result.success) {
-        toast.success("Test submission created successfully!");
-        refetch();
-      } else {
-        toast.error("Failed to create test submission");
-        console.error("Test submission error:", result.error);
-      }
-    } catch (error) {
-      console.error("Error creating test submission:", error);
-      toast.error("Error creating test submission");
-    }
-  };
-
   const assignEngineer = async (projectId: string, engineerId: string | null) => {
     try {
-      const { error } = await supabase
-        .from('form_submissions')
-        .update({ engineer_id: engineerId })
-        .eq('id', projectId);
-        
-      if (error) throw error;
+      if (engineerId) {
+        const result = await assignEngineerToProject(projectId, engineerId);
+        if (result.error) throw result.error;
+        toast.success('Engineer assigned to project. Status set to LIVE');
+      } else {
+        const result = await unassignEngineerFromProject(projectId);
+        if (result.error) throw result.error;
+        toast.success('Engineer unassigned from project. Status set to CONTACTED');
+      }
       
-      toast.success(engineerId ? 'Engineer assigned to project' : 'Engineer unassigned from project');
       refetch();
       
       if (selectedSubmission && selectedSubmission.id === projectId) {
-        setSelectedSubmission({...selectedSubmission, engineer_id: engineerId});
+        setSelectedSubmission({
+          ...selectedSubmission, 
+          engineer_id: engineerId,
+          status: engineerId ? 'live' : 'contacted'
+        });
       }
     } catch (error) {
-      console.error('Error assigning engineer:', error);
-      toast.error('Failed to assign engineer');
+      console.error('Error managing engineer assignment:', error);
+      toast.error('Failed to update engineer assignment');
     }
   };
 
@@ -584,7 +522,7 @@ const Admin = () => {
                                                   <h3 className="text-sm font-medium text-gray-500">Status</h3>
                                                   <div className="mt-2">
                                                     <div className="flex flex-wrap gap-2">
-                                                      {['new', 'contacted', 'closed', 'archived'].map((status) => (
+                                                      {['new', 'contacted', 'live', 'closed', 'archived'].map((status) => (
                                                         <Button
                                                           key={status}
                                                           variant={selectedSubmission.status === status ? "default" : "outline"}

@@ -46,6 +46,102 @@ export const saveFormSubmissionToDatabase = async (formData: any, formType: stri
 };
 
 /**
+ * Assigns an engineer to a project and updates its status to 'live'
+ * 
+ * @param projectId - The UUID of the project to assign
+ * @param engineerId - The UUID of the engineer to assign
+ * @returns Promise with the result of the operation
+ */
+export const assignEngineerToProject = async (projectId: string, engineerId: string) => {
+  console.log(`Assigning engineer ${engineerId} to project ${projectId}`);
+  
+  try {
+    // Update the project with the engineer ID and set status to 'live'
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .update({
+        engineer_id: engineerId,
+        status: 'live' // Automatically set status to 'live' when an engineer is assigned
+      })
+      .eq('id', projectId)
+      .select();
+    
+    if (error) {
+      console.error("Error assigning engineer to project:", error);
+      return { success: false, error };
+    }
+    
+    console.log("Engineer assigned to project successfully:", data);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Exception when assigning engineer:", error);
+    return { success: false, error };
+  }
+};
+
+/**
+ * Unassigns an engineer from a project and reverts status to 'contacted'
+ * 
+ * @param projectId - The UUID of the project 
+ * @returns Promise with the result of the operation
+ */
+export const unassignEngineerFromProject = async (projectId: string) => {
+  console.log(`Unassigning engineer from project ${projectId}`);
+  
+  try {
+    // Update the project to remove engineer ID and set status back to 'contacted'
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .update({
+        engineer_id: null,
+        status: 'contacted' // Revert to 'contacted' status when engineer is unassigned
+      })
+      .eq('id', projectId)
+      .select();
+    
+    if (error) {
+      console.error("Error unassigning engineer from project:", error);
+      return { success: false, error };
+    }
+    
+    console.log("Engineer unassigned from project successfully:", data);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Exception when unassigning engineer:", error);
+    return { success: false, error };
+  }
+};
+
+/**
+ * Gets all projects assigned to a specific engineer
+ * 
+ * @param engineerId - The UUID of the engineer
+ * @returns Promise with an array of assigned projects
+ */
+export const getEngineerProjects = async (engineerId: string) => {
+  console.log(`Fetching projects for engineer ${engineerId}`);
+  
+  try {
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .eq('engineer_id', engineerId)
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error("Error fetching engineer projects:", error);
+      return { success: false, error };
+    }
+    
+    console.log(`Found ${data.length} projects assigned to engineer`);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Exception when fetching engineer projects:", error);
+    return { success: false, error };
+  }
+};
+
+/**
  * Marks a project as completed in the database
  * This sets up the project for future archiving after 30 days
  * 
