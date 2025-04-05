@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from 'sonner';
-import { Key, User, Info, Sparkles, Lightbulb, Rocket, Brain } from 'lucide-react';
+import { Key, User, Info, Sparkles, Lightbulb, Rocket, Brain, Shield, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { sendLoginCredentialsEmail, isAuthorizedEngineer } from '@/utils/engineerEmailService';
 
@@ -161,11 +161,18 @@ const EngineerLogin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 p-4 flex items-center justify-center overflow-hidden relative">
-      {/* Quirky background elements */}
+      {/* Enhanced background elements with more modern touch */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/20 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/4"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-500/20 rounded-full filter blur-3xl translate-y-1/3 -translate-x-1/3"></div>
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/20 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/4 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-500/20 rounded-full filter blur-3xl translate-y-1/3 -translate-x-1/3 animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        
+        {/* Additional modern elements */}
+        <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-purple-500/10 rounded-full filter blur-2xl animate-pulse" style={{animationDelay: '3s'}}></div>
+        <div className="absolute top-2/3 right-1/4 w-56 h-56 bg-cyan-500/15 rounded-full filter blur-2xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        
+        {/* Subtle grid pattern overlay */}
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px] opacity-10"></div>
       </div>
       
       <div className="container max-w-md z-10">
@@ -178,9 +185,10 @@ const EngineerLogin = () => {
         </div>
         
         <Card className="backdrop-blur-lg bg-white/90 border-0 shadow-xl overflow-hidden relative">
-          {/* Decorative elements */}
+          {/* Enhanced decorative elements */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-200 to-teal-300 rounded-bl-full opacity-20"></div>
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-200 to-emerald-200 rounded-tr-full opacity-20"></div>
+          <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-gradient-to-tl from-purple-200 to-emerald-200 rounded-tl-full opacity-10"></div>
           
           <CardHeader className="space-y-1 text-center relative z-10">
             <div className="flex justify-center w-full">
@@ -192,7 +200,7 @@ const EngineerLogin = () => {
                 />
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold text-slate-800">Engineer Access</CardTitle>
+            <CardTitle className="text-2xl font-bold text-slate-800 mt-2">Engineer Access</CardTitle>
             <CardDescription className="text-slate-600">
               Innovation begins with your expertise
             </CardDescription>
@@ -214,7 +222,7 @@ const EngineerLogin = () => {
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-slate-800 flex items-center gap-2">
                     <User size={14} />
-                    <span>Engineering Email</span>
+                    <span>Email</span>
                   </Label>
                   <div className="relative">
                     <Input
@@ -226,12 +234,13 @@ const EngineerLogin = () => {
                       className="border-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pl-3"
                       required
                     />
+                    <Shield className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                   </div>
                 </div>
                 
                 <div className="mt-4 p-4 bg-gradient-to-r from-slate-50 to-blue-50 rounded-lg border border-slate-100">
                   <div className="flex items-center gap-2 mb-2 text-slate-700">
-                    <Lightbulb size={18} className="text-amber-500" />
+                    <Zap size={18} className="text-amber-500" />
                     <span className="text-sm font-medium">First time logging in?</span>
                   </div>
                   <p className="text-sm text-slate-600">
@@ -243,10 +252,14 @@ const EngineerLogin = () => {
               <CardFooter>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg"
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg relative overflow-hidden group"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Processing...' : 'Request Access'}
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {isLoading ? 'Processing...' : 'Request Access'}
+                    {!isLoading && <Sparkles className="h-4 w-4 animate-pulse" />}
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
               </CardFooter>
             </form>
@@ -284,6 +297,7 @@ const EngineerLogin = () => {
                       className="border-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pl-3"
                       required
                     />
+                    <Shield className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                   </div>
                 </div>
                 
@@ -301,10 +315,14 @@ const EngineerLogin = () => {
               <CardFooter className="flex-col space-y-2">
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg"
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-5 shadow-lg relative overflow-hidden group"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Connecting...' : 'Access Engineering Tools'}
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {isLoading ? 'Connecting...' : 'Access Engineering Tools'}
+                    {!isLoading && <Sparkles className="h-4 w-4 animate-pulse" />}
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
                 <Button 
                   type="button" 
