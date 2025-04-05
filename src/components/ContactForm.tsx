@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -26,7 +25,6 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
-  // Update form schema to reflect the new structure
   const formSchema = z.object({
     firstName: z.string().min(2, "Name is required"),
     email: z.string().email("Invalid email address"),
@@ -54,10 +52,9 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Submit the form data to our email handler
       const result = await submitFormToEmail({
         ...data,
-        lastName: "", // We still pass an empty lastName for backend compatibility
+        lastName: "",
         message: data.message || '',
       }, 'contact');
 
@@ -74,7 +71,6 @@ const ContactForm = () => {
           message: '',
         });
         
-        // Reset success state after 5 seconds
         setTimeout(() => {
           setIsSuccess(false);
         }, 5000);
@@ -123,7 +119,6 @@ const ContactForm = () => {
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Name Field */}
                   <FormField
                     control={form.control}
                     name="firstName"
@@ -138,7 +133,6 @@ const ContactForm = () => {
                     )}
                   />
                   
-                  {/* Email Field */}
                   <FormField
                     control={form.control}
                     name="email"
@@ -155,7 +149,6 @@ const ContactForm = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Phone Field */}
                   <FormField
                     control={form.control}
                     name="phone"
@@ -170,7 +163,6 @@ const ContactForm = () => {
                     )}
                   />
                   
-                  {/* Service Type Field */}
                   <FormField
                     control={form.control}
                     name="serviceType"
@@ -201,7 +193,6 @@ const ContactForm = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Address Field */}
                   <FormField
                     control={form.control}
                     name="address"
@@ -216,7 +207,6 @@ const ContactForm = () => {
                     )}
                   />
                   
-                  {/* Postcode Field */}
                   <FormField
                     control={form.control}
                     name="postcode"
@@ -232,7 +222,6 @@ const ContactForm = () => {
                   />
                 </div>
 
-                {/* Message Field */}
                 <FormField
                   control={form.control}
                   name="message"

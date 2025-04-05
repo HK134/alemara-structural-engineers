@@ -304,14 +304,14 @@ const FormSubmissionsTable: React.FC<FormSubmissionsTableProps> = ({
                                 <div className="flex flex-col">
                                   <h3 className="text-sm font-medium text-gray-500 mb-2">Assigned Engineer</h3>
                                   <Select
-                                    value={selectedSubmission.engineer_id || ''}
-                                    onValueChange={(value) => assignEngineer(selectedSubmission.id, value || null)}
+                                    value={selectedSubmission.engineer_id || "unassigned"}
+                                    onValueChange={(value) => assignEngineer(selectedSubmission.id, value === "unassigned" ? null : value)}
                                   >
                                     <SelectTrigger className="w-full">
                                       <SelectValue placeholder="Select an engineer" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                      <SelectItem value="">Not Assigned</SelectItem>
+                                      <SelectItem value="unassigned">Not Assigned</SelectItem>
                                       {engineers?.map((engineer) => (
                                         <SelectItem key={engineer.id} value={engineer.id}>
                                           {engineer.name}
