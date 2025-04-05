@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -29,7 +28,8 @@ import {
   Book,
   FileCheck,
   Heart,
-  Users
+  Users,
+  Sparkles
 } from "lucide-react";
 
 export const EngineerSidebar = () => {
@@ -61,6 +61,12 @@ export const EngineerSidebar = () => {
               Engineering Portal
             </div>
             <SidebarTrigger />
+          </div>
+          <div className="mt-3 text-xs text-center px-2 py-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-md border border-emerald-100">
+            <div className="flex items-center justify-center gap-1 text-emerald-700">
+              <Sparkles size={14} className="text-emerald-500" />
+              <span className="font-medium">Building tomorrow with precision today</span>
+            </div>
           </div>
         </SidebarHeader>
         

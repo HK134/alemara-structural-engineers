@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from 'sonner';
-import { Key, User, Info } from 'lucide-react';
+import { Key, User, Info, Sparkles } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 const EngineerLogin = () => {
@@ -90,57 +90,74 @@ const EngineerLogin = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 p-4">
-      <div className="absolute top-0 right-0 w-full h-32 bg-purple-600 rounded-b-[30%] transform skew-y-2"></div>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4">
+      {/* Top decorative shape */}
+      <div className="absolute top-0 right-0 w-full h-32 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-b-[30%] transform skew-y-1 z-0"></div>
       
       <Card className="w-full max-w-md bg-white/95 backdrop-blur-sm shadow-xl border-0 z-10">
-        <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-4 w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center">
-            <User className="h-8 w-8 text-white" />
+        <CardHeader className="space-y-1 text-center pb-0">
+          <div className="flex justify-center w-full">
+            <img 
+              src="/lovable-uploads/6680eb37-5f4f-4000-abea-88ccf4675de9.png" 
+              alt="Alemara Engineering" 
+              className="h-16 mb-2"
+              width="auto"
+              height="64"
+            />
           </div>
-          <CardTitle className="text-2xl font-bold text-purple-800">Engineer Portal</CardTitle>
-          <CardDescription className="text-purple-600">
-            Welcome to your engineering workspace
+          <CardTitle className="text-2xl font-bold text-slate-800">Engineer Portal</CardTitle>
+          <CardDescription className="text-slate-600">
+            Access to excellence and innovation
           </CardDescription>
+          
+          <div className="mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-100">
+            <div className="flex items-center gap-2 mb-1">
+              <Sparkles size={18} className="text-emerald-600" />
+              <span className="text-sm font-medium text-emerald-700">Your expertise builds tomorrow's world</span>
+            </div>
+            <p className="text-xs text-emerald-600 italic">
+              "Excellence in every calculation, innovation in every design, and precision in every detail."
+            </p>
+          </div>
         </CardHeader>
         
         <form onSubmit={handleLogin}>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 pt-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-purple-800">Email</Label>
+              <Label htmlFor="email" className="text-slate-800">Email</Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-5 w-5 text-purple-500" />
+                <User className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
                 <Input
                   id="email"
                   type="email"
                   placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 border-purple-200 focus:border-purple-500"
+                  className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
                   required
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-purple-800">Password</Label>
+              <Label htmlFor="password" className="text-slate-800">Password</Label>
               <div className="relative">
-                <Key className="absolute left-3 top-3 h-5 w-5 text-purple-500" />
+                <Key className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
                 <Input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 border-purple-200 focus:border-purple-500"
+                  className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
                   required
                 />
               </div>
             </div>
             
             {engineersList.length > 0 && (
-              <div className="mt-4 p-4 bg-indigo-50 rounded-lg border border-indigo-100">
-                <div className="flex items-center gap-2 mb-2 text-indigo-700">
+              <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                <div className="flex items-center gap-2 mb-2 text-slate-700">
                   <Info size={18} />
-                  <span className="text-sm font-medium">Available Demo Engineers</span>
+                  <span className="text-sm font-medium">Available Engineers</span>
                 </div>
                 <div className="grid grid-cols-1 gap-2">
                   {engineersList.map((engineer) => (
@@ -149,17 +166,17 @@ const EngineerLogin = () => {
                       type="button"
                       variant="outline" 
                       size="sm"
-                      className="justify-start text-left text-indigo-700 h-auto py-2"
+                      className="justify-start text-left text-slate-700 h-auto py-2"
                       onClick={() => selectEngineer(engineer.email, engineer.name)}
                     >
                       <div>
                         <div className="font-medium">{engineer.name}</div>
-                        <div className="text-xs text-indigo-500">{engineer.email}</div>
+                        <div className="text-xs text-slate-500">{engineer.email}</div>
                       </div>
                     </Button>
                   ))}
                 </div>
-                <p className="mt-2 text-xs text-indigo-500">
+                <p className="mt-2 text-xs text-slate-500">
                   Click on an engineer to auto-fill credentials. For the first login, the system will automatically create an account.
                 </p>
               </div>
@@ -168,7 +185,7 @@ const EngineerLogin = () => {
           <CardFooter>
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-lg py-6"
+              className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-6"
               disabled={isLoading}
             >
               {isLoading ? 'Connecting...' : 'Access Engineer Tools'}
