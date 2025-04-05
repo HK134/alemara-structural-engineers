@@ -9,11 +9,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from 'sonner';
 import { Key, User, Info, Sparkles } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { sendLoginCredentialsEmail, isAuthorizedEngineer } from '@/utils/engineerEmailService';
 
 const EngineerLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [step, setStep] = useState<'email' | 'password'>('email');
   const [engineersList, setEngineersList] = useState<{name: string, email: string}[]>([]);
   const { isAuthenticated, engineerLogin, userRole } = useAuth();
   const location = useLocation();
@@ -22,7 +24,7 @@ const EngineerLogin = () => {
   const from = location.state?.from?.pathname || '/engineer';
 
   useEffect(() => {
-    // Fetch engineers for the demo environment
+    // Fetch engineers for the admin view only
     const fetchEngineers = async () => {
       const { data, error } = await supabase
         .from('engineers')
@@ -42,6 +44,67 @@ const EngineerLogin = () => {
     fetchEngineers();
   }, []);
 
+  // Function to create a password for the engineer
+  const generatePassword = (name: string) => {
+    const reversedName = name.toLowerCase().split('').reverse().join('');
+    const randomNumbers = Math.floor(Math.random() * 900 + 100); // 3 random digits (100-999)
+    return `${reversedName}${randomNumbers}`;
+  };
+
+  const handleRequestAccess = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast.error('Please enter your email address');
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    try {
+      // Check if this is an authorized engineer
+      const isAuthorized = await isAuthorizedEngineer(email);
+      
+      if (!isAuthorized) {
+        toast.error('Access denied. You are not authorized to access the engineer portal.');
+        setIsLoading(false);
+        return;
+      }
+      
+      // Get engineer's name to generate password
+      const { data: engineerData } = await supabase
+        .from('engineers')
+        .select('name')
+        .eq('email', email)
+        .single();
+      
+      if (!engineerData) {
+        toast.error('Error retrieving engineer information');
+        setIsLoading(false);
+        return;
+      }
+      
+      // Generate password
+      const generatedPassword = generatePassword(engineerData.name);
+      
+      // Send login credentials via email
+      const emailSent = await sendLoginCredentialsEmail(email, generatedPassword);
+      
+      if (emailSent) {
+        toast.success('Login credentials have been sent to your email address');
+        setPassword(generatedPassword); // Set the password in state but don't show to user
+        setStep('password');
+      } else {
+        toast.error('Failed to send login credentials. Please try again or contact support.');
+      }
+    } catch (error) {
+      console.error('Error in request access:', error);
+      toast.error('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -53,6 +116,15 @@ const EngineerLogin = () => {
     setIsLoading(true);
     
     try {
+      // Verify this is an authorized engineer before login attempt
+      const isAuthorized = await isAuthorizedEngineer(email);
+      
+      if (!isAuthorized) {
+        toast.error('Access denied. You are not authorized to access the engineer portal.');
+        setIsLoading(false);
+        return;
+      }
+      
       const result = await engineerLogin(email, password);
       
       if (!result.success) {
@@ -63,20 +135,6 @@ const EngineerLogin = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  // Function to create a demo password for the selected engineer
-  const generatePassword = (name: string) => {
-    const reversedName = name.toLowerCase().split('').reverse().join('');
-    const randomNumbers = Math.floor(Math.random() * 900 + 100); // 3 random digits (100-999)
-    return `${reversedName}${randomNumbers}`;
-  };
-
-  const selectEngineer = (engineerEmail: string, engineerName: string) => {
-    setEmail(engineerEmail);
-    const generatedPassword = generatePassword(engineerName);
-    setPassword(generatedPassword);
-    toast.info(`For demo: Password set to "${generatedPassword}"`);
   };
 
   // If already authenticated as an engineer, redirect to the engineer dashboard
@@ -121,77 +179,110 @@ const EngineerLogin = () => {
           </div>
         </CardHeader>
         
-        <form onSubmit={handleLogin}>
-          <CardContent className="space-y-4 pt-4">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-800">Email</Label>
-              <div className="relative">
-                <User className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
-                  required
-                />
+        {step === 'email' ? (
+          <form onSubmit={handleRequestAccess}>
+            <CardContent className="space-y-4 pt-4">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-slate-800">Email</Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-800">Password</Label>
-              <div className="relative">
-                <Key className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
-                  required
-                />
-              </div>
-            </div>
-            
-            {engineersList.length > 0 && (
+              
               <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
                 <div className="flex items-center gap-2 mb-2 text-slate-700">
                   <Info size={18} />
-                  <span className="text-sm font-medium">Available Engineers</span>
+                  <span className="text-sm font-medium">First time login?</span>
                 </div>
-                <div className="grid grid-cols-1 gap-2">
-                  {engineersList.map((engineer) => (
-                    <Button 
-                      key={engineer.email}
-                      type="button"
-                      variant="outline" 
-                      size="sm"
-                      className="justify-start text-left text-slate-700 h-auto py-2"
-                      onClick={() => selectEngineer(engineer.email, engineer.name)}
-                    >
-                      <div>
-                        <div className="font-medium">{engineer.name}</div>
-                        <div className="text-xs text-slate-500">{engineer.email}</div>
-                      </div>
-                    </Button>
-                  ))}
-                </div>
-                <p className="mt-2 text-xs text-slate-500">
-                  Click on an engineer to auto-fill credentials. For the first login, the system will automatically create an account.
+                <p className="text-sm text-slate-600">
+                  Enter your email address to request access. If you're authorized, 
+                  we'll send login details to your email address.
                 </p>
               </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button 
-              type="submit" 
-              className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-6"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Connecting...' : 'Access Engineer Tools'}
-            </Button>
-          </CardFooter>
-        </form>
+            </CardContent>
+            <CardFooter>
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-6"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Processing...' : 'Request Access'}
+              </Button>
+            </CardFooter>
+          </form>
+        ) : (
+          <form onSubmit={handleLogin}>
+            <CardContent className="space-y-4 pt-4">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-slate-800">Email</Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    disabled
+                    className="pl-10 border-slate-200 bg-slate-50"
+                  />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-slate-800">Password</Label>
+                <div className="relative">
+                  <Key className="absolute left-3 top-3 h-5 w-5 text-slate-500" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter the password sent to your email"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                <div className="flex items-center gap-2 mb-2 text-slate-700">
+                  <Info size={18} />
+                  <span className="text-sm font-medium">Check your email</span>
+                </div>
+                <p className="text-sm text-slate-600">
+                  We've sent your login credentials to {email}. 
+                  Please check your inbox and enter the password provided.
+                </p>
+              </div>
+            </CardContent>
+            <CardFooter className="flex-col space-y-2">
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-lg py-6"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Connecting...' : 'Access Engineer Tools'}
+              </Button>
+              <Button 
+                type="button" 
+                variant="ghost"
+                className="text-slate-600"
+                onClick={() => setStep('email')}
+                disabled={isLoading}
+              >
+                Back to email entry
+              </Button>
+            </CardFooter>
+          </form>
+        )}
       </Card>
     </div>
   );
