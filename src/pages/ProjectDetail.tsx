@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ServiceCTA from '@/components/services/ServiceCTA';
-import { portfolioItems } from '@/components/PortfolioData';
+import { portfolioItems } from '@/data/projects';
 import ProjectInfo from '@/components/project/ProjectInfo';
 import ProjectGallery from '@/components/project/ProjectGallery';
 import ProjectNavigation from '@/components/project/ProjectNavigation';

@@ -1,19 +1,14 @@
-
 import React from 'react';
 import { ArrowRight, Award, Shield, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { portfolioItems } from './PortfolioData';
+import { getFeaturedProjects } from '@/data/projects';
 import PortfolioCard from './PortfolioCard';
 import { Badge } from "@/components/ui/badge";
 
 const Portfolio = () => {
-  // Get three recent projects for preview
-  const previewProjects = [
-    portfolioItems.find(item => item.id === 15), // Cheval Place
-    portfolioItems.find(item => item.id === 14), // Acoustic Club
-    portfolioItems.find(item => item.id === 13), // Warrington Crescent
-  ].filter(Boolean);
+  // Get featured projects for preview
+  const previewProjects = getFeaturedProjects();
 
   return (
     <section id="portfolio" className="py-20 bg-gray-50">

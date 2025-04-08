@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building, Home, HardHat, Shield, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import PortfolioCard from '@/components/PortfolioCard';
-import { portfolioItems } from '@/components/PortfolioData';
+import { portfolioItems } from '@/data/projects';
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import { Badge } from "@/components/ui/badge";
