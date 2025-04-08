@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProjectInfoProps {
   project: {
@@ -20,6 +21,7 @@ interface ProjectInfoProps {
 
 const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
@@ -32,27 +34,39 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       {/* Main project image with loading state */}
-      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-100 min-h-[400px]">
-        {!imageLoaded && (
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-100 min-h-[400px] flex items-center justify-center">
+        {!imageLoaded && !imageError && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 border-4 border-gray-200 border-t-[#ea384c] rounded-full animate-spin"></div>
           </div>
         )}
-        <img 
-          src={displayImage}
-          alt={imageAlt} 
-          className={`w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          width="800"
-          height="600"
-          loading="eager"
-          onLoad={() => setImageLoaded(true)}
-          onError={(e) => {
-            console.error('Image failed to load:', displayImage);
-            setImageLoaded(true);
-            const target = e.target as HTMLImageElement;
-            target.src = '/placeholder.svg';
-          }}
-        />
+        
+        {imageError ? (
+          <div className="flex flex-col items-center justify-center p-6 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <p>Image could not be loaded</p>
+          </div>
+        ) : (
+          <img 
+            src={displayImage}
+            alt={imageAlt} 
+            className={`w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            width="800"
+            height="600"
+            loading="eager"
+            onLoad={() => {
+              setImageLoaded(true);
+              setImageError(false);
+            }}
+            onError={() => {
+              console.error('Image failed to load:', displayImage);
+              setImageLoaded(true);
+              setImageError(true);
+            }}
+          />
+        )}
       </div>
       
       {/* Project info */}
