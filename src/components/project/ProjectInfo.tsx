@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ProjectInfoProps {
@@ -19,6 +19,8 @@ interface ProjectInfoProps {
 }
 
 const ProjectInfo = ({ project }: ProjectInfoProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
   
@@ -29,15 +31,27 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-      {/* Main project image - now static with fixed dimensions and alt text */}
-      <div>
+      {/* Main project image with loading state */}
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-100 min-h-[400px]">
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-gray-200 border-t-[#ea384c] rounded-full animate-spin"></div>
+          </div>
+        )}
         <img 
           src={displayImage}
           alt={imageAlt} 
-          className="w-full h-auto rounded-lg shadow-lg"
+          className={`w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           width="800"
           height="600"
           loading="eager"
+          onLoad={() => setImageLoaded(true)}
+          onError={(e) => {
+            console.error('Image failed to load:', displayImage);
+            setImageLoaded(true);
+            const target = e.target as HTMLImageElement;
+            target.src = '/placeholder.svg';
+          }}
         />
       </div>
       
