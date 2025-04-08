@@ -33,7 +33,10 @@ const Index = () => {
             <Portfolio />
             <CommonQuestions />
             <AccreditationSection />
-            <Testimonials />
+          </Suspense>
+          {/* Testimonials is directly imported, so it's outside the Suspense boundary */}
+          <Testimonials />
+          <Suspense fallback={<div className="w-full h-20 bg-gray-100"></div>}>
             <FAQ />
             <ContactForm />
             <CTA />
