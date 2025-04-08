@@ -5,23 +5,25 @@ export const residentialProjects = [
     id: 15, // Cheval Place
     title: 'Cheval Place - Knightsbridge',
     type: 'residential',
-    image: '/lovable-uploads/2c419267-6d4a-4ea5-9057-df5c33e2f60f.png', // Using the exterior facade as main image
+    image: '/lovable-uploads/f6d84c9e-7694-46f3-a12c-d624fe3416aa.png', // Main facade image
     description: 'Located in the heart of London, on the site of Count Rumford\'s Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.',
     completion: 'January 2024',
     architect: 'Morgan Studio Architects',
     location: 'Knightsbridge, London',
     images: [
-      '/lovable-uploads/2c419267-6d4a-4ea5-9057-df5c33e2f60f.png', // Exterior facade
-      '/lovable-uploads/3070502b-f302-47ac-9ba5-cff43a64f790.png', // Dining area with stairs
-      '/lovable-uploads/511ace14-bc82-4a97-aac2-f997aea62eec.png', // Bedroom with windows
-      '/lovable-uploads/f764ff1d-766e-4150-9618-314bb462ec8c.png', // Bathroom with marble
-      '/lovable-uploads/1271f5ea-1a3b-421c-94e2-b712ff389909.png'  // Outdoor terrace
+      '/lovable-uploads/f6d84c9e-7694-46f3-a12c-d624fe3416aa.png', // Exterior facade
+      '/lovable-uploads/3a8e1d31-fb64-491a-8006-16e46c4fd03b.png', // Dining area with stairs
+      '/lovable-uploads/e8061deb-281a-400c-b558-f6994a4636a3.png', // Luxury bathroom
+      '/lovable-uploads/f6d84c9e-7694-46f3-a12c-d624fe3416aa.png', // Duplicate facade for consistent display
+      '/lovable-uploads/6e110fed-88ab-4761-81ca-5ae7392aa099.png', // Contemporary bedroom
+      '/lovable-uploads/7a4b6a35-ca4b-433a-a436-5ffed55c56c2.png'  // Outdoor terrace
     ],
     imageAlt: [
       'Historic Knightsbridge mews property with brick façade, featuring elegant gray door and multiple windows with red brick detail',
       'Modern dining area with wooden table, white chairs, black kitchen and elegant staircase with iron railings',
-      'Contemporary bedroom with large windows, wooden paneling, and built-in wood cabinetry',
       'Luxury bathroom with black marble walls, wooden vanity, and dual vessel sinks',
+      'Front view of the Cheval Place Knightsbridge property showing the historic mews facade',
+      'Contemporary bedroom with sage green walls, large windows, and wooden headboard with built-in side tables',
       'Private terrace with wooden paneling, comfortable outdoor seating and parasol'
     ],
     fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
