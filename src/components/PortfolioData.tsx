@@ -1,6 +1,36 @@
 
 export const portfolioItems = [
   {
+    id: 15, // New ID for Cheval Place
+    title: 'Cheval Place - Knightsbridge',
+    type: 'residential',
+    image: '/lovable-uploads/7ef4d23b-1c6e-4ac8-9708-c7f0bdd5baae.png',
+    description: 'Located in the heart of London, on the site of Count Rumford\'s Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.',
+    completion: 'January 2024',
+    architect: 'Morgan Studio Architects',
+    location: 'Knightsbridge, London',
+    images: [
+      '/lovable-uploads/7ef4d23b-1c6e-4ac8-9708-c7f0bdd5baae.png'
+    ],
+    imageAlt: [
+      'Historic Knightsbridge mews property with brick facade, modern windows, and rooftop terrace'
+    ],
+    fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
+
+The proposal aims to preserve the character of the historic mews property while providing a modern aesthetic which pays homage to the original form. Additionally, a discreet contemporary extension ensures that the proposed duplex apartments enjoy high-quality, spacious city centre living and benefit from private outdoor space.
+
+Our structural engineering work included:
+
+1. Careful assessment of the existing structure to determine load-bearing capabilities
+2. Design of steel reinforcements for the additional floor while maintaining the historic facade
+3. Engineering solutions for internal reconfigurations that preserved the external character
+4. Specialized foundation work to accommodate modern amenities
+5. Rooftop terrace structural support systems with minimal visual impact
+
+This challenging project required close collaboration with conservation specialists and architects to balance modernization with heritage preservation. The successful result demonstrates our expertise in sensitive structural interventions within historically significant properties.`
+  },
+  
+  {
     id: 2,
     title: 'Victoria Park Project - East London',
     type: 'residential',
@@ -248,3 +278,4 @@ Our work on the HS2 project underscores our expertise in delivering innovative, 
     completion: 'August 2023'
   }
 ];
+

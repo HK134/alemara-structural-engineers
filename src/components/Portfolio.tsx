@@ -10,9 +10,9 @@ import { Badge } from "@/components/ui/badge";
 const Portfolio = () => {
   // Get three recent projects for preview
   const previewProjects = [
+    portfolioItems.find(item => item.id === 15), // Cheval Place
     portfolioItems.find(item => item.id === 14), // Acoustic Club
     portfolioItems.find(item => item.id === 13), // Warrington Crescent
-    portfolioItems.find(item => item.id === 1),  // Carlton Road
   ].filter(Boolean);
 
   return (
