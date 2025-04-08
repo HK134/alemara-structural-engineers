@@ -14,6 +14,7 @@ interface ProjectInfoProps {
     location?: string;
     fullDescription?: string;
     images?: string[];
+    imageAlt?: string[];
   };
 }
 
@@ -21,20 +22,22 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
   
+  // Get alt text for better SEO
+  const imageAlt = project.imageAlt && project.imageAlt.length > 0 
+    ? project.imageAlt[0] 
+    : `${project.title} - ${project.type} structural engineering project in ${project.location || 'London'}`;
+  
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-      {/* Main project image */}
+      {/* Main project image - now static with fixed dimensions and alt text */}
       <div>
         <img 
           src={displayImage}
-          alt={project.title} 
+          alt={imageAlt} 
           className="w-full h-auto rounded-lg shadow-lg"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            console.error(`Failed to load image: ${target.src}`);
-            target.onerror = null;
-            target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
-          }}
+          width="800"
+          height="600"
+          loading="eager"
         />
       </div>
       
