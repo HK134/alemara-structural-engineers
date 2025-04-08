@@ -5,13 +5,13 @@ export const residentialProjects = [
     id: 15, // Cheval Place
     title: 'Cheval Place - Knightsbridge',
     type: 'residential',
-    image: '/lovable-uploads/05890659-b8b9-4a9c-885d-5ab1eb73459f.png',
+    image: '/lovable-uploads/e4516e3a-722a-4060-9a70-e12b911f4822.png',
     description: 'Located in the heart of London, on the site of Count Rumford\'s Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.',
     completion: 'January 2024',
     architect: 'Morgan Studio Architects',
     location: 'Knightsbridge, London',
     images: [
-      '/lovable-uploads/05890659-b8b9-4a9c-885d-5ab1eb73459f.png'
+      '/lovable-uploads/e4516e3a-722a-4060-9a70-e12b911f4822.png'
     ],
     imageAlt: [
       'Historic London mews property with brick façade, rooftop terrace, and contemporary door and window details'

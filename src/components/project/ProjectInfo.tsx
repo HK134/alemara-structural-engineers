@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -22,6 +22,7 @@ interface ProjectInfoProps {
 const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
@@ -30,6 +31,29 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const imageAlt = project.imageAlt && project.imageAlt.length > 0 
     ? project.imageAlt[0] 
     : `${project.title} - ${project.type} structural engineering project in ${project.location || 'London'}`;
+  
+  // Reset image states when displayImage changes
+  useEffect(() => {
+    setImageLoaded(false);
+    setImageError(false);
+    setRetryCount(0);
+  }, [displayImage]);
+
+  // Retry loading the image if it fails (up to 2 attempts)
+  const handleImageError = () => {
+    console.error('Image failed to load:', displayImage);
+    if (retryCount < 2) {
+      // Wait a bit and try again
+      setTimeout(() => {
+        setRetryCount(prev => prev + 1);
+        setImageError(false);
+        setImageLoaded(false);
+      }, 1000);
+    } else {
+      setImageLoaded(true);
+      setImageError(true);
+    }
+  };
   
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -50,6 +74,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
           </div>
         ) : (
           <img 
+            key={`${displayImage}-${retryCount}`} // Force re-render on retry
             src={displayImage}
             alt={imageAlt} 
             className={`w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -60,11 +85,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
               setImageLoaded(true);
               setImageError(false);
             }}
-            onError={() => {
-              console.error('Image failed to load:', displayImage);
-              setImageLoaded(true);
-              setImageError(true);
-            }}
+            onError={handleImageError}
           />
         )}
       </div>
