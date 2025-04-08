@@ -1,5 +1,48 @@
-
 export const portfolioItems = [
+  {
+    id: 16,
+    title: 'Cheval Place Mews Conversion - Knightsbridge',
+    type: 'residential',
+    image: '/lovable-uploads/a19c18a8-9b36-4917-a1eb-d4ad483184aa.png',
+    description: 'Structural engineering for a high-end historic mews property in Knightsbridge, featuring a contemporary extension, duplex configuration, and a new floor with private outdoor space.',
+    completion: 'May 2024',
+    architect: 'Studio Indigo',
+    location: 'Knightsbridge, London',
+    useModal: true,
+    images: [
+      '/lovable-uploads/a19c18a8-9b36-4917-a1eb-d4ad483184aa.png', // Exterior facade
+      '/lovable-uploads/6ff7989e-11a5-484d-8a96-5379374f5fb4.png', // Dining area
+      '/lovable-uploads/514430cb-7042-413a-9a5a-ff5bc7b3720f.png', // Outdoor terrace
+      '/lovable-uploads/cc200100-bbfc-45e1-a504-4b036a98aecb.png'  // Luxury bathroom
+    ],
+    imageAlt: [
+      'Elegant historic brick mews property in Knightsbridge with black window frames and terrace extension',
+      'Modern dining area with wooden parquet flooring, contemporary kitchen and elegant staircase',
+      'Private outdoor terrace with wooden cladding, comfortable seating and umbrella',
+      'Luxury bathroom with black marble walls, dual vessel sinks on live-edge wooden vanity'
+    ],
+    fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
+
+The proposal aimed to preserve the character of the historic mews property while providing a modern aesthetic which pays homage to the original form. Additionally, a discreet contemporary extension ensures that the duplex apartments enjoy high-quality, spacious city centre living and benefit from private outdoor space.
+
+Our structural engineering scope included:
+
+1. Comprehensive structural assessment of the existing building fabric
+2. Design of new floor structures for the additional level
+3. Detailed steel frame solutions for open-plan living spaces
+4. Structural design for the new rooftop extension
+5. Party wall considerations and underpinning works
+6. Foundation strengthening to support the increased loading
+
+The project presented several technical challenges, particularly in marrying modern spatial requirements with the historic fabric of the building. Our solutions included:
+
+- Concealed steel frame integration to provide open plan living while respecting the historic facade
+- Minimally invasive strengthening methods for the existing structure
+- Lightweight construction techniques for the new floor addition to minimize additional loading
+- Careful coordination with the architects to ensure structural elements complemented the high-end interior design
+
+This prestigious Knightsbridge project exemplifies our ability to provide innovative structural solutions for complex heritage projects while enabling contemporary living spaces with luxury finishes.`
+  },
   {
     id: 15,
     title: 'Halcyon Gallery - New Bond Street',
