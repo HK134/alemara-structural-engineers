@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 
 interface ProjectInfoProps {
   project: {
@@ -23,6 +24,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
+  const [imageSrc, setImageSrc] = useState('');
   
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
@@ -37,21 +39,49 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
     setImageLoaded(false);
     setImageError(false);
     setRetryCount(0);
+    setImageSrc(displayImage);
   }, [displayImage]);
 
-  // Retry loading the image if it fails (up to 2 attempts)
+  // Fallback images from unsplash (available in placeholders)
+  const fallbackImages = [
+    'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    'https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&q=80&w=800&h=500',
+    'https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&q=80&w=800&h=500'
+  ];
+
+  // Try to load the image, with fallbacks and retries
   const handleImageError = () => {
-    console.error('Image failed to load:', displayImage);
-    if (retryCount < 2) {
-      // Wait a bit and try again
+    console.error('Image failed to load:', imageSrc);
+    
+    if (retryCount < 3) {
+      // Try again with the same image (could be a temporary network issue)
       setTimeout(() => {
         setRetryCount(prev => prev + 1);
+        // Force image reload by adding a cache-busting param
+        setImageSrc(`${displayImage}?retry=${retryCount + 1}`);
         setImageError(false);
         setImageLoaded(false);
       }, 1000);
+    } else if (retryCount === 3 && project.id === 15) {
+      // For Cheval Place project, use the new uploaded image as a direct fallback
+      setImageSrc('/lovable-uploads/a8ef8877-2675-49d2-8ae5-3b03e44c5482.png');
+      setRetryCount(prev => prev + 1);
+      setImageError(false);
+      setImageLoaded(false);
+      toast.info("Using alternative image");
+    } else if (retryCount < 6) {
+      // Try one of the fallback images
+      const fallbackIndex = (retryCount - 3) % fallbackImages.length;
+      setImageSrc(fallbackImages[fallbackIndex]);
+      setRetryCount(prev => prev + 1);
+      setImageError(false);
+      setImageLoaded(false);
+      toast.info("Using fallback image");
     } else {
+      // Give up and show error
       setImageLoaded(true);
       setImageError(true);
+      toast.error("Could not load project image");
     }
   };
   
@@ -74,8 +104,8 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
           </div>
         ) : (
           <img 
-            key={`${displayImage}-${retryCount}`} // Force re-render on retry
-            src={displayImage}
+            key={`${imageSrc}-${retryCount}`} // Force re-render on retry
+            src={imageSrc}
             alt={imageAlt} 
             className={`w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             width="800"
