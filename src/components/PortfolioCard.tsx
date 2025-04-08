@@ -58,14 +58,14 @@ const PortfolioCard = ({
             alt={imageAlt} 
             className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             loading="lazy"
+            width="600"
+            height="400"
             onLoad={() => setImageLoaded(true)}
             onError={(e) => {
               setImageLoaded(true);
               const target = e.target as HTMLImageElement;
               target.src = '/placeholder.svg';
             }}
-            width="600"
-            height="400"
           />
         </div>
         <div className="p-6">
