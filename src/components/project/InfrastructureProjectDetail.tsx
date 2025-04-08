@@ -2,7 +2,18 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HardHat, Award, CheckCircle, FileCheck, Calendar, MapPin, Building, Construction } from 'lucide-react';
+import { 
+  HardHat, 
+  Award, 
+  CheckCircle, 
+  FileCheck, 
+  Calendar, 
+  MapPin, 
+  Building, 
+  Construction, 
+  Home,
+  Briefcase
+} from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import ProjectImageCard from './ProjectImageCard';
 import ImageLightbox from './ImageLightbox';
@@ -31,21 +42,48 @@ const InfrastructureProjectDetail = ({
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxCaption, setLightboxCaption] = useState<string | undefined>(undefined);
 
-  // Determine if it's HS2 project
-  const isHS2 = project.title.includes('HS2');
-
-  // Define color schemes based on project
-  const colorScheme = isHS2 ? {
-    primary: '#9b87f5',
-    secondary: '#7E69AB',
-    accent: '#33C3F0',
-    light: '#D6BCFA'
-  } : {
-    primary: '#ea384c',
-    secondary: '#d02e40',
-    accent: '#1A1F2C',
-    light: '#ffebee'
+  // Determine project type and set appropriate color scheme
+  const getProjectTypeConfig = () => {
+    switch (project.type) {
+      case 'civil':
+        return {
+          icon: <Construction className="mr-2 h-5 w-5" />,
+          colorScheme: {
+            primary: '#ea384c',
+            secondary: '#d02e40',
+            accent: '#1A1F2C',
+            light: '#ffebee'
+          }
+        };
+      case 'commercial':
+        return {
+          icon: <Briefcase className="mr-2 h-5 w-5" />,
+          colorScheme: {
+            primary: '#3861ea',
+            secondary: '#2e45d0',
+            accent: '#1A1F2C',
+            light: '#ebf0ff'
+          }
+        };
+      case 'residential':
+      default:
+        return {
+          icon: <Home className="mr-2 h-5 w-5" />,
+          colorScheme: {
+            primary: '#38b2ea',
+            secondary: '#2e9cd0',
+            accent: '#1A1F2C',
+            light: '#ebf9ff'
+          }
+        };
+    }
   };
+
+  const { icon, colorScheme } = getProjectTypeConfig();
+
+  // Special handling for specific projects
+  const isHS2 = project.id === 12;
+  const isHinkleyPoint = project.id === 11;
 
   // Function to open lightbox
   const openLightbox = (image: string, caption?: string) => {
@@ -61,25 +99,34 @@ const InfrastructureProjectDetail = ({
     return `${project.title} - Image ${index + 1}`;
   };
 
+  // Get an image for display, or use the first available fallback
+  const getDisplayImage = (index: number = 0) => {
+    if (project.images && project.images.length > index) {
+      return project.images[index];
+    } else if (project.image) {
+      return project.image;
+    } else {
+      return '/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png'; // Fallback image
+    }
+  };
+
   return (
     <div className="bg-white">
       {/* Hero banner with gradient overlay */}
       <div className="w-full h-[500px] relative overflow-hidden" style={{
         background: `linear-gradient(to right, ${colorScheme.accent} 0%, ${colorScheme.primary} 100%)`
       }}>
-        {project.images && project.images.length > 0 && (
-          <img 
-            src={project.images[0]} 
-            alt={getImageAlt(0)} 
-            className="w-full h-full object-cover opacity-40" 
-            style={{
-              objectPosition: 'center 30%'
-            }}
-            loading="eager"
-            width="1920"
-            height="1080"
-          />
-        )}
+        <img 
+          src={getDisplayImage(0)} 
+          alt={getImageAlt(0)} 
+          className="w-full h-full object-cover opacity-40" 
+          style={{
+            objectPosition: 'center 30%'
+          }}
+          loading="eager"
+          width="1920"
+          height="1080"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
           <Badge className="mb-4" style={{
@@ -115,12 +162,23 @@ const InfrastructureProjectDetail = ({
           }}>
             <CardContent className="pt-6">
               <div className="flex items-center mb-4">
-                <Building className="mr-2 h-5 w-5" style={{
-                  color: colorScheme.primary
-                }} />
-                <h3 className="text-lg font-semibold">Client</h3>
+                {project.architect ? (
+                  <>
+                    <Building className="mr-2 h-5 w-5" style={{
+                      color: colorScheme.primary
+                    }} />
+                    <h3 className="text-lg font-semibold">Architect</h3>
+                  </>
+                ) : (
+                  <>
+                    <Building className="mr-2 h-5 w-5" style={{
+                      color: colorScheme.primary
+                    }} />
+                    <h3 className="text-lg font-semibold">Client</h3>
+                  </>
+                )}
               </div>
-              <p className="text-gray-700">{project.client || 'Confidential'}</p>
+              <p className="text-gray-700">{project.architect || project.client || 'Confidential'}</p>
             </CardContent>
           </Card>
           
@@ -134,13 +192,13 @@ const InfrastructureProjectDetail = ({
                 }} />
                 <h3 className="text-lg font-semibold">Location</h3>
               </div>
-              <p className="text-gray-700">{project.location}</p>
+              <p className="text-gray-700">{project.location || 'London'}</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* HS2 project special gallery */}
-        {isHS2 && (
+        {/* Project gallery section */}
+        {project.images && project.images.length > 1 && (
           <div className="mb-16">
             <div className="flex items-center mb-8">
               <Construction className="mr-3 h-7 w-7" style={{
@@ -150,110 +208,58 @@ const InfrastructureProjectDetail = ({
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-              <ProjectImageCard 
-                image="/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png" 
-                title="HS2 Construction Site" 
-                caption="Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development" 
-                onClick={() => openLightbox(
-                  "/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png", 
-                  "Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development"
-                )} 
-                className="h-96" 
-              />
-              <ProjectImageCard 
-                image="/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png" 
-                title="HS2 Bridge Construction" 
-                caption="HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system" 
-                onClick={() => openLightbox(
-                  "/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png", 
-                  "HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system"
-                )} 
-                className="h-96" 
-              />
+              {project.images.slice(0, 4).map((image, index) => (
+                <ProjectImageCard 
+                  key={index}
+                  image={image} 
+                  title={`${project.title} - Image ${index + 1}`} 
+                  caption={project.imageAlt?.[index] || `${project.title} - Detail view ${index + 1}`} 
+                  onClick={() => openLightbox(
+                    image, 
+                    project.imageAlt?.[index]
+                  )} 
+                  className="h-80" 
+                />
+              ))}
             </div>
           </div>
         )}
 
-        {/* Project overview integrated with images for Hinkley Point */}
-        {project.id === 11 && (
+        {/* Project overview - show for all projects with fullDescription */}
+        {project.fullDescription && (
           <div className="mb-16">
             <div className="flex items-center mb-8">
-              <HardHat className="mr-3 h-7 w-7" style={{
+              <FileCheck className="mr-3 h-7 w-7" style={{
                 color: colorScheme.primary
               }} />
               <h2 className="text-2xl md:text-3xl font-bold">Project Overview</h2>
             </div>
             
-            {/* Header section with first image and introductory text */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
               <div className="prose prose-lg max-w-none">
-                <p className="text-xl font-medium mb-6 text-gray-800">
-                  As part of the engineering team for the landmark Hinkley Point C nuclear power station project, 
-                  our structural engineering practice delivered critical expertise for this transformative UK energy 
-                  infrastructure initiative.
-                </p>
-                <p className="mb-4 text-gray-700">
-                  Our work focused on ensuring the highest standards of structural engineering and compliance,
-                  contributing to the project's milestones through meticulous planning and execution.
-                </p>
-                {project.fullDescription?.split('\n\n').slice(0, 1).map((paragraph, index) => (
+                {project.fullDescription?.split('\n\n').slice(0, 2).map((paragraph, index) => (
                   <p key={index} className="mb-4 text-gray-700">{paragraph}</p>
                 ))}
               </div>
               
-              <ProjectImageCard 
-                image="/lovable-uploads/96cb7441-1400-49aa-b4ac-57a2b03e7408.png" 
-                title="Hinkley Point C Aerial View" 
-                caption="Aerial view of the Hinkley Point C nuclear power station construction site" 
-                onClick={() => openLightbox(
-                  "/lovable-uploads/96cb7441-1400-49aa-b4ac-57a2b03e7408.png", 
-                  "Aerial view of the Hinkley Point C nuclear power station construction site"
-                )} 
-              />
+              {project.images && project.images.length > 0 && (
+                <ProjectImageCard 
+                  image={project.images[0]} 
+                  title={project.title} 
+                  caption={project.imageAlt?.[0] || `${project.title} main view`} 
+                  onClick={() => openLightbox(
+                    project.images![0], 
+                    project.imageAlt?.[0]
+                  )} 
+                />
+              )}
             </div>
             
-            {/* Big Carl Feature with new image */}
-            <div className="my-12">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-8">
-                  <ProjectImageCard 
-                    image="/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png" 
-                    title="Big Carl Crane at Hinkley Point C" 
-                    caption="Aerial view of Big Carl, the world's largest land-based crane, operating at Hinkley Point C" 
-                    onClick={() => openLightbox(
-                      "/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png", 
-                      "Big Carl - The world's largest land-based crane at Hinkley Point C"
-                    )} 
-                    className="h-full" 
-                  />
-                </div>
-                <div className="lg:col-span-4">
-                  <div className="bg-[#1A1F2C] rounded-lg p-5 h-full flex flex-col">
-                    <div className="flex items-center mb-4">
-                      <Construction className="h-6 w-6 text-[#ea384c] mr-2" />
-                      <h3 className="text-xl font-bold text-white">Big Carl: Engineering Marvel</h3>
-                    </div>
-                    <p className="text-white/90 mb-4">
-                      Big Carl, the world's largest land based crane is a 250m tall and 5,000t capacity 
-                      super heavy lift ring crane operating on 96 individual wheels on 6km of rails.
-                    </p>
-                    <p className="text-white/90 mb-4">
-                      This massive engineering marvel is a critical component in the construction of Hinkley Point C, enabling 
-                      the precise placement of enormous prefabricated components.
-                    </p>
-                    <div className="mt-auto">
-                      <Button className="w-full mt-4" style={{
-                        backgroundColor: colorScheme.primary
-                      }} onClick={() => openLightbox(
-                        "/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png", 
-                        "Big Carl - The world's largest land-based crane at Hinkley Point C"
-                      )}>
-                        View Full Image
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Additional paragraphs */}
+            <div className="mt-8">
+              {project.fullDescription?.split('\n\n').slice(2).map((paragraph, index) => (
+                <p key={index + 2} className="mb-4 text-gray-700">{paragraph}</p>
+              ))}
             </div>
           </div>
         )}
@@ -261,84 +267,14 @@ const InfrastructureProjectDetail = ({
         {/* Services provided */}
         <div className="mb-16">
           <div className="flex items-center mb-8">
-            <FileCheck className="mr-3 h-7 w-7" style={{
+            <CheckCircle className="mr-3 h-7 w-7" style={{
               color: colorScheme.primary
             }} />
             <h2 className="text-2xl md:text-3xl font-bold">Our Services</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-2 flex items-center">
-                  <CheckCircle className="mr-2 h-5 w-5" style={{
-                    color: colorScheme.primary
-                  }} />
-                  Temporary Works Design
-                </h3>
-                <p className="text-gray-600">Comprehensive design solutions tailored to each construction phase, ensuring structural integrity and safety.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-2 flex items-center">
-                  <CheckCircle className="mr-2 h-5 w-5" style={{
-                    color: colorScheme.primary
-                  }} />
-                  Site-Wide Coordination
-                </h3>
-                <p className="text-gray-600">Expert coordination across multiple work areas, ensuring seamless integration and workflow efficiency.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-2 flex items-center">
-                  <CheckCircle className="mr-2 h-5 w-5" style={{
-                    color: colorScheme.primary
-                  }} />
-                  Structural Inspections
-                </h3>
-                <p className="text-gray-600">Thorough on-site inspections verifying construction adherence to designs, drawings, and safety standards.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-2 flex items-center">
-                  <CheckCircle className="mr-2 h-5 w-5" style={{
-                    color: colorScheme.primary
-                  }} />
-                  Quality Assurance
-                </h3>
-                <p className="text-gray-600">Rigorous quality processes ensuring all works meet specifications, regulatory standards, and client expectations.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-2 flex items-center">
-                  <CheckCircle className="mr-2 h-5 w-5" style={{
-                    color: colorScheme.primary
-                  }} />
-                  Compliance Oversight
-                </h3>
-                <p className="text-gray-600">Ensuring adherence to industry regulations, project specifications, and stakeholder assurances.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-lg mb-2 flex items-center">
-                  <CheckCircle className="mr-2 h-5 w-5" style={{
-                    color: colorScheme.primary
-                  }} />
-                  Detailed Reporting
-                </h3>
-                <p className="text-gray-600">Clear documentation and comprehensive reports tracking progress and maintaining stakeholder transparency.</p>
-              </CardContent>
-            </Card>
+            {getServiceCards(project, colorScheme)}
           </div>
         </div>
 
@@ -383,6 +319,90 @@ const InfrastructureProjectDetail = ({
       )}
     </div>
   );
+};
+
+// Helper function to generate service cards based on project type
+const getServiceCards = (project: any, colorScheme: any) => {
+  // Default services for all project types
+  const defaultServices = [
+    {
+      title: "Structural Assessment",
+      description: "Comprehensive analysis of existing structures to evaluate integrity, safety, and compliance with building codes."
+    },
+    {
+      title: "Design Solutions",
+      description: "Tailored engineering designs that balance technical requirements with aesthetic considerations and budget constraints."
+    },
+    {
+      title: "Technical Documentation",
+      description: "Detailed drawings, calculations, and specifications for planning approval and construction guidance."
+    }
+  ];
+
+  // Additional services based on project type
+  const typeSpecificServices = {
+    residential: [
+      {
+        title: "Renovation Support",
+        description: "Engineering guidance for property renovations, including removal of load-bearing walls and floor strengthening."
+      },
+      {
+        title: "Extension Design",
+        description: "Structural designs for home extensions, ensuring seamless integration with existing structures."
+      },
+      {
+        title: "Building Regulations Compliance",
+        description: "Expert assistance in meeting all relevant building regulations and obtaining necessary approvals."
+      }
+    ],
+    commercial: [
+      {
+        title: "Space Optimization",
+        description: "Structural solutions that maximize usable space while maintaining building integrity and safety."
+      },
+      {
+        title: "Compliance Management",
+        description: "Ensuring all work meets commercial building regulations and safety standards."
+      },
+      {
+        title: "Retrofit Solutions",
+        description: "Engineering designs to update and strengthen existing commercial structures."
+      }
+    ],
+    civil: [
+      {
+        title: "Site-Wide Coordination",
+        description: "Expert coordination across multiple work areas, ensuring seamless integration and workflow efficiency."
+      },
+      {
+        title: "Quality Assurance",
+        description: "Rigorous quality processes ensuring all works meet specifications, regulatory standards, and client expectations."
+      },
+      {
+        title: "Compliance Oversight",
+        description: "Ensuring adherence to industry regulations, project specifications, and stakeholder assurances."
+      }
+    ]
+  };
+
+  // Combine default services with type-specific services
+  const projectTypeServices = typeSpecificServices[project.type as keyof typeof typeSpecificServices] || [];
+  const services = [...defaultServices, ...projectTypeServices];
+
+  // Return the service cards JSX
+  return services.slice(0, 6).map((service, index) => (
+    <Card key={index} className="shadow-sm hover:shadow-md transition-shadow">
+      <CardContent className="pt-6">
+        <h3 className="font-semibold text-lg mb-2 flex items-center">
+          <CheckCircle className="mr-2 h-5 w-5" style={{
+            color: colorScheme.primary
+          }} />
+          {service.title}
+        </h3>
+        <p className="text-gray-600">{service.description}</p>
+      </CardContent>
+    </Card>
+  ));
 };
 
 export default InfrastructureProjectDetail;
