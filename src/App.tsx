@@ -1,136 +1,119 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "@/contexts/AuthContext";
-import ProtectedRoute from "@/components/ProtectedRoute";
-import StickyBookingButton from "@/components/StickyBookingButton";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Terms from "./pages/Terms";
-import Admin from "./pages/Admin";
-import Login from "./pages/Login";
-import ClientLogin from "./pages/ClientLogin";
-import EngineerLogin from "./pages/EngineerLogin";
-import ClientDashboard from "./pages/ClientDashboard";
-import EngineerDashboard from "./pages/EngineerDashboard";
-import EngineerMessages from "./pages/EngineerMessages";
-import EngineerAvailability from "./pages/EngineerAvailability";
-import EngineerTimesheet from "./pages/EngineerTimesheet";
-import EngineerInvoices from "./pages/EngineerInvoices";
-import EngineerProjectsMap from "./pages/EngineerProjectsMap";
-import EngineerCompanyPolicy from "./pages/EngineerCompanyPolicy";
-import EngineerClientEtiquette from "./pages/EngineerClientEtiquette";
-import EngineerLayout from "./components/EngineerLayout";
-import AdminLayout from "./components/AdminLayout";
-import ClientLayout from "./components/ClientLayout";
-import SEO from "./pages/SEO";
-import Analytics from "./pages/Analytics";
-import Services from "./pages/Services";
-import Portfolio from "./pages/Portfolio"; 
-import ProjectDetail from "./pages/ProjectDetail";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import AboutUs from "./pages/AboutUs";
-import FAQPage from "./pages/FAQPage";
 
-// Import residential service pages
-import LoftConversions from "./pages/residential/LoftConversions";
-import Extensions from "./pages/residential/Extensions";
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
 
-// Import service category pages
-import Residential from "./pages/services/Residential";
-import Commercial from "./pages/services/Commercial";
-import StructuralSurveys from "./pages/services/StructuralSurveys";
-import CivilEngineering from "./pages/services/CivilEngineering";
+// Pages
+const Index = lazy(() => import('@/pages/Index'));
+const AboutUs = lazy(() => import('@/pages/AboutUs'));
+const Services = lazy(() => import('@/pages/Services'));
+const Portfolio = lazy(() => import('@/pages/Portfolio'));
+const ProjectDetail = lazy(() => import('@/pages/ProjectDetail'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
+const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
+const Terms = lazy(() => import('@/pages/Terms'));
+const FAQPage = lazy(() => import('@/pages/FAQPage'));
+const Blog = lazy(() => import('@/pages/Blog'));
+const BlogPost = lazy(() => import('@/pages/BlogPost'));
+const SiteVisits = lazy(() => import('@/pages/BlogPost/SiteVisits'));
 
-const queryClient = new QueryClient();
+// Service pages
+const Residential = lazy(() => import('@/pages/services/Residential'));
+const Commercial = lazy(() => import('@/pages/services/Commercial'));
+const CivilEngineering = lazy(() => import('@/pages/services/CivilEngineering'));
+const StructuralSurveys = lazy(() => import('@/pages/services/StructuralSurveys'));
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          {/* The StickyBookingButton is now outside of the Routes, so it appears on all pages */}
-          <StickyBookingButton />
-          
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:id" element={<ProjectDetail />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/faq" element={<FAQPage />} />
-            
-            {/* Service category pages */}
-            <Route path="/services/residential" element={<Residential />} />
-            <Route path="/services/commercial" element={<Commercial />} />
-            <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
-            <Route path="/services/civil-engineering" element={<CivilEngineering />} />
-            
-            {/* Residential service pages */}
-            <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
-            <Route path="/services/residential/extensions" element={<Extensions />} />
-            
-            <Route path="/admin-login" element={<Login />} />
-            <Route path="/client-login" element={<ClientLogin />} />
-            <Route path="/engineer-login" element={<EngineerLogin />} />
-            <Route path="/login" element={<Navigate to="/client-login" replace />} />
-            
-            {/* Protected admin routes with sidebar layout */}
-            <Route path="/admin" element={
-              <ProtectedRoute allowedRoles={['admin']}>
-                <AdminLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<Admin />} />
-              <Route path="seo" element={<SEO />} />
-              <Route path="analytics" element={<Analytics />} />
-              {/* Additional admin routes can be added here */}
-            </Route>
-            
-            {/* Protected client routes with sidebar layout */}
-            <Route path="/client" element={
-              <ProtectedRoute allowedRoles={['client']}>
-                <ClientLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<ClientDashboard />} />
-              {/* Additional client routes can be added here */}
-            </Route>
-            
-            {/* Engineer routes with sidebar layout */}
-            <Route path="/engineer" element={
-              <ProtectedRoute allowedRoles={['engineer']}>
-                <EngineerLayout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<EngineerDashboard />} />
-              <Route path="messages" element={<EngineerMessages />} />
-              <Route path="availability" element={<EngineerAvailability />} />
-              <Route path="timesheet" element={<EngineerTimesheet />} />
-              <Route path="invoices" element={<EngineerInvoices />} />
-              <Route path="projects-map" element={<EngineerProjectsMap />} />
-              <Route path="company-policy" element={<EngineerCompanyPolicy />} />
-              <Route path="client-etiquette" element={<EngineerClientEtiquette />} />
-            </Route>
-            
-            {/* Catch-all route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+// Residential service pages
+const LoftConversions = lazy(() => import('@/pages/residential/LoftConversions'));
+const Extensions = lazy(() => import('@/pages/residential/Extensions'));
+
+// Admin pages
+const Admin = lazy(() => import('@/pages/Admin'));
+const Login = lazy(() => import('@/pages/Login'));
+const ClientLogin = lazy(() => import('@/pages/ClientLogin'));
+const EngineerLogin = lazy(() => import('@/pages/EngineerLogin'));
+const ClientDashboard = lazy(() => import('@/pages/ClientDashboard'));
+const EngineerDashboard = lazy(() => import('@/pages/EngineerDashboard'));
+const EngineerProjectsMap = lazy(() => import('@/pages/EngineerProjectsMap'));
+const EngineerTimesheet = lazy(() => import('@/pages/EngineerTimesheet'));
+const EngineerInvoices = lazy(() => import('@/pages/EngineerInvoices'));
+const EngineerMessages = lazy(() => import('@/pages/EngineerMessages'));
+const EngineerAvailability = lazy(() => import('@/pages/EngineerAvailability'));
+const EngineerCompanyPolicy = lazy(() => import('@/pages/EngineerCompanyPolicy'));
+const EngineerClientEtiquette = lazy(() => import('@/pages/EngineerClientEtiquette'));
+
+// Analytics pages
+const SEO = lazy(() => import('@/pages/SEO'));
+const Analytics = lazy(() => import('@/pages/Analytics'));
+
+// Loading fallback
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa]">
+    <div className="text-center">
+      <div className="w-16 h-16 border-4 border-[#ea384c] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p className="text-[#1A1F2C] font-medium">Loading...</p>
+    </div>
+  </div>
 );
+
+function App() {
+  return (
+    <Router>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          {/* Main Routes */}
+          <Route path="/" element={<Index />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/blog/structural-engineering-site-visits" element={<SiteVisits />} />
+
+          {/* Service Routes */}
+          <Route path="/services/residential" element={<Residential />} />
+          <Route path="/services/commercial" element={<Commercial />} />
+          <Route path="/services/civil-engineering" element={<CivilEngineering />} />
+          <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
+          
+          {/* Residential Service Routes */}
+          <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
+          <Route path="/services/residential/extensions" element={<Extensions />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/client-login" element={<ClientLogin />} />
+          <Route path="/engineer-login" element={<EngineerLogin />} />
+          
+          {/* Client Portal Routes */}
+          <Route path="/client-dashboard" element={<ClientDashboard />} />
+          
+          {/* Engineer Portal Routes */}
+          <Route path="/engineer-dashboard" element={<EngineerDashboard />} />
+          <Route path="/engineer-projects-map" element={<EngineerProjectsMap />} />
+          <Route path="/engineer-timesheet" element={<EngineerTimesheet />} />
+          <Route path="/engineer-invoices" element={<EngineerInvoices />} />
+          <Route path="/engineer-messages" element={<EngineerMessages />} />
+          <Route path="/engineer-availability" element={<EngineerAvailability />} />
+          <Route path="/engineer-company-policy" element={<EngineerCompanyPolicy />} />
+          <Route path="/engineer-client-etiquette" element={<EngineerClientEtiquette />} />
+          
+          {/* Analytics Routes */}
+          <Route path="/seo" element={<SEO />} />
+          <Route path="/analytics" element={<Analytics />} />
+          
+          {/* Fallbacks */}
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Routes>
+      </Suspense>
+    </Router>
+  );
+}
 
 export default App;

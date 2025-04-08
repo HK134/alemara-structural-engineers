@@ -75,6 +75,17 @@ const blogPosts = [
     category: "Advice",
     image: "/lovable-uploads/be2ffdaf-904e-4449-b8bf-ba820e52e28f.png",
     author: "Olivia Martinez, CEng MIStructE"
+  },
+  {
+    id: 7,
+    title: "Why We Conduct Structural Engineering Site Visits",
+    excerpt: "Understand the crucial importance of professional site visits before starting any structural project in London.",
+    content: "Full article content goes here...",
+    date: "March 28, 2023",
+    slug: "/blog/structural-engineering-site-visits",
+    category: "Professional Practice",
+    image: "/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png",
+    author: "James Thompson, MEng CEng MIStructE"
   }
 ];
 
