@@ -1,78 +1,5 @@
+
 export const portfolioItems = [
-  {
-    id: 16,
-    title: 'Cheval Place Mews Conversion - Knightsbridge',
-    type: 'residential',
-    image: '/lovable-uploads/a19c18a8-9b36-4917-a1eb-d4ad483184aa.png',
-    description: 'Structural engineering for a high-end historic mews property in Knightsbridge, featuring a contemporary extension, duplex configuration, and a new floor with private outdoor space.',
-    completion: 'May 2024',
-    architect: 'Studio Indigo',
-    location: 'Knightsbridge, London',
-    useModal: true,
-    images: [
-      '/lovable-uploads/a19c18a8-9b36-4917-a1eb-d4ad483184aa.png', // Exterior facade
-      '/lovable-uploads/6ff7989e-11a5-484d-8a96-5379374f5fb4.png', // Dining area
-      '/lovable-uploads/514430cb-7042-413a-9a5a-ff5bc7b3720f.png', // Outdoor terrace
-      '/lovable-uploads/cc200100-bbfc-45e1-a504-4b036a98aecb.png'  // Luxury bathroom
-    ],
-    imageAlt: [
-      'Elegant historic brick mews property in Knightsbridge with black window frames and terrace extension',
-      'Modern dining area with wooden parquet flooring, contemporary kitchen and elegant staircase',
-      'Private outdoor terrace with wooden cladding, comfortable seating and umbrella',
-      'Luxury bathroom with black marble walls, dual vessel sinks on live-edge wooden vanity'
-    ],
-    fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
-
-The proposal aimed to preserve the character of the historic mews property while providing a modern aesthetic which pays homage to the original form. Additionally, a discreet contemporary extension ensures that the duplex apartments enjoy high-quality, spacious city centre living and benefit from private outdoor space.
-
-Our structural engineering scope included:
-
-1. Comprehensive structural assessment of the existing building fabric
-2. Design of new floor structures for the additional level
-3. Detailed steel frame solutions for open-plan living spaces
-4. Structural design for the new rooftop extension
-5. Party wall considerations and underpinning works
-6. Foundation strengthening to support the increased loading
-
-The project presented several technical challenges, particularly in marrying modern spatial requirements with the historic fabric of the building. Our solutions included:
-
-- Concealed steel frame integration to provide open plan living while respecting the historic facade
-- Minimally invasive strengthening methods for the existing structure
-- Lightweight construction techniques for the new floor addition to minimize additional loading
-- Careful coordination with the architects to ensure structural elements complemented the high-end interior design
-
-This prestigious Knightsbridge project exemplifies our ability to provide innovative structural solutions for complex heritage projects while enabling contemporary living spaces with luxury finishes.`
-  },
-  {
-    id: 15,
-    title: 'Halcyon Gallery - New Bond Street',
-    type: 'commercial',
-    image: '/lovable-uploads/2af65380-85a4-471b-8571-e5e94646b7c0.png',
-    description: 'Bespoke structural design for the Persian Pergola ceiling at the Chihuly Now exhibition, creating a safe and immersive artistic experience for gallery visitors.',
-    completion: 'April 2024',
-    architect: 'Halcyon Gallery',
-    location: 'New Bond Street, London',
-    useModal: true,
-    images: [
-      '/lovable-uploads/2af65380-85a4-471b-8571-e5e94646b7c0.png'
-    ],
-    imageAlt: [
-      'Colorful glass installation ceiling at Halcyon Gallery with visitor walking through illuminated corridor'
-    ],
-    fullDescription: `This bespoke design was commissioned as part of the new exhibition at the New Bond Street Halcyon Gallery. We were involved in creating the structural support for the beautiful Persian Pergola ceiling as part of the Chihuly Now exhibition, led by master artist Dale Chihuly. 
-
-The bespoke structural design to support the ceiling was required to create maximum space and ensure the safety of visitors while they walk beneath the ceiling or when they stop to take photos of the immersive canopy of colour, form and light.
-
-Our engineering team worked closely with the gallery curators and installation specialists to design a support structure that would:
-
-1. Provide adequate strength to hold the delicate glass artwork safely
-2. Remain visually unobtrusive to maintain the artistic integrity of the installation
-3. Meet all safety requirements for public exhibition spaces
-4. Allow for the unique lighting conditions needed to showcase the vibrant colors and forms
-
-This project demonstrates our ability to combine technical structural engineering with sensitive artistic requirements, creating a solution that prioritizes both safety and aesthetics in a high-profile cultural venue.`
-  },
-  
   {
     id: 2,
     title: 'Victoria Park Project - East London',
@@ -126,7 +53,6 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     description: 'Transformation of a 3,000ft² carpet warehouse into a 500-capacity club with optimized acoustic design featuring an innovative floating floor system.',
     completion: 'November 2023',
     location: 'East London',
-    useModal: true,
     images: [
       '/lovable-uploads/91b012ae-e548-4165-9472-d996b4394182.png',
       '/lovable-uploads/80b6be3e-a48e-4da3-a3e0-4059e0303b14.png',
