@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import StickyBookingButton from '@/components/StickyBookingButton';
+import Testimonials from '@/components/Testimonials';
 
 // Lazy load components that are below the fold
 const Services = lazy(() => import('@/components/Services'));
@@ -12,7 +13,6 @@ const Process = lazy(() => import('@/components/Process'));
 const Portfolio = lazy(() => import('@/components/Portfolio'));
 const CommonQuestions = lazy(() => import('@/components/CommonQuestions'));
 const AccreditationSection = lazy(() => import('@/components/AccreditationSection'));
-const Testimonials = lazy(() => import('@/components/Testimonials'));
 const FAQ = lazy(() => import('@/components/FAQ'));
 const ContactForm = lazy(() => import('@/components/ContactForm'));
 const CTA = lazy(() => import('@/components/CTA'));
