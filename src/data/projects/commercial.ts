@@ -37,7 +37,7 @@ The unique challenges of this project required innovative approaches to structur
     id: 6,
     title: 'Commercial Office Building - City of London',
     type: 'commercial',
-    image: '/lovable-uploads/9ae2a80a-0d46-4983-95d1-acc383d040ac.png',
+    image: 'https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Structural assessment and remediation strategy for an 8-storey office building with subsidence concerns.',
     completion: 'February 2023'
   },
@@ -45,7 +45,7 @@ The unique challenges of this project required innovative approaches to structur
     id: 9,
     title: 'Retail Space Conversion - Shoreditch',
     type: 'commercial',
-    image: '/lovable-uploads/bb746e6a-6105-42d2-81e9-1c0805d61938.png',
+    image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Conversion of warehouse to open plan retail space, including removal of load-bearing columns and installation of steel beams.',
     completion: 'June 2023'
   }

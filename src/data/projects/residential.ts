@@ -5,26 +5,16 @@ export const residentialProjects = [
     id: 15, // Cheval Place
     title: 'Cheval Place - Knightsbridge',
     type: 'residential',
-    image: '/lovable-uploads/f6d84c9e-7694-46f3-a12c-d624fe3416aa.png', // Main facade image
+    image: '/lovable-uploads/bdcb550d-599e-4f38-9db4-39e243f15f0a.png',
     description: 'Located in the heart of London, on the site of Count Rumford\'s Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.',
     completion: 'January 2024',
     architect: 'Morgan Studio Architects',
     location: 'Knightsbridge, London',
     images: [
-      '/lovable-uploads/f6d84c9e-7694-46f3-a12c-d624fe3416aa.png', // Exterior facade
-      '/lovable-uploads/3a8e1d31-fb64-491a-8006-16e46c4fd03b.png', // Dining area with stairs
-      '/lovable-uploads/e8061deb-281a-400c-b558-f6994a4636a3.png', // Luxury bathroom
-      '/lovable-uploads/f6d84c9e-7694-46f3-a12c-d624fe3416aa.png', // Duplicate facade for consistent display
-      '/lovable-uploads/6e110fed-88ab-4761-81ca-5ae7392aa099.png', // Contemporary bedroom
-      '/lovable-uploads/7a4b6a35-ca4b-433a-a436-5ffed55c56c2.png'  // Outdoor terrace
+      '/lovable-uploads/bdcb550d-599e-4f38-9db4-39e243f15f0a.png'
     ],
     imageAlt: [
-      'Historic Knightsbridge mews property with brick façade, featuring elegant gray door and multiple windows with red brick detail',
-      'Modern dining area with wooden table, white chairs, black kitchen and elegant staircase with iron railings',
-      'Luxury bathroom with black marble walls, wooden vanity, and dual vessel sinks',
-      'Front view of the Cheval Place Knightsbridge property showing the historic mews facade',
-      'Contemporary bedroom with sage green walls, large windows, and wooden headboard with built-in side tables',
-      'Private terrace with wooden paneling, comfortable outdoor seating and parasol'
+      'Historic London mews property with brick façade, rooftop terrace, and contemporary door and window details'
     ],
     fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
 
@@ -91,7 +81,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 3,
     title: 'Structural Reinforcement - Kensington',
     type: 'residential',
-    image: '/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Complete basement reinforcement for a Victorian property, including steel beam installation and load-bearing wall modifications.',
     completion: 'January 2023'
   },
@@ -99,7 +89,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 4,
     title: 'Loft Conversion - Richmond',
     type: 'residential',
-    image: '/lovable-uploads/8f1a8336-2983-4ee5-8e70-4663c95ced97.png',
+    image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Structural design for loft conversion including dormer windows and reinforced floor structure.',
     completion: 'March 2023'
   },
@@ -107,7 +97,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 5,
     title: 'Side Return Extension - Islington',
     type: 'residential',
-    image: '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
+    image: 'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Structural calculations and design for a glass-roofed side return extension with steel frame.',
     completion: 'May 2023'
   },
@@ -115,7 +105,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 7,
     title: 'Apartment Complex - Canary Wharf',
     type: 'residential',
-    image: '/lovable-uploads/9f574bde-b7be-4a18-8760-5edd68bf7e6c.png',
+    image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Comprehensive structural calculations and design for a new 12-unit apartment complex, including foundation specifications.',
     completion: 'April 2023'
   },
@@ -123,7 +113,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 8,
     title: 'Student Accommodation - Greenwich',
     type: 'residential',
-    image: '/lovable-uploads/68a803f8-745d-4d4a-a3e1-a2dd44831eb3.png',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
     description: 'Structural design for a 40-unit student accommodation building, focusing on efficient space utilization and safety compliance.',
     completion: 'July 2023'
   }

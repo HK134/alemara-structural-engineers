@@ -42,29 +42,16 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
     setImageSrc(displayImage);
   }, [displayImage]);
 
-  // Static fallback images from the project
+  // Fallback images from unsplash (available in placeholders)
   const fallbackImages = [
-    '/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png',
-    '/lovable-uploads/8f1a8336-2983-4ee5-8e70-4663c95ced97.png',
-    '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png'
+    'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    'https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&q=80&w=800&h=500',
+    'https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&q=80&w=800&h=500'
   ];
 
   // Try to load the image, with fallbacks and retries
   const handleImageError = () => {
     console.error('Image failed to load:', imageSrc);
-    
-    // For Cheval Place project, try other available images as fallbacks first
-    if (project.id === 15 && project.images && project.images.length > 1 && retryCount < project.images.length) {
-      const nextImageIndex = retryCount + 1;
-      if (nextImageIndex < project.images.length) {
-        setImageSrc(project.images[nextImageIndex]);
-        setRetryCount(prev => prev + 1);
-        setImageError(false);
-        setImageLoaded(false);
-        toast.info("Trying alternative project image");
-        return;
-      }
-    }
     
     if (retryCount < 3) {
       // Try again with the same image (could be a temporary network issue)
@@ -75,8 +62,15 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
         setImageError(false);
         setImageLoaded(false);
       }, 1000);
+    } else if (retryCount === 3 && project.id === 15) {
+      // For Cheval Place project, use the new uploaded image as a direct fallback
+      setImageSrc('/lovable-uploads/a8ef8877-2675-49d2-8ae5-3b03e44c5482.png');
+      setRetryCount(prev => prev + 1);
+      setImageError(false);
+      setImageLoaded(false);
+      toast.info("Using alternative image");
     } else if (retryCount < 6) {
-      // Try one of the static fallback images
+      // Try one of the fallback images
       const fallbackIndex = (retryCount - 3) % fallbackImages.length;
       setImageSrc(fallbackImages[fallbackIndex]);
       setRetryCount(prev => prev + 1);
