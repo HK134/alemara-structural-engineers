@@ -42,11 +42,11 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
     setImageSrc(displayImage);
   }, [displayImage]);
 
-  // Fallback images from unsplash (available in placeholders)
+  // Static fallback images from the project
   const fallbackImages = [
-    'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
-    'https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&q=80&w=800&h=500',
-    'https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&q=80&w=800&h=500'
+    '/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png',
+    '/lovable-uploads/8f1a8336-2983-4ee5-8e70-4663c95ced97.png',
+    '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png'
   ];
 
   // Try to load the image, with fallbacks and retries
@@ -70,7 +70,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
       setImageLoaded(false);
       toast.info("Using alternative image");
     } else if (retryCount < 6) {
-      // Try one of the fallback images
+      // Try one of the static fallback images
       const fallbackIndex = (retryCount - 3) % fallbackImages.length;
       setImageSrc(fallbackImages[fallbackIndex]);
       setRetryCount(prev => prev + 1);

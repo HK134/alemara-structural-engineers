@@ -81,7 +81,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 3,
     title: 'Structural Reinforcement - Kensington',
     type: 'residential',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    image: '/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png',
     description: 'Complete basement reinforcement for a Victorian property, including steel beam installation and load-bearing wall modifications.',
     completion: 'January 2023'
   },
@@ -89,7 +89,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 4,
     title: 'Loft Conversion - Richmond',
     type: 'residential',
-    image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
+    image: '/lovable-uploads/8f1a8336-2983-4ee5-8e70-4663c95ced97.png',
     description: 'Structural design for loft conversion including dormer windows and reinforced floor structure.',
     completion: 'March 2023'
   },
@@ -97,7 +97,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 5,
     title: 'Side Return Extension - Islington',
     type: 'residential',
-    image: 'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?auto=format&fit=crop&q=80&w=800&h=500',
+    image: '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
     description: 'Structural calculations and design for a glass-roofed side return extension with steel frame.',
     completion: 'May 2023'
   },
@@ -105,7 +105,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 7,
     title: 'Apartment Complex - Canary Wharf',
     type: 'residential',
-    image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
+    image: '/lovable-uploads/9f574bde-b7be-4a18-8760-5edd68bf7e6c.png',
     description: 'Comprehensive structural calculations and design for a new 12-unit apartment complex, including foundation specifications.',
     completion: 'April 2023'
   },
@@ -113,7 +113,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     id: 8,
     title: 'Student Accommodation - Greenwich',
     type: 'residential',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
+    image: '/lovable-uploads/68a803f8-745d-4d4a-a3e1-a2dd44831eb3.png',
     description: 'Structural design for a 40-unit student accommodation building, focusing on efficient space utilization and safety compliance.',
     completion: 'July 2023'
   }

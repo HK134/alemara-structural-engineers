@@ -36,6 +36,9 @@ const PortfolioCard = ({
     ? project.imageAlt[0] 
     : `${project.title} - ${project.type} structural engineering project`;
 
+  // Static fallback image
+  const fallbackImage = '/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png';
+
   const handleViewDetails = (e: React.MouseEvent) => {
     if (project.useModal) {
       e.preventDefault();
@@ -63,7 +66,8 @@ const PortfolioCard = ({
             onError={(e) => {
               setImageLoaded(true);
               const target = e.target as HTMLImageElement;
-              target.src = '/placeholder.svg';
+              console.error(`Failed to load image:`, target.src);
+              target.src = fallbackImage;
             }}
           />
         </div>
