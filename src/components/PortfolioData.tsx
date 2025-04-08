@@ -1,4 +1,3 @@
-
 export const portfolioItems = [
   {
     id: 16,
@@ -9,7 +8,6 @@ export const portfolioItems = [
     completion: 'May 2024',
     architect: 'Studio Indigo',
     location: 'Knightsbridge, London',
-    featured: true,
     useModal: true,
     images: [
       '/lovable-uploads/a19c18a8-9b36-4917-a1eb-d4ad483184aa.png', // Exterior facade
@@ -45,7 +43,6 @@ The project presented several technical challenges, particularly in marrying mod
 
 This prestigious Knightsbridge project exemplifies our ability to provide innovative structural solutions for complex heritage projects while enabling contemporary living spaces with luxury finishes.`
   },
-  // All other existing portfolio items follow
   {
     id: 15,
     title: 'Halcyon Gallery - New Bond Street',
