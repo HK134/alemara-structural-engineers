@@ -53,6 +53,19 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const handleImageError = () => {
     console.error('Image failed to load:', imageSrc);
     
+    // For Cheval Place project, try other available images as fallbacks first
+    if (project.id === 15 && project.images && project.images.length > 1 && retryCount < project.images.length) {
+      const nextImageIndex = retryCount + 1;
+      if (nextImageIndex < project.images.length) {
+        setImageSrc(project.images[nextImageIndex]);
+        setRetryCount(prev => prev + 1);
+        setImageError(false);
+        setImageLoaded(false);
+        toast.info("Trying alternative project image");
+        return;
+      }
+    }
+    
     if (retryCount < 3) {
       // Try again with the same image (could be a temporary network issue)
       setTimeout(() => {
@@ -62,13 +75,6 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
         setImageError(false);
         setImageLoaded(false);
       }, 1000);
-    } else if (retryCount === 3 && project.id === 15) {
-      // For Cheval Place project, use the new uploaded image as a direct fallback
-      setImageSrc('/lovable-uploads/a8ef8877-2675-49d2-8ae5-3b03e44c5482.png');
-      setRetryCount(prev => prev + 1);
-      setImageError(false);
-      setImageLoaded(false);
-      toast.info("Using alternative image");
     } else if (retryCount < 6) {
       // Try one of the static fallback images
       const fallbackIndex = (retryCount - 3) % fallbackImages.length;

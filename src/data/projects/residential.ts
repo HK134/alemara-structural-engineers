@@ -5,16 +5,24 @@ export const residentialProjects = [
     id: 15, // Cheval Place
     title: 'Cheval Place - Knightsbridge',
     type: 'residential',
-    image: '/lovable-uploads/bdcb550d-599e-4f38-9db4-39e243f15f0a.png',
+    image: '/lovable-uploads/2c419267-6d4a-4ea5-9057-df5c33e2f60f.png', // Using the exterior facade as main image
     description: 'Located in the heart of London, on the site of Count Rumford\'s Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.',
     completion: 'January 2024',
     architect: 'Morgan Studio Architects',
     location: 'Knightsbridge, London',
     images: [
-      '/lovable-uploads/bdcb550d-599e-4f38-9db4-39e243f15f0a.png'
+      '/lovable-uploads/2c419267-6d4a-4ea5-9057-df5c33e2f60f.png', // Exterior facade
+      '/lovable-uploads/3070502b-f302-47ac-9ba5-cff43a64f790.png', // Dining area with stairs
+      '/lovable-uploads/511ace14-bc82-4a97-aac2-f997aea62eec.png', // Bedroom with windows
+      '/lovable-uploads/f764ff1d-766e-4150-9618-314bb462ec8c.png', // Bathroom with marble
+      '/lovable-uploads/1271f5ea-1a3b-421c-94e2-b712ff389909.png'  // Outdoor terrace
     ],
     imageAlt: [
-      'Historic London mews property with brick façade, rooftop terrace, and contemporary door and window details'
+      'Historic Knightsbridge mews property with brick façade, featuring elegant gray door and multiple windows with red brick detail',
+      'Modern dining area with wooden table, white chairs, black kitchen and elegant staircase with iron railings',
+      'Contemporary bedroom with large windows, wooden paneling, and built-in wood cabinetry',
+      'Luxury bathroom with black marble walls, wooden vanity, and dual vessel sinks',
+      'Private terrace with wooden paneling, comfortable outdoor seating and parasol'
     ],
     fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
 
