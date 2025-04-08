@@ -1,38 +1,25 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Home, HardHat, Shield, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Building, Home, HardHat, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import PortfolioCard from '@/components/PortfolioCard';
 import { portfolioItems } from '@/components/PortfolioData';
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import ProjectModal from '@/components/project/ProjectModal';
 
 const PROJECTS_PER_PAGE = 6;
 
 const Portfolio = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState('all');
-  const [featuredProject, setFeaturedProject] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // Find the featured project (Cheval Place project)
-  useEffect(() => {
-    const featured = portfolioItems.find(item => item.id === 16); // Cheval Place project
-    if (featured) {
-      setFeaturedProject(featured);
-    }
-  }, []);
   
   // Filter projects based on active tab
   const filteredProjects = activeTab === 'all' 
-    ? portfolioItems.filter(item => item.id !== 16) // Exclude the featured project 
-    : portfolioItems.filter(item => item.type === activeTab && item.id !== 16);
+    ? portfolioItems 
+    : portfolioItems.filter(item => item.type === activeTab);
   
   // Calculate pagination
   const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
@@ -67,127 +54,8 @@ const Portfolio = () => {
           </div>
         </section>
         
-        {/* Featured Project - Cheval Place */}
-        {featuredProject && (
-          <section className="py-12 bg-gray-50">
-            <div className="container mx-auto px-4">
-              <div className="flex items-center gap-2 mb-8">
-                <Badge className="bg-[#ea384c]">Featured Project</Badge>
-                <h2 className="text-2xl md:text-3xl font-bold">Latest Work</h2>
-              </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                {/* Left column - image */}
-                <div className="relative overflow-hidden rounded-lg shadow-lg h-[500px]">
-                  <img 
-                    src={featuredProject.image} 
-                    alt={featuredProject.imageAlt ? featuredProject.imageAlt[0] : featuredProject.title} 
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <Badge className="mb-2 bg-transparent border border-white text-white">
-                      {featuredProject.type.charAt(0).toUpperCase() + featuredProject.type.slice(1)}
-                    </Badge>
-                    <h3 className="text-2xl font-bold text-white">{featuredProject.title}</h3>
-                  </div>
-                </div>
-                
-                {/* Right column - details */}
-                <div className="flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-4 mb-4">
-                      <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] px-3 py-1 rounded-full text-sm font-semibold">
-                        {featuredProject.completion}
-                      </span>
-                      <span className="text-sm text-gray-600">{featuredProject.location}</span>
-                    </div>
-                    
-                    <h3 className="text-2xl md:text-3xl font-bold mb-4">{featuredProject.title}</h3>
-                    <p className="text-lg text-gray-700 mb-6">{featuredProject.description}</p>
-                    
-                    {featuredProject.architect && (
-                      <div className="mb-2">
-                        <span className="font-semibold">Architect:</span> {featuredProject.architect}
-                      </div>
-                    )}
-                    
-                    {/* Image gallery preview */}
-                    <div className="grid grid-cols-3 gap-2 mb-6">
-                      {featuredProject.images && featuredProject.images.slice(1, 4).map((image: string, index: number) => (
-                        <div 
-                          key={index} 
-                          className="aspect-[4/3] overflow-hidden rounded-md shadow-sm hover:opacity-90 transition-opacity cursor-pointer"
-                          onClick={() => setIsModalOpen(true)}
-                        >
-                          <img 
-                            src={image} 
-                            alt={featuredProject.imageAlt ? featuredProject.imageAlt[index + 1] : `${featuredProject.title} - Image ${index + 1}`} 
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <Button 
-                    className="bg-[#1A1F2C] hover:bg-[#ea384c] transition-colors w-full md:w-auto"
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    View Project Details
-                  </Button>
-                </div>
-              </div>
-              
-              {/* Key project highlights */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <Card className="shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-[#ea384c]">
-                  <CardContent className="pt-6">
-                    <h4 className="text-lg font-semibold mb-2 flex items-center">
-                      <Star className="h-4 w-4 mr-2 text-[#ea384c]" />
-                      Historic Preservation
-                    </h4>
-                    <p className="text-gray-600">Carefully preserved the character of the historic mews property while enabling modern living.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-[#ea384c]">
-                  <CardContent className="pt-6">
-                    <h4 className="text-lg font-semibold mb-2 flex items-center">
-                      <Star className="h-4 w-4 mr-2 text-[#ea384c]" />
-                      Contemporary Extension
-                    </h4>
-                    <p className="text-gray-600">Discreet contemporary extension providing high-quality, spacious city centre living spaces.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-[#ea384c]">
-                  <CardContent className="pt-6">
-                    <h4 className="text-lg font-semibold mb-2 flex items-center">
-                      <Star className="h-4 w-4 mr-2 text-[#ea384c]" />
-                      Structural Innovation
-                    </h4>
-                    <p className="text-gray-600">Concealed steel frame integration enabling open plan living while respecting the historic facade.</p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-            
-            {/* Modal for the featured project */}
-            {featuredProject.useModal && (
-              <ProjectModal 
-                project={featuredProject} 
-                isOpen={isModalOpen} 
-                onOpenChange={setIsModalOpen}
-              />
-            )}
-          </section>
-        )}
-        
         {/* Portfolio filters */}
-        <section className="py-12 bg-white">
+        <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">All Projects</h2>
             <p className="text-gray-600 text-center mb-12">Browse our complete portfolio of structural engineering work</p>
@@ -266,7 +134,7 @@ const Portfolio = () => {
         </section>
         
         {/* Project delivery guarantee */}
-        <section className="py-12 bg-gray-50">
+        <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <div className="flex justify-center mb-4">
@@ -278,7 +146,7 @@ const Portfolio = () => {
                 ensuring timely delivery and 100% building control approval. Our designs optimize both 
                 safety and cost-efficiency, backed by professional indemnity insurance.
               </p>
-              <div className="inline-block bg-white p-4 rounded-lg border border-gray-200">
+              <div className="inline-block bg-gray-50 p-4 rounded-lg border border-gray-200">
                 <p className="font-semibold text-[#1A1F2C]">
                   All projects showcased have received full approval from relevant London borough authorities.
                 </p>

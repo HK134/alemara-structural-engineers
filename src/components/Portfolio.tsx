@@ -1,32 +1,30 @@
 
 import React from 'react';
-import { ArrowRight, Award, Shield, Star } from 'lucide-react';
+import { ArrowRight, Award, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { portfolioItems } from './PortfolioData';
 import PortfolioCard from './PortfolioCard';
-import { Badge } from "@/components/ui/badge";
 
 const Portfolio = () => {
-  // Get three recent projects for preview
+  // Get specific projects for preview
   const previewProjects = [
-    portfolioItems.find(item => item.id === 16), // Cheval Place
-    portfolioItems.find(item => item.id === 15), // Halcyon Gallery
+    portfolioItems.find(item => item.id === 15), // Halcyon Gallery (new project)
     portfolioItems.find(item => item.id === 14), // New Club project
+    portfolioItems.find(item => item.id === 13), // Warrington Crescent
   ].filter(Boolean);
 
   return (
     <section id="portfolio" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-4">Our Recent Projects</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             A selection of our recent structural engineering projects across London
           </p>
         </div>
         
-        {/* Recent projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {previewProjects.map((item) => (
             <PortfolioCard key={item?.id} project={item!} />
           ))}
