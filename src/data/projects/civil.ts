@@ -1,27 +1,6 @@
 
 // Civil engineering projects data
 export const civilProjects = [
-  {
-    id: 1,
-    title: 'Structural Engineering for Carlton Road Extension - South West London',
-    type: 'civil',
-    image: '/lovable-uploads/a962fd8a-7fe5-446e-8d03-9be35e0cef64.png',
-    description: 'Comprehensive structural engineering for a sophisticated rear extension and internal refurbishment in South West London, featuring bespoke steel support solutions and specialized foundation design.',
-    completion: 'March 2023',
-    architect: 'REES Architects',
-    location: 'South West London',
-    images: [
-      '/lovable-uploads/a962fd8a-7fe5-446e-8d03-9be35e0cef64.png'
-    ],
-    fullDescription: `Based in South West London, this property required a comprehensive rear extension and internal refurbishment. The project architecture and management were successfully led by REES Architects, with our structural engineering team providing critical support throughout the development process.
-
-The technically challenging rear extension design incorporated sophisticated structural elements including lateral stabilisation of the existing walls and strategic support of the structure above. Our engineers implemented a Universal Column (UC) steel beam solution that ensured structural integrity while maintaining the architect's aesthetic vision.
-
-This residential transformation also featured specialized foundation engineering for a sunken seating area, which necessitated the design of a robust retaining wall system with detailed bar bending schedules. Our structural calculations accounted for soil pressure and drainage requirements, ensuring long-term stability and compliance with building regulations.
-
-Throughout the project, we collaborated closely with the architects and contractors to overcome site-specific challenges and deliver engineering solutions that balanced technical requirements with design aspirations. The successful completion of this project demonstrates our expertise in residential structural engineering and our commitment to realizing complex architectural visions through innovative structural design.`
-  },
-  
   // Hinkley Point C project
   {
     id: 11,
@@ -91,23 +70,5 @@ Compliance Oversight: Ensuring all engineering solutions adhered to industry reg
 Detailed Reporting: Providing clear documentation and detailed reports to track progress and maintain transparency with project stakeholders, ensuring accountability at every stage.
 
 Our work on the HS2 project underscores our expertise in delivering innovative, cost-effective engineering solutions while prioritising safety, compliance, and efficiency. Through our dedicated approach, we support the successful progression of critical infrastructure works, reinforcing our reputation as a trusted engineering partner for large-scale projects of national importance.`
-  },
-  
-  // Additional civil engineering projects
-  {
-    id: 10,
-    title: 'Bridge Reinforcement - Hammersmith',
-    type: 'civil',
-    image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Assessment and reinforcement design for a pedestrian bridge showing signs of structural fatigue.',
-    completion: 'January 2023'
-  },
-  {
-    id: 16,
-    title: 'Flood Defense System - Richmond Riverside',
-    type: 'civil',
-    image: 'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Design of reinforced concrete flood defense system to protect riverside properties.',
-    completion: 'August 2023'
   }
 ];
