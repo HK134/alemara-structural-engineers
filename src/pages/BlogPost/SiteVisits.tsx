@@ -38,20 +38,20 @@ const SiteVisitsPage = () => {
         <link rel="canonical" href="https://londonstructuralsurveys.com/blog/structural-engineering-site-visits" />
         <meta property="og:title" content="Structural Engineering Site Visits in London | Alemara Engineering" />
         <meta property="og:description" content="Expert guide to structural engineering site visits for London properties - what to expect, why they're important, and how they can save you time and money." />
-        <meta property="og:image" content="/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png" />
+        <meta property="og:image" content="/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png" />
         <meta property="og:url" content="https://londonstructuralsurveys.com/blog/structural-engineering-site-visits" />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Structural Engineering Site Visits in London | Alemara Engineering" />
         <meta name="twitter:description" content="Expert guide to structural engineering site visits for London properties - what to expect, why they're important, and how they can save you time and money." />
-        <meta name="twitter:image" content="/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png" />
+        <meta name="twitter:image" content="/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png" />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "BlogPosting",
               "headline": "Why We Conduct Structural Engineering Site Visits",
-              "image": "/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png",
+              "image": "/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png",
               "datePublished": "2023-05-15T08:00:00+01:00",
               "dateModified": "2023-11-28T10:30:00+01:00",
               "author": {
@@ -80,9 +80,9 @@ const SiteVisitsPage = () => {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Hero Section - Updated with new background image */}
         <section className="bg-[#1A1F2C] py-16 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png')] bg-cover bg-center opacity-20"></div>
           <div className="container mx-auto px-4 max-w-[1400px] relative z-10">
             <div className="max-w-4xl mx-auto">
               <div className="inline-block bg-[#ea384c]/20 px-4 py-2 rounded-full mb-4">
@@ -288,8 +288,8 @@ const SiteVisitsPage = () => {
 
                   <div className="my-10">
                     <img 
-                      src="/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png" 
-                      alt="Structural engineer conducting a site visit at a London property basement" 
+                      src="/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png" 
+                      alt="Structural engineer conducting a detailed site visit inspection" 
                       className="w-full h-auto rounded-lg shadow-md"
                     />
                     <p className="text-sm text-gray-500 mt-2 text-center">Our structural engineer examining foundation elements during a site visit in North London</p>
@@ -413,7 +413,7 @@ const SiteVisitsPage = () => {
 
                   <div className="my-10">
                     <img 
-                      src="https://images.unsplash.com/photo-1487958449943-2429e8be8625" 
+                      src="/lovable-uploads/1f9708d9-de83-4362-9b30-7fafe295163c.png" 
                       alt="Structural engineer examining foundation during site visit" 
                       className="w-full h-auto rounded-lg shadow-md object-cover"
                       style={{ maxHeight: "400px" }}
@@ -654,3 +654,4 @@ const SiteVisitsPage = () => {
 };
 
 export default SiteVisitsPage;
+
