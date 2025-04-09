@@ -45,7 +45,7 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
     // Special handling for specific projects
     if (title.includes('Cheval Place')) {
       const chevalPlaceFallbacks = [
-        '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png',
+        '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png',
         '/lovable-uploads/f584a768-55ab-44d7-8634-9a6e94adda2b.png',
         '/lovable-uploads/cd25898b-c49e-4558-b60b-61a6fb9174df.png'
       ];
@@ -144,7 +144,7 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
                   if (!target) return;
                   
                   if (title.includes('Cheval Place')) {
-                    target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+                    target.src = '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png';
                   } else if (title.includes('Victoria Park')) {
                     target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
                   } else if (title.includes('Warrington Crescent')) {

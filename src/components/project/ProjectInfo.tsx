@@ -46,7 +46,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const getProjectFallback = () => {
     // Cheval Place project (id: 15)
     if (project.id === 15) {
-      return '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+      return '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png';
     }
     
     // Victoria Park Project (id: 2)
@@ -64,7 +64,7 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
 
   // Specific fallback images for Cheval Place project (id: 15)
   const chevalPlaceFallbacks = [
-    '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png',
+    '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png',
     '/lovable-uploads/f584a768-55ab-44d7-8634-9a6e94adda2b.png',
     '/lovable-uploads/cd25898b-c49e-4558-b60b-61a6fb9174df.png'
   ];
