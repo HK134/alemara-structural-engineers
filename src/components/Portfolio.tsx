@@ -29,12 +29,20 @@ const Portfolio = () => {
         </div>
         
         <div className="text-center">
-          <Button asChild className="inline-flex items-center bg-[#1A1F2C] hover:bg-[#ea384c] transition-colors">
-            <Link to="/portfolio">
-              View All Projects
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+            <Button asChild className="inline-flex items-center bg-[#1A1F2C] hover:bg-[#ea384c] transition-colors">
+              <Link to="/portfolio">
+                View Standard Layout
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="inline-flex items-center border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white transition-colors">
+              <Link to="/portfolio-alternative">
+                View Grid Layout
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
           <div className="flex justify-center items-center mt-8">
             <Award className="text-[#ea384c] mr-2 h-5 w-5" />
             <p className="text-gray-600">All projects approved by local councils and building control authorities</p>

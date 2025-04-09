@@ -8,6 +8,7 @@ const Index = lazy(() => import('@/pages/Index'));
 const AboutUs = lazy(() => import('@/pages/AboutUs'));
 const Services = lazy(() => import('@/pages/Services'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
+const PortfolioAlternative = lazy(() => import('@/pages/PortfolioAlternative'));
 const ProjectDetail = lazy(() => import('@/pages/ProjectDetail'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
@@ -66,7 +67,8 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/portfolio-alternative" element={<PortfolioAlternative />} />
+          <Route path="/portfolio/:id" element={<ProjectDetail />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />

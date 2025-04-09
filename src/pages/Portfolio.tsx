@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from 'react-router-dom';
 
 const PROJECTS_PER_PAGE = 6;
 
@@ -53,6 +54,11 @@ const Portfolio = () => {
             <p className="text-xl max-w-3xl">
               Explore our structural engineering projects across London, showcasing our expertise in residential, commercial, and civil engineering.
             </p>
+            <div className="mt-8">
+              <Link to="/portfolio-alternative" className="text-white hover:text-[#ea384c] underline transition-colors">
+                View Alternative Layout
+              </Link>
+            </div>
           </div>
         </section>
         
