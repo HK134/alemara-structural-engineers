@@ -56,6 +56,9 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
   // Specific fallback images for Cheval Place project (id: 15)
   const chevalPlaceFallbacks = [
     'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg', // Main image
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(1).jpg',
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(2).jpg',
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(3).jpg',
     'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
     'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
     'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
@@ -77,11 +80,14 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
     if (isSupabaseStorageUrl(currentImageSrc) && retryCount === 0) {
       try {
         // Extract path from URL
-        const path = currentImageSrc.split('public/website-images/')[1];
+        const path = currentImageSrc.split('public/')[1];
         if (path) {
+          const bucketName = path.split('/')[0];
+          const filePath = path.substring(bucketName.length + 1);
+          
           const { data, error } = await supabase.storage
-            .from('website-images')
-            .createSignedUrl(path, 60); // 60 seconds expiry
+            .from(bucketName)
+            .createSignedUrl(filePath, 60); // 60 seconds expiry
             
           if (data?.signedUrl) {
             setCurrentImageSrc(data.signedUrl);
@@ -116,7 +122,7 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
         setImageLoaded(false);
       }, 1000);
     } else if (project.id === 15 && retryCount < chevalPlaceFallbacks.length + 2) {
-      // For Cheval Place project, use the newly uploaded images as fallbacks
+      // For Cheval Place project, use the updated list of fallbacks
       const fallbackIndex = retryCount - 2;
       setCurrentImageSrc(chevalPlaceFallbacks[fallbackIndex]);
       setRetryCount(prev => prev + 1);

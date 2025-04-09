@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -57,34 +56,25 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
     if (isSupabaseStorageUrl(image)) {
       // For Supabase URLs, we'll try to get a direct URL as fallback
       try {
-        // Extract path from URL
-        const path = image.split('public/website-images/')[1];
-        if (path) {
-          // Try to use a project-specific fallback instead
-          if (title.includes('Cheval Place')) {
-            const chevalPlaceFallbacks = [
-              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg',
-              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
-              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
-              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
-              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
-            ];
-            
-            if (index < chevalPlaceFallbacks.length) {
-              target.src = chevalPlaceFallbacks[index];
-              setImageErrors(prev => ({...prev, [image]: false}));
-              return;
-            } else {
-              target.src = 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg';
-              setImageErrors(prev => ({...prev, [image]: false}));
-              return;
-            }
-          } else if (title.includes('Victoria Park')) {
-            target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
+        // Special handling for Cheval Place project
+        if (title.includes('Cheval Place')) {
+          const chevalPlaceFallbacks = [
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(1).jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(2).jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(3).jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
+            'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
+          ];
+          
+          if (index < chevalPlaceFallbacks.length) {
+            target.src = chevalPlaceFallbacks[index];
             setImageErrors(prev => ({...prev, [image]: false}));
             return;
-          } else if (title.includes('Warrington Crescent')) {
-            target.src = '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
+          } else {
+            target.src = chevalPlaceFallbacks[0];
             setImageErrors(prev => ({...prev, [image]: false}));
             return;
           }
@@ -95,26 +85,6 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
     }
     
     // Special handling for specific projects
-    if (title.includes('Cheval Place')) {
-      const chevalPlaceFallbacks = [
-        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg',
-        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
-        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
-        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
-        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
-      ];
-      
-      if (index < chevalPlaceFallbacks.length) {
-        target.src = chevalPlaceFallbacks[index];
-        setImageErrors(prev => ({...prev, [image]: false}));
-        return;
-      } else {
-        target.src = chevalPlaceFallbacks[0];
-        setImageErrors(prev => ({...prev, [image]: false}));
-        return;
-      }
-    }
-    
     if (title.includes('Victoria Park')) {
       target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
       setImageErrors(prev => ({...prev, [image]: false}));
@@ -202,7 +172,7 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
                   if (!target) return;
                   
                   if (title.includes('Cheval Place')) {
-                    target.src = '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png';
+                    target.src = 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg';
                   } else if (title.includes('Victoria Park')) {
                     target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
                   } else if (title.includes('Warrington Crescent')) {

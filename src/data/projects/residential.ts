@@ -12,18 +12,26 @@ export const residentialProjects = [
     location: 'Knightsbridge, London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg', // Main image
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(1).jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(2).jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(3).jpg',
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg', 
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg',
+      '/lovable-uploads/58d5a476-8f04-4237-8c10-5215ac90cdd7.png', // Adding the newly uploaded image from the current request
       '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png'  // Keep the original terrace image as backup
     ],
     imageAlt: [
       'Historic London mews townhouse with yellow brick façade, contemporary dark frames, rooftop terrace with umbrella, and detailed architectural elements',
+      'Cheval Place structural engineering project - exterior view of the building showing yellow brick façade',
+      'Cheval Place structural engineering project - interior renovation showing modern design elements',
+      'Cheval Place structural engineering project - architectural detail showing structural solutions',
       'Modern entrance area with elegant lighting fixtures and minimalist design',
       'Contemporary kitchen with high-end appliances and sleek cabinetry',
       'Elegant staircase with black railings and wooden steps',
       'Luxury bathroom with black marble walls and gold accents',
+      'Historic London mews townhouse - street view showing the complete façade',
       'Stylish outdoor terrace with wooden wall panels, comfortable L-shaped seating area, and cream parasol'
     ],
     fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
@@ -128,3 +136,4 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     completion: 'July 2023'
   }
 ];
+
