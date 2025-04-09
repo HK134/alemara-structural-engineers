@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import ProjectImage from './ProjectImage';
 import { Separator } from "@/components/ui/separator";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProjectInfoProps {
   project: {
@@ -22,53 +23,82 @@ interface ProjectInfoProps {
 }
 
 const ProjectInfo = ({ project }: ProjectInfoProps) => {
-  // Get the first image from the project.images array if available, otherwise use the main image
-  const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
+  // Get the main image and all other images
+  const allImages = project.images && project.images.length > 0 
+    ? project.images 
+    : [project.image];
+  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const currentImage = allImages[currentImageIndex];
   
   // Get alt text for better SEO
-  const imageAlt = project.imageAlt && project.imageAlt.length > 0 
-    ? project.imageAlt[0] 
+  const imageAlt = project.imageAlt && project.imageAlt.length > 0 && project.imageAlt[currentImageIndex]
+    ? project.imageAlt[currentImageIndex] 
     : `${project.title} - ${project.type} structural engineering project in ${project.location || 'London'}`;
   
-  // For displaying a few thumbnail images
-  const additionalImages = project.images ? project.images.slice(1, 4) : [];
-  const [selectedImage, setSelectedImage] = useState(displayImage);
+  const goToPrevImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
   
   return (
     <div className="max-w-4xl mx-auto">
       <Card className="bg-white border border-gray-200 shadow-sm">
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Main project image with thumbnails */}
-            <div className="space-y-3">
+            {/* Main project image with navigation arrows */}
+            <div className="relative">
               <div className="overflow-hidden rounded-lg">
                 <ProjectImage 
                   project={project}
-                  imageSrc={selectedImage}
+                  imageSrc={currentImage}
                   imageAlt={imageAlt}
                 />
               </div>
               
-              {/* Thumbnail images */}
-              {additionalImages.length > 0 && (
-                <div className="grid grid-cols-4 gap-2 mt-2">
-                  <div 
-                    className={`aspect-square rounded-md overflow-hidden cursor-pointer border-2 ${selectedImage === displayImage ? 'border-[#ea384c]' : 'border-transparent'}`}
-                    onClick={() => setSelectedImage(displayImage)}
+              {/* Navigation arrows */}
+              {allImages.length > 1 && (
+                <>
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 rounded-full bg-white/80 hover:bg-white border border-gray-200 shadow-sm"
+                    onClick={goToPrevImage}
+                    aria-label="Previous image"
                   >
-                    <img src={displayImage} alt={`${project.title} thumbnail`} className="w-full h-full object-cover" />
-                  </div>
+                    <ChevronLeft className="h-5 w-5 text-gray-700" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-white/80 hover:bg-white border border-gray-200 shadow-sm"
+                    onClick={goToNextImage}
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="h-5 w-5 text-gray-700" />
+                  </Button>
                   
-                  {additionalImages.map((img, index) => (
-                    <div 
-                      key={index}
-                      className={`aspect-square rounded-md overflow-hidden cursor-pointer border-2 ${selectedImage === img ? 'border-[#ea384c]' : 'border-transparent'}`}
-                      onClick={() => setSelectedImage(img)}
-                    >
-                      <img src={img} alt={`${project.title} thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-                    </div>
-                  ))}
-                </div>
+                  {/* Dots indicator for current image */}
+                  <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+                    {allImages.map((_, index) => (
+                      <span 
+                        key={index} 
+                        className={`h-2 w-2 rounded-full ${index === currentImageIndex ? 'bg-[#ea384c]' : 'bg-gray-300'}`}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => setCurrentImageIndex(index)}
+                        aria-label={`Go to image ${index + 1}`}
+                      ></span>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
             
@@ -113,33 +143,39 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
             </div>
           </div>
           
-          {/* Organized Project Details */}
+          {/* Organized Project Details with improved styling */}
           {project.fullDescription && (
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <div className="prose max-w-none text-gray-700 space-y-6">
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <div className="bg-gray-50 rounded-lg p-6 shadow-sm border border-gray-100">
                 {/* Project Overview */}
-                <div>
+                <div className="mb-6">
                   <h3 className="text-lg font-semibold mb-3">Project Overview</h3>
-                  <p className="mb-4">{project.fullDescription.split('\n\n')[0]}</p>
-                  {project.fullDescription.split('\n\n')[1] && (
-                    <p className="mb-4">{project.fullDescription.split('\n\n')[1]}</p>
-                  )}
+                  <div className="text-gray-700 space-y-4">
+                    {project.fullDescription.split('\n\n')[0] && (
+                      <p>{project.fullDescription.split('\n\n')[0]}</p>
+                    )}
+                    {project.fullDescription.split('\n\n')[1] && (
+                      <p>{project.fullDescription.split('\n\n')[1]}</p>
+                    )}
+                  </div>
                 </div>
                 
                 {/* Structural Work */}
                 {project.fullDescription.includes("Our structural engineering work included:") && (
-                  <div>
+                  <div className="mb-6">
                     <h3 className="text-lg font-semibold mb-3">Structural Engineering Work</h3>
-                    <ul className="list-disc pl-5 space-y-2">
-                      {project.fullDescription
-                        .split("Our structural engineering work included:")[1]
-                        .split("\n\n")[0]
-                        .split(/\d\.\s/)
-                        .filter(item => item.trim())
-                        .map((item, index) => (
-                          <li key={index} className="text-gray-700">{item.trim()}</li>
-                        ))}
-                    </ul>
+                    <div className="bg-white rounded-md p-4 border border-gray-100">
+                      <ul className="list-disc pl-5 space-y-2">
+                        {project.fullDescription
+                          .split("Our structural engineering work included:")[1]
+                          .split("\n\n")[0]
+                          .split(/\d\.\s/)
+                          .filter(item => item.trim())
+                          .map((item, index) => (
+                            <li key={index} className="text-gray-700">{item.trim()}</li>
+                          ))}
+                      </ul>
+                    </div>
                   </div>
                 )}
                 
@@ -147,9 +183,11 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
                 {project.fullDescription.includes("This challenging project") && (
                   <div>
                     <h3 className="text-lg font-semibold mb-3">Challenges & Solutions</h3>
-                    <p className="mb-4">
-                      {project.fullDescription.split("This challenging project")[1].trim()}
-                    </p>
+                    <div className="bg-white rounded-md p-4 border border-gray-100">
+                      <p className="text-gray-700">
+                        {project.fullDescription.split("This challenging project")[1].trim()}
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
