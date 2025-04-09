@@ -63,10 +63,11 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
           // Try to use a project-specific fallback instead
           if (title.includes('Cheval Place')) {
             const chevalPlaceFallbacks = [
-              '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png', // Exterior
-              '/lovable-uploads/b7b02193-7ff4-4154-a345-15e8dc6ad549.png', // Bathroom
-              '/lovable-uploads/bfd1ed50-bdf0-404e-9d7a-3d65f5110366.png', // Dining area
-              '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png'  // Terrace
+              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg',
+              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
+              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
+              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
+              'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
             ];
             
             if (index < chevalPlaceFallbacks.length) {
@@ -74,7 +75,7 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
               setImageErrors(prev => ({...prev, [image]: false}));
               return;
             } else {
-              target.src = '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png';
+              target.src = 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg';
               setImageErrors(prev => ({...prev, [image]: false}));
               return;
             }
@@ -96,10 +97,11 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
     // Special handling for specific projects
     if (title.includes('Cheval Place')) {
       const chevalPlaceFallbacks = [
-        '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png', // Exterior
-        '/lovable-uploads/b7b02193-7ff4-4154-a345-15e8dc6ad549.png', // Bathroom
-        '/lovable-uploads/bfd1ed50-bdf0-404e-9d7a-3d65f5110366.png', // Dining area
-        '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png'  // Terrace
+        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg',
+        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
+        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
+        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
+        'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
       ];
       
       if (index < chevalPlaceFallbacks.length) {

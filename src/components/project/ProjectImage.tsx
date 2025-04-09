@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -56,10 +55,11 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
 
   // Specific fallback images for Cheval Place project (id: 15)
   const chevalPlaceFallbacks = [
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg', // Updated main fallback
-    '/lovable-uploads/b7b02193-7ff4-4154-a345-15e8dc6ad549.png', // Bathroom
-    '/lovable-uploads/bfd1ed50-bdf0-404e-9d7a-3d65f5110366.png', // Dining area
-    '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png'  // Terrace
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg', // Main image
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
+    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
   ];
 
   // Fallback images from unsplash (available in placeholders)
