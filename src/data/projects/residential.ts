@@ -159,6 +159,147 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
+  // Adding Gloucester Gardens 2 (new)
+  {
+    id: 23,
+    title: 'Gloucester Gardens 2 - Period Property Restoration',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%201.jpg',
+    description: 'Complete structural restoration and modernization of a period property, with careful preservation of historical features and introduction of contemporary living spaces.',
+    completion: 'February 2024',
+    architect: 'Heritage Preservation Partners',
+    location: 'Gloucester Gardens, London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%201.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%202.JPG.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%203.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%204.jpg'
+    ],
+    imageAlt: [
+      'Exterior view of the restored period property at Gloucester Gardens',
+      'Interior renovation showing preserved historical elements with modern structural interventions',
+      'Detail of specialist structural work maintaining period features while providing modern support',
+      'Construction phase showing complex structural engineering solutions in a heritage context'
+    ]
+  },
+  
+  // Adding Gloucester Terrace (new)
+  {
+    id: 24,
+    title: 'Gloucester Terrace - Classic London Terrace',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Terrace/105a%20Gloucester%20Terrace%20Alemara%20Structural%20Engineers%201.jpg',
+    description: 'Structural engineering for the renovation of a classic London terrace property, involving careful adaptation of the historic structure to meet contemporary living standards.',
+    completion: 'March 2024',
+    architect: 'London Heritage Architects',
+    location: 'Gloucester Terrace, London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Terrace/105a%20Gloucester%20Terrace%20Alemara%20Structural%20Engineers%201.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Terrace/105a%20Gloucester%20Terrace%20Alemara%20Structural%20Engineers%203.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Terrace/105a%20Gloucester%20Terrace%20Alemara%20Structural%20Engineers%205.jpg'
+    ],
+    imageAlt: [
+      'Front view of the classic London terrace on Gloucester Terrace showing restored facade',
+      'Interior structural work revealing the careful integration of modern supports with original features',
+      'Technical structural drawing showing engineering solutions for the Gloucester Terrace renovation'
+    ]
+  },
+  
+  // Adding Cambridge Street - Pimlico (new)
+  {
+    id: 25,
+    title: 'Cambridge Street - Pimlico',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%201.JPG',
+    description: 'Comprehensive structural renovation of a Pimlico property with distinctive period features, balancing heritage preservation with modern structural requirements.',
+    completion: 'January 2024',
+    architect: 'Pimlico Restoration Specialists',
+    location: 'Cambridge Street, Pimlico, London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%201.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%202.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%203.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%204.JPG'
+    ],
+    imageAlt: [
+      'External view of the Cambridge Street Pimlico property showing classic London architecture',
+      'Interior structural reinforcement work showing integration with period features',
+      'Detailed view of structural interventions preserving original architectural elements',
+      'Construction phase showing complex engineering solutions maintaining building integrity'
+    ]
+  },
+  
+  // Adding Hanningfield - Timber Structure (new)
+  {
+    id: 26,
+    title: 'Hanningfield - Timber Structure',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Hanningfield%20-%20Timber%20Structure/Alemara%20Structural%20Engineers%20London%20Hanningfield%201.JPG',
+    description: 'Innovative timber structure engineering for a sustainable residential development, showcasing advanced wood construction techniques and eco-friendly design principles.',
+    completion: 'April 2024',
+    architect: 'Sustainable Living Architects',
+    location: 'Hanningfield, Essex',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Hanningfield%20-%20Timber%20Structure/Alemara%20Structural%20Engineers%20London%20Hanningfield%201.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Hanningfield%20-%20Timber%20Structure/Alemara%20Structural%20Engineers%20London%20Hanningfield%204.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Hanningfield%20-%20Timber%20Structure/Alemara%20Structural%20Engineers%20London%20Hanningfield%205.JPG'
+    ],
+    imageAlt: [
+      'Exterior view of the Hanningfield timber structure showing sustainable building design',
+      'Close-up of advanced timber construction techniques and joinery details',
+      'Interior timber framework showing the structural engineering solutions for the sustainable build'
+    ]
+  },
+  
+  // Adding Mollands - RIBA Feature (new)
+  {
+    id: 27,
+    title: 'Mollands - RIBA Feature Project',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Mollands%20-%20RIBA%20Feature%20-%20London/Alemara%20Structural%20Engineers%20Mollands%20-%20RIBA%20feature.jpg',
+    description: 'Award-winning residential project featured by RIBA, showcasing exceptional structural engineering solutions integrated with outstanding architectural design.',
+    completion: 'November 2023',
+    architect: 'RIBA Award Architects',
+    location: 'Mollands, London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Mollands%20-%20RIBA%20Feature%20-%20London/Alemara%20Structural%20Engineers%20Mollands%20-%20RIBA%20feature.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Mollands%20-%20RIBA%20Feature%20-%20London/Alemara%20Structural%20Engineers%20Mollands%20-%20RIBA%20feature%203.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Mollands%20-%20RIBA%20Feature%20-%20London/Alemara%20Structural%20Engineers%20Mollands%20-%20RIBA%20feature%206.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Mollands%20-%20RIBA%20Feature%20-%20London/Alemara%20Structural%20Engineers%20Mollands%20-%20RIBA%20feature%20.jpg'
+    ],
+    imageAlt: [
+      'Award-winning Mollands residential project featured by RIBA showing innovative structural design',
+      'Interior view showcasing the integration of architectural excellence with structural engineering',
+      'Detail of specialist structural solutions that contributed to the RIBA recognition',
+      'Construction phase showing the complex engineering behind the award-winning design'
+    ]
+  },
+  
+  // Adding Ongar New Build Project (new)
+  {
+    id: 28,
+    title: 'Ongar New Build Project',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Ongar%20New%20Build%20Project/Alemara%20Structural%20Engineers%20Ongar%205.jpg',
+    description: 'Comprehensive structural engineering for a new build residential development in Ongar, showcasing modern construction techniques and innovative design solutions.',
+    completion: 'May 2024',
+    architect: 'New Horizon Architects',
+    location: 'Ongar, Essex',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Ongar%20New%20Build%20Project/Alemara%20Structural%20Engineers%20Ongar%205.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Ongar%20New%20Build%20Project/Alemara%20Structural%20Engineers%20Ongar%202.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Ongar%20New%20Build%20Project/Alemara%20Structural%20Engineers%20Ongar%203.JPG',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Ongar%20New%20Build%20Project/Alemara%20Structural%20Engineers%20Ongar%207.jpg'
+    ],
+    imageAlt: [
+      'Exterior view of the Ongar new build project showing modern architectural design',
+      'Structural framework during construction showing engineering principles',
+      'Foundation work highlighting essential structural engineering solutions',
+      'Completed structural elements showing quality of engineering implementation'
+    ]
+  },
+  
+  // Keep the rest of the residential projects
   {
     id: 3,
     title: 'Structural Reinforcement - Kensington',

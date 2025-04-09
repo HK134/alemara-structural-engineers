@@ -3,6 +3,6 @@
 export const featuredProjects = [
   15, // Cheval Place
   20, // Halcyon Gallery, Bond Street
-  19, // Five Miles
+  27, // Mollands - RIBA Feature
   22  // Watford Stadium
 ];

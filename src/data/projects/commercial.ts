@@ -64,20 +64,22 @@ Our structural solutions included:
 This project presented unique challenges in combining food production facilities with entertainment spaces while meeting all relevant safety regulations and sound control requirements. The resulting venue has become a landmark in the area's regeneration, demonstrating how thoughtful structural engineering can facilitate innovative commercial concepts.`
   },
   
-  // Updating Halcyon Gallery with correct images
+  // Updating Halcyon Gallery with new image
   {
     id: 20,
     title: 'Halcyon Gallery - Bond Street',
     type: 'commercial',
-    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20design.jpg',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
     description: 'Comprehensive structural engineering for the renovation of a prestigious art gallery in Mayfair, featuring custom display solutions and enhanced load-bearing capacity.',
     completion: 'April 2023',
     location: 'Bond Street, Mayfair',
     images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20design.jpg'
     ],
     imageAlt: [
-      'Interior of Halcyon Gallery on Bond Street showing bespoke structural design elements',
+      'Interior of Halcyon Gallery on Bond Street showing bespoke structural engineering solutions',
+      'Interior of Halcyon Gallery on Bond Street showing bespoke structural design elements'
     ],
     fullDescription: `The Halcyon Gallery renovation on Bond Street required sophisticated structural engineering to transform a historic Mayfair building into a world-class contemporary art exhibition space. 
 
@@ -91,24 +93,22 @@ Our engineering contributions included:
 Working within the constraints of a heritage building in one of London's most prestigious locations required meticulous attention to detail and close collaboration with conservationists, architects, and gallery specialists. The completed gallery has successfully hosted numerous high-profile exhibitions, with the engineering work remaining elegantly concealed behind the refined gallery aesthetic.`
   },
   
-  // Keeping the other commercial projects
+  // Updating Riverbank Plaza Hotel with proper images
   {
     id: 21,
     title: 'Riverbank Plaza Hotel - Structural Upgrade',
     type: 'commercial',
-    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/riverbank-plaza-main.jpg',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/Alemara%20Riverbank%20Plaza%20Hotel%20engineers%201.jpg',
     description: 'Major structural assessment and reinforcement program for a prominent riverside hotel, focusing on increased capacity and modernized infrastructure.',
     completion: 'September 2023',
     location: 'South Bank, London',
     images: [
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/riverbank-plaza-main.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/riverbank-plaza-interior.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/riverbank-plaza-structural.jpg'
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/Alemara%20Riverbank%20Plaza%20Hotel%20engineers%201.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/riverbankplaxahotelalemara2.jpg'
     ],
     imageAlt: [
       'Exterior view of the Riverbank Plaza Hotel showing the riverside façade',
-      'Interior renovation showing structural reinforcements and modern design',
-      'Structural diagram detailing the engineering upgrades implemented'
+      'Interior renovation showing structural reinforcements and modern design'
     ],
     fullDescription: `The Riverbank Plaza Hotel project involved a comprehensive structural assessment and upgrade program for this prominent riverside hotel. Operating in a fully functioning hotel environment presented unique challenges that required careful planning and phased implementation.
 
@@ -122,7 +122,7 @@ Our engineering work included:
 This major commercial project demonstrates our ability to deliver complex structural upgrades while minimizing disruption to ongoing business operations. The completed work has extended the building's operational lifespan and enhanced its commercial value while maintaining its iconic riverside presence.`
   },
   
-  // Additional commercial projects
+  // Keep the other commercial projects
   {
     id: 6,
     title: 'Commercial Office Building - City of London',
