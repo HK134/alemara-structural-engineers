@@ -1,6 +1,5 @@
+
 import React, { useState, useEffect } from 'react';
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 interface ProjectImageProps {
   project: {
@@ -17,21 +16,14 @@ interface ProjectImageProps {
 const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
   const [currentImageSrc, setCurrentImageSrc] = useState(imageSrc);
 
   // Reset image states when imageSrc changes
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
-    setRetryCount(0);
     setCurrentImageSrc(imageSrc);
   }, [imageSrc]);
-
-  // Check if the image is a Supabase storage URL or public URL
-  const isSupabaseStorageUrl = (url: string): boolean => {
-    return url.startsWith('https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/');
-  };
 
   // Project-specific fallback images
   const getProjectFallback = () => {
@@ -53,126 +45,46 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
     return null;
   };
 
-  // Specific fallback images for Cheval Place project (id: 15)
-  const chevalPlaceFallbacks = [
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg', // Main image
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(1).jpg',
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(2).jpg',
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/Alemara%20Structural%20Engineering%20-%20London%20-%20Cheval%20Place%20(3).jpg',
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/entrance.jpg',
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/kitchen.jpg',
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/stairs.jpg',
-    'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/bathroom.jpg'
-  ];
-
-  // Fallback images from unsplash (available in placeholders)
-  const fallbackImages = [
-    'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
-    'https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&q=80&w=800&h=500',
-    'https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&q=80&w=800&h=500'
-  ];
-
-  // Try to load the image, with fallbacks and retries
-  const handleImageError = async () => {
+  // Handle image loading errors
+  const handleImageError = () => {
     console.error('Image failed to load:', currentImageSrc);
-    
-    // If it's a Supabase URL that failed, try to get a signed URL
-    if (isSupabaseStorageUrl(currentImageSrc) && retryCount === 0) {
-      try {
-        // Extract path from URL
-        const path = currentImageSrc.split('public/')[1];
-        if (path) {
-          const bucketName = path.split('/')[0];
-          const filePath = path.substring(bucketName.length + 1);
-          
-          const { data, error } = await supabase.storage
-            .from(bucketName)
-            .createSignedUrl(filePath, 60); // 60 seconds expiry
-            
-          if (data?.signedUrl) {
-            setCurrentImageSrc(data.signedUrl);
-            setRetryCount(prev => prev + 1);
-            setImageError(false);
-            setImageLoaded(false);
-            return;
-          }
-        }
-      } catch (err) {
-        console.error('Error creating signed URL:', err);
-      }
-    }
     
     // Try project-specific fallback first
     const projectFallback = getProjectFallback();
-    if (projectFallback && retryCount === 0) {
+    if (projectFallback) {
       setCurrentImageSrc(projectFallback);
-      setRetryCount(prev => prev + 1);
       setImageError(false);
-      setImageLoaded(false);
       return;
     }
     
-    if (retryCount < 2) {
-      // Try again with the same image (could be a temporary network issue)
-      setTimeout(() => {
-        setRetryCount(prev => prev + 1);
-        // Force image reload by adding a cache-busting param
-        setCurrentImageSrc(`${imageSrc}?retry=${retryCount + 1}`);
-        setImageError(false);
-        setImageLoaded(false);
-      }, 1000);
-    } else if (project.id === 15 && retryCount < chevalPlaceFallbacks.length + 2) {
-      // For Cheval Place project, use the updated list of fallbacks
-      const fallbackIndex = retryCount - 2;
-      setCurrentImageSrc(chevalPlaceFallbacks[fallbackIndex]);
-      setRetryCount(prev => prev + 1);
-      setImageError(false);
-      setImageLoaded(false);
-      toast.info("Using alternative image");
-    } else if (retryCount < 5 + chevalPlaceFallbacks.length) {
-      // Try one of the fallback images
-      const fallbackIndex = (retryCount - chevalPlaceFallbacks.length - 2) % fallbackImages.length;
-      setCurrentImageSrc(fallbackImages[fallbackIndex]);
-      setRetryCount(prev => prev + 1);
-      setImageError(false);
-      setImageLoaded(false);
-      toast.info("Using fallback image");
-    } else {
-      // Give up and show error
-      setImageLoaded(true);
-      setImageError(true);
-      toast.error("Could not load project image");
-    }
+    // Set error state if no fallbacks work
+    setImageError(true);
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-100 min-h-[400px] flex items-center justify-center">
+    <div className="relative overflow-hidden rounded-lg bg-gray-100 aspect-4/3">
       {!imageLoaded && !imageError && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-8 h-8 border-4 border-gray-200 border-t-[#ea384c] rounded-full animate-spin"></div>
+          <div className="w-6 h-6 border-2 border-gray-200 border-t-[#ea384c] rounded-full animate-spin"></div>
         </div>
       )}
       
       {imageError ? (
-        <div className="flex flex-col items-center justify-center p-6 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex flex-col items-center justify-center p-6 text-gray-400 h-full">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <p>Image could not be loaded</p>
+          <p className="text-sm">Image not available</p>
         </div>
       ) : (
         <img 
-          key={`${currentImageSrc}-${retryCount}`} // Force re-render on retry
           src={currentImageSrc}
           alt={imageAlt} 
-          className={`w-full h-auto rounded-lg shadow-lg transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          width="800"
-          height="600"
+          className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          width="600"
+          height="450"
           loading="eager"
-          onLoad={() => {
-            setImageLoaded(true);
-            setImageError(false);
-          }}
+          onLoad={() => setImageLoaded(true)}
           onError={handleImageError}
         />
       )}
