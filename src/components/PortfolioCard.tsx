@@ -39,6 +39,11 @@ const PortfolioCard = ({
     ? project.imageAlt[0] 
     : `${project.title} - ${project.type} structural engineering project`;
 
+  // Only show architect if it's Daniel Rees or Xami
+  const showArchitect = project.architect && 
+    (project.architect.toLowerCase().includes('daniel rees') || 
+     project.architect.toLowerCase().includes('xami'));
+
   const handleViewDetails = (e: React.MouseEvent) => {
     if (project.useModal) {
       e.preventDefault();
@@ -113,7 +118,9 @@ const PortfolioCard = ({
             <span className="inline-block bg-[#ea384c]/10 text-[#ea384c] text-xs font-semibold px-2 py-1 rounded-full">
               {project.type.charAt(0).toUpperCase() + project.type.slice(1)}
             </span>
-            <span className="text-xs text-gray-500">{project.completion}</span>
+            {showArchitect && (
+              <span className="text-xs text-gray-500">Architect: {project.architect}</span>
+            )}
           </div>
           <h3 className="text-xl font-semibold text-[#1A1F2C] mb-3">{project.title}</h3>
           <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>

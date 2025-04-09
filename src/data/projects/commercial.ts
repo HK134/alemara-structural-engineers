@@ -3,11 +3,11 @@
 export const commercialProjects = [
   {
     id: 14,
-    title: 'Five Miles - Music Venue & Brewery',
+    title: 'Five Miles - Music Venue',
     type: 'commercial',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design.jpg',
-    description: 'Transformation of a 3,000ft² warehouse into a 500-capacity club and brewery with optimized acoustic design featuring an innovative floating floor system.',
-    completion: 'February 2023',
+    description: 'Transformation of a 3,000ft² warehouse into a 500-capacity club with optimized acoustic design featuring an innovative floating floor system.',
+    completion: '',
     location: 'Tottenham, North London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design.jpg',
@@ -18,10 +18,10 @@ export const commercialProjects = [
     imageAlt: [
       'Exterior of Five Miles venue with modern industrial design elements',
       'Interior of the underground music space showing acoustic treatment and structural supports',
-      'Bar area with integrated brewery equipment and structural features',
+      'Bar area with structural features',
       'Technical drawing showing acoustic and structural design elements for the Five Miles venue'
     ],
-    fullDescription: `A 3,000ft² warehouse was transformed into a 500-capacity club space, bar and craft brewery. The concept focused on providing the area with the best possible acoustics.
+    fullDescription: `A 3,000ft² warehouse was transformed into a 500-capacity club space. The concept focused on providing the area with the best possible acoustics.
 
 The main area of the club was designed as a standalone structure in an internal space, so the entire floor was lifted from the ground and dampeners were used to distance it from the floor below.
 
@@ -34,7 +34,7 @@ Our structural engineering solutions included:
 3. Independent structural framework that avoided load-bearing on exterior walls
 4. Sound-absorbing materials integration
 5. Strategic placement of support columns to maximize open space while maintaining structural integrity
-6. Design of support structures for heavy brewing equipment
+6. Design of support structures for heavy equipment
 7. Reinforcement of existing foundations to bear additional loads
 
 The unique challenges of this project required innovative approaches to structural design while ensuring compliance with both building safety regulations and acoustic performance standards. The resulting venue has become a landmark in the area's regeneration, demonstrating how thoughtful structural engineering can facilitate innovative commercial concepts.`
@@ -47,7 +47,7 @@ The unique challenges of this project required innovative approaches to structur
     type: 'commercial',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
     description: 'Comprehensive structural engineering for the renovation of a prestigious art gallery in Mayfair, featuring custom display solutions and enhanced load-bearing capacity.',
-    completion: 'April 2023',
+    completion: '',
     location: 'Bond Street, Mayfair',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
@@ -76,7 +76,7 @@ Working within the constraints of a heritage building in one of London's most pr
     type: 'commercial',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/Alemara%20Riverbank%20Plaza%20Hotel%20engineers%201.jpg',
     description: 'Major structural assessment and reinforcement program for a prominent riverside hotel, focusing on increased capacity and modernized infrastructure.',
-    completion: 'September 2023',
+    completion: '',
     location: 'South Bank, London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/Alemara%20Riverbank%20Plaza%20Hotel%20engineers%201.jpg',
