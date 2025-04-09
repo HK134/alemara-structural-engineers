@@ -70,5 +70,37 @@ Compliance Oversight: Ensuring all engineering solutions adhered to industry reg
 Detailed Reporting: Providing clear documentation and detailed reports to track progress and maintain transparency with project stakeholders, ensuring accountability at every stage.
 
 Our work on the HS2 project underscores our expertise in delivering innovative, cost-effective engineering solutions while prioritising safety, compliance, and efficiency. Through our dedicated approach, we support the successful progression of critical infrastructure works, reinforcing our reputation as a trusted engineering partner for large-scale projects of national importance.`
+  },
+  
+  // Adding Watford Stadium project
+  {
+    id: 22,
+    title: 'Watford Stadium - Structural Assessment',
+    type: 'civil',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Watford%20Stadium/watford-stadium-main.jpg',
+    description: 'Comprehensive structural assessment and improvement recommendations for Watford Football Stadium, focusing on stand safety and expansion potential.',
+    completion: 'July 2023',
+    client: 'Watford FC',
+    location: 'Watford, Hertfordshire',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Watford%20Stadium/watford-stadium-main.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Watford%20Stadium/watford-stadium-stand.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Watford%20Stadium/watford-stadium-structural.jpg'
+    ],
+    imageAlt: [
+      'Aerial view of Watford Football Stadium showing the stands and pitch',
+      'Close-up of stand structure showing support columns and seating arrangement',
+      'Structural diagram showing assessment findings and reinforcement recommendations'
+    ],
+    fullDescription: `The Watford Stadium project involved a detailed structural assessment of the existing football ground to evaluate safety compliance and expansion potential. Our civil engineering team conducted a thorough investigation of all structural elements including foundations, stands, and supporting facilities.
+
+Key aspects of our work included:
+1. Comprehensive condition assessment of all structural elements
+2. Dynamic load testing of stands under simulated crowd conditions
+3. Computer modeling of structural performance under various loading scenarios
+4. Identification of capacity constraints and safety considerations
+5. Development of phased reinforcement and improvement recommendations
+
+This high-profile sports infrastructure project required specialized knowledge of stadium engineering and close collaboration with club management and safety authorities. Our assessment provided the client with a clear understanding of the current structural condition and a roadmap for future improvements to enhance capacity and spectator experience while maintaining the highest safety standards.`
   }
 ];

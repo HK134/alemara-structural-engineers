@@ -39,16 +39,22 @@ This challenging project required close collaboration with conservation speciali
     id: 2,
     title: 'Victoria Park Project - East London',
     type: 'residential',
-    image: '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Victoria%20Park/victoria-park-main.jpg',
     description: 'Structural refurbishment of a Victorian property with timber design solutions for open plan living space, addressing sloping floors and fragile supports.',
     completion: 'June 2023',
     architect: 'REES Architects',
     location: 'Victoria Park, East London',
     images: [
-      '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png'
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Victoria%20Park/victoria-park-main.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Victoria%20Park/victoria-park-interior-1.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Victoria%20Park/victoria-park-interior-2.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Victoria%20Park/victoria-park-plans.jpg'
     ],
     imageAlt: [
-      'Modern bright open plan living space with blue sofa, dining table, and white kitchen after structural refurbishment'
+      'Modern bright open plan living space with blue sofa, dining table, and white kitchen after structural refurbishment',
+      'Interior view of the Victoria Park project showing the timber structural solutions',
+      'Open plan kitchen and dining area with natural light after structural improvements',
+      'Technical structural plans and drawings for the Victoria Park renovation project'
     ],
     fullDescription: `This property required a full internal refurbishment. The original condition was poor with numerous structural issues, including sloping floors and fragile timber supports. We provided a very cost-effective timber design solution to remedy the problems and allow for openings within load bearing walls to create an open plan living space. The architecture and project management were successfully led by REES Architects.
 
@@ -63,13 +69,20 @@ The successful completion of this project demonstrates our expertise in finding 
     id: 13,
     title: 'Warrington Crescent - Maida Vale',
     type: 'residential',
-    image: '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Warrington%20Crescent/warrington-crescent-main.jpg',
     description: 'Structural engineering for reconfiguration of a top floor flat within a grade II listed building, including mezzanine design and timber structural elements.',
     completion: 'September 2023',
     architect: 'XAMI Architects',
     location: 'Maida Vale, London',
     images: [
-      '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png'
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Warrington%20Crescent/warrington-crescent-main.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Warrington%20Crescent/warrington-crescent-interior.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Warrington%20Crescent/warrington-crescent-plans.jpg'
+    ],
+    imageAlt: [
+      'Exterior view of the Grade II listed building on Warrington Crescent in Maida Vale',
+      'Interior view of the top floor flat showing the mezzanine design and timber elements',
+      'Technical drawings and structural plans for the Warrington Crescent project'
     ],
     fullDescription: `Based in Maida Vale this project involved reconfiguring a top floor flat within a six storey grade II listed building. The redevelopment included a mezzanine, forming a new opening in the mansard roof and demolishing walls below the mezzanine level to create an open living space. 
 
@@ -80,7 +93,73 @@ As a Grade II listed building, our engineering approach required careful conside
 The mezzanine design utilized lightweight timber construction techniques that minimized load impact on the existing structure, while the new roof opening was engineered to maintain structural integrity and comply with conservation guidelines. Our timber-focused approach not only reduced costs but also aligned with sustainable building practices and heritage conservation principles.`
   },
   
-  // Additional residential projects
+  // Now adding new project: Burrows Court
+  {
+    id: 16,
+    title: 'Burrows Court - Residential Development',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Burrows%20Court/burrows-court-main.jpg',
+    description: 'Structural engineering for a modern residential development with emphasis on efficient space utilization and sustainable building practices.',
+    completion: 'October 2023',
+    architect: 'BrightSpace Architects',
+    location: 'South London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Burrows%20Court/burrows-court-main.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Burrows%20Court/burrows-court-exterior.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Burrows%20Court/burrows-court-plans.jpg'
+    ],
+    imageAlt: [
+      'Modern residential development at Burrows Court with contemporary architectural features',
+      'Exterior view showing the structural elements and façade details',
+      'Technical drawings and structural plans for the Burrows Court development'
+    ]
+  },
+  
+  // Adding Carlton Road
+  {
+    id: 17,
+    title: 'Carlton Road - Victorian Conversion',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Carlton%20Road/carlton-road-main.jpg',
+    description: 'Comprehensive structural renovation of a Victorian property, converting it into modern apartments while preserving original architectural features.',
+    completion: 'August 2023',
+    architect: 'Heritage Studios',
+    location: 'Carlton Road, North London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Carlton%20Road/carlton-road-main.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Carlton%20Road/carlton-road-interior.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Carlton%20Road/carlton-road-details.jpg'
+    ],
+    imageAlt: [
+      'Exterior view of the Victorian property on Carlton Road after structural renovation',
+      'Interior showing the blend of preserved original features and modern structural elements',
+      'Detail view of architectural elements preserved during the conversion process'
+    ]
+  },
+  
+  // Adding Gloucester Gardens
+  {
+    id: 18,
+    title: 'Gloucester Gardens - Heritage Renovation',
+    type: 'residential',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens/gloucester-gardens-main.jpg',
+    description: 'Structural renovation of a period property in Gloucester Gardens, featuring basement extension and comprehensive internal reconfiguration.',
+    completion: 'December 2023',
+    architect: 'Period Renovations Ltd',
+    location: 'Gloucester Gardens, Paddington',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens/gloucester-gardens-main.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens/gloucester-gardens-basement.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens/gloucester-gardens-details.jpg'
+    ],
+    imageAlt: [
+      'Front facade of the period property on Gloucester Gardens after renovation',
+      'Newly constructed basement extension with structural reinforcements',
+      'Architectural details showing the structural support system implemented'
+    ]
+  },
+  
+  // Keep the rest of the existing residential projects
   {
     id: 3,
     title: 'Structural Reinforcement - Kensington',

@@ -2,6 +2,7 @@
 // Featured projects - used for homepage and featured sections
 export const featuredProjects = [
   15, // Cheval Place
-  14, // Acoustic Club
-  13  // Warrington Crescent
+  20, // Halcyon Gallery, Bond Street
+  19, // Five Miles
+  22  // Watford Stadium
 ];
