@@ -58,7 +58,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
+          <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
           <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
           <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
           <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
@@ -97,7 +97,7 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
-                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
+                <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
                 <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
                 <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
                 <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
