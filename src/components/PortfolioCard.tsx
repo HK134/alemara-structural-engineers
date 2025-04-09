@@ -55,7 +55,7 @@ const PortfolioCard = ({
     
     // Special handling for Cheval Place project (id: 15)
     if (project.id === 15) {
-      target.src = '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png';
+      target.src = '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png';
       setImageError(false);
       return;
     }

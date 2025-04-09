@@ -5,20 +5,24 @@ export const residentialProjects = [
     id: 15, // Cheval Place
     title: 'Cheval Place - Knightsbridge',
     type: 'residential',
-    image: '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png', // Updated to use the new exterior brick facade image
+    image: '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png', // Updated to use the new exterior brick facade image
     description: 'Located in the heart of London, on the site of Count Rumford\'s Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.',
     completion: 'January 2024',
     architect: 'Morgan Studio Architects',
     location: 'Knightsbridge, London',
     images: [
-      '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png', // New exterior brick facade
-      '/lovable-uploads/f584a768-55ab-44d7-8634-9a6e94adda2b.png', // Interior dining space
-      '/lovable-uploads/cd25898b-c49e-4558-b60b-61a6fb9174df.png'  // Outdoor terrace
+      '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png', // Exterior facade
+      '/lovable-uploads/b7b02193-7ff4-4154-a345-15e8dc6ad549.png', // Interior bathroom with black marble
+      '/lovable-uploads/bfd1ed50-bdf0-404e-9d7a-3d65f5110366.png', // Interior dining area
+      '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png', // Outdoor terrace
+      '/lovable-uploads/21245a9f-e8d3-46d7-92e3-b38db9e341d4.png'  // Duplicate of exterior for backup
     ],
     imageAlt: [
       'Historic London mews townhouse with yellow brick façade, contemporary dark frames, rooftop terrace with umbrella, and detailed architectural elements',
-      'Contemporary interior dining area with parquet flooring, modern kitchen, elegant staircase and oval mirror',
-      'Stylish outdoor terrace with wooden wall panels, comfortable seating area, and parasol'
+      'Luxury bathroom with black marble walls and gold accents, featuring vessel sinks on a wooden countertop',
+      'Modern dining area with wooden parquet flooring, contemporary kitchen, and elegant staircase with black railings',
+      'Stylish outdoor terrace with wooden wall panels, comfortable L-shaped seating area, and cream parasol',
+      'Front view of the renovated London townhouse showing the preserved historic yellow brick façade'
     ],
     fullDescription: `Located in the heart of London, on the site of Count Rumford's Brompton Road residence, Cheval Place has a long history of innovation, experimentation and Victorian practicality.
 

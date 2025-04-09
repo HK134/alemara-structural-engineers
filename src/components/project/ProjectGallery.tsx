@@ -62,9 +62,22 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
         if (path) {
           // Try to use a project-specific fallback instead
           if (title.includes('Cheval Place')) {
-            target.src = '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png';
-            setImageErrors(prev => ({...prev, [image]: false}));
-            return;
+            const chevalPlaceFallbacks = [
+              '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png', // Exterior
+              '/lovable-uploads/b7b02193-7ff4-4154-a345-15e8dc6ad549.png', // Bathroom
+              '/lovable-uploads/bfd1ed50-bdf0-404e-9d7a-3d65f5110366.png', // Dining area
+              '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png'  // Terrace
+            ];
+            
+            if (index < chevalPlaceFallbacks.length) {
+              target.src = chevalPlaceFallbacks[index];
+              setImageErrors(prev => ({...prev, [image]: false}));
+              return;
+            } else {
+              target.src = '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png';
+              setImageErrors(prev => ({...prev, [image]: false}));
+              return;
+            }
           } else if (title.includes('Victoria Park')) {
             target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
             setImageErrors(prev => ({...prev, [image]: false}));
@@ -83,13 +96,18 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
     // Special handling for specific projects
     if (title.includes('Cheval Place')) {
       const chevalPlaceFallbacks = [
-        '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png',
-        '/lovable-uploads/f584a768-55ab-44d7-8634-9a6e94adda2b.png',
-        '/lovable-uploads/cd25898b-c49e-4558-b60b-61a6fb9174df.png'
+        '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png', // Exterior
+        '/lovable-uploads/b7b02193-7ff4-4154-a345-15e8dc6ad549.png', // Bathroom
+        '/lovable-uploads/bfd1ed50-bdf0-404e-9d7a-3d65f5110366.png', // Dining area
+        '/lovable-uploads/55fc9291-548e-4d78-bd43-5a653cfb33f4.png'  // Terrace
       ];
       
       if (index < chevalPlaceFallbacks.length) {
         target.src = chevalPlaceFallbacks[index];
+        setImageErrors(prev => ({...prev, [image]: false}));
+        return;
+      } else {
+        target.src = chevalPlaceFallbacks[0];
         setImageErrors(prev => ({...prev, [image]: false}));
         return;
       }
@@ -182,7 +200,7 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
                   if (!target) return;
                   
                   if (title.includes('Cheval Place')) {
-                    target.src = '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png';
+                    target.src = '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png';
                   } else if (title.includes('Victoria Park')) {
                     target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
                   } else if (title.includes('Warrington Crescent')) {
