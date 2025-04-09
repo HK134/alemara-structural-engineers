@@ -1,3 +1,4 @@
+
 // Residential projects data
 export const residentialProjects = [
   {
@@ -208,12 +209,13 @@ The mezzanine design utilized lightweight timber construction techniques that mi
   // Cambridge Street - Pimlico
   {
     id: 25,
-    title: 'Pimlico',
+    title: 'Cambridge Street - Pimlico',
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%201.JPG',
     description: 'Comprehensive structural renovation of a Pimlico property with distinctive period features, balancing heritage preservation with modern structural requirements.',
+    completion: 'January 2024',
     architect: 'Pimlico Restoration Specialists',
-    location: 'Cambridge Street, London',
+    location: 'Cambridge Street, Pimlico, London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%201.JPG',
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%202.JPG',

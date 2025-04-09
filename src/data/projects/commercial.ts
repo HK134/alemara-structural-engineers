@@ -1,78 +1,100 @@
+
 // Commercial projects data
 export const commercialProjects = [
-  // The Shard - London Bridge
+  {
+    id: 14,
+    title: 'Five Miles - Music Venue',
+    type: 'commercial',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design.jpg',
+    description: 'Transformation of a 3,000ft² warehouse into a 500-capacity club with optimized acoustic design featuring an innovative floating floor system.',
+    completion: '',
+    location: 'Tottenham, North London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design%202.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design%203.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design%205.jpg'
+    ],
+    imageAlt: [
+      'Exterior of Five Miles venue with modern industrial design elements',
+      'Interior of the underground music space showing acoustic treatment and structural supports',
+      'Bar area with structural features',
+      'Technical drawing showing acoustic and structural design elements for the Five Miles venue'
+    ],
+    fullDescription: `A 3,000ft² warehouse was transformed into a 500-capacity club space. The concept focused on providing the area with the best possible acoustics.
+
+The main area of the club was designed as a standalone structure in an internal space, so the entire floor was lifted from the ground and dampeners were used to distance it from the floor below.
+
+This meant that none of the structure was allowed to rely on the external walls, which meant very little outside noise came in and less noise escaped, providing the perfect environment for recording studios and the club.
+
+Our structural engineering solutions included:
+
+1. Custom-designed acoustic isolation systems
+2. Floating floor construction with vibration dampening mechanisms
+3. Independent structural framework that avoided load-bearing on exterior walls
+4. Sound-absorbing materials integration
+5. Strategic placement of support columns to maximize open space while maintaining structural integrity
+6. Design of support structures for heavy equipment
+7. Reinforcement of existing foundations to bear additional loads
+
+The unique challenges of this project required innovative approaches to structural design while ensuring compliance with both building safety regulations and acoustic performance standards. The resulting venue has become a landmark in the area's regeneration, demonstrating how thoughtful structural engineering can facilitate innovative commercial concepts.`
+  },
+  
+  // Halcyon Gallery - Bond Street
   {
     id: 20,
-    title: 'The Shard',
-    type: 'commercial',
-    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/The%20Shard/Alemara%20Structural%20Engineers%20The%20Shard.jpg',
-    description: 'Structural engineering services for Europe\'s tallest skyscraper, including design optimization and construction support.',
-    location: 'London Bridge, London',
-    images: [
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/The%20Shard/Alemara%20Structural%20Engineers%20The%20Shard.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/The%20Shard/Alemara%20Structural%20Engineers%20The%20Shard%202.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/The%20Shard/Alemara%20Structural%20Engineers%20The%20Shard%203.jpg'
-    ],
-    imageAlt: [
-      'The Shard skyscraper in London, a modern architectural marvel',
-      'Close-up of the Shard\'s unique glass facade',
-      'Construction details of the Shard showing its complex structural design'
-    ],
-    fullDescription: `Our structural engineering team provided critical support for the design and construction of The Shard, Western Europe's tallest building. We worked closely with the architectural team to optimize the structural design, ensuring stability and efficiency while meeting the aesthetic goals of the project.
-
-Key aspects of our involvement included:
-1. Finite element analysis to model structural behavior under various loading conditions
-2. Design of high-strength concrete core and steel frame
-3. Optimization of foundation design to minimize settlement
-4. Wind tunnel testing to assess aerodynamic performance
-5. On-site construction support and quality control
-
-This landmark project required innovative engineering solutions to overcome the challenges of building a super-tall structure in a dense urban environment. Our work helped ensure the Shard's structural integrity and long-term durability.`
-  },
-  
-  // Battersea Power Station
-  {
-    id: 21,
-    title: 'Battersea Power Station',
-    type: 'commercial',
-    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Battersea%20Power%20Station/Alemara%20Structural%20Engineers%20Battersea%20Power%20Station.jpg',
-    description: 'Structural assessment and refurbishment of the iconic Battersea Power Station, converting it into a mixed-use commercial and residential space.',
-    location: 'Battersea, London',
-    images: [
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Battersea%20Power%20Station/Alemara%20Structural%20Engineers%20Battersea%20Power%20Station.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Battersea%20Power%20Station/Alemara%20Structural%20Engineers%20Battersea%20Power%20Station%202.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Battersea%20Power%20Station/Alemara%20Structural%20Engineers%20Battersea%20Power%20Station%203.jpg'
-    ],
-    imageAlt: [
-      'The iconic Battersea Power Station after structural refurbishment',
-      'Close-up of the refurbished facade showing the blend of old and new',
-      'Interior view of the commercial space within Battersea Power Station'
-    ],
-    fullDescription: `The Battersea Power Station project involved the structural assessment and refurbishment of the iconic building, transforming it into a mixed-use commercial and residential space. Our team conducted a thorough investigation of the existing structure to determine its condition and load-bearing capacity.
-
-Key aspects of our work included:
-1. Detailed condition assessment of all structural elements
-2. Finite element analysis to model structural behavior under new loading conditions
-3. Design of reinforcement and repair strategies for damaged elements
-4. Design of new structural elements to support the new building functions
-5. On-site construction support and quality control
-
-This complex project required a deep understanding of historic building materials and construction techniques. Our work helped ensure the structural integrity of the building while preserving its architectural heritage.`
-  },
-  
-  // Updated Halcyon Gallery project
-  {
-    id: 19,
-    title: 'Mayfair',
+    title: 'Halcyon Gallery - Bond Street',
     type: 'commercial',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
-    description: 'Structural engineering solutions for a prestigious Mayfair art gallery, incorporating specialist design for art display areas and building fabric reinforcement.',
-    location: 'Bond Street, London',
+    description: 'Comprehensive structural engineering for the renovation of a prestigious art gallery in Mayfair, featuring custom display solutions and enhanced load-bearing capacity.',
+    completion: '',
+    location: 'Bond Street, Mayfair',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20design.jpg'
     ],
     imageAlt: [
-      'The luxurious exterior of Bond Street Gallery in Mayfair showing the elegant facade and entrance',
-    ]
+      'Interior of Halcyon Gallery on Bond Street showing bespoke structural engineering solutions',
+      'Interior of Halcyon Gallery on Bond Street showing bespoke structural design elements'
+    ],
+    fullDescription: `The Halcyon Gallery renovation on Bond Street required sophisticated structural engineering to transform a historic Mayfair building into a world-class contemporary art exhibition space. 
+
+Our engineering contributions included:
+1. Assessment and reinforcement of the existing period structure
+2. Design of minimalist structural supports to create expansive, uninterrupted display areas
+3. Engineering solutions for mounting and securing valuable large-scale artworks
+4. Integration of specialized lighting and climate control systems
+5. Enhanced floor loading capacity for heavyweight sculpture displays
+
+Working within the constraints of a heritage building in one of London's most prestigious locations required meticulous attention to detail and close collaboration with conservationists, architects, and gallery specialists. The completed gallery has successfully hosted numerous high-profile exhibitions, with the engineering work remaining elegantly concealed behind the refined gallery aesthetic.`
   },
+  
+  // Riverbank Plaza Hotel
+  {
+    id: 21,
+    title: 'Riverbank Plaza Hotel - Structural Upgrade',
+    type: 'commercial',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/Alemara%20Riverbank%20Plaza%20Hotel%20engineers%201.jpg',
+    description: 'Major structural assessment and reinforcement program for a prominent riverside hotel, focusing on increased capacity and modernized infrastructure.',
+    completion: '',
+    location: 'South Bank, London',
+    images: [
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/Alemara%20Riverbank%20Plaza%20Hotel%20engineers%201.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Riverbank%20Plaza%20Hotel/riverbankplaxahotelalemara2.jpg'
+    ],
+    imageAlt: [
+      'Exterior view of the Riverbank Plaza Hotel showing the riverside façade',
+      'Interior renovation showing structural reinforcements and modern design'
+    ],
+    fullDescription: `The Riverbank Plaza Hotel project involved a comprehensive structural assessment and upgrade program for this prominent riverside hotel. Operating in a fully functioning hotel environment presented unique challenges that required careful planning and phased implementation.
+
+Our engineering work included:
+1. Full structural condition assessment of the existing building
+2. Design of reinforcement solutions for increased floor loading capacities
+3. Structural modifications to accommodate new building services
+4. Seismic performance evaluation and enhancement measures
+5. Façade retention engineering during internal reconfiguration
+
+This major commercial project demonstrates our ability to deliver complex structural upgrades while minimizing disruption to ongoing business operations. The completed work has extended the building's operational lifespan and enhanced its commercial value while maintaining its iconic riverside presence.`
+  }
 ];

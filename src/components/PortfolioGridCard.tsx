@@ -10,6 +10,7 @@ interface ProjectProps {
     type: string;
     image: string;
     description: string;
+    completion: string;
     location?: string;
   };
 }
@@ -18,12 +19,11 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Updated color from yellow to a red that matches site branding
   const typeColor = {
-    residential: 'text-[#ea384c]',
-    commercial: 'text-[#ea384c]',
-    civil: 'text-[#ea384c]'
-  }[project.type] || 'text-[#ea384c]';
+    residential: 'text-yellow-400',
+    commercial: 'text-yellow-400',
+    civil: 'text-yellow-400'
+  }[project.type] || 'text-yellow-400';
 
   // Extract the location name or use a placeholder
   const locationName = project.location?.split(',')[0] || 'London';
@@ -97,7 +97,7 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
       {/* Project details positioned on top of the image */}
       <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
         <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-wide mb-1">
-          {project.title}
+          {locationName}
         </h2>
         <p className="text-sm text-gray-300 mb-2">
           {locationSubtitle}

@@ -9,100 +9,14 @@ import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building, Home, HardHat } from 'lucide-react';
 import PortfolioGridCard from '@/components/PortfolioGridCard';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 
 const Portfolio = () => {
   const [activeTab, setActiveTab] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 6;
   
   // Filter projects based on active tab
   const filteredProjects = activeTab === 'all' 
     ? portfolioItems
     : portfolioItems.filter(item => item.type === activeTab);
-  
-  // Calculate pagination
-  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
-  const indexOfLastProject = currentPage * projectsPerPage;
-  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
-  
-  // Handle page change
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    // Scroll to top when changing pages
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-  
-  // Reset to page 1 when changing tabs
-  const handleTabChange = (value: string) => {
-    setActiveTab(value);
-    setCurrentPage(1);
-  };
-  
-  // Generate pagination items
-  const renderPaginationItems = () => {
-    const items = [];
-    
-    // First page
-    if (currentPage > 3) {
-      items.push(
-        <PaginationItem key="first">
-          <PaginationLink onClick={() => handlePageChange(1)}>1</PaginationLink>
-        </PaginationItem>
-      );
-      
-      if (currentPage > 4) {
-        items.push(
-          <PaginationItem key="ellipsis-1">
-            <span className="px-4">...</span>
-          </PaginationItem>
-        );
-      }
-    }
-    
-    // Pages around current page
-    for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
-      items.push(
-        <PaginationItem key={i}>
-          <PaginationLink 
-            isActive={currentPage === i} 
-            onClick={() => handlePageChange(i)}
-          >
-            {i}
-          </PaginationLink>
-        </PaginationItem>
-      );
-    }
-    
-    // Last page
-    if (currentPage < totalPages - 2) {
-      if (currentPage < totalPages - 3) {
-        items.push(
-          <PaginationItem key="ellipsis-2">
-            <span className="px-4">...</span>
-          </PaginationItem>
-        );
-      }
-      
-      items.push(
-        <PaginationItem key="last">
-          <PaginationLink onClick={() => handlePageChange(totalPages)}>
-            {totalPages}
-          </PaginationLink>
-        </PaginationItem>
-      );
-    }
-    
-    return items;
-  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -131,7 +45,7 @@ const Portfolio = () => {
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">All Projects</h2>
             <p className="text-gray-600 text-center mb-12">Browse our complete portfolio of structural engineering work</p>
             
-            <Tabs defaultValue="all" value={activeTab} onValueChange={handleTabChange} className="w-full">
+            <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
               <div className="flex justify-center mb-12">
                 <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   <TabsTrigger value="all" className="flex items-center gap-2">
@@ -155,30 +69,10 @@ const Portfolio = () => {
               
               <TabsContent value={activeTab} className="mt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {currentProjects.map(project => (
+                  {filteredProjects.map(project => (
                     <PortfolioGridCard key={project.id} project={project} />
                   ))}
                 </div>
-                
-                {totalPages > 1 && (
-                  <Pagination className="mt-12">
-                    <PaginationContent>
-                      {currentPage > 1 && (
-                        <PaginationItem>
-                          <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
-                        </PaginationItem>
-                      )}
-                      
-                      {renderPaginationItems()}
-                      
-                      {currentPage < totalPages && (
-                        <PaginationItem>
-                          <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
-                        </PaginationItem>
-                      )}
-                    </PaginationContent>
-                  </Pagination>
-                )}
               </TabsContent>
             </Tabs>
           </div>
