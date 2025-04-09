@@ -7,6 +7,7 @@ interface ProjectMetadataProps {
     completion: string;
     location?: string;
     architect?: string;
+    title: string; // Added the missing title property
   };
 }
 
