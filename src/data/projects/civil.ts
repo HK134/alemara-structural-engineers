@@ -1,4 +1,3 @@
-
 // Civil engineering projects data
 export const civilProjects = [
   // Hinkley Point C project
