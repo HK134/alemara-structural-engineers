@@ -1,3 +1,4 @@
+
 // Residential projects data
 export const residentialProjects = [
   {
@@ -93,7 +94,7 @@ As a Grade II listed building, our engineering approach required careful conside
 The mezzanine design utilized lightweight timber construction techniques that minimized load impact on the existing structure, while the new roof opening was engineered to maintain structural integrity and comply with conservation guidelines. Our timber-focused approach not only reduced costs but also aligned with sustainable building practices and heritage conservation principles.`
   },
   
-  // Updating Burrows Court with proper images
+  // Burrows Court
   {
     id: 16,
     title: 'Burrows Court - Residential Development',
@@ -113,7 +114,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Updating Carlton Road
+  // Carlton Road
   {
     id: 17,
     title: 'Carlton Road - Victorian Conversion',
@@ -137,7 +138,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Updating Gloucester Gardens
+  // Gloucester Gardens
   {
     id: 18,
     title: 'Gloucester Gardens - Heritage Renovation',
@@ -159,7 +160,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Adding Gloucester Gardens 2 (new)
+  // Gloucester Gardens 2
   {
     id: 23,
     title: 'Gloucester Gardens 2 - Period Property Restoration',
@@ -183,7 +184,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Adding Gloucester Terrace (new)
+  // Gloucester Terrace
   {
     id: 24,
     title: 'Gloucester Terrace - Classic London Terrace',
@@ -205,7 +206,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Adding Cambridge Street - Pimlico (new)
+  // Cambridge Street - Pimlico
   {
     id: 25,
     title: 'Cambridge Street - Pimlico',
@@ -229,7 +230,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Adding Hanningfield - Timber Structure (new)
+  // Hanningfield - Timber Structure
   {
     id: 26,
     title: 'Hanningfield - Timber Structure',
@@ -251,7 +252,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Adding Mollands - RIBA Feature (new)
+  // Mollands - RIBA Feature
   {
     id: 27,
     title: 'Mollands - RIBA Feature Project',
@@ -275,7 +276,7 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     ]
   },
   
-  // Adding Ongar New Build Project (new)
+  // Ongar New Build Project
   {
     id: 28,
     title: 'Ongar New Build Project',
@@ -297,47 +298,5 @@ The mezzanine design utilized lightweight timber construction techniques that mi
       'Foundation work highlighting essential structural engineering solutions',
       'Completed structural elements showing quality of engineering implementation'
     ]
-  },
-  
-  // Keep the rest of the residential projects
-  {
-    id: 3,
-    title: 'Structural Reinforcement - Kensington',
-    type: 'residential',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Complete basement reinforcement for a Victorian property, including steel beam installation and load-bearing wall modifications.',
-    completion: 'January 2023'
-  },
-  {
-    id: 4,
-    title: 'Loft Conversion - Richmond',
-    type: 'residential',
-    image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Structural design for loft conversion including dormer windows and reinforced floor structure.',
-    completion: 'March 2023'
-  },
-  {
-    id: 5,
-    title: 'Side Return Extension - Islington',
-    type: 'residential',
-    image: 'https://images.unsplash.com/photo-1433832597046-4f10e10ac764?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Structural calculations and design for a glass-roofed side return extension with steel frame.',
-    completion: 'May 2023'
-  },
-  {
-    id: 7,
-    title: 'Apartment Complex - Canary Wharf',
-    type: 'residential',
-    image: 'https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Comprehensive structural calculations and design for a new 12-unit apartment complex, including foundation specifications.',
-    completion: 'April 2023'
-  },
-  {
-    id: 8,
-    title: 'Student Accommodation - Greenwich',
-    type: 'residential',
-    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
-    description: 'Structural design for a 40-unit student accommodation building, focusing on efficient space utilization and safety compliance.',
-    completion: 'July 2023'
   }
 ];
