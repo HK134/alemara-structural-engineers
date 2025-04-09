@@ -1,4 +1,3 @@
-
 // Residential projects data
 export const residentialProjects = [
   {
@@ -101,8 +100,8 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Burrows%20Court/Alemara%20Stuctural%20Engineers%20High%20Rise.jpg',
     description: 'Structural engineering for a modern residential development with emphasis on efficient space utilization and sustainable building practices.',
-    completion: 'October 2023',
-    architect: 'BrightSpace Architects',
+    completion: '',
+    architect: '',
     location: 'South London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Burrows%20Court/Alemara%20Stuctural%20Engineers%20High%20Rise.jpg',
@@ -121,8 +120,8 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Carlton%20Road/Alemara%20Carlton%20Park%201.jpg',
     description: 'Comprehensive structural renovation of a Victorian property, converting it into modern apartments while preserving original architectural features.',
-    completion: 'August 2023',
-    architect: 'Heritage Studios',
+    completion: '',
+    architect: '',
     location: 'Carlton Road, North London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Carlton%20Road/Alemara%20Carlton%20Park%201.jpg',
@@ -145,8 +144,8 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens/Alemara%20structural%20Gloucester%20Gardens%201.jpg',
     description: 'Structural renovation of a period property in Gloucester Gardens, featuring basement extension and comprehensive internal reconfiguration.',
-    completion: 'December 2023',
-    architect: 'Period Renovations Ltd',
+    completion: '',
+    architect: '',
     location: 'Gloucester Gardens, Paddington',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens/Alemara%20structural%20Gloucester%20Gardens%201.jpg',
@@ -167,8 +166,8 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%201.jpg',
     description: 'Complete structural restoration and modernization of a period property, with careful preservation of historical features and introduction of contemporary living spaces.',
-    completion: 'February 2024',
-    architect: 'Heritage Preservation Partners',
+    completion: '',
+    architect: '',
     location: 'Gloucester Gardens, London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Gardens%202/Gloucester%20Gardens%202%20-Alemara%20Structural%20Engineers%201.jpg',
@@ -191,8 +190,8 @@ The mezzanine design utilized lightweight timber construction techniques that mi
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Terrace/105a%20Gloucester%20Terrace%20Alemara%20Structural%20Engineers%201.jpg',
     description: 'Structural engineering for the renovation of a classic London terrace property, involving careful adaptation of the historic structure to meet contemporary living standards.',
-    completion: 'March 2024',
-    architect: 'London Heritage Architects',
+    completion: '',
+    architect: '',
     location: 'Gloucester Terrace, London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Gloucester%20Terrace/105a%20Gloucester%20Terrace%20Alemara%20Structural%20Engineers%201.jpg',
@@ -209,12 +208,12 @@ The mezzanine design utilized lightweight timber construction techniques that mi
   // Cambridge Street - Pimlico
   {
     id: 25,
-    title: 'Cambridge Street - Pimlico',
+    title: 'Pimlico',
     type: 'residential',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%201.JPG',
     description: 'Comprehensive structural renovation of a Pimlico property with distinctive period features, balancing heritage preservation with modern structural requirements.',
-    completion: 'January 2024',
-    architect: 'Pimlico Restoration Specialists',
+    completion: '',
+    architect: '',
     location: 'Cambridge Street, Pimlico, London',
     images: [
       'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cambridge%20Street%20-%20Pimlico/Pimlico%20-Alemara%20Structural%20Engineers%201.JPG',

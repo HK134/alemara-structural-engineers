@@ -20,10 +20,10 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
   const [imageError, setImageError] = useState(false);
 
   const typeColor = {
-    residential: 'text-yellow-400',
-    commercial: 'text-yellow-400',
-    civil: 'text-yellow-400'
-  }[project.type] || 'text-yellow-400';
+    residential: 'text-[#ea384c]',
+    commercial: 'text-[#ea384c]',
+    civil: 'text-[#ea384c]'
+  }[project.type] || 'text-[#ea384c]';
 
   // Extract the location name or use a placeholder
   const locationName = project.location?.split(',')[0] || 'London';

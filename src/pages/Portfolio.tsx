@@ -5,18 +5,40 @@ import Footer from '@/components/Footer';
 import { portfolioItems } from '@/data/projects';
 import { Helmet } from "react-helmet";
 import ServiceCTA from '@/components/services/ServiceCTA';
-import { Link } from 'react-router-dom';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building, Home, HardHat } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PortfolioGridCard from '@/components/PortfolioGridCard';
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from "@/components/ui/pagination";
 
 const Portfolio = () => {
   const [activeTab, setActiveTab] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 6;
   
   // Filter projects based on active tab
   const filteredProjects = activeTab === 'all' 
     ? portfolioItems
     : portfolioItems.filter(item => item.type === activeTab);
+    
+  // Calculate pagination variables
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
+  
+  // Handle page changes
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Scroll to top of projects section
+    document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -40,12 +62,12 @@ const Portfolio = () => {
         </section>
         
         {/* Portfolio filters */}
-        <section className="py-12 bg-white">
+        <section id="projects-section" className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">All Projects</h2>
             <p className="text-gray-600 text-center mb-12">Browse our complete portfolio of structural engineering work</p>
             
-            <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs defaultValue="all" value={activeTab} onValueChange={(value) => { setActiveTab(value); setCurrentPage(1); }} className="w-full">
               <div className="flex justify-center mb-12">
                 <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   <TabsTrigger value="all" className="flex items-center gap-2">
@@ -69,10 +91,40 @@ const Portfolio = () => {
               
               <TabsContent value={activeTab} className="mt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {filteredProjects.map(project => (
+                  {currentProjects.map(project => (
                     <PortfolioGridCard key={project.id} project={project} />
                   ))}
                 </div>
+                
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <Pagination className="mt-12">
+                    <PaginationContent>
+                      {currentPage > 1 && (
+                        <PaginationItem>
+                          <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)} />
+                        </PaginationItem>
+                      )}
+                      
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                        <PaginationItem key={page}>
+                          <PaginationLink 
+                            isActive={currentPage === page}
+                            onClick={() => handlePageChange(page)}
+                          >
+                            {page}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      
+                      {currentPage < totalPages && (
+                        <PaginationItem>
+                          <PaginationNext onClick={() => handlePageChange(currentPage + 1)} />
+                        </PaginationItem>
+                      )}
+                    </PaginationContent>
+                  </Pagination>
+                )}
               </TabsContent>
             </Tabs>
           </div>

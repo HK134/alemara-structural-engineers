@@ -40,10 +40,10 @@ Our structural engineering solutions included:
 The unique challenges of this project required innovative approaches to structural design while ensuring compliance with both building safety regulations and acoustic performance standards. The resulting venue has become a landmark in the area's regeneration, demonstrating how thoughtful structural engineering can facilitate innovative commercial concepts.`
   },
   
-  // Halcyon Gallery - Bond Street
+  // Halcyon Gallery - Mayfair
   {
     id: 20,
-    title: 'Halcyon Gallery - Bond Street',
+    title: 'Mayfair',
     type: 'commercial',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20Structural%20Enginering.png',
     description: 'Comprehensive structural engineering for the renovation of a prestigious art gallery in Mayfair, featuring custom display solutions and enhanced load-bearing capacity.',
