@@ -19,6 +19,7 @@ interface ProjectGalleryProps {
 
 const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
 
   if (!images || images.length === 0) {
     return null;
@@ -30,6 +31,36 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
       return imageAlt[index];
     }
     return `${title} - Image ${index + 1}`;
+  };
+
+  // Handle image loading errors
+  const handleImageError = (image: string, index: number) => {
+    console.error(`Failed to load image for ${index}:`, image);
+    setImageErrors(prev => ({...prev, [image]: true}));
+    
+    // Special handling for Cheval Place images
+    if (title.includes('Cheval Place')) {
+      const chevalPlaceFallbacks = [
+        '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png',
+        '/lovable-uploads/f584a768-55ab-44d7-8634-9a6e94adda2b.png',
+        '/lovable-uploads/cd25898b-c49e-4558-b60b-61a6fb9174df.png'
+      ];
+      
+      if (index < chevalPlaceFallbacks.length) {
+        const target = document.getElementById(`gallery-img-${index}`) as HTMLImageElement;
+        if (target) {
+          target.src = chevalPlaceFallbacks[index];
+          setImageErrors(prev => ({...prev, [image]: false}));
+        }
+        return;
+      }
+    }
+    
+    // Default fallback
+    const target = document.getElementById(`gallery-img-${index}`) as HTMLImageElement;
+    if (target) {
+      target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+    }
   };
 
   return (
@@ -48,18 +79,14 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
                 >
                   <div className="h-full overflow-hidden rounded-lg cursor-pointer">
                     <img 
+                      id={`gallery-img-${index}`}
                       src={image} 
                       alt={getImageAlt(index)}
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
                       loading="lazy"
                       width="400"
                       height="300"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        console.error(`Failed to load image for ${index}:`, target.src);
-                        target.onerror = null;
-                        target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
-                      }}
+                      onError={() => handleImageError(image, index)}
                     />
                   </div>
                 </div>
@@ -86,12 +113,7 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
               loading="lazy"
               width="200"
               height="150"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                console.error(`Failed to load image for thumbnail ${index}:`, target.src);
-                target.onerror = null;
-                target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
-              }}
+              onError={() => handleImageError(image, index)}
             />
           </div>
         ))}
@@ -106,11 +128,15 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
                 src={selectedImage} 
                 alt="Project image" 
                 className="w-full h-auto max-h-[80vh] object-contain"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  console.error(`Failed to load lightbox image:`, target.src);
-                  target.onerror = null;
-                  target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                onError={() => {
+                  const target = document.querySelector('.dialog-img') as HTMLImageElement;
+                  if (target) {
+                    if (title.includes('Cheval Place')) {
+                      target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+                    } else {
+                      target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+                    }
+                  }
                 }}
               />
               <Button

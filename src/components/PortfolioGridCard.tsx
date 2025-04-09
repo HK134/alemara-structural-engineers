@@ -16,6 +16,7 @@ interface ProjectProps {
 
 const PortfolioGridCard = ({ project }: ProjectProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const typeColor = {
     residential: 'text-yellow-400',
@@ -29,6 +30,21 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
   // Create a subtitle for the card based on location
   const locationSubtitle = project.location || 'London, UK';
 
+  // Handle image errors - especially for the Cheval Place project
+  const handleImageError = () => {
+    console.error(`Failed to load image for project ${project.id}:`, project.image);
+    setImageError(true);
+    
+    // For Cheval Place project, use specific fallback
+    if (project.id === 15) {
+      const target = document.getElementById(`project-img-${project.id}`) as HTMLImageElement;
+      if (target) {
+        target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+        setImageError(false);
+      }
+    }
+  };
+
   return (
     <Link 
       to={`/portfolio/${project.id}`}
@@ -36,20 +52,22 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
     >
       {/* Background Image with gradient overlay */}
       <div className="absolute inset-0 bg-gray-900">
-        {/* Show placeholder while image is loading */}
-        {!imageLoaded && (
+        {/* Show placeholder while image is loading or if there's an error */}
+        {(!imageLoaded || imageError) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
             <div className="w-8 h-8 border-4 border-gray-700 border-t-gray-400 rounded-full animate-spin"></div>
           </div>
         )}
         <img 
+          id={`project-img-${project.id}`}
           src={project.image} 
           alt={`${project.title} - ${project.type} structural engineering project`}
-          className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
           loading="lazy"
           width="600"
           height="600"
           onLoad={() => setImageLoaded(true)}
+          onError={handleImageError}
         />
         {/* Dark gradient overlay for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>

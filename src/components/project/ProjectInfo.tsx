@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -42,6 +41,13 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
     setImageSrc(displayImage);
   }, [displayImage]);
 
+  // Specific fallback images for Cheval Place project (id: 15)
+  const chevalPlaceFallbacks = [
+    '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png',
+    '/lovable-uploads/f584a768-55ab-44d7-8634-9a6e94adda2b.png',
+    '/lovable-uploads/cd25898b-c49e-4558-b60b-61a6fb9174df.png'
+  ];
+
   // Fallback images from unsplash (available in placeholders)
   const fallbackImages = [
     'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=800&h=500',
@@ -62,16 +68,17 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
         setImageError(false);
         setImageLoaded(false);
       }, 1000);
-    } else if (retryCount === 3 && project.id === 15) {
-      // For Cheval Place project, use the new uploaded image as a direct fallback
-      setImageSrc('/lovable-uploads/a8ef8877-2675-49d2-8ae5-3b03e44c5482.png');
+    } else if (project.id === 15 && retryCount < chevalPlaceFallbacks.length + 3) {
+      // For Cheval Place project, use the newly uploaded images as fallbacks
+      const fallbackIndex = retryCount - 3;
+      setImageSrc(chevalPlaceFallbacks[fallbackIndex]);
       setRetryCount(prev => prev + 1);
       setImageError(false);
       setImageLoaded(false);
       toast.info("Using alternative image");
-    } else if (retryCount < 6) {
+    } else if (retryCount < 6 + chevalPlaceFallbacks.length) {
       // Try one of the fallback images
-      const fallbackIndex = (retryCount - 3) % fallbackImages.length;
+      const fallbackIndex = (retryCount - chevalPlaceFallbacks.length - 3) % fallbackImages.length;
       setImageSrc(fallbackImages[fallbackIndex]);
       setRetryCount(prev => prev + 1);
       setImageError(false);
