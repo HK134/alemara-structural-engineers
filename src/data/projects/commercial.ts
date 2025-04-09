@@ -1,4 +1,3 @@
-
 // Commercial projects data
 export const commercialProjects = [
   {
@@ -32,24 +31,26 @@ Our structural engineering solutions included:
 The unique challenges of this project required innovative approaches to structural design while ensuring compliance with both building safety regulations and acoustic performance standards. The resulting space successfully combines technical excellence with a striking visual aesthetic.`
   },
   
-  // Adding Five Miles project
+  // Updating Five Miles project with correct images
   {
     id: 19,
     title: 'Five Miles - Music Venue & Brewery',
     type: 'commercial',
-    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/five-miles-main.jpg',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design.jpg',
     description: 'Structural engineering for an innovative multi-purpose venue combining a craft brewery, bar, and underground music space with specialized acoustic treatment.',
     completion: 'February 2023',
     location: 'Tottenham, North London',
     images: [
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/five-miles-main.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/five-miles-interior.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/five-miles-bar.jpg'
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design%202.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design%203.jpg',
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Five%20Miles/Alemara%20structural%20acoustic%20design%205.jpg'
     ],
     imageAlt: [
       'Exterior of Five Miles venue with modern industrial design elements',
       'Interior of the underground music space showing acoustic treatment and structural supports',
-      'Bar area with integrated brewery equipment and structural features'
+      'Bar area with integrated brewery equipment and structural features',
+      'Technical drawing showing acoustic and structural design elements for the Five Miles venue'
     ],
     fullDescription: `Five Miles is an innovative multi-purpose commercial venue that required specialized structural engineering to integrate a craft brewery, bar, and underground music space within a converted industrial building. 
 
@@ -63,24 +64,20 @@ Our structural solutions included:
 This project presented unique challenges in combining food production facilities with entertainment spaces while meeting all relevant safety regulations and sound control requirements. The resulting venue has become a landmark in the area's regeneration, demonstrating how thoughtful structural engineering can facilitate innovative commercial concepts.`
   },
   
-  // Adding Halcyon Gallery project
+  // Updating Halcyon Gallery with correct images
   {
     id: 20,
     title: 'Halcyon Gallery - Bond Street',
     type: 'commercial',
-    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery%2C%20Bond%20Street/halcyon-gallery-main.jpg',
+    image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20design.jpg',
     description: 'Comprehensive structural engineering for the renovation of a prestigious art gallery in Mayfair, featuring custom display solutions and enhanced load-bearing capacity.',
     completion: 'April 2023',
     location: 'Bond Street, Mayfair',
     images: [
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery%2C%20Bond%20Street/halcyon-gallery-main.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery%2C%20Bond%20Street/halcyon-gallery-interior.jpg',
-      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery%2C%20Bond%20Street/halcyon-gallery-details.jpg'
+      'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Halcyon%20Gallery,%20Bond%20Street/Alemara%20Bespoke%20design.jpg'
     ],
     imageAlt: [
-      'Exterior view of the Halcyon Gallery on Bond Street with elegant façade',
-      'Interior gallery space showing open layout with minimalist structural elements',
-      'Detail of custom structural solutions for artwork display and lighting'
+      'Interior of Halcyon Gallery on Bond Street showing bespoke structural design elements',
     ],
     fullDescription: `The Halcyon Gallery renovation on Bond Street required sophisticated structural engineering to transform a historic Mayfair building into a world-class contemporary art exhibition space. 
 
@@ -94,7 +91,7 @@ Our engineering contributions included:
 Working within the constraints of a heritage building in one of London's most prestigious locations required meticulous attention to detail and close collaboration with conservationists, architects, and gallery specialists. The completed gallery has successfully hosted numerous high-profile exhibitions, with the engineering work remaining elegantly concealed behind the refined gallery aesthetic.`
   },
   
-  // Adding Riverbank Plaza Hotel project
+  // Keeping the other commercial projects
   {
     id: 21,
     title: 'Riverbank Plaza Hotel - Structural Upgrade',
