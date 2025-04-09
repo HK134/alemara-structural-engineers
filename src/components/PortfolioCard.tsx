@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Maximize2 } from 'lucide-react';
 import ProjectModal from './project/ProjectModal';
+import { toast } from "sonner";
 
 interface ProjectProps {
   project: {
@@ -27,6 +29,7 @@ const PortfolioCard = ({
 }: ProjectProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Get the first image from the project.images array if available, otherwise use the main image
   const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
@@ -43,6 +46,38 @@ const PortfolioCard = ({
     }
   };
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.error(`Failed to load image for project ${project.id}:`, displayImage);
+    setImageLoaded(true);
+    setImageError(true);
+    
+    const target = e.target as HTMLImageElement;
+    
+    // Special handling for Cheval Place project (id: 15)
+    if (project.id === 15) {
+      target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+      setImageError(false);
+      return;
+    }
+    
+    // Victoria Park Project (id: 2)
+    if (project.id === 2) {
+      target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
+      setImageError(false);
+      return;
+    }
+    
+    // Warrington Crescent (id: 13)
+    if (project.id === 13) {
+      target.src = '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
+      setImageError(false);
+      return;
+    }
+    
+    // For other projects, use a placeholder
+    target.src = '/placeholder.svg';
+  };
+
   return <>
       <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
         <div className="h-56 overflow-hidden relative bg-gray-100">
@@ -55,17 +90,22 @@ const PortfolioCard = ({
           <img 
             src={displayImage} 
             alt={imageAlt} 
-            className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
             loading="lazy"
             width="600"
             height="400"
             onLoad={() => setImageLoaded(true)}
-            onError={(e) => {
-              setImageLoaded(true);
-              const target = e.target as HTMLImageElement;
-              target.src = '/placeholder.svg';
-            }}
+            onError={handleImageError}
           />
+          {imageError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+              <div className="text-gray-400 flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+          )}
         </div>
         <div className="p-6">
           <div className="flex items-center justify-between mb-3">

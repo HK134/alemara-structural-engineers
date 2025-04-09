@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X } from 'lucide-react';
+import { toast } from "sonner";
 import { 
   Carousel,
   CarouselContent,
@@ -33,12 +34,15 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
     return `${title} - Image ${index + 1}`;
   };
 
-  // Handle image loading errors
+  // Handle image loading errors with improved fallbacks
   const handleImageError = (image: string, index: number) => {
-    console.error(`Failed to load image for ${index}:`, image);
+    console.error(`Failed to load image for ${title} (index ${index}):`, image);
     setImageErrors(prev => ({...prev, [image]: true}));
     
-    // Special handling for Cheval Place images
+    const target = document.getElementById(`gallery-img-${index}`) as HTMLImageElement;
+    if (!target) return;
+    
+    // Special handling for specific projects
     if (title.includes('Cheval Place')) {
       const chevalPlaceFallbacks = [
         '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png',
@@ -47,20 +51,27 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
       ];
       
       if (index < chevalPlaceFallbacks.length) {
-        const target = document.getElementById(`gallery-img-${index}`) as HTMLImageElement;
-        if (target) {
-          target.src = chevalPlaceFallbacks[index];
-          setImageErrors(prev => ({...prev, [image]: false}));
-        }
+        target.src = chevalPlaceFallbacks[index];
+        setImageErrors(prev => ({...prev, [image]: false}));
         return;
       }
     }
     
-    // Default fallback
-    const target = document.getElementById(`gallery-img-${index}`) as HTMLImageElement;
-    if (target) {
-      target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
+    if (title.includes('Victoria Park')) {
+      target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
+      setImageErrors(prev => ({...prev, [image]: false}));
+      return;
     }
+    
+    if (title.includes('Warrington Crescent')) {
+      target.src = '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
+      setImageErrors(prev => ({...prev, [image]: false}));
+      return;
+    }
+    
+    // Default fallback
+    target.src = '/placeholder.svg';
+    toast.error(`Could not load gallery image ${index + 1}`);
   };
 
   return (
@@ -127,15 +138,19 @@ const ProjectGallery = ({ images, title, imageAlt }: ProjectGalleryProps) => {
               <img 
                 src={selectedImage} 
                 alt="Project image" 
-                className="w-full h-auto max-h-[80vh] object-contain"
+                className="w-full h-auto max-h-[80vh] object-contain dialog-img"
                 onError={() => {
                   const target = document.querySelector('.dialog-img') as HTMLImageElement;
-                  if (target) {
-                    if (title.includes('Cheval Place')) {
-                      target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
-                    } else {
-                      target.src = 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&q=80&w=800&h=500';
-                    }
+                  if (!target) return;
+                  
+                  if (title.includes('Cheval Place')) {
+                    target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+                  } else if (title.includes('Victoria Park')) {
+                    target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
+                  } else if (title.includes('Warrington Crescent')) {
+                    target.src = '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
+                  } else {
+                    target.src = '/placeholder.svg';
                   }
                 }}
               />

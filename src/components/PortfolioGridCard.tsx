@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from "sonner";
 
 interface ProjectProps {
   project: {
@@ -30,19 +31,39 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
   // Create a subtitle for the card based on location
   const locationSubtitle = project.location || 'London, UK';
 
-  // Handle image errors - especially for the Cheval Place project
+  // Handle image errors with improved fallbacks
   const handleImageError = () => {
     console.error(`Failed to load image for project ${project.id}:`, project.image);
     setImageError(true);
     
-    // For Cheval Place project, use specific fallback
+    // Special handling for specific projects
+    const target = document.getElementById(`project-img-${project.id}`) as HTMLImageElement;
+    if (!target) return;
+    
+    // Cheval Place project (id: 15)
     if (project.id === 15) {
-      const target = document.getElementById(`project-img-${project.id}`) as HTMLImageElement;
-      if (target) {
-        target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
-        setImageError(false);
-      }
+      target.src = '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+      setImageError(false);
+      return;
     }
+    
+    // Victoria Park Project (id: 2)
+    if (project.id === 2) {
+      target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
+      setImageError(false);
+      return;
+    }
+    
+    // Warrington Crescent (id: 13)
+    if (project.id === 13) {
+      target.src = '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
+      setImageError(false);
+      return;
+    }
+    
+    // Use a placeholder for other projects
+    target.src = '/placeholder.svg';
+    toast.error(`Could not load image for ${project.title}`);
   };
 
   return (

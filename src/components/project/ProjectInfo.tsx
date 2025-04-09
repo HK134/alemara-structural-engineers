@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -41,6 +42,26 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
     setImageSrc(displayImage);
   }, [displayImage]);
 
+  // Project-specific fallback images
+  const getProjectFallback = () => {
+    // Cheval Place project (id: 15)
+    if (project.id === 15) {
+      return '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png';
+    }
+    
+    // Victoria Park Project (id: 2)
+    if (project.id === 2) {
+      return '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
+    }
+    
+    // Warrington Crescent (id: 13)
+    if (project.id === 13) {
+      return '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
+    }
+    
+    return null;
+  };
+
   // Specific fallback images for Cheval Place project (id: 15)
   const chevalPlaceFallbacks = [
     '/lovable-uploads/47d1f9e3-73d5-4a64-8f4f-99b79fb319bf.png',
@@ -59,7 +80,17 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const handleImageError = () => {
     console.error('Image failed to load:', imageSrc);
     
-    if (retryCount < 3) {
+    // Try project-specific fallback first
+    const projectFallback = getProjectFallback();
+    if (projectFallback && retryCount === 0) {
+      setImageSrc(projectFallback);
+      setRetryCount(prev => prev + 1);
+      setImageError(false);
+      setImageLoaded(false);
+      return;
+    }
+    
+    if (retryCount < 2) {
       // Try again with the same image (could be a temporary network issue)
       setTimeout(() => {
         setRetryCount(prev => prev + 1);
@@ -68,17 +99,17 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
         setImageError(false);
         setImageLoaded(false);
       }, 1000);
-    } else if (project.id === 15 && retryCount < chevalPlaceFallbacks.length + 3) {
+    } else if (project.id === 15 && retryCount < chevalPlaceFallbacks.length + 2) {
       // For Cheval Place project, use the newly uploaded images as fallbacks
-      const fallbackIndex = retryCount - 3;
+      const fallbackIndex = retryCount - 2;
       setImageSrc(chevalPlaceFallbacks[fallbackIndex]);
       setRetryCount(prev => prev + 1);
       setImageError(false);
       setImageLoaded(false);
       toast.info("Using alternative image");
-    } else if (retryCount < 6 + chevalPlaceFallbacks.length) {
+    } else if (retryCount < 5 + chevalPlaceFallbacks.length) {
       // Try one of the fallback images
-      const fallbackIndex = (retryCount - chevalPlaceFallbacks.length - 3) % fallbackImages.length;
+      const fallbackIndex = (retryCount - chevalPlaceFallbacks.length - 2) % fallbackImages.length;
       setImageSrc(fallbackImages[fallbackIndex]);
       setRetryCount(prev => prev + 1);
       setImageError(false);
