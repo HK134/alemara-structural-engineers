@@ -1,14 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ServiceCTA from '@/components/services/ServiceCTA';
-import { portfolioItems } from '@/data/projects';
+import { portfolioItems, getProjectsByType } from '@/data/projects';
 import ProjectInfo from '@/components/project/ProjectInfo';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import ProjectStructuredData from '@/components/project/ProjectStructuredData';
 import { Helmet } from 'react-helmet';
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Building, Home, HardHat } from 'lucide-react';
+import PortfolioCard from '@/components/PortfolioCard';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -16,6 +18,8 @@ const ProjectDetail = () => {
   const [loading, setLoading] = useState(true);
   const [prevProject, setPrevProject] = useState<any>(null);
   const [nextProject, setNextProject] = useState<any>(null);
+  const [relatedProjects, setRelatedProjects] = useState<any[]>([]);
+  const [filterType, setFilterType] = useState<string>('all');
 
   useEffect(() => {
     if (id) {
@@ -28,10 +32,33 @@ const ProjectDetail = () => {
         const currentIndex = portfolioItems.findIndex(item => item.id === parseInt(id));
         setPrevProject(currentIndex > 0 ? portfolioItems[currentIndex - 1] : null);
         setNextProject(currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null);
+        
+        // Set initial related projects
+        updateRelatedProjects(currentProject.type);
       }
     }
     setLoading(false);
   }, [id]);
+  
+  // Update related projects when filter changes
+  useEffect(() => {
+    if (project) {
+      updateRelatedProjects(filterType);
+    }
+  }, [filterType, project]);
+  
+  const updateRelatedProjects = (type: string) => {
+    // Get filtered projects based on type
+    let filteredProjects = type === 'all' 
+      ? portfolioItems 
+      : getProjectsByType(type);
+    
+    // Exclude current project
+    filteredProjects = filteredProjects.filter(item => item.id !== project?.id);
+    
+    // Limit to 3 projects
+    setRelatedProjects(filteredProjects.slice(0, 3));
+  };
 
   if (loading) {
     return (
@@ -80,6 +107,42 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4 mt-12">
           <div className="max-w-4xl mx-auto">
             <ProjectNavigation prevProject={prevProject} nextProject={nextProject} />
+          </div>
+        </div>
+        
+        {/* Other projects section */}
+        <div className="container mx-auto px-4 mt-16">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6 text-center">Check Out Our Other Projects</h2>
+            
+            {/* Project type filter */}
+            <div className="flex justify-center mb-8">
+              <ToggleGroup type="single" defaultValue="all" value={filterType} onValueChange={(value) => value && setFilterType(value)}>
+                <ToggleGroupItem value="all" aria-label="All projects" className="flex items-center gap-2">
+                  <Building className="h-4 w-4" />
+                  <span>All</span>
+                </ToggleGroupItem>
+                <ToggleGroupItem value="residential" aria-label="Residential projects" className="flex items-center gap-2">
+                  <Home className="h-4 w-4" />
+                  <span>Residential</span>
+                </ToggleGroupItem>
+                <ToggleGroupItem value="commercial" aria-label="Commercial projects" className="flex items-center gap-2">
+                  <Building className="h-4 w-4" />
+                  <span>Commercial</span>
+                </ToggleGroupItem>
+                <ToggleGroupItem value="civil" aria-label="Civil projects" className="flex items-center gap-2">
+                  <HardHat className="h-4 w-4" />
+                  <span>Civil</span>
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+            
+            {/* Related projects */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedProjects.map(relatedProject => (
+                <PortfolioCard key={relatedProject.id} project={relatedProject} />
+              ))}
+            </div>
           </div>
         </div>
         
