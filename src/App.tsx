@@ -3,13 +3,15 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
-// Pages
-const Index = lazy(() => import('@/pages/Index'));
+// Instead of lazy loading critical components, import them directly
+import Index from '@/pages/Index';
+import Portfolio from '@/pages/Portfolio';
+import PortfolioAlternative from '@/pages/PortfolioAlternative';
+import ProjectDetail from '@/pages/ProjectDetail';
+
+// Continue lazy loading for less critical routes
 const AboutUs = lazy(() => import('@/pages/AboutUs'));
 const Services = lazy(() => import('@/pages/Services'));
-const Portfolio = lazy(() => import('@/pages/Portfolio'));
-const PortfolioAlternative = lazy(() => import('@/pages/PortfolioAlternative'));
-const ProjectDetail = lazy(() => import('@/pages/ProjectDetail'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
 const Terms = lazy(() => import('@/pages/Terms'));
@@ -62,13 +64,15 @@ function App() {
     <Router>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          {/* Main Routes */}
+          {/* Main Routes - Critical paths loaded directly */}
           <Route path="/" element={<Index />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio-alternative" element={<PortfolioAlternative />} />
           <Route path="/portfolio/:id" element={<ProjectDetail />} />
+          
+          {/* Lazy loaded routes */}
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
