@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -78,6 +79,7 @@ const PortfolioCard = ({
   };
 
   return (
+    <>
       <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg hover:-translate-y-1">
         <div className="h-56 overflow-hidden relative bg-gray-100">
           {/* Show placeholder while image is loading */}
@@ -148,7 +150,8 @@ const PortfolioCard = ({
       
       {/* Modal for projects with useModal property */}
       {project.useModal && <ProjectModal project={project} isOpen={isModalOpen} onOpenChange={setIsModalOpen} />}
-    );
+    </>
+  );
 };
 
 export default PortfolioCard;
