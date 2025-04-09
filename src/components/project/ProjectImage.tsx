@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ProjectImageProps {
   project: {
@@ -27,6 +28,11 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
     setRetryCount(0);
     setCurrentImageSrc(imageSrc);
   }, [imageSrc]);
+
+  // Check if the image is a Supabase storage URL or public URL
+  const isSupabaseStorageUrl = (url: string): boolean => {
+    return url.startsWith('https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/');
+  };
 
   // Project-specific fallback images
   const getProjectFallback = () => {
@@ -63,8 +69,31 @@ const ProjectImage = ({ project, imageSrc, imageAlt }: ProjectImageProps) => {
   ];
 
   // Try to load the image, with fallbacks and retries
-  const handleImageError = () => {
+  const handleImageError = async () => {
     console.error('Image failed to load:', currentImageSrc);
+    
+    // If it's a Supabase URL that failed, try to get a signed URL
+    if (isSupabaseStorageUrl(currentImageSrc) && retryCount === 0) {
+      try {
+        // Extract path from URL
+        const path = currentImageSrc.split('public/website-images/')[1];
+        if (path) {
+          const { data, error } = await supabase.storage
+            .from('website-images')
+            .createSignedUrl(path, 60); // 60 seconds expiry
+            
+          if (data?.signedUrl) {
+            setCurrentImageSrc(data.signedUrl);
+            setRetryCount(prev => prev + 1);
+            setImageError(false);
+            setImageLoaded(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.error('Error creating signed URL:', err);
+      }
+    }
     
     // Try project-specific fallback first
     const projectFallback = getProjectFallback();
