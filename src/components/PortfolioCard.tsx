@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -55,7 +54,7 @@ const PortfolioCard = ({
     
     // Special handling for Cheval Place project (id: 15)
     if (project.id === 15) {
-      target.src = '/lovable-uploads/ad432c49-50c0-4368-b23a-21b69bc189b1.png';
+      target.src = 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg';
       setImageError(false);
       return;
     }

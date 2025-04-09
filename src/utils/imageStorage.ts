@@ -74,6 +74,32 @@ export const uploadPublicUrlToStorage = async (imageUrl: string, folder: string 
 };
 
 /**
+ * Copies an image from one Supabase bucket to another
+ * @param sourceUrl The source URL of the image in a Supabase bucket
+ * @param targetBucket The target bucket name
+ * @param folder Optional folder path within the target bucket
+ * @returns The new URL in the target bucket
+ */
+export const copySupabaseImage = async (sourceUrl: string, targetBucket: string = 'website-images', folder: string = 'projects') => {
+  try {
+    // Check if the URL is from a Supabase bucket
+    if (!sourceUrl.includes('supabase.co/storage/v1/object/public/')) {
+      // If not, use the uploadPublicUrlToStorage function
+      return await uploadPublicUrlToStorage(sourceUrl, folder);
+    }
+    
+    // Extract the filename from the URL
+    const fileName = sourceUrl.split('/').pop() || `${uuidv4()}`;
+    
+    // Use the uploadPublicUrlToStorage function to handle the download and upload
+    return await uploadPublicUrlToStorage(sourceUrl, folder);
+  } catch (error) {
+    console.error('Error copying Supabase image:', error);
+    throw error;
+  }
+};
+
+/**
  * Retrieves a signed URL for a private file in Supabase storage
  * @param path The path to the file in the bucket
  * @param expiresIn Expiration time in seconds

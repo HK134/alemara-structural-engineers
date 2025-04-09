@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from "sonner";
@@ -42,7 +41,7 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
     
     // Cheval Place project (id: 15)
     if (project.id === 15) {
-      target.src = '/lovable-uploads/fcdb272d-9ef4-44ba-9409-ae7576efe782.png';
+      target.src = 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg';
       setImageError(false);
       return;
     }
