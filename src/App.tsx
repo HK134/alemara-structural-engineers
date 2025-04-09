@@ -6,7 +6,6 @@ import './App.css';
 // Instead of lazy loading critical components, import them directly
 import Index from '@/pages/Index';
 import Portfolio from '@/pages/Portfolio';
-import PortfolioAlternative from '@/pages/PortfolioAlternative';
 import ProjectDetail from '@/pages/ProjectDetail';
 
 // Continue lazy loading for less critical routes
@@ -67,7 +66,6 @@ function App() {
           {/* Main Routes - Critical paths loaded directly */}
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/portfolio-alternative" element={<PortfolioAlternative />} />
           <Route path="/portfolio/:id" element={<ProjectDetail />} />
           
           {/* Lazy loaded routes */}
