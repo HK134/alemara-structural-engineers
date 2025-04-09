@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -5,6 +6,7 @@ import Footer from '@/components/Footer';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import { portfolioItems, getProjectsByType } from '@/data/projects';
 import ProjectInfo from '@/components/project/ProjectInfo';
+import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import ProjectStructuredData from '@/components/project/ProjectStructuredData';
 import { Helmet } from 'react-helmet';
@@ -76,6 +78,9 @@ const ProjectDetail = () => {
     );
   }
 
+  // Special handling for civil infrastructure projects (Hinkley Point C and HS2)
+  const isInfrastructureProject = project.id === 11 || project.id === 12;
+
   const pageTitle = `${project.title} | London Structural Engineering Project`;
   const pageDescription = project.description?.substring(0, 160);
 
@@ -90,18 +95,24 @@ const ProjectDetail = () => {
       <ProjectStructuredData project={project} />
       <Navbar />
       <main className="flex-grow py-12">
-        {/* Compact header */}
-        <div className="container mx-auto px-4 mb-8">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-2">{project.title}</h1>
-            <p className="text-gray-600">{project.location || 'London'}</p>
-          </div>
-        </div>
-        
-        {/* Project information */}
-        <div className="container mx-auto px-4 mb-8">
-          <ProjectInfo project={project} />
-        </div>
+        {isInfrastructureProject ? (
+          <InfrastructureProjectDetail project={project} />
+        ) : (
+          <>
+            {/* Compact header */}
+            <div className="container mx-auto px-4 mb-8">
+              <div className="max-w-4xl mx-auto">
+                <h1 className="text-3xl font-bold mb-2">{project.title}</h1>
+                <p className="text-gray-600">{project.location || 'London'}</p>
+              </div>
+            </div>
+            
+            {/* Project information */}
+            <div className="container mx-auto px-4 mb-8">
+              <ProjectInfo project={project} />
+            </div>
+          </>
+        )}
         
         {/* Project navigation */}
         <div className="container mx-auto px-4 mt-12">
