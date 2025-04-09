@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import { portfolioItems } from '@/data/projects';
 import ProjectInfo from '@/components/project/ProjectInfo';
-import ProjectGallery from '@/components/project/ProjectGallery';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import ProjectStructuredData from '@/components/project/ProjectStructuredData';
 import { Helmet } from 'react-helmet';
@@ -50,10 +49,9 @@ const ProjectDetail = () => {
     );
   }
 
-  const pageTitle = `${project.title} | London Structural Surveys Project`;
+  const pageTitle = `${project.title} | London Structural Engineering Project`;
   const pageDescription = project.description?.substring(0, 160);
 
-  // Standard project display
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Helmet>
@@ -77,17 +75,6 @@ const ProjectDetail = () => {
         <div className="container mx-auto px-4 mb-8">
           <ProjectInfo project={project} />
         </div>
-        
-        {/* Project gallery (only if there are additional images) */}
-        {project.images && project.images.length > 1 && (
-          <div className="container mx-auto px-4 mb-8">
-            <ProjectGallery 
-              images={project.images} 
-              title={project.title}
-              imageAlt={project.imageAlt}
-            />
-          </div>
-        )}
         
         {/* Project navigation */}
         <div className="container mx-auto px-4 mt-12">
