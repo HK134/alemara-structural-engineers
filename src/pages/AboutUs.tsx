@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from "react-helmet";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import AccreditationSection from '@/components/AccreditationSection';
 import TeamMember from '@/components/about/TeamMember';
 import ServiceCTA from '@/components/services/ServiceCTA';
@@ -99,7 +100,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>About Structural Engineering Solutions | Alemara</title>
         <meta name="description" content="Discover Alemara's team of expert structural engineers providing innovative, reliable engineering solutions for London's residential and commercial projects." />
@@ -125,7 +126,7 @@ const AboutUs = () => {
       
       <Navbar />
       
-      <main className="min-h-screen">
+      <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative h-[500px] overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -422,7 +423,8 @@ const AboutUs = () => {
       </main>
       
       <Footer />
-    </>
+      <StickyBookingButton />
+    </div>
   );
 };
 

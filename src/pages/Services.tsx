@@ -9,6 +9,7 @@ import StructuralEngineeringServices from '@/components/services/StructuralEngin
 import CivilEngineeringServices from '@/components/services/CivilEngineeringServices';
 import SteelFabricationServices from '@/components/services/SteelFabricationServices';
 import ServiceCTA from '@/components/services/ServiceCTA';
+import StickyBookingButton from '@/components/StickyBookingButton';
 
 const Services = () => {
   // Create a function for smooth scrolling with offset
@@ -52,6 +53,7 @@ const Services = () => {
         <ServiceCTA />
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

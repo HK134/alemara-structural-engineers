@@ -1,18 +1,7 @@
-
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ServiceCTA from '@/components/services/ServiceCTA';
-import { portfolioItems, getProjectsByType } from '@/data/projects';
-import ProjectInfo from '@/components/project/ProjectInfo';
-import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
-import ProjectNavigation from '@/components/project/ProjectNavigation';
-import ProjectStructuredData from '@/components/project/ProjectStructuredData';
-import { Helmet } from 'react-helmet';
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Building, Home, HardHat } from 'lucide-react';
-import PortfolioCard from '@/components/PortfolioCard';
+import StickyBookingButton from '@/components/StickyBookingButton';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -85,16 +74,9 @@ const ProjectDetail = () => {
   const pageDescription = project.description?.substring(0, 160);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="keywords" content={`${project.type} engineering, ${project.title}, structural engineering project, London, ${project.location || ''}`} />
-        <link rel="canonical" href={`https://londonstructuralsurveys.com/portfolio/${project.id}`} />
-      </Helmet>
-      <ProjectStructuredData project={project} />
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow py-12">
+      <main className="flex-grow">
         {isInfrastructureProject ? (
           <InfrastructureProjectDetail project={project} />
         ) : (
@@ -160,6 +142,7 @@ const ProjectDetail = () => {
         <ServiceCTA />
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

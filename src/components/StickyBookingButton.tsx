@@ -24,7 +24,9 @@ const StickyBookingButton = () => {
     '/engineer-messages',
     '/engineer-availability',
     '/engineer-company-policy',
-    '/engineer-client-etiquette'
+    '/engineer-client-etiquette',
+    '/analytics',
+    '/seo'
   ];
   
   // Check if current path should hide the booking button

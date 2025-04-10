@@ -1,12 +1,7 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ArrowRight, Calendar, Search, Tag } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import StickyBookingButton from '@/components/StickyBookingButton';
 
 // Sample blog post data - this will be replaced with actual data later
 const blogPosts = [
@@ -92,7 +87,7 @@ const blogPosts = [
 // Get unique categories
 const allCategories = ["All", ...new Set(blogPosts.map(post => post.category))];
 
-const BlogPage = () => {
+const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   
@@ -105,9 +100,9 @@ const BlogPage = () => {
   });
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="min-h-screen bg-gray-50">
+      <main className="flex-grow">
         {/* Hero section */}
         <section className="bg-[#1A1F2C] py-16">
           <div className="container mx-auto px-4">
@@ -236,8 +231,9 @@ const BlogPage = () => {
         </section>
       </main>
       <Footer />
-    </>
+      <StickyBookingButton />
+    </div>
   );
 };
 
-export default BlogPage;
+export default Blog;

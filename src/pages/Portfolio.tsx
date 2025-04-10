@@ -1,7 +1,7 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { portfolioItems } from '@/data/projects';
 import { Helmet } from "react-helmet";
 import ServiceCTA from '@/components/services/ServiceCTA';
@@ -22,21 +22,17 @@ const Portfolio = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 6;
   
-  // Filter projects based on active tab
   const filteredProjects = activeTab === 'all' 
     ? portfolioItems
     : portfolioItems.filter(item => item.type === activeTab);
     
-  // Calculate pagination variables
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
   
-  // Handle page changes
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    // Scroll to top of projects section
     document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' });
   };
   
@@ -51,7 +47,6 @@ const Portfolio = () => {
       
       <Navbar />
       <main className="flex-grow">
-        {/* Hero section */}
         <section className="bg-[#1A1F2C] text-white py-16">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1>
@@ -61,7 +56,6 @@ const Portfolio = () => {
           </div>
         </section>
         
-        {/* Portfolio filters */}
         <section id="projects-section" className="py-12 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">All Projects</h2>
@@ -96,7 +90,6 @@ const Portfolio = () => {
                   ))}
                 </div>
                 
-                {/* Pagination */}
                 {totalPages > 1 && (
                   <Pagination className="mt-12">
                     <PaginationContent>
@@ -133,6 +126,7 @@ const Portfolio = () => {
         <ServiceCTA />
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };
