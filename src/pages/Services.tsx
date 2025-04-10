@@ -33,6 +33,9 @@ const Services = () => {
       setTimeout(() => {
         scrollToSection(id);
       }, 500); // Small delay to ensure page is fully loaded
+    } else {
+      // If no hash, scroll to top when component mounts
+      window.scrollTo(0, 0);
     }
   }, []);
 

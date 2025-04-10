@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import ContactDialog from './ContactDialog';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,6 +22,7 @@ import {
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +40,17 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Function to handle navigation to the current page (scrolls to top)
+  const handleCurrentPageNav = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const currentPath = location.pathname;
+    const linkPath = event.currentTarget.getAttribute('href');
+    
+    if (linkPath === currentPath) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className={`${scrolled ? 'bg-[#1A1F2C]' : 'bg-[#1A1F2C]'} py-4 w-full z-50 sticky top-0 transition-all duration-300`}>
@@ -58,13 +71,16 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="text-white hover:text-[#ea384c] transition-colors">Home</Link>
-          <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
-          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
-          <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
-          <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
-          <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</Link>
-          <Link to="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</Link>
+          <Link to="/" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Home</Link>
+          <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>About</Link>
+          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Services</Link>
+          <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Portfolio</Link>
+          <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Blog</Link>
+          <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>FAQ</Link>
+          
+          <ContactDialog>
+            <button className="text-white hover:text-[#ea384c] transition-colors">Contact</button>
+          </ContactDialog>
           
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
@@ -98,18 +114,22 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
-                <Link to="/" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                <Link to="/" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>
                   <span className="flex items-center">
                     <Home className="h-4 w-4 mr-2" />
                     Home
                   </span>
                 </Link>
-                <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
-                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
-                <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
-                <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
-                <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</Link>
-                <Link to="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</Link>
+                <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>About</Link>
+                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Services</Link>
+                <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Portfolio</Link>
+                <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Blog</Link>
+                <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>FAQ</Link>
+                
+                <ContactDialog>
+                  <button className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 text-left">Contact</button>
+                </ContactDialog>
+                
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />
