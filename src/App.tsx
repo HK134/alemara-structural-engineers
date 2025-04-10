@@ -2,6 +2,7 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 // Instead of lazy loading critical components, import them directly
 import Index from '@/pages/Index';
@@ -60,63 +61,65 @@ const LoadingFallback = () => (
 
 function App() {
   return (
-    <Router>
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          {/* Main Routes - Critical paths loaded directly */}
-          <Route path="/" element={<Index />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/portfolio/:id" element={<ProjectDetail />} />
-          
-          {/* Lazy loaded routes */}
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/blog/structural-engineering-site-visits" element={<SiteVisits />} />
+    <AuthProvider>
+      <Router>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            {/* Main Routes - Critical paths loaded directly */}
+            <Route path="/" element={<Index />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:id" element={<ProjectDetail />} />
+            
+            {/* Lazy loaded routes */}
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/blog/structural-engineering-site-visits" element={<SiteVisits />} />
 
-          {/* Service Routes */}
-          <Route path="/services/residential" element={<Residential />} />
-          <Route path="/services/commercial" element={<Commercial />} />
-          <Route path="/services/civil-engineering" element={<CivilEngineering />} />
-          <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
-          
-          {/* Residential Service Routes */}
-          <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
-          <Route path="/services/residential/extensions" element={<Extensions />} />
+            {/* Service Routes */}
+            <Route path="/services/residential" element={<Residential />} />
+            <Route path="/services/commercial" element={<Commercial />} />
+            <Route path="/services/civil-engineering" element={<CivilEngineering />} />
+            <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
+            
+            {/* Residential Service Routes */}
+            <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
+            <Route path="/services/residential/extensions" element={<Extensions />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/client-login" element={<ClientLogin />} />
-          <Route path="/engineer-login" element={<EngineerLogin />} />
-          
-          {/* Client Portal Routes */}
-          <Route path="/client-dashboard" element={<ClientDashboard />} />
-          
-          {/* Engineer Portal Routes */}
-          <Route path="/engineer-dashboard" element={<EngineerDashboard />} />
-          <Route path="/engineer-projects-map" element={<EngineerProjectsMap />} />
-          <Route path="/engineer-timesheet" element={<EngineerTimesheet />} />
-          <Route path="/engineer-invoices" element={<EngineerInvoices />} />
-          <Route path="/engineer-messages" element={<EngineerMessages />} />
-          <Route path="/engineer-availability" element={<EngineerAvailability />} />
-          <Route path="/engineer-company-policy" element={<EngineerCompanyPolicy />} />
-          <Route path="/engineer-client-etiquette" element={<EngineerClientEtiquette />} />
-          
-          {/* Analytics Routes */}
-          <Route path="/seo" element={<SEO />} />
-          <Route path="/analytics" element={<Analytics />} />
-          
-          {/* Fallbacks */}
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/404" replace />} />
-        </Routes>
-      </Suspense>
-    </Router>
+            {/* Admin Routes */}
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/client-login" element={<ClientLogin />} />
+            <Route path="/engineer-login" element={<EngineerLogin />} />
+            
+            {/* Client Portal Routes */}
+            <Route path="/client-dashboard" element={<ClientDashboard />} />
+            
+            {/* Engineer Portal Routes */}
+            <Route path="/engineer-dashboard" element={<EngineerDashboard />} />
+            <Route path="/engineer-projects-map" element={<EngineerProjectsMap />} />
+            <Route path="/engineer-timesheet" element={<EngineerTimesheet />} />
+            <Route path="/engineer-invoices" element={<EngineerInvoices />} />
+            <Route path="/engineer-messages" element={<EngineerMessages />} />
+            <Route path="/engineer-availability" element={<EngineerAvailability />} />
+            <Route path="/engineer-company-policy" element={<EngineerCompanyPolicy />} />
+            <Route path="/engineer-client-etiquette" element={<EngineerClientEtiquette />} />
+            
+            {/* Analytics Routes */}
+            <Route path="/seo" element={<SEO />} />
+            <Route path="/analytics" element={<Analytics />} />
+            
+            {/* Fallbacks */}
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </AuthProvider>
   );
 }
 
