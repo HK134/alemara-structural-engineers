@@ -1,30 +1,38 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Calendar, X } from "lucide-react";
 import BookingDialog from "./BookingDialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useLocation } from 'react-router-dom';
 
 const StickyBookingButton = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const location = useLocation();
   
-  // Add lazy loading behavior - only show after scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      if (scrollPosition > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Don't show on admin/login/portal pages
+  const adminOrPortalPages = [
+    '/admin', 
+    '/login', 
+    '/client-login', 
+    '/engineer-login', 
+    '/client-dashboard',
+    '/engineer-dashboard',
+    '/engineer-projects-map',
+    '/engineer-timesheet',
+    '/engineer-invoices',
+    '/engineer-messages',
+    '/engineer-availability',
+    '/engineer-company-policy',
+    '/engineer-client-etiquette'
+  ];
   
-  if (!isVisible) return null;
+  // Check if current path should hide the booking button
+  const shouldHideButton = adminOrPortalPages.some(path => 
+    location.pathname.startsWith(path)
+  );
+  
+  if (shouldHideButton) return null;
   
   return (
     <div className="fixed bottom-6 right-6 z-50 animate-fade-in">

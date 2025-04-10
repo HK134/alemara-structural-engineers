@@ -8,8 +8,8 @@ import PortfolioCard from './PortfolioCard';
 import { Badge } from "@/components/ui/badge";
 
 const Portfolio = () => {
-  // Get featured projects for preview
-  const previewProjects = getFeaturedProjects();
+  // Get featured projects for preview, limiting to 3
+  const previewProjects = getFeaturedProjects().slice(0, 3);
 
   return (
     <section id="portfolio" className="py-20 bg-gray-50">
@@ -22,7 +22,7 @@ const Portfolio = () => {
         </div>
         
         {/* Recent projects grid - with SEO optimized images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {previewProjects.map((item) => (
             <PortfolioCard key={item?.id} project={item!} />
           ))}

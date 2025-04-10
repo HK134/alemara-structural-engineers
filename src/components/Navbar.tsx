@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Clock, Shield, MapPin, Menu, ChevronDown } from "lucide-react";
+import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
@@ -58,12 +58,13 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
+          <Link to="/" className="text-white hover:text-[#ea384c] transition-colors">Home</Link>
           <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
           <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
           <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
           <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
           <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</Link>
-          <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</a>
+          <Link to="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</Link>
           
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
@@ -97,12 +98,18 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
+                <Link to="/" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                  <span className="flex items-center">
+                    <Home className="h-4 w-4 mr-2" />
+                    Home
+                  </span>
+                </Link>
                 <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
                 <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
                 <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
                 <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
                 <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</Link>
-                <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</a>
+                <Link to="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</Link>
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />

@@ -43,7 +43,7 @@ const NotFound = () => {
                 Our Services
               </Button>
             </Link>
-            <Link to="/contact">
+            <Link to="/#contact">
               <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white px-6 py-6 h-auto text-lg">
                 Contact Us
               </Button>
