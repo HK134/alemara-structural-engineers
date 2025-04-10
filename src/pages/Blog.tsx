@@ -1,7 +1,13 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StickyBookingButton from '@/components/StickyBookingButton';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Search, Calendar, ArrowRight, Tag } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Sample blog post data - this will be replaced with actual data later
 const blogPosts = [
