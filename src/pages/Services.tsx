@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SchemaMarkup from '@/components/services/SchemaMarkup';
@@ -11,7 +11,7 @@ import SteelFabricationServices from '@/components/services/SteelFabricationServ
 import ServiceCTA from '@/components/services/ServiceCTA';
 
 const Services = () => {
-  // Create refs for smooth scrolling with offset
+  // Create a function for smooth scrolling with offset
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
