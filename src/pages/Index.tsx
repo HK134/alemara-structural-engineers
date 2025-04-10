@@ -5,6 +5,7 @@ import Hero from '@/components/Hero';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import Testimonials from '@/components/Testimonials';
+import ContactForm from '@/components/ContactForm'; // Import directly
 
 // Lazy load components that are below the fold
 const Services = lazy(() => import('@/components/Services'));
@@ -14,7 +15,7 @@ const Portfolio = lazy(() => import('@/components/Portfolio'));
 const CommonQuestions = lazy(() => import('@/components/CommonQuestions'));
 const AccreditationSection = lazy(() => import('@/components/AccreditationSection'));
 const FAQ = lazy(() => import('@/components/FAQ'));
-const ContactForm = lazy(() => import('@/components/ContactForm'));
+// ContactForm is now imported directly
 const CTA = lazy(() => import('@/components/CTA'));
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -38,7 +39,10 @@ const Index = () => {
           <Testimonials />
           <Suspense fallback={<div className="w-full h-20 bg-gray-100"></div>}>
             <FAQ />
-            <ContactForm />
+            {/* ContactForm is now directly rendered, not inside Suspense */}
+          </Suspense>
+          <ContactForm />
+          <Suspense fallback={<div className="w-full h-20 bg-gray-100"></div>}>
             <CTA />
           </Suspense>
         </main>
