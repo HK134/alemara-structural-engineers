@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import ContactForm from './ContactForm';
 
 interface ContactDialogProps {
   children: React.ReactNode;
@@ -16,12 +15,11 @@ const ContactDialog = ({ children }: ContactDialogProps) => {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[90%] md:max-w-[85%] lg:max-w-[80%]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center mb-4">Contact Us</DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left side - Contact details */}
+        <div className="space-y-6">
           <div className="bg-[#1A1F2C] p-6 rounded-lg text-white">
             <div className="flex items-center mb-4">
               <Phone className="h-5 w-5 text-[#ea384c] mr-3" />
@@ -60,9 +58,13 @@ const ContactDialog = ({ children }: ContactDialogProps) => {
             </div>
           </div>
           
-          {/* Right side - Contact form */}
-          <div className="bg-white rounded-lg">
-            <ContactForm inDialog={true} />
+          <div className="text-center">
+            <p className="mb-4">Need to send us a detailed inquiry?</p>
+            <Button asChild className="w-full bg-[#ea384c] hover:bg-[#d02e40]">
+              <Link to="/#contact" onClick={() => window.scrollTo({top: document.getElementById('contact')?.offsetTop - 120 || 0, behavior: 'smooth'})}>
+                Go to Contact Form
+              </Link>
+            </Button>
           </div>
         </div>
       </DialogContent>
