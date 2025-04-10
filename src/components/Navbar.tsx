@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home } from "lucide-react";
+import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home, UserCircle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import ContactDialog from './ContactDialog';
@@ -82,6 +82,36 @@ const Navbar = () => {
             <button className="text-white hover:text-[#ea384c] transition-colors">Contact</button>
           </ContactDialog>
           
+          {/* Login Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="border-[#ea384c] text-white hover:bg-[#ea384c]/10">
+                <UserCircle className="mr-1 h-4 w-4" />
+                Login
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white p-2 rounded-md shadow-lg w-48 border border-gray-200">
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/client-login">
+                  <UserCircle className="mr-2 h-4 w-4 text-blue-600" />
+                  <span>Client Portal</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/engineer-login">
+                  <Shield className="mr-2 h-4 w-4 text-green-600" />
+                  <span>Engineer Login</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/login">
+                  <MapPin className="mr-2 h-4 w-4 text-red-600" />
+                  <span>Admin Panel</span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
               <div className="flex items-center mb-1">
@@ -129,6 +159,23 @@ const Navbar = () => {
                 <ContactDialog>
                   <button className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 text-left">Contact</button>
                 </ContactDialog>
+                
+                {/* Login Options */}
+                <div className="border-t border-gray-700 pt-4 space-y-2">
+                  <p className="text-sm text-gray-400 px-4">Login Portals:</p>
+                  <Link to="/client-login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                    <UserCircle className="mr-2 h-4 w-4" />
+                    Client Portal
+                  </Link>
+                  <Link to="/engineer-login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                    <Shield className="mr-2 h-4 w-4" />
+                    Engineer Login
+                  </Link>
+                  <Link to="/login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Admin Panel
+                  </Link>
+                </div>
                 
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
