@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home, UserCircle } from "lucide-react";
@@ -41,7 +40,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // Function to handle navigation to the current page (scrolls to top)
   const handleCurrentPageNav = (event: React.MouseEvent<HTMLAnchorElement>) => {
     const currentPath = location.pathname;
     const linkPath = event.currentTarget.getAttribute('href');
@@ -82,10 +80,9 @@ const Navbar = () => {
             <button className="text-white hover:text-[#ea384c] transition-colors">Contact</button>
           </ContactDialog>
           
-          {/* Login Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="border-[#ea384c] text-white hover:bg-[#ea384c]/10">
+              <Button variant="outline" size="sm" className="bg-[#ea384c] text-white border-white hover:bg-[#ea384c]/90 hover:text-white">
                 <UserCircle className="mr-1 h-4 w-4" />
                 Login
               </Button>
@@ -160,7 +157,6 @@ const Navbar = () => {
                   <button className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 text-left">Contact</button>
                 </ContactDialog>
                 
-                {/* Login Options */}
                 <div className="border-t border-gray-700 pt-4 space-y-2">
                   <p className="text-sm text-gray-400 px-4">Login Portals:</p>
                   <Link to="/client-login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
