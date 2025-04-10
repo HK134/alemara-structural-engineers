@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Droplets, Road, Map } from 'lucide-react';
+import { ArrowRight, Droplets, Route, Map } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface CivilEngineeringServicesProps {
@@ -45,7 +45,7 @@ const CivilEngineeringServices = ({ onRequestService }: CivilEngineeringServices
             
             <div className="bg-white p-6 rounded-lg border border-gray-100">
               <div className="flex items-start mb-4">
-                <Road className="h-8 w-8 text-[#ea384c] mr-3 mt-1" />
+                <Route className="h-8 w-8 text-[#ea384c] mr-3 mt-1" />
                 <div>
                   <h3 className="text-xl font-semibold text-[#1A1F2C]">Infrastructure Design</h3>
                   <p className="mt-2 text-gray-600">
