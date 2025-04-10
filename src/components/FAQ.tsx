@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Info, FileText, LayoutPlan, HelpCircle, ArrowRight } from "lucide-react";
+import { Info, FileText, LayoutGrid, HelpCircle, ArrowRight } from "lucide-react";
 
 const faqCategories = {
   general: [
@@ -203,7 +202,7 @@ const FAQ = () => {
                   <span className="ml-1 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">{faqCategories.buildingControl.length}</span>
                 </TabsTrigger>
                 <TabsTrigger value="planning" className="flex items-center gap-2">
-                  <LayoutPlan className="h-4 w-4" />
+                  <LayoutGrid className="h-4 w-4" />
                   <span>Planning</span>
                   <span className="ml-1 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">{faqCategories.planning.length}</span>
                 </TabsTrigger>
@@ -220,7 +219,7 @@ const FAQ = () => {
                     <div className="flex items-center p-4 mb-2">
                       {category === "general" && <Info className="h-5 w-5 text-[#ea384c] mr-2" />}
                       {category === "buildingControl" && <FileText className="h-5 w-5 text-[#ea384c] mr-2" />}
-                      {category === "planning" && <LayoutPlan className="h-5 w-5 text-[#ea384c] mr-2" />}
+                      {category === "planning" && <LayoutGrid className="h-5 w-5 text-[#ea384c] mr-2" />}
                       {category === "other" && <HelpCircle className="h-5 w-5 text-[#ea384c] mr-2" />}
                       <h3 className="text-2xl font-bold text-[#1A1F2C]">
                         {category === "general" && "General Questions"}
