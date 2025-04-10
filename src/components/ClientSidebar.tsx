@@ -25,7 +25,8 @@ import {
   HelpCircle,
   MessageSquare,
   Wrench,
-  UserCircle
+  UserCircle,
+  Home
 } from "lucide-react";
 
 export const ClientSidebar = () => {
@@ -39,7 +40,7 @@ export const ClientSidebar = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/client-login");
+    navigate("/"); // Navigate to home page after logout
   };
 
   return (
@@ -152,6 +153,15 @@ export const ClientSidebar = () => {
                   >
                     <HelpCircle className="h-5 w-5" />
                     <span>Help & Support</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    tooltip="Go to Website"
+                    onClick={() => navigate("/")}
+                  >
+                    <Home className="h-5 w-5" />
+                    <span>Back to Main Site</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

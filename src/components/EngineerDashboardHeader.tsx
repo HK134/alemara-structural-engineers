@@ -9,6 +9,7 @@ import {
   Settings,
   LayoutDashboard,
   CalendarClock,
+  Home
 } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -20,6 +21,11 @@ const EngineerDashboardHeader = () => {
   // Helper function to determine if a path is active
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/"); // Navigate to home page after logout
   };
 
   return (
@@ -73,6 +79,17 @@ const EngineerDashboardHeader = () => {
               <span className="hidden md:inline">Availability</span>
             </Button>
 
+            {/* Return to Main Site */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/')}
+            >
+              <Home className="mr-2 h-4 w-4" />
+              <span className="hidden md:inline">Main Site</span>
+            </Button>
+
             {/* Profile Button */}
             <Button variant="ghost" size="sm" className="flex items-center">
               <User className="mr-2 h-4 w-4" />
@@ -86,7 +103,7 @@ const EngineerDashboardHeader = () => {
             </Button>
             
             {/* Logout Button */}
-            <Button variant="outline" size="sm" onClick={logout} className="flex items-center">
+            <Button variant="outline" size="sm" onClick={handleLogout} className="flex items-center">
               <LogOut className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Logout</span>
             </Button>

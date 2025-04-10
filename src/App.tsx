@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AdminLayout from '@/components/AdminLayout';
+import ClientLayout from '@/components/ClientLayout';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -95,17 +98,37 @@ function App() {
               <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
               <Route path="/services/residential/extensions" element={<Extensions />} />
 
-              {/* Admin Routes */}
-              <Route path="/admin" element={<Admin />} />
+              {/* Auth Routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/client-login" element={<ClientLogin />} />
               <Route path="/engineer-login" element={<EngineerLogin />} />
               
+              {/* Admin Portal Routes */}
+              <Route path="/admin" element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<Admin />} />
+                <Route path="analytics" element={<Analytics />} />
+                <Route path="seo" element={<SEO />} />
+              </Route>
+              
               {/* Client Portal Routes */}
-              <Route path="/client-dashboard" element={<ClientDashboard />} />
+              <Route path="/client" element={
+                <ProtectedRoute allowedRoles={['client']}>
+                  <ClientLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<ClientDashboard />} />
+              </Route>
               
               {/* Engineer Portal Routes */}
-              <Route path="/engineer-dashboard" element={<EngineerDashboard />} />
+              <Route path="/engineer" element={
+                <ProtectedRoute allowedRoles={['engineer']}>
+                  <EngineerDashboard />
+                </ProtectedRoute>
+              } />
               <Route path="/engineer-projects-map" element={<EngineerProjectsMap />} />
               <Route path="/engineer-timesheet" element={<EngineerTimesheet />} />
               <Route path="/engineer-invoices" element={<EngineerInvoices />} />
@@ -113,10 +136,6 @@ function App() {
               <Route path="/engineer-availability" element={<EngineerAvailability />} />
               <Route path="/engineer-company-policy" element={<EngineerCompanyPolicy />} />
               <Route path="/engineer-client-etiquette" element={<EngineerClientEtiquette />} />
-              
-              {/* Analytics Routes */}
-              <Route path="/seo" element={<SEO />} />
-              <Route path="/analytics" element={<Analytics />} />
               
               {/* Fallbacks */}
               <Route path="/404" element={<NotFound />} />

@@ -10,7 +10,8 @@ import {
   HelpCircle,
   LayoutDashboard,
   FileCheck,
-  Package
+  Package,
+  Home
 } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
@@ -30,6 +31,11 @@ const ClientDashboardHeader = () => {
     } else {
       navigate('/#faq');
     }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/"); // Navigate to home page after logout
   };
 
   return (
@@ -98,6 +104,17 @@ const ClientDashboardHeader = () => {
               </DialogContent>
             </Dialog>
 
+            {/* Return to Main Site */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center" 
+              onClick={() => navigate('/')}
+            >
+              <Home className="mr-2 h-4 w-4" />
+              <span className="hidden md:inline">Main Site</span>
+            </Button>
+
             {/* Project Stages Button */}
             <Dialog>
               <DialogTrigger asChild>
@@ -152,7 +169,7 @@ const ClientDashboardHeader = () => {
             </Button>
             
             {/* Logout Button */}
-            <Button variant="outline" size="sm" onClick={logout} className="flex items-center">
+            <Button variant="outline" size="sm" onClick={handleLogout} className="flex items-center">
               <LogOut className="mr-2 h-4 w-4" />
               <span className="hidden md:inline">Logout</span>
             </Button>
