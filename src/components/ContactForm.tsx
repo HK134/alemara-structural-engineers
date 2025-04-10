@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -21,7 +22,12 @@ const serviceOptions = [
   { value: "other", label: "Other" },
 ];
 
-const ContactForm = () => {
+interface ContactFormProps {
+  inDialog?: boolean;
+  preselectedService?: string;
+}
+
+const ContactForm = ({ inDialog = false, preselectedService }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
@@ -43,7 +49,7 @@ const ContactForm = () => {
       phone: "",
       address: "",
       postcode: "",
-      serviceType: "",
+      serviceType: preselectedService || "",
       message: "",
     },
   })
@@ -86,16 +92,18 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Get in touch with our team of expert structural engineers. We'll respond to all inquiries within 4 hours during business hours.
-          </p>
-        </div>
+    <section id="contact" className={inDialog ? "py-0" : "py-16 bg-gray-50"}>
+      <div className={inDialog ? "" : "container mx-auto px-4"}>
+        {!inDialog && (
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Get in touch with our team of expert structural engineers. We'll respond to all inquiries within 4 hours during business hours.
+            </p>
+          </div>
+        )}
         
-        <div className="w-full max-w-3xl mx-auto">
+        <div className={inDialog ? "w-full" : "w-full max-w-3xl mx-auto"}>
           {isSuccess ? (
             <div className="bg-green-50 p-8 rounded-lg border border-green-100 text-center">
               <div className="flex justify-center mb-4">
@@ -117,8 +125,12 @@ const ContactForm = () => {
             </div>
           ) : (
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-4 ${inDialog ? "p-0" : "bg-white p-8 rounded-lg shadow-sm border border-gray-100"}`}>
+                {inDialog && (
+                  <h3 className="text-lg font-semibold mb-4">Send us your inquiry</h3>
+                )}
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="firstName"
@@ -148,7 +160,7 @@ const ContactForm = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="phone"
@@ -172,6 +184,7 @@ const ContactForm = () => {
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
+                          value={field.value}
                         >
                           <FormControl>
                             <SelectTrigger>
@@ -192,7 +205,7 @@ const ContactForm = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="address"
@@ -231,7 +244,7 @@ const ContactForm = () => {
                       <FormControl>
                         <Textarea 
                           placeholder="Please provide any additional information about your requirements" 
-                          className="min-h-[120px]" 
+                          className={inDialog ? "min-h-[80px]" : "min-h-[120px]"}
                           {...field} 
                         />
                       </FormControl>

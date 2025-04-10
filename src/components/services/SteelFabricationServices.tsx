@@ -1,119 +1,90 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, Hammer, PencilRuler, Factory } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Hammer, CheckCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-interface SteelServiceItem {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  longDescription: string;
-  id: string;
+interface SteelFabricationServicesProps {
+  onRequestService?: (serviceType: string) => void;
 }
 
-const steelFabricationServices: SteelServiceItem[] = [
-  {
-    icon: <Hammer className="h-16 w-16 text-[#ea384c]" />,
-    title: "Steel Fabrication & Installation",
-    description: "End-to-end steel fabrication services including design, manufacturing, and on-site installation.",
-    longDescription: "Our steel fabrication and installation service provides end-to-end solutions for structural steel requirements. From detailed connection design and steel member specification to manufacturing and on-site installation, our team ensures precision and quality at every stage. We specialize in both standard structural elements and bespoke fabrication for architecturally complex or visually exposed steelwork.",
-    id: "steel-fabrication"
-  }
-];
+const SteelFabricationServices = ({ onRequestService }: SteelFabricationServicesProps) => {
+  const handleRequestService = (serviceType: string) => {
+    if (onRequestService) {
+      onRequestService(serviceType);
+    }
+  };
 
-const SteelFabricationServices = () => {
   return (
-    <section id="steel-fabrication" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="steel-fabrication" className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-6 mb-12">
-            <div className="bg-[#ea384c]/10 p-6 rounded-full">
-              <Hammer className="h-16 w-16 text-[#ea384c]" />
-            </div>
-            <div className="text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1A1F2C] mb-3">Steel Fabrication & Installation</h2>
-              <p className="text-xl text-gray-700 max-w-2xl">
-                End-to-end steel solutions from design to installation
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-            <div className="p-8">
-              <Badge className="bg-[#ea384c] mb-4">Comprehensive Services</Badge>
-              
-              <p className="text-gray-700 text-lg mb-8">
-                {steelFabricationServices[0].longDescription}
-              </p>
-
-              <Tabs defaultValue="fabrication" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="fabrication" className="data-[state=active]:bg-[#ea384c] data-[state=active]:text-white">
-                    Fabrication Services
-                  </TabsTrigger>
-                  <TabsTrigger value="installation" className="data-[state=active]:bg-[#ea384c] data-[state=active]:text-white">
-                    Installation Services
-                  </TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="fabrication" className="bg-gray-50 p-6 rounded-lg">
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[
-                      "Structural steel members",
-                      "Architectural steel features",
-                      "Bespoke connection details",
-                      "CE marked fabrication"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <CheckCircle className="h-5 w-5 text-[#ea384c]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </TabsContent>
-                
-                <TabsContent value="installation" className="bg-gray-50 p-6 rounded-lg">
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[
-                      "Fully insured installation teams",
-                      "Residential and commercial projects",
-                      "Coordination with other trades",
-                      "Health & safety compliant"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <CheckCircle className="h-5 w-5 text-[#ea384c]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </TabsContent>
-              </Tabs>
-              
-              <div className="mt-8 flex justify-center md:justify-start">
-                <Link to="/#contact">
-                  <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center gap-2 px-6 py-6 text-base">
-                    Request Steel Services <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-[#1A1F2C] mb-8">Steel Fabrication Services</h2>
+          
+          <div className="space-y-8">
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+              <div className="flex items-start mb-4">
+                <PencilRuler className="h-8 w-8 text-[#ea384c] mr-3 mt-1" />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#1A1F2C]">Structural Steel Design</h3>
+                  <p className="mt-2 text-gray-600">
+                    Comprehensive structural steel design for residential and commercial projects, including detailed 
+                    connection design and fabrication drawings.
+                  </p>
+                  <div className="mt-4">
+                    <Button 
+                      variant="outline" 
+                      className="border-[#ea384c] text-[#ea384c] hover:bg-[#ea384c] hover:text-white"
+                      onClick={() => handleRequestService("steel-design")}
+                    >
+                      Request this service <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <div className="mt-12 flex flex-col md:flex-row gap-6 text-center md:text-left">
-            <div className="md:w-1/3 bg-[#1A1F2C] text-white p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-2">Quality Guaranteed</h3>
-              <p>All fabrication work is certified to industry standards with full documentation provided.</p>
+            
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+              <div className="flex items-start mb-4">
+                <Factory className="h-8 w-8 text-[#ea384c] mr-3 mt-1" />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#1A1F2C]">Steel Fabrication & Installation</h3>
+                  <p className="mt-2 text-gray-600">
+                    Bespoke steel fabrication services for architectural and structural elements, including beams, columns, 
+                    staircases, and decorative metalwork.
+                  </p>
+                  <div className="mt-4">
+                    <Button 
+                      variant="outline" 
+                      className="border-[#ea384c] text-[#ea384c] hover:bg-[#ea384c] hover:text-white"
+                      onClick={() => handleRequestService("steel-fabrication")}
+                    >
+                      Request this service <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="md:w-1/3 bg-[#1A1F2C] text-white p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-2">Project Management</h3>
-              <p>Dedicated project management from initial design through to final installation.</p>
-            </div>
-            <div className="md:w-1/3 bg-[#1A1F2C] text-white p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-2">Bespoke Solutions</h3>
-              <p>Custom fabrication for complex architectural features and specialized requirements.</p>
+            
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+              <div className="flex items-start mb-4">
+                <Hammer className="h-8 w-8 text-[#ea384c] mr-3 mt-1" />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#1A1F2C]">Custom Architectural Metalwork</h3>
+                  <p className="mt-2 text-gray-600">
+                    Specialist design and fabrication of bespoke architectural metalwork, including balustrades, canopies, 
+                    feature staircases, and decorative elements.
+                  </p>
+                  <div className="mt-4">
+                    <Button 
+                      variant="outline" 
+                      className="border-[#ea384c] text-[#ea384c] hover:bg-[#ea384c] hover:text-white"
+                      onClick={() => handleRequestService("architectural-metalwork")}
+                    >
+                      Request this service <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
