@@ -1,5 +1,4 @@
-
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
@@ -20,13 +19,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userRole, setUserRole] = useState<'admin' | 'engineer' | 'client' | null>(null);
 
   useEffect(() => {
-    // Set up auth state listener FIRST to ensure we catch all auth events
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       const isAuthed = !!session;
       setIsAuthenticated(isAuthed);
       
       if (session?.user) {
-        // Defer this Supabase call to prevent potential deadlocks
         setTimeout(async () => {
           const { data: engineerData, error: engineerError } = await supabase
             .from('engineers')
@@ -47,7 +44,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       setIsLoading(false);
       
-      // Handle auth events with toast notifications
       if (event === 'SIGNED_IN') {
         toast.success('Signed in successfully');
       } else if (event === 'SIGNED_OUT') {
@@ -63,7 +59,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
 
-    // THEN check for existing session
     const checkSession = async () => {
       try {
         const { data } = await supabase.auth.getSession();
@@ -118,7 +113,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const engineerLogin = async (email: string, password: string) => {
     try {
-      // First check if this is an authorized engineer
       const { data: engineerData, error: engineerError } = await supabase
         .from('engineers')
         .select('*')
@@ -131,7 +125,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { success: false, message: 'Engineer account not found or inactive' };
       }
       
-      // Attempt to sign in with provided credentials
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -140,7 +133,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (error) {
         console.error("Engineer login error:", error.message);
         
-        // Special handling for unconfirmed emails
         if (error.message.includes('Email not confirmed')) {
           return { 
             success: false, 

@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,6 +10,13 @@ export type SubmissionData = {
   serviceType: string;
   postcode?: string;
   address?: string;
+};
+
+export const saveFormSubmissionToDatabase = async (
+  formData: SubmissionData,
+  formType: string = 'contact'
+) => {
+  return submitFormToDB(formData, formType);
 };
 
 export const submitFormToDB = async (
@@ -52,6 +58,21 @@ export const submitFormToDB = async (
     console.error('Error in form submission:', error);
     return { success: false, message: 'An unexpected error occurred', error };
   }
+};
+
+export const assignEngineerToProject = async (
+  submissionId: string,
+  engineerId: string,
+  status: string = 'contacted'
+) => {
+  return assignEngineerToSubmission(submissionId, engineerId, status);
+};
+
+export const unassignEngineerFromProject = async (
+  submissionId: string,
+  status: string = 'new'
+) => {
+  return unassignEngineerFromSubmission(submissionId, status);
 };
 
 export const assignEngineerToSubmission = async (
@@ -122,6 +143,34 @@ export const getEngineerSubmissions = async (engineerId: string) => {
     return { success: true, data };
   } catch (error) {
     console.error('Error in getEngineerSubmissions:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+export const getEngineerProjects = async (engineerId: string) => {
+  return getEngineerSubmissions(engineerId);
+};
+
+export const getProjectsEligibleForArchiving = async () => {
+  try {
+    // Get projects that are closed and older than 30 days
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .eq('status', 'closed')
+      .lt('completion_date', thirtyDaysAgo.toISOString());
+    
+    if (error) {
+      console.error('Error getting eligible projects for archiving:', error);
+      return { success: false, message: 'Failed to get eligible projects', error };
+    }
+    
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error in getProjectsEligibleForArchiving:', error);
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };
