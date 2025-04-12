@@ -1,55 +1,146 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { LogOut } from 'lucide-react';
-import AdminViewTabs from './AdminViewTabs';
+import { 
+  RefreshCw, 
+  LogOut, 
+  PlusCircle, 
+  LayoutDashboard, 
+  Map, 
+  Users,
+  LineChart,
+  Search,
+  Zap
+} from 'lucide-react';
+import { setupAlexEngineer } from '@/utils/engineerSetup';
+import { toast } from 'sonner';
 
 interface AdminHeaderProps {
   title: string;
   onLogout: () => void;
   onRefresh: () => void;
   onCreateTestSubmission: () => void;
-  viewMode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics';
-  onViewChange: (view: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics') => void;
+  viewMode: string;
+  onViewChange: (mode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics') => void;
 }
 
-const AdminHeader: React.FC<AdminHeaderProps> = ({
+const AdminHeader = ({
   title,
   onLogout,
   onRefresh,
   onCreateTestSubmission,
   viewMode,
   onViewChange
-}) => {
+}: AdminHeaderProps) => {
+  
+  const handleSetupAlex = async () => {
+    toast.loading('Setting up engineer: Alex...');
+    const result = await setupAlexEngineer();
+    
+    if (result.success) {
+      toast.success(`${result.message}. Email: ${result.credentials.email}, Password: ${result.credentials.password}`);
+    } else {
+      toast.error(result.message);
+    }
+  };
+  
   return (
-    <div className="flex justify-between items-center mb-8">
-      <h1 className="text-3xl font-bold">{title}</h1>
-      <div className="flex items-center gap-3">
+    <div className="mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <h1 className="text-2xl font-bold text-slate-800">{title}</h1>
+        
+        <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={onRefresh}
+            className="flex items-center"
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Refresh
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={onCreateTestSubmission}
+            className="flex items-center"
+          >
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Create Test Lead
+          </Button>
+          
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleSetupAlex}
+            className="flex items-center"
+          >
+            <Zap className="mr-2 h-4 w-4" />
+            Setup Alex Engineer
+          </Button>
+          
+          <Button 
+            variant="destructive" 
+            size="sm"
+            onClick={onLogout}
+            className="flex items-center"
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            Sign Out
+          </Button>
+        </div>
+      </div>
+      
+      <div className="flex flex-wrap gap-2 mb-6">
         <Button 
-          variant="outline" 
-          onClick={onRefresh}
-          className="mr-2"
+          variant={viewMode === 'leads' ? "default" : "outline"}
+          size="sm"
+          onClick={() => onViewChange('leads')}
+          className="flex items-center"
         >
-          Refresh Data
+          <LayoutDashboard className="mr-2 h-4 w-4" />
+          Leads
         </Button>
+        
         <Button 
-          variant="outline" 
-          onClick={onCreateTestSubmission} 
-          className="mr-2"
+          variant={viewMode === 'map' ? "default" : "outline"}
+          size="sm"
+          onClick={() => onViewChange('map')}
+          className="flex items-center"
         >
-          Create Test Submission
+          <Map className="mr-2 h-4 w-4" />
+          Lead Map
         </Button>
-        <AdminViewTabs 
-          viewMode={viewMode} 
-          onViewChange={onViewChange} 
-        />
+        
         <Button 
-          variant="outline" 
-          onClick={onLogout}
-          className="flex items-center gap-2"
+          variant={viewMode === 'engineers' ? "default" : "outline"}
+          size="sm"
+          onClick={() => onViewChange('engineers')}
+          className="flex items-center"
         >
-          <LogOut size={16} />
-          Logout
+          <Users className="mr-2 h-4 w-4" />
+          Engineers
+        </Button>
+        
+        <Button 
+          variant={viewMode === 'analytics' ? "default" : "outline"}
+          size="sm"
+          onClick={() => onViewChange('analytics')}
+          className="flex items-center"
+        >
+          <LineChart className="mr-2 h-4 w-4" />
+          Analytics
+        </Button>
+        
+        <Button 
+          variant={viewMode === 'seo' ? "default" : "outline"}
+          size="sm"
+          onClick={() => onViewChange('seo')}
+          className="flex items-center"
+        >
+          <Search className="mr-2 h-4 w-4" />
+          SEO
         </Button>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AdminLayout from '@/components/AdminLayout';
 import ClientLayout from '@/components/ClientLayout';
+import EngineerLayout from '@/components/EngineerLayout';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
 // Create a new QueryClient instance
@@ -126,16 +127,18 @@ function App() {
               {/* Engineer Portal Routes */}
               <Route path="/engineer" element={
                 <ProtectedRoute allowedRoles={['engineer']}>
-                  <EngineerDashboard />
+                  <EngineerLayout />
                 </ProtectedRoute>
-              } />
-              <Route path="/engineer-projects-map" element={<EngineerProjectsMap />} />
-              <Route path="/engineer-timesheet" element={<EngineerTimesheet />} />
-              <Route path="/engineer-invoices" element={<EngineerInvoices />} />
-              <Route path="/engineer-messages" element={<EngineerMessages />} />
-              <Route path="/engineer-availability" element={<EngineerAvailability />} />
-              <Route path="/engineer-company-policy" element={<EngineerCompanyPolicy />} />
-              <Route path="/engineer-client-etiquette" element={<EngineerClientEtiquette />} />
+              }>
+                <Route index element={<EngineerDashboard />} />
+                <Route path="projects-map" element={<EngineerProjectsMap />} />
+                <Route path="timesheet" element={<EngineerTimesheet />} />
+                <Route path="invoices" element={<EngineerInvoices />} />
+                <Route path="messages" element={<EngineerMessages />} />
+                <Route path="availability" element={<EngineerAvailability />} />
+                <Route path="company-policy" element={<EngineerCompanyPolicy />} />
+                <Route path="client-etiquette" element={<EngineerClientEtiquette />} />
+              </Route>
               
               {/* Fallbacks */}
               <Route path="/404" element={<NotFound />} />

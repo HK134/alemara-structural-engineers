@@ -113,6 +113,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const engineerLogin = async (email: string, password: string) => {
     try {
+      // First check if this is an authorized engineer
       const { data: engineerData, error: engineerError } = await supabase
         .from('engineers')
         .select('*')
@@ -125,32 +126,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { success: false, message: 'Engineer account not found or inactive' };
       }
       
+      // Attempt to sign in with provided credentials
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) {
-        if (error.message.includes('Invalid login credentials')) {
-          const { error: signUpError } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-              emailRedirectTo: window.location.origin + '/engineer'
-            }
-          });
-          
-          if (signUpError) {
-            console.error("Engineer signup error:", signUpError.message);
-            return { success: false, message: signUpError.message };
-          }
-          
-          return { 
-            success: true, 
-            message: 'Engineer account created successfully. Please check your email to complete registration.' 
-          };
-        }
-        
         console.error("Engineer login error:", error.message);
         return { success: false, message: error.message };
       }
