@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { 
   RefreshCw, 
@@ -10,10 +10,14 @@ import {
   Users,
   LineChart,
   Search,
-  Zap
+  Zap,
+  UserPlus
 } from 'lucide-react';
-import { setupAlexEngineer } from '@/utils/engineerSetup';
+import { setupEngineer } from '@/utils/engineerSetup';
 import { toast } from 'sonner';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface AdminHeaderProps {
   title: string;
@@ -32,13 +36,37 @@ const AdminHeader = ({
   viewMode,
   onViewChange
 }: AdminHeaderProps) => {
+  // Engineer dialog state
+  const [engineerName, setEngineerName] = useState('');
+  const [engineerEmail, setEngineerEmail] = useState('');
+  const [engineerPassword, setEngineerPassword] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
-  const handleSetupAlex = async () => {
-    toast.loading('Setting up engineer: Alex...');
-    const result = await setupAlexEngineer();
+  const handleSetupEngineer = async () => {
+    if (!engineerName || !engineerEmail || !engineerPassword) {
+      toast.error('Please fill in all engineer details');
+      return;
+    }
+    
+    setIsLoading(true);
+    toast.loading(`Setting up engineer: ${engineerName}...`);
+    
+    const result = await setupEngineer({
+      name: engineerName,
+      email: engineerEmail,
+      password: engineerPassword
+    });
+    
+    setIsLoading(false);
     
     if (result.success) {
       toast.success(`${result.message}. Email: ${result.credentials.email}, Password: ${result.credentials.password}`);
+      setIsDialogOpen(false);
+      // Reset form
+      setEngineerName('');
+      setEngineerEmail('');
+      setEngineerPassword('');
     } else {
       toast.error(result.message);
     }
@@ -70,15 +98,75 @@ const AdminHeader = ({
             Create Test Lead
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={handleSetupAlex}
-            className="flex items-center"
-          >
-            <Zap className="mr-2 h-4 w-4" />
-            Setup Alex Engineer
-          </Button>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="flex items-center"
+              >
+                <UserPlus className="mr-2 h-4 w-4" />
+                Setup Engineer
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Set up a new engineer</DialogTitle>
+                <DialogDescription>
+                  Create an engineer account with database entry and authentication.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    value={engineerName}
+                    onChange={(e) => setEngineerName(e.target.value)}
+                    className="col-span-3"
+                    placeholder="Engineer's name"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="email" className="text-right">
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={engineerEmail}
+                    onChange={(e) => setEngineerEmail(e.target.value)}
+                    className="col-span-3"
+                    placeholder="engineer@example.com"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="password" className="text-right">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={engineerPassword}
+                    onChange={(e) => setEngineerPassword(e.target.value)}
+                    className="col-span-3"
+                    placeholder="Strong password"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  type="submit"
+                  onClick={handleSetupEngineer}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Setting up...' : 'Set up Engineer'}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
           
           <Button 
             variant="destructive" 

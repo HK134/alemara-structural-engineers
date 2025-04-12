@@ -1,13 +1,18 @@
-
 import { supabase } from '@/integrations/supabase/client';
 
-export const setupAlexEngineer = async () => {
+interface EngineerSetupParams {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export const setupEngineer = async ({ name, email, password }: EngineerSetupParams) => {
   try {
-    // Check if Alex already exists
+    // Check if engineer already exists
     const { data: existingEngineer, error: checkError } = await supabase
       .from('engineers')
       .select('*')
-      .eq('email', 'dubiah@hotmail.com')
+      .eq('email', email)
       .single();
     
     if (checkError && checkError.code !== 'PGRST116') {
@@ -15,13 +20,13 @@ export const setupAlexEngineer = async () => {
       return { success: false, message: "Failed to check for existing engineer" };
     }
     
-    // If Alex doesn't exist, create the engineer
+    // If engineer doesn't exist, create the engineer
     if (!existingEngineer) {
       const { data: newEngineer, error: insertError } = await supabase
         .from('engineers')
         .insert({
-          name: 'Alex',
-          email: 'dubiah@hotmail.com',
+          name,
+          email,
           active: true
         })
         .select()
@@ -35,13 +40,13 @@ export const setupAlexEngineer = async () => {
       console.log("Created engineer:", newEngineer);
     }
     
-    // Create auth user for Alex if it doesn't exist
+    // Create auth user if it doesn't exist
     const { data: userData, error: userError } = await supabase.auth.signUp({
-      email: 'dubiah@hotmail.com',
-      password: 'EngineerAlex123!',
+      email,
+      password,
       options: {
         data: {
-          name: 'Alex',
+          name,
           role: 'engineer'
         }
       }
@@ -51,19 +56,27 @@ export const setupAlexEngineer = async () => {
       // If the user already exists, this may error, which is fine
       console.log("Note about auth user:", userError.message);
     } else {
-      console.log("Created auth user for Alex");
+      console.log(`Created auth user for ${name}`);
     }
     
     return { 
       success: true, 
-      message: "Engineer Alex set up successfully", 
+      message: `Engineer ${name} set up successfully`, 
       credentials: {
-        email: 'dubiah@hotmail.com',
-        password: 'EngineerAlex123!'
+        email,
+        password
       }
     };
   } catch (error) {
     console.error("Error setting up engineer:", error);
     return { success: false, message: "An unexpected error occurred" };
   }
+};
+
+export const setupAlexEngineer = async () => {
+  return setupEngineer({
+    name: 'Alex',
+    email: 'dubiah@hotmail.com',
+    password: 'EngineerAlex123!'
+  });
 };
