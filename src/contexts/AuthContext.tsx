@@ -56,6 +56,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         toast.success('Your profile has been updated');
       } else if (event === 'TOKEN_REFRESHED') {
         console.log('Auth token refreshed');
+      } else if (event === 'EMAIL_CONFIRMED') {
+        toast.success('Email confirmed successfully');
       }
     });
 
@@ -134,6 +136,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) {
         console.error("Engineer login error:", error.message);
+        
+        // Special handling for unconfirmed emails
+        if (error.message.includes('Email not confirmed')) {
+          return { 
+            success: false, 
+            message: 'Please confirm your email address first. Check your inbox for the confirmation link.' 
+          };
+        }
+        
         return { success: false, message: error.message };
       }
       

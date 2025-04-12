@@ -6,6 +6,18 @@ import type { Database } from './types';
 const SUPABASE_URL = "https://alwjzubhrjubtvwenyqt.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsd2p6dWJocmp1YnR2d2VueXF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4NjA1NTQsImV4cCI6MjA1ODQzNjU1NH0.QQxZvC1par1hFfudWIoLuqpA8Ji50-vAZA4QHWMayds";
 
+// Get the current app URL for redirects
+const getRedirectURL = () => {
+  // Default to the current window location in browser environments
+  if (typeof window !== 'undefined') {
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    return `${protocol}//${host}/engineer-login`;
+  }
+  // Fallback for non-browser environments
+  return 'https://alwjzubhrjubtvwenyqt.supabase.co/engineer-login';
+};
+
 // Updated client configuration with auth settings
 export const supabase = createClient<Database>(
   SUPABASE_URL, 
@@ -16,6 +28,7 @@ export const supabase = createClient<Database>(
       persistSession: true,
       detectSessionInUrl: true,
       flowType: 'pkce',
+      redirectTo: getRedirectURL()
     }
   }
 );

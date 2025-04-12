@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from "@/components/ui/button";
@@ -7,18 +7,31 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from 'sonner';
-import { Key, User, Info, Sparkles, Shield } from 'lucide-react';
+import { Key, User, Info, Sparkles, Shield, AlertCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 const EngineerLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [hasConfirmationMessage, setHasConfirmationMessage] = useState(false);
   const { isAuthenticated, engineerLogin, userRole } = useAuth();
   const location = useLocation();
   
   // Get the intended destination from location state, or default to engineer dashboard
   const from = location.state?.from?.pathname || '/engineer';
+
+  useEffect(() => {
+    // Check if there's a hash parameter that indicates an email confirmation
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token') && hash.includes('type=signup')) {
+      setHasConfirmationMessage(true);
+      toast.success('Email confirmed successfully! You can now log in.');
+      
+      // Clean up the URL by removing the hash
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,6 +86,18 @@ const EngineerLogin = () => {
           </h1>
           <p className="text-emerald-300 text-sm italic">Engineering excellence at your fingertips</p>
         </div>
+        
+        {hasConfirmationMessage && (
+          <div className="mb-4 p-4 bg-emerald-100 border border-emerald-200 rounded-lg text-emerald-800 flex items-start gap-3">
+            <div className="mt-0.5">
+              <Shield className="h-5 w-5 text-emerald-600" />
+            </div>
+            <div>
+              <p className="font-medium">Your email has been confirmed!</p>
+              <p className="text-sm">You can now log in with your credentials.</p>
+            </div>
+          </div>
+        )}
         
         <Card className="backdrop-blur-lg bg-white/90 border-0 shadow-xl overflow-hidden relative">
           {/* Decorative elements */}

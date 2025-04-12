@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 
 interface EngineerSetupParams {
@@ -16,7 +17,7 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
       .single();
     
     if (checkError && checkError.code !== 'PGRST116') {
-      console.error("Error checking for existing engineer:", checkError);
+      console.log("Error checking for existing engineer:", checkError);
       return { success: false, message: "Failed to check for existing engineer" };
     }
     
@@ -33,7 +34,7 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
         .single();
       
       if (insertError) {
-        console.error("Error creating engineer:", insertError);
+        console.log("Error creating engineer:", insertError);
         return { success: false, message: "Failed to create engineer" };
       }
       
@@ -48,20 +49,22 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
         data: {
           name,
           role: 'engineer'
-        }
+        },
+        emailRedirectTo: `${window.location.origin}/engineer-login`
       }
     });
     
     if (userError) {
       // If the user already exists, this may error, which is fine
       console.log("Note about auth user:", userError.message);
+      return { success: false, message: userError.message };
     } else {
       console.log(`Created auth user for ${name}`);
     }
     
     return { 
       success: true, 
-      message: `Engineer ${name} set up successfully`, 
+      message: `Engineer ${name} set up successfully. A confirmation email has been sent to ${email}.`, 
       credentials: {
         email,
         password
