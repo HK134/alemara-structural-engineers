@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { AuthChangeEvent } from '@supabase/supabase-js';
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -54,7 +55,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         toast.success('Your profile has been updated');
       } else if (event === 'TOKEN_REFRESHED') {
         console.log('Auth token refreshed');
-      } else if (event === 'EMAIL_CONFIRMED') {
+      }
+      
+      const confirmationEvents: AuthChangeEvent[] = ['SIGNED_IN'];
+      if (confirmationEvents.includes(event) && session?.user?.email_confirmed_at) {
         toast.success('Email confirmed successfully');
       }
     });
