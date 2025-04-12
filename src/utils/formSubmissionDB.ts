@@ -1,277 +1,271 @@
 
-import { supabase } from "@/integrations/supabase/client";
-import { archiveProjectToOneDrive } from "./oneDriveIntegration";
+import { supabase } from '@/integrations/supabase/client';
+import { v4 as uuidv4 } from 'uuid';
 
-/**
- * Saves form submission data to the Supabase database
- * This function stores the submission while also allowing email submission to continue
- */
-export const saveFormSubmissionToDatabase = async (formData: any, formType: string) => {
-  console.log(`Saving ${formType} submission to database:`, formData);
-  
+export type SubmissionData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  message?: string;
+  serviceType: string;
+  postcode?: string;
+  address?: string;
+};
+
+export const submitFormToDB = async (
+  formData: SubmissionData,
+  formType: string = 'contact'
+) => {
   try {
-    // Create the submission object with all required fields
-    const submissionData = {
+    const { firstName, lastName, email, phone, message, serviceType, postcode, address } = formData;
+
+    // Use explicit typecasting to match Supabase types
+    const submission = {
       form_type: formType,
-      first_name: formData.firstName,
-      last_name: formData.lastName || '', // Support for empty lastName
-      email: formData.email,
-      phone: formData.phone,
-      service_type: formData.serviceType || 'Not specified',
-      message: formData.message || '',
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      phone,
+      service_type: serviceType,
+      message,
       status: 'new',
-      postcode: formData.postcode || '',
-      address: formData.address || '', // Add support for storing address
-      secured: false // Explicitly set default value
+      postcode,
+      address: address || '',
+      secured: false
     };
-    
-    console.log("Submitting data to Supabase:", submissionData);
-    
+
+    // Insert as an array for Supabase
     const { data, error } = await supabase
       .from('form_submissions')
-      .insert(submissionData)
+      .insert([submission as any])
       .select();
-    
+
     if (error) {
-      console.error("Error saving form submission to database:", error);
-      return { success: false, error };
+      console.error('Error submitting form to database:', error);
+      return { success: false, message: 'Database submission failed', error };
     }
-    
-    console.log("Form submission saved to database successfully:", data);
-    return { success: true, data };
+
+    console.log('Form submitted to database:', data);
+    return { success: true, message: 'Form submitted successfully', data };
   } catch (error) {
-    console.error("Exception when saving form submission:", error);
-    return { success: false, error };
+    console.error('Error in form submission:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
-/**
- * Assigns an engineer to a project and updates its status to 'live'
- * 
- * @param projectId - The UUID of the project to assign
- * @param engineerId - The UUID of the engineer to assign
- * @returns Promise with the result of the operation
- */
-export const assignEngineerToProject = async (projectId: string, engineerId: string) => {
-  console.log(`Assigning engineer ${engineerId} to project ${projectId}`);
-  
+export const assignEngineerToSubmission = async (
+  submissionId: string,
+  engineerId: string,
+  status: string = 'contacted'
+) => {
   try {
-    // Update the project with the engineer ID and set status to 'live'
     const { data, error } = await supabase
       .from('form_submissions')
       .update({
         engineer_id: engineerId,
-        status: 'live' // Automatically set status to 'live' when an engineer is assigned
-      })
-      .eq('id', projectId)
+        status: status
+      } as any)
+      .eq('id', submissionId as any)
       .select();
-    
+
     if (error) {
-      console.error("Error assigning engineer to project:", error);
-      return { success: false, error };
+      console.error('Error assigning engineer:', error);
+      return { success: false, message: 'Failed to assign engineer', error };
     }
-    
-    console.log("Engineer assigned to project successfully:", data);
-    return { success: true, data };
+
+    return { success: true, message: 'Engineer assigned successfully', data };
   } catch (error) {
-    console.error("Exception when assigning engineer:", error);
-    return { success: false, error };
+    console.error('Error in assignEngineerToSubmission:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
-/**
- * Unassigns an engineer from a project and reverts status to 'contacted'
- * 
- * @param projectId - The UUID of the project 
- * @returns Promise with the result of the operation
- */
-export const unassignEngineerFromProject = async (projectId: string) => {
-  console.log(`Unassigning engineer from project ${projectId}`);
-  
+export const unassignEngineerFromSubmission = async (
+  submissionId: string,
+  status: string = 'new'
+) => {
   try {
-    // Update the project to remove engineer ID and set status back to 'contacted'
     const { data, error } = await supabase
       .from('form_submissions')
       .update({
         engineer_id: null,
-        status: 'contacted' // Revert to 'contacted' status when engineer is unassigned
-      })
-      .eq('id', projectId)
+        status: status
+      } as any)
+      .eq('id', submissionId as any)
       .select();
-    
+
     if (error) {
-      console.error("Error unassigning engineer from project:", error);
-      return { success: false, error };
+      console.error('Error unassigning engineer:', error);
+      return { success: false, message: 'Failed to unassign engineer', error };
     }
-    
-    console.log("Engineer unassigned from project successfully:", data);
-    return { success: true, data };
+
+    return { success: true, message: 'Engineer unassigned successfully', data };
   } catch (error) {
-    console.error("Exception when unassigning engineer:", error);
-    return { success: false, error };
+    console.error('Error in unassignEngineerFromSubmission:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
-/**
- * Gets all projects assigned to a specific engineer
- * 
- * @param engineerId - The UUID of the engineer
- * @returns Promise with an array of assigned projects
- */
-export const getEngineerProjects = async (engineerId: string) => {
-  console.log(`Fetching projects for engineer ${engineerId}`);
-  
+export const getEngineerSubmissions = async (engineerId: string) => {
   try {
     const { data, error } = await supabase
       .from('form_submissions')
       .select('*')
-      .eq('engineer_id', engineerId)
-      .order('created_at', { ascending: false });
-    
+      .eq('engineer_id', engineerId as any);
+
     if (error) {
-      console.error("Error fetching engineer projects:", error);
-      return { success: false, error };
+      console.error('Error getting engineer submissions:', error);
+      return { success: false, message: 'Failed to get engineer submissions', error };
     }
-    
-    console.log(`Found ${data.length} projects assigned to engineer`);
+
     return { success: true, data };
   } catch (error) {
-    console.error("Exception when fetching engineer projects:", error);
-    return { success: false, error };
+    console.error('Error in getEngineerSubmissions:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
-/**
- * Marks a project as completed in the database
- * This sets up the project for future archiving after 30 days
- * 
- * @param projectId - The UUID of the project in the database
- * @returns Promise with the result of the operation
- */
-export const markProjectAsCompleted = async (projectId: string) => {
-  console.log(`Marking project ${projectId} as completed`);
-  
+export const markSubmissionComplete = async (
+  submissionId: string,
+  completionDate: Date = new Date()
+) => {
   try {
-    const completionDate = new Date().toISOString();
-    
+    const formattedDate = completionDate.toISOString();
     const { data, error } = await supabase
       .from('form_submissions')
       .update({
         status: 'closed',
-        completion_date: completionDate
-      })
-      .eq('id', projectId)
+        completion_date: formattedDate
+      } as any)
+      .eq('id', submissionId as any)
       .select();
-    
+
     if (error) {
-      console.error("Error marking project as completed:", error);
-      return { success: false, error };
+      console.error('Error marking submission complete:', error);
+      return { success: false, message: 'Failed to mark as complete', error };
     }
-    
-    console.log("Project marked as completed successfully:", data);
-    return { success: true, data };
+
+    return { success: true, message: 'Submission marked as complete', data };
   } catch (error) {
-    console.error("Exception when marking project as completed:", error);
-    return { success: false, error };
+    console.error('Error in markSubmissionComplete:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
-/**
- * Archives a completed project by:
- * 1. Retrieving all project data
- * 2. Saving it to OneDrive via archiveProjectToOneDrive
- * 3. Optionally removing or flagging it in the database
- * 
- * @param projectId - The UUID of the project to archive
- * @param removeFromDatabase - Whether to delete the project from the database after archiving
- * @returns Promise with the result of the operation
- */
-export const archiveCompletedProject = async (projectId: string, removeFromDatabase = false) => {
-  console.log(`Archiving project ${projectId} (removeFromDB: ${removeFromDatabase})`);
-  
+export const generateProjectReference = async (submissionId: string) => {
   try {
-    // 1. Get all project data
-    const { data: projectData, error: fetchError } = await supabase
+    // Get the submission
+    const { data: submission, error: getError } = await supabase
       .from('form_submissions')
       .select('*')
-      .eq('id', projectId)
+      .eq('id', submissionId as any)
       .single();
-    
-    if (fetchError || !projectData) {
-      console.error("Error fetching project for archiving:", fetchError);
-      return { success: false, error: fetchError };
-    }
-    
-    // 2. Archive to OneDrive
-    const archiveSuccess = await archiveProjectToOneDrive(
-      projectData.project_reference || projectId,
-      projectData
-    );
-    
-    if (!archiveSuccess) {
-      return { success: false, error: "Failed to archive to OneDrive" };
-    }
-    
-    // 3. Update or remove from database
-    if (removeFromDatabase) {
-      // Delete from database
-      const { error: deleteError } = await supabase
-        .from('form_submissions')
-        .delete()
-        .eq('id', projectId);
-      
-      if (deleteError) {
-        console.error("Error removing archived project from database:", deleteError);
-        return { success: false, error: deleteError };
-      }
-    } else {
-      // Just mark as archived
-      const { error: updateError } = await supabase
-        .from('form_submissions')
-        .update({ 
-          status: 'archived', 
-          archived_date: new Date().toISOString() 
-        })
-        .eq('id', projectId);
-      
-      if (updateError) {
-        console.error("Error marking project as archived:", updateError);
-        return { success: false, error: updateError };
-      }
-    }
-    
-    console.log(`Project ${projectId} successfully archived`);
-    return { success: true };
-  } catch (error) {
-    console.error("Exception when archiving project:", error);
-    return { success: false, error };
-  }
-};
 
-/**
- * Gets a list of projects eligible for archiving (completed more than 30 days ago)
- * @returns Promise with an array of eligible projects
- */
-export const getProjectsEligibleForArchiving = async () => {
-  try {
-    // Calculate date 30 days ago
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    
+    if (getError) {
+      console.error('Error getting submission:', getError);
+      return { success: false, message: 'Failed to get submission', error: getError };
+    }
+
+    // If it already has a project reference, return it
+    if (submission?.project_reference) {
+      return { success: true, projectReference: submission.project_reference };
+    }
+
+    // Function to generate a unique project reference
+    const generateReference = () => {
+      const year = new Date().getFullYear().toString().slice(-2);
+      const randomPart = Math.floor(1000 + Math.random() * 9000); // 4-digit number
+      return `W-${year}-${randomPart}`;
+    };
+
+    const projectReference = generateReference();
+
+    // Update the submission with the new project reference
     const { data, error } = await supabase
       .from('form_submissions')
-      .select('*')
-      .eq('status', 'closed')
-      .lt('completion_date', thirtyDaysAgo.toISOString());
-    
+      .update({ project_reference: projectReference } as any)
+      .eq('id', submissionId as any)
+      .select();
+
     if (error) {
-      console.error("Error fetching projects eligible for archiving:", error);
-      return { success: false, error };
+      console.error('Error updating project reference:', error);
+      return { success: false, message: 'Failed to generate project reference', error };
     }
-    
-    return { success: true, data };
+
+    return { success: true, projectReference };
   } catch (error) {
-    console.error("Exception when getting projects for archiving:", error);
-    return { success: false, error };
+    console.error('Error in generateProjectReference:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+export const archiveSubmission = async (submissionId: string) => {
+  try {
+    const formattedDate = new Date().toISOString();
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .update({
+        status: 'archived',
+        archived_date: formattedDate
+      } as any)
+      .eq('id', submissionId as any)
+      .select();
+
+    if (error) {
+      console.error('Error archiving submission:', error);
+      return { success: false, message: 'Failed to archive submission', error };
+    }
+
+    return { success: true, message: 'Submission archived successfully', data };
+  } catch (error) {
+    console.error('Error in archiveSubmission:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+export const getSubmissionCounts = async () => {
+  try {
+    // Get counts by status
+    const { data: statusData, error: statusError } = await supabase
+      .rpc('get_status_counts');
+
+    if (statusError) {
+      console.error('Error getting status counts:', statusError);
+      return { success: false, message: 'Failed to get status counts', error: statusError };
+    }
+
+    // Get total count
+    const { count: totalCount, error: countError } = await supabase
+      .from('form_submissions')
+      .select('*', { count: 'exact', head: true });
+
+    if (countError) {
+      console.error('Error getting total count:', countError);
+      return { success: false, message: 'Failed to get total count', error: countError };
+    }
+
+    // Get new submissions count (status = 'new')
+    const { count: newCount, error: newError } = await supabase
+      .from('form_submissions')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'new' as any);
+
+    if (newError) {
+      console.error('Error getting new count:', newError);
+      return { success: false, message: 'Failed to get new count', error: newError };
+    }
+
+    return {
+      success: true,
+      counts: {
+        total: totalCount ?? 0,
+        new: newCount ?? 0,
+        byStatus: statusData ?? []
+      }
+    };
+  } catch (error) {
+    console.error('Error in getSubmissionCounts:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
   }
 };

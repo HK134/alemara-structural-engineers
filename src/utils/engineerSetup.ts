@@ -13,7 +13,7 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
     const { data: existingEngineer, error: checkError } = await supabase
       .from('engineers')
       .select('*')
-      .eq('email', email)
+      .eq('email', email as string)
       .single();
     
     if (checkError && checkError.code !== 'PGRST116') {
@@ -25,11 +25,11 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
     if (!existingEngineer) {
       const { data: newEngineer, error: insertError } = await supabase
         .from('engineers')
-        .insert({
+        .insert([{
           name,
           email,
           active: true
-        })
+        }])
         .select()
         .single();
       

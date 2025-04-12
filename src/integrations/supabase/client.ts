@@ -28,7 +28,29 @@ export const supabase = createClient<Database>(
       persistSession: true,
       detectSessionInUrl: true,
       flowType: 'pkce',
-      redirectTo: getRedirectURL()
+      // Using the redirectTo option correctly
+      storage: localStorage
     }
   }
 );
+
+// Add redirectTo to the auth config
+supabase.auth.setSession = async (args) => {
+  const result = await supabase.auth._setSession(args);
+  
+  // Set the redirect URL for auth operations
+  if (typeof window !== 'undefined') {
+    supabase.auth.setConfig({
+      redirectTo: getRedirectURL()
+    });
+  }
+  
+  return result;
+};
+
+// Initialize the redirect URL
+if (typeof window !== 'undefined') {
+  supabase.auth.setConfig({
+    redirectTo: getRedirectURL()
+  });
+}

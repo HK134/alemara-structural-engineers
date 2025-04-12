@@ -14,9 +14,9 @@ export const sendLoginCredentialsEmail = async (
     // Check if this is an authorized engineer first
     const { data: engineerData, error: engineerError } = await supabase
       .from('engineers')
-      .select('name')
-      .eq('email', email)
-      .eq('active', true)
+      .select('*')
+      .eq('email', email as string)
+      .eq('active', true as boolean)
       .single();
     
     if (engineerError || !engineerData) {
@@ -26,7 +26,7 @@ export const sendLoginCredentialsEmail = async (
     
     // Prepare email data for the engineer
     const emailData = {
-      firstName: engineerData.name,
+      firstName: engineerData?.name || '',
       lastName: '',
       email: email,
       phone: '',
@@ -56,9 +56,9 @@ export const isAuthorizedEngineer = async (email: string): Promise<boolean> => {
   try {
     const { data, error } = await supabase
       .from('engineers')
-      .select('email')
-      .eq('email', email)
-      .eq('active', true)
+      .select('*')
+      .eq('email', email as string)
+      .eq('active', true as boolean)
       .single();
     
     return !!data && !error;

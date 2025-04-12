@@ -28,10 +28,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (session?.user) {
         // Defer this Supabase call to prevent potential deadlocks
         setTimeout(async () => {
-          const { data: engineerData } = await supabase
+          const { data: engineerData, error: engineerError } = await supabase
             .from('engineers')
             .select('*')
-            .eq('email', session.user.email)
+            .eq('email', session.user.email as string)
+            .eq('active', true as boolean)
             .single();
             
           if (engineerData) {
@@ -46,6 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       setIsLoading(false);
       
+      // Handle auth events with toast notifications
       if (event === 'SIGNED_IN') {
         toast.success('Signed in successfully');
       } else if (event === 'SIGNED_OUT') {
@@ -71,7 +73,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           const { data: engineerData } = await supabase
             .from('engineers')
             .select('*')
-            .eq('email', data.session.user.email)
+            .eq('email', data.session.user.email as string)
+            .eq('active', true as boolean)
             .single();
             
           if (engineerData) {
@@ -119,8 +122,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data: engineerData, error: engineerError } = await supabase
         .from('engineers')
         .select('*')
-        .eq('email', email)
-        .eq('active', true)
+        .eq('email', email as string)
+        .eq('active', true as boolean)
         .single();
         
       if (engineerError || !engineerData) {
