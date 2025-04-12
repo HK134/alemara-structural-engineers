@@ -49,6 +49,8 @@ interface AdminDashboardContentProps {
   isLoading: boolean;
   error: Error | null;
   onRefetch: () => void;
+  selectedEngineerId?: string | null;
+  onEngineerChange?: (engineerId: string | null) => void;
 }
 
 const AdminDashboardContent: React.FC<AdminDashboardContentProps> = ({
@@ -64,7 +66,9 @@ const AdminDashboardContent: React.FC<AdminDashboardContentProps> = ({
   onTabChange,
   isLoading,
   error,
-  onRefetch
+  onRefetch,
+  selectedEngineerId,
+  onEngineerChange
 }) => {
   switch (viewMode) {
     case 'leads':
@@ -82,6 +86,8 @@ const AdminDashboardContent: React.FC<AdminDashboardContentProps> = ({
           isLoading={isLoading}
           error={error}
           onRefetch={onRefetch}
+          selectedEngineerId={selectedEngineerId}
+          onEngineerChange={onEngineerChange}
         />
       );
     case 'map':

@@ -150,6 +150,8 @@ const EngineerProjects = () => {
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-4">
             <TabsTrigger value="all">All Projects</TabsTrigger>
+            <TabsTrigger value="new">New</TabsTrigger>
+            <TabsTrigger value="contacted">Contacted</TabsTrigger>
             <TabsTrigger value="live">Live</TabsTrigger>
             <TabsTrigger value="closed">Completed</TabsTrigger>
           </TabsList>
@@ -177,6 +179,8 @@ const EngineerProjects = () => {
                     </div>
                     <Badge 
                       className={
+                        project.status === 'new' ? 'bg-blue-500' :
+                        project.status === 'contacted' ? 'bg-yellow-500' :
                         project.status === 'live' ? 'bg-purple-500' :
                         project.status === 'closed' ? 'bg-green-500' : 
                         'bg-gray-500'
