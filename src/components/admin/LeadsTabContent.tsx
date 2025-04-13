@@ -6,6 +6,7 @@ import FormSubmissionsTable from './FormSubmissionsTable';
 import AdminPagination from './AdminPagination';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Filter } from 'lucide-react';
+import ClientOnboardingLinkGenerator from './ClientOnboardingLinkGenerator';
 
 type Engineer = {
   id: string;
@@ -70,6 +71,10 @@ const LeadsTabContent: React.FC<LeadsTabContentProps> = ({
 }) => {
   return (
     <>
+      <div className="mb-6">
+        <ClientOnboardingLinkGenerator />
+      </div>
+    
       <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
         <AdminSearchBar 
           searchQuery={searchQuery} 
