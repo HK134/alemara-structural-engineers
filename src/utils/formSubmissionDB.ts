@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,13 +11,6 @@ export type SubmissionData = {
   serviceType: string;
   postcode?: string;
   address?: string;
-};
-
-export const saveFormSubmissionToDatabase = async (
-  formData: SubmissionData,
-  formType: string = 'contact'
-) => {
-  return submitFormToDB(formData, formType);
 };
 
 export const submitFormToDB = async (
@@ -58,20 +52,8 @@ export const submitFormToDB = async (
   }
 };
 
-export const assignEngineerToProject = async (
-  submissionId: string,
-  engineerId: string,
-  status: string = 'contacted'
-) => {
-  return assignEngineerToSubmission(submissionId, engineerId, status);
-};
-
-export const unassignEngineerFromProject = async (
-  submissionId: string,
-  status: string = 'new'
-) => {
-  return unassignEngineerFromSubmission(submissionId, status);
-};
+// Alias for backward compatibility
+export const saveFormSubmissionToDatabase = submitFormToDB;
 
 export const assignEngineerToSubmission = async (
   submissionId: string,
@@ -100,6 +82,9 @@ export const assignEngineerToSubmission = async (
   }
 };
 
+// Alias for backward compatibility
+export const assignEngineerToProject = assignEngineerToSubmission;
+
 export const unassignEngineerFromSubmission = async (
   submissionId: string,
   status: string = 'new'
@@ -126,6 +111,9 @@ export const unassignEngineerFromSubmission = async (
   }
 };
 
+// Alias for backward compatibility
+export const unassignEngineerFromProject = unassignEngineerFromSubmission;
+
 export const getEngineerSubmissions = async (engineerId: string) => {
   try {
     const { data, error } = await supabase
@@ -145,9 +133,8 @@ export const getEngineerSubmissions = async (engineerId: string) => {
   }
 };
 
-export const getEngineerProjects = async (engineerId: string) => {
-  return getEngineerSubmissions(engineerId);
-};
+// Alias for backward compatibility
+export const getEngineerProjects = getEngineerSubmissions;
 
 export const getProjectsEligibleForArchiving = async () => {
   try {
@@ -314,21 +301,25 @@ export const getSubmissionCounts = async () => {
  */
 export const createClientAccount = async (submission: any) => {
   try {
-    const { data: existingUsers, error: checkError } = await supabase
-      .from('auth.users')
-      .select('email')
-      .eq('email', submission.email)
-      .maybeSingle();
-      
-    if (checkError) {
-      console.error('Error checking for existing user:', checkError);
-    } else if (existingUsers) {
+    // Check if a user with this email already exists
+    const { data, error } = await supabase.auth.admin.getUserByEmail(submission.email);
+    
+    if (!error && data) {
       console.log('User already exists with this email:', submission.email);
+      
+      // Update the submission to mark client_auth_created as true
+      await supabase
+        .from('form_submissions')
+        .update({ client_auth_created: true })
+        .eq('id', submission.id);
+        
       return { success: true, message: 'User already exists with this email' };
     }
     
+    // Generate a temporary password
     const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(10).slice(-2);
     
+    // Create a new user
     const { data: authData, error: authError } = await supabase.auth.admin.createUser({
       email: submission.email,
       password: tempPassword,
@@ -342,41 +333,16 @@ export const createClientAccount = async (submission: any) => {
     
     if (authError) {
       console.error('Error creating client account:', authError);
-      
-      const { data, error } = await supabase.auth.signUp({
-        email: submission.email,
-        password: tempPassword,
-        options: {
-          data: { 
-            full_name: `${submission.first_name} ${submission.last_name}`,
-            project_id: submission.id,
-            project_reference: submission.project_reference 
-          }
-        }
-      });
-      
-      if (error) {
-        console.error('Error creating client account via signUp:', error);
-        return { success: false, message: error.message };
-      }
-      
-      await supabase
-        .from('form_submissions')
-        .update({ client_auth_created: true, client_temp_password: tempPassword })
-        .eq('id', submission.id);
-      
-      console.log('Client account created:', {
-        email: submission.email,
-        password: tempPassword,
-        name: `${submission.first_name} ${submission.last_name}`
-      });
-      
-      return { success: true, message: 'Client account created successfully' };
+      return { success: false, message: authError.message };
     }
     
+    // Update the submission to mark client_auth_created as true and store the temp password
     await supabase
       .from('form_submissions')
-      .update({ client_auth_created: true, client_temp_password: tempPassword })
+      .update({ 
+        client_auth_created: true, 
+        client_temp_password: tempPassword 
+      })
       .eq('id', submission.id);
     
     console.log('Client account created:', {
