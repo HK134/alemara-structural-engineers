@@ -31,10 +31,7 @@ const Services = () => {
       <CivilEngineeringServices />
       <SteelFabricationServices />
       <ServiceCTA />
-      <Testimonials
-        title="What Our Clients Say About Our Services"
-        subtitle="Trusted by homeowners and businesses across London"
-      />
+      <Testimonials />
       <CommonQuestions />
       <FAQ />
       <ContactForm />

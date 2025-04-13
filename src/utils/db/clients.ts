@@ -20,42 +20,47 @@ export const createClientAccount = async (submission: FormSubmission): Promise<O
       return { success: false, message: 'Email is required' };
     }
     
-    // Check if client already exists
-    const { data: existingClient, error: existingClientError } = await supabase
-      .from('clients')
+    // We'll just update the form_submissions record to mark it as secured
+    // since we don't have a separate clients table
+    const { data: existingSubmission, error: existingError } = await supabase
+      .from('form_submissions')
       .select('*')
       .eq('email', email)
       .maybeSingle();
       
-    if (existingClientError) {
-      console.error('Error checking existing client:', existingClientError);
-      return { success: false, message: 'Failed to check if client exists', error: existingClientError };
+    if (existingError) {
+      console.error('Error checking existing submission:', existingError);
+      return { success: false, message: 'Failed to check if client exists', error: existingError };
     }
     
-    if (existingClient) {
-      // Client already exists, just return success
-      return { success: true, message: 'Client already exists', data: existingClient };
+    if (existingSubmission) {
+      // Client already exists in form_submissions, just return success
+      return { success: true, message: 'Client already exists', data: existingSubmission };
     }
     
-    // Create new client record
-    const { data: newClient, error: newClientError } = await supabase
-      .from('clients')
+    // Create new form_submissions record if needed
+    // This should rarely happen as we normally create from the form first
+    const { data: newSubmission, error: newSubmissionError } = await supabase
+      .from('form_submissions')
       .insert({
         email: email,
         first_name: submission.first_name,
         last_name: submission.last_name,
         phone: submission.phone,
         project_reference: submission.project_reference,
+        form_type: 'client_creation',
+        service_type: 'not_specified',
+        status: 'new'
       })
       .select()
       .single();
       
-    if (newClientError) {
-      console.error('Error creating client:', newClientError);
-      return { success: false, message: 'Failed to create client account', error: newClientError };
+    if (newSubmissionError) {
+      console.error('Error creating client:', newSubmissionError);
+      return { success: false, message: 'Failed to create client account', error: newSubmissionError };
     }
     
-    return { success: true, message: 'Client account created successfully', data: newClient };
+    return { success: true, message: 'Client account created successfully', data: newSubmission };
   } catch (error) {
     console.error('Error in createClientAccount:', error);
     return { success: false, message: 'An unexpected error occurred', error };

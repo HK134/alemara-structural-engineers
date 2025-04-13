@@ -1,3 +1,4 @@
+
 export type FormSubmission = {
   id: string;
   form_type: string;
