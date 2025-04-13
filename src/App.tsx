@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
@@ -34,54 +35,60 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/contexts/AuthContext';
 import './App.css';
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/project/:id" element={<ProjectDetail />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
-          <Route path="/services/residential" element={<Residential />} />
-          <Route path="/services/loft-conversions" element={<LoftConversions />} />
-          <Route path="/services/extensions" element={<Extensions />} />
-          <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
-          <Route path="/services/commercial" element={<Commercial />} />
-          <Route path="/services/civil-engineering" element={<CivilEngineering />} />
-          <Route path="/client-onboarding" element={<ClientOnboarding />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/engineer-login" element={<EngineerLogin />} />
-          <Route path="/client-login" element={<ClientLogin />} />
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/project/:id" element={<ProjectDetail />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
+            <Route path="/services/residential" element={<Residential />} />
+            <Route path="/services/loft-conversions" element={<LoftConversions />} />
+            <Route path="/services/extensions" element={<Extensions />} />
+            <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
+            <Route path="/services/commercial" element={<Commercial />} />
+            <Route path="/services/civil-engineering" element={<CivilEngineering />} />
+            <Route path="/client-onboarding" element={<ClientOnboarding />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/engineer-login" element={<EngineerLogin />} />
+            <Route path="/client-login" element={<ClientLogin />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
-          <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
+            {/* Admin Routes */}
+            <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
+            <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
 
-          {/* Engineer Routes */}
-          <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
-          <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
-          <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
-          <Route path="/engineer/client-etiquette" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerClientEtiquette /></ProtectedRoute>} />
-          <Route path="/engineer/availability" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerAvailability /></ProtectedRoute>} />
-          <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
-          <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
+            {/* Engineer Routes */}
+            <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
+            <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
+            <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
+            <Route path="/engineer/client-etiquette" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerClientEtiquette /></ProtectedRoute>} />
+            <Route path="/engineer/availability" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerAvailability /></ProtectedRoute>} />
+            <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
+            <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
 
-          {/* Client Routes */}
-           <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
+            {/* Client Routes */}
+            <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
 
-          {/* Not Found Route */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+            {/* Not Found Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
