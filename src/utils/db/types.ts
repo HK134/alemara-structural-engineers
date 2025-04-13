@@ -1,30 +1,3 @@
-
-import { supabase } from '@/integrations/supabase/client';
-
-export type SubmissionData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  message?: string;
-  serviceType: string;
-  postcode?: string;
-  address?: string;
-};
-
-export type OperationResult<T = any> = {
-  success: boolean;
-  message: string;
-  data?: T;
-  error?: any;
-  counts?: {
-    total: number;
-    new: number;
-    byStatus: any[];
-  };
-  projectReference?: string;
-};
-
 export type FormSubmission = {
   id: string;
   form_type: string;
@@ -43,8 +16,6 @@ export type FormSubmission = {
   address: string | null;
   completion_date: string | null;
   archived_date: string | null;
-  client_auth_created?: boolean;
-  client_temp_password?: string;
 };
 
 export type Engineer = {
@@ -53,4 +24,11 @@ export type Engineer = {
   email: string;
   active: boolean;
   created_at: string;
+}
+
+export type OperationResult = {
+  success: boolean;
+  message: string;
+  data?: any;
+  error?: any;
 };
