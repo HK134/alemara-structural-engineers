@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { 
@@ -16,7 +15,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChevronDown, ChevronUp, Edit, LockIcon, UnlockIcon, UserCheck } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import { assignEngineerToProject, unassignEngineerFromProject } from '@/utils/formSubmissionDB';
+import { assignEngineerToProject, unassignEngineerFromProject, createClientAccount } from '@/utils/formSubmissionDB';
 
 type Engineer = {
   id: string;
@@ -94,6 +93,16 @@ const FormSubmissionsTable: React.FC<FormSubmissionsTableProps> = ({
         const { data: projectRef } = await supabase.rpc('generate_project_reference');
         if (projectRef) {
           updateData.project_reference = projectRef;
+        }
+        
+        const submission = submissions.find(s => s.id === id);
+        if (submission) {
+          const result = await createClientAccount(submission);
+          if (result.success) {
+            toast.success(`Client portal access created for ${submission.email}`);
+          } else {
+            toast.error(`Failed to create client access: ${result.message}`);
+          }
         }
       }
       
@@ -409,6 +418,15 @@ const FormSubmissionsTable: React.FC<FormSubmissionsTableProps> = ({
                             }
                           </div>
                         </div>
+                        
+                        {submission.secured && (
+                          <div className="md:col-span-2 flex items-center space-x-2 bg-green-100 p-3 rounded">
+                            <UserCheck className="text-green-600" size={18} />
+                            <span className="text-green-700 text-sm">
+                              Client portal access enabled with their email as login
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </TableCell>

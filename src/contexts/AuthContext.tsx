@@ -2,13 +2,16 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { AuthChangeEvent } from '@supabase/supabase-js';
 
 type AuthContextType = {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
+  engineerLogin: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
+  clientLogin: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
   logout: () => Promise<void>;
-  userRole: 'admin' | null;
+  userRole: 'admin' | 'engineer' | 'client' | null;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -16,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [userRole, setUserRole] = useState<'admin' | null>(null);
+  const [userRole, setUserRole] = useState<'admin' | 'engineer' | 'client' | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -24,8 +27,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAuthenticated(isAuthed);
       
       if (session?.user) {
-        // All authenticated users are considered admins
-        setUserRole('admin');
+        setTimeout(async () => {
+          // First check if user is an engineer
+          const { data: engineerData, error: engineerError } = await supabase
+            .from('engineers')
+            .select('*')
+            .eq('email', session.user.email as string)
+            .eq('active', true as boolean)
+            .single();
+            
+          if (engineerData) {
+            setUserRole('engineer');
+          } else {
+            // Then check if user is associated with a form submission (client)
+            const { data: clientData, error: clientError } = await supabase
+              .from('form_submissions')
+              .select('*')
+              .eq('email', session.user.email as string)
+              .eq('secured', true as boolean)
+              .eq('client_auth_created', true as boolean)
+              .maybeSingle();
+              
+            if (clientData) {
+              setUserRole('client');
+            } else {
+              // Default to admin if not engineer or client
+              setUserRole('admin');
+            }
+          }
+        }, 0);
       } else {
         setUserRole(null);
       }
@@ -56,8 +86,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAuthenticated(!!data.session);
         
         if (data.session?.user) {
-          // All authenticated users are considered admins
-          setUserRole('admin');
+          // First check if user is an engineer
+          const { data: engineerData } = await supabase
+            .from('engineers')
+            .select('*')
+            .eq('email', data.session.user.email as string)
+            .eq('active', true as boolean)
+            .single();
+            
+          if (engineerData) {
+            setUserRole('engineer');
+          } else {
+            // Then check if user is associated with a form submission (client)
+            const { data: clientData } = await supabase
+              .from('form_submissions')
+              .select('*')
+              .eq('email', data.session.user.email as string)
+              .eq('secured', true as boolean)
+              .eq('client_auth_created', true as boolean)
+              .maybeSingle();
+              
+            if (clientData) {
+              setUserRole('client');
+            } else {
+              // Default to admin if not engineer or client
+              setUserRole('admin');
+            }
+          }
         }
       } catch (error) {
         console.error("Error checking session:", error);
@@ -92,6 +147,89 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const engineerLogin = async (email: string, password: string) => {
+    try {
+      const { data: engineerData, error: engineerError } = await supabase
+        .from('engineers')
+        .select('*')
+        .eq('email', email as string)
+        .eq('active', true as boolean)
+        .single();
+        
+      if (engineerError || !engineerData) {
+        console.error("Engineer not found:", engineerError?.message);
+        return { success: false, message: 'Engineer account not found or inactive' };
+      }
+      
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error("Engineer login error:", error.message);
+        
+        if (error.message.includes('Email not confirmed')) {
+          return { 
+            success: false, 
+            message: 'Please confirm your email address first. Check your inbox for the confirmation link.' 
+          };
+        }
+        
+        return { success: false, message: error.message };
+      }
+      
+      setUserRole('engineer');
+      return { success: true, message: 'Engineer login successful' };
+    } catch (error) {
+      console.error('Engineer login error:', error);
+      return { success: false, message: 'An unexpected error occurred' };
+    }
+  };
+
+  const clientLogin = async (email: string, password: string) => {
+    try {
+      // Check if this email is associated with a secured project
+      const { data: clientData, error: clientError } = await supabase
+        .from('form_submissions')
+        .select('*')
+        .eq('email', email)
+        .eq('secured', true)
+        .eq('client_auth_created', true)
+        .maybeSingle();
+        
+      if (clientError || !clientData) {
+        console.error("Client account not found:", clientError?.message);
+        return { success: false, message: 'No client account found for this email' };
+      }
+      
+      // Proceed with login
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error("Client login error:", error.message);
+        
+        if (error.message.includes('Email not confirmed')) {
+          return { 
+            success: false, 
+            message: 'Please confirm your email address first. Check your inbox for the confirmation link.' 
+          };
+        }
+        
+        return { success: false, message: error.message };
+      }
+      
+      setUserRole('client');
+      return { success: true, message: 'Client login successful' };
+    } catch (error) {
+      console.error('Client login error:', error);
+      return { success: false, message: 'An unexpected error occurred' };
+    }
+  };
+
   const logout = async () => {
     try {
       await supabase.auth.signOut();
@@ -107,7 +245,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     <AuthContext.Provider value={{ 
       isAuthenticated, 
       isLoading, 
-      login,
+      login, 
+      engineerLogin,
+      clientLogin, 
       logout, 
       userRole 
     }}>
