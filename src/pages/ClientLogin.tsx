@@ -14,11 +14,11 @@ const ClientLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuthenticated, clientLogin } = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const location = useLocation();
   
-  // Get the intended destination from location state, or default to client dashboard
-  const from = location.state?.from?.pathname || '/client';
+  // Get the intended destination from location state, or default to admin dashboard
+  const from = location.state?.from?.pathname || '/admin';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,20 +31,19 @@ const ClientLogin = () => {
     setIsLoading(true);
     
     try {
-      // Use clientLogin instead of login
-      const result = await clientLogin(email, password);
+      const result = await login(email, password);
       
       if (!result.success) {
         toast.error(result.message);
       } else {
-        toast.success('Welcome to your client portal!');
+        toast.success('Login successful');
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  // If already authenticated, redirect to the client dashboard
+  // If already authenticated, redirect to the admin dashboard
   if (isAuthenticated) {
     return <Navigate to={from} replace />;
   }

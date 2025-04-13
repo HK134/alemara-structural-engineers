@@ -15,11 +15,11 @@ const EngineerLogin = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [hasConfirmationMessage, setHasConfirmationMessage] = useState(false);
-  const { isAuthenticated, engineerLogin, userRole } = useAuth();
+  const { isAuthenticated, login, userRole } = useAuth();
   const location = useLocation();
   
-  // Get the intended destination from location state, or default to engineer dashboard
-  const from = location.state?.from?.pathname || '/engineer';
+  // Get the intended destination from location state, or default to admin dashboard
+  const from = location.state?.from?.pathname || '/admin';
 
   useEffect(() => {
     // Check if there's a hash parameter that indicates an email confirmation
@@ -44,26 +44,21 @@ const EngineerLogin = () => {
     setIsLoading(true);
     
     try {
-      const result = await engineerLogin(email, password);
+      const result = await login(email, password);
       
       if (!result.success) {
         toast.error(result.message);
       } else {
-        toast.success('Welcome to your engineer portal!');
+        toast.success('Welcome to the admin portal!');
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  // If already authenticated as an engineer, redirect to the engineer dashboard
-  if (isAuthenticated && userRole === 'engineer') {
+  // If already authenticated, redirect to the admin dashboard
+  if (isAuthenticated) {
     return <Navigate to={from} replace />;
-  }
-  
-  // If authenticated but not as an engineer, redirect to the admin dashboard
-  if (isAuthenticated && userRole !== 'engineer') {
-    return <Navigate to="/admin" replace />;
   }
 
   return (
@@ -82,7 +77,7 @@ const EngineerLogin = () => {
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-white mb-2 flex justify-center items-center gap-2">
             <Sparkles className="h-8 w-8 text-emerald-400" />
-            <span>Engineer Portal</span>
+            <span>Admin Portal</span>
           </h1>
           <p className="text-emerald-300 text-sm italic">Engineering excellence at your fingertips</p>
         </div>
@@ -112,9 +107,9 @@ const EngineerLogin = () => {
                 className="h-12 w-auto bg-white/80 p-2 rounded-lg shadow-md"
               />
             </div>
-            <CardTitle className="text-2xl font-bold text-slate-800">Engineer Login</CardTitle>
+            <CardTitle className="text-2xl font-bold text-slate-800">Admin Login</CardTitle>
             <CardDescription className="text-slate-600">
-              Enter your credentials to access your engineering dashboard
+              Enter your credentials to access your admin dashboard
             </CardDescription>
           </CardHeader>
           
@@ -161,11 +156,11 @@ const EngineerLogin = () => {
               <div className="mt-2 p-3 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-lg border border-blue-100">
                 <div className="flex items-center gap-2 mb-1 text-slate-700">
                   <Info size={18} className="text-blue-500" />
-                  <span className="text-sm font-medium">Engineer Access Only</span>
+                  <span className="text-sm font-medium">Admin Access Only</span>
                 </div>
                 <p className="text-xs text-slate-600">
-                  This portal is exclusively for authorized Alemara engineers.
-                  If you're having trouble logging in, please contact your administrator.
+                  This portal is exclusively for authorized administrators.
+                  If you're having trouble logging in, please contact your system administrator.
                 </p>
               </div>
             </CardContent>
@@ -177,7 +172,7 @@ const EngineerLogin = () => {
                 disabled={isLoading}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  {isLoading ? 'Signing in...' : 'Access Engineering Tools'}
+                  {isLoading ? 'Signing in...' : 'Access Admin Portal'}
                   {!isLoading && <Sparkles className="h-4 w-4 animate-pulse" />}
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

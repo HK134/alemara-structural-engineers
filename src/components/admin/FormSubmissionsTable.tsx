@@ -13,9 +13,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ChevronDown, ChevronUp, Edit, LockIcon, UnlockIcon, UserCheck } from 'lucide-react';
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { ChevronDown, ChevronUp, Edit, LockIcon, UnlockIcon, UserCheck, Trash2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import { assignEngineerToProject, unassignEngineerFromProject, createClientAccount } from '@/utils/formSubmissionDB';
+import { assignEngineerToProject, unassignEngineerFromProject, deleteSubmission, createClientAccount } from '@/utils/formSubmissionDB';
 
 type Engineer = {
   id: string;
@@ -178,6 +189,22 @@ const FormSubmissionsTable: React.FC<FormSubmissionsTableProps> = ({
     }
   };
 
+  const handleDeleteSubmission = async (id: string) => {
+    try {
+      const result = await deleteSubmission(id);
+      
+      if (!result.success) {
+        throw new Error(result.message);
+      }
+      
+      toast.success('Lead deleted successfully');
+      onRefetch();
+    } catch (error) {
+      console.error('Error deleting submission:', error);
+      toast.error('Failed to delete lead');
+    }
+  };
+
   const getEngineerName = (engineerId: string | null) => {
     if (!engineerId) return 'Not assigned';
     const engineer = engineers?.find(e => e.id === engineerId);
@@ -262,12 +289,14 @@ const FormSubmissionsTable: React.FC<FormSubmissionsTableProps> = ({
                         <LockIcon size={16} className="text-green-500" />
                       }
                     </Button>
+                    
                     <Sheet>
                       <SheetTrigger asChild>
                         <Button
                           variant="ghost" 
                           size="icon"
                           onClick={() => setSelectedSubmission(submission)}
+                          className="mr-1"
                         >
                           <Edit size={16} />
                         </Button>
@@ -385,6 +414,36 @@ const FormSubmissionsTable: React.FC<FormSubmissionsTableProps> = ({
                         </SheetContent>
                       )}
                     </Sheet>
+                    
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="ghost" 
+                          size="icon"
+                          className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                          title="Delete lead"
+                        >
+                          <Trash2 size={16} />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete Lead</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to delete this lead? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction 
+                            onClick={() => handleDeleteSubmission(submission.id)}
+                            className="bg-red-500 text-white hover:bg-red-600"
+                          >
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </TableCell>
               </TableRow>

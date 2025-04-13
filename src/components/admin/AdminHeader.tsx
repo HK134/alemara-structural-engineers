@@ -1,234 +1,171 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
+import { RefreshCcw, LogOut, DatabaseBackup, Database, Plus, FileSpreadsheet, Trash2 } from 'lucide-react';
 import { 
-  RefreshCw, 
-  LogOut, 
-  PlusCircle, 
-  LayoutDashboard, 
-  Map, 
-  Users,
-  LineChart,
-  Search,
-  Zap,
-  UserPlus
-} from 'lucide-react';
-import { setupEngineer } from '@/utils/engineerSetup';
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { deleteAllSubmissions } from '@/utils/formSubmissionDB';
 import { toast } from 'sonner';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 interface AdminHeaderProps {
   title: string;
   onLogout: () => void;
   onRefresh: () => void;
   onCreateTestSubmission: () => void;
-  viewMode: string;
+  viewMode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics';
   onViewChange: (mode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics') => void;
 }
 
-const AdminHeader = ({
-  title,
-  onLogout,
-  onRefresh,
-  onCreateTestSubmission,
-  viewMode,
-  onViewChange
-}: AdminHeaderProps) => {
-  // Engineer dialog state
-  const [engineerName, setEngineerName] = useState('');
-  const [engineerEmail, setEngineerEmail] = useState('');
-  const [engineerPassword, setEngineerPassword] = useState('');
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  
-  const handleSetupEngineer = async () => {
-    if (!engineerName || !engineerEmail || !engineerPassword) {
-      toast.error('Please fill in all engineer details');
-      return;
-    }
-    
-    setIsLoading(true);
-    toast.loading(`Setting up engineer: ${engineerName}...`);
-    
-    const result = await setupEngineer({
-      name: engineerName,
-      email: engineerEmail,
-      password: engineerPassword
-    });
-    
-    setIsLoading(false);
-    
-    if (result.success) {
-      toast.success(`${result.message}. Email: ${result.credentials.email}, Password: ${result.credentials.password}`);
-      setIsDialogOpen(false);
-      // Reset form
-      setEngineerName('');
-      setEngineerEmail('');
-      setEngineerPassword('');
-    } else {
-      toast.error(result.message);
+const AdminHeader: React.FC<AdminHeaderProps> = ({ 
+  title, 
+  onLogout, 
+  onRefresh, 
+  onCreateTestSubmission, 
+  viewMode, 
+  onViewChange 
+}) => {
+  const handleDeleteAllSubmissions = async () => {
+    try {
+      const result = await deleteAllSubmissions();
+      
+      if (!result.success) {
+        throw new Error(result.message);
+      }
+      
+      toast.success('All leads deleted successfully');
+      onRefresh();
+    } catch (error) {
+      console.error('Error deleting all submissions:', error);
+      toast.error('Failed to delete all leads');
     }
   };
-  
+
   return (
     <div className="mb-8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">{title}</h1>
+      <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
+        <h1 className="text-3xl font-bold text-slate-800">{title}</h1>
         
-        <div className="flex flex-wrap gap-2 mt-4 md:mt-0">
+        <div className="flex flex-wrap gap-2">
           <Button 
             variant="outline" 
-            size="sm"
+            size="sm" 
             onClick={onRefresh}
-            className="flex items-center"
+            className="flex items-center gap-1.5"
           >
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Refresh
+            <RefreshCcw size={14} />
+            <span>Refresh</span>
           </Button>
           
           <Button 
             variant="outline" 
-            size="sm"
+            size="sm" 
             onClick={onCreateTestSubmission}
-            className="flex items-center"
+            className="flex items-center gap-1.5"
           >
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Create Test Lead
+            <Plus size={14} />
+            <span>Test Lead</span>
           </Button>
           
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
               <Button 
                 variant="outline" 
                 size="sm"
-                className="flex items-center"
+                className="flex items-center gap-1.5 text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600"
               >
-                <UserPlus className="mr-2 h-4 w-4" />
-                Setup Engineer
+                <Trash2 size={14} />
+                <span>Delete All</span>
               </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Set up a new engineer</DialogTitle>
-                <DialogDescription>
-                  Create an engineer account with database entry and authentication.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    value={engineerName}
-                    onChange={(e) => setEngineerName(e.target.value)}
-                    className="col-span-3"
-                    placeholder="Engineer's name"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="email" className="text-right">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={engineerEmail}
-                    onChange={(e) => setEngineerEmail(e.target.value)}
-                    className="col-span-3"
-                    placeholder="engineer@example.com"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="password" className="text-right">
-                    Password
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={engineerPassword}
-                    onChange={(e) => setEngineerPassword(e.target.value)}
-                    className="col-span-3"
-                    placeholder="Strong password"
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button
-                  type="submit"
-                  onClick={handleSetupEngineer}
-                  disabled={isLoading}
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Delete All Leads</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to delete all leads? This action cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction 
+                  onClick={handleDeleteAllSubmissions}
+                  className="bg-red-500 text-white hover:bg-red-600"
                 >
-                  {isLoading ? 'Setting up...' : 'Set up Engineer'}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+                  Delete All
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           
           <Button 
             variant="destructive" 
-            size="sm"
+            size="sm" 
             onClick={onLogout}
-            className="flex items-center"
+            className="flex items-center gap-1.5"
           >
-            <LogOut className="mr-2 h-4 w-4" />
-            Sign Out
+            <LogOut size={14} />
+            <span>Logout</span>
           </Button>
         </div>
       </div>
       
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-2">
         <Button 
-          variant={viewMode === 'leads' ? "default" : "outline"}
+          variant={viewMode === 'leads' ? 'default' : 'outline'} 
           size="sm"
           onClick={() => onViewChange('leads')}
-          className="flex items-center"
+          className="flex items-center gap-1.5"
         >
-          <LayoutDashboard className="mr-2 h-4 w-4" />
-          Leads
+          <Database size={14} />
+          <span>Leads</span>
         </Button>
         
         <Button 
-          variant={viewMode === 'map' ? "default" : "outline"}
+          variant={viewMode === 'map' ? 'default' : 'outline'} 
           size="sm"
           onClick={() => onViewChange('map')}
-          className="flex items-center"
+          className="flex items-center gap-1.5"
         >
-          <Map className="mr-2 h-4 w-4" />
-          Lead Map
+          <FileSpreadsheet size={14} />
+          <span>Map</span>
         </Button>
         
         <Button 
-          variant={viewMode === 'engineers' ? "default" : "outline"}
+          variant={viewMode === 'engineers' ? 'default' : 'outline'} 
           size="sm"
           onClick={() => onViewChange('engineers')}
-          className="flex items-center"
+          className="flex items-center gap-1.5"
         >
-          <Users className="mr-2 h-4 w-4" />
-          Engineers
+          <DatabaseBackup size={14} />
+          <span>Engineers</span>
         </Button>
         
         <Button 
-          variant={viewMode === 'analytics' ? "default" : "outline"}
+          variant={viewMode === 'analytics' ? 'default' : 'outline'} 
           size="sm"
           onClick={() => onViewChange('analytics')}
-          className="flex items-center"
+          className="flex items-center gap-1.5"
         >
-          <LineChart className="mr-2 h-4 w-4" />
-          Analytics
+          <DatabaseBackup size={14} />
+          <span>Analytics</span>
         </Button>
         
         <Button 
-          variant={viewMode === 'seo' ? "default" : "outline"}
+          variant={viewMode === 'seo' ? 'default' : 'outline'} 
           size="sm"
           onClick={() => onViewChange('seo')}
-          className="flex items-center"
+          className="flex items-center gap-1.5"
         >
-          <Search className="mr-2 h-4 w-4" />
-          SEO
+          <DatabaseBackup size={14} />
+          <span>SEO</span>
         </Button>
       </div>
     </div>
