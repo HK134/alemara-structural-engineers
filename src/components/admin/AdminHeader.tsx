@@ -131,6 +131,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
         </Tabs>
       </div>
       
+      {/* Only show ClientOnboardingLinkGenerator in the leads view */}
       {viewMode === 'leads' && (
         <div className="mb-6">
           <ClientOnboardingLinkGenerator />

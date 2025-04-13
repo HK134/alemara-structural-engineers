@@ -75,10 +75,9 @@ const EngineerManagement = () => {
       return;
     }
     
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error('Please enter a valid email address');
+    // Validate email is from the alemara.co.uk domain
+    if (!email.toLowerCase().endsWith('@alemara.co.uk')) {
+      toast.error('Engineer email must use the @alemara.co.uk domain');
       return;
     }
     
@@ -131,8 +130,11 @@ const EngineerManagement = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="engineer@example.com"
+                placeholder="engineer@alemara.co.uk"
               />
+              <p className="text-xs text-muted-foreground">
+                Must use company email domain: @alemara.co.uk
+              </p>
             </div>
             
             {resultPassword && (
@@ -142,13 +144,13 @@ const EngineerManagement = () => {
                   <div>
                     <p className="font-medium text-green-800">Engineer added successfully!</p>
                     <p className="text-sm text-green-700 mt-1">
-                      An email has been sent, but here's the generated password for your records:
+                      Generated password for this engineer:
                     </p>
                     <p className="mt-2 font-mono bg-white p-2 rounded border border-green-200 text-sm">
                       {resultPassword}
                     </p>
                     <p className="text-xs text-green-600 mt-2">
-                      Please save this password in a secure location. It won't be shown again.
+                      Please save this password and share it securely with the engineer. They can change it after logging in.
                     </p>
                   </div>
                 </div>

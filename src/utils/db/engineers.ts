@@ -112,6 +112,11 @@ export const createEngineer = async (name: string, email: string): Promise<Opera
       return { success: false, message: "Engineer with this email already exists", data: existingEngineer };
     }
     
+    // Verify the email domain is @alemara.co.uk
+    if (!email.toLowerCase().endsWith('@alemara.co.uk')) {
+      return { success: false, message: "Engineer email must use the @alemara.co.uk domain" };
+    }
+    
     // Generate a secure password
     const password = generateSecurePassword();
     
@@ -154,7 +159,7 @@ export const createEngineer = async (name: string, email: string): Promise<Opera
     if (!emailSent) {
       return { 
         success: true, 
-        message: `Engineer ${name} created successfully, but failed to send login credentials email. Password: ${password}`,
+        message: `Engineer ${name} created successfully. Make sure to save the password to share with them.`,
         data: { engineer: newEngineer, password }
       };
     }

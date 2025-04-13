@@ -98,6 +98,6 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
 export const setupMakramEngineer = async () => {
   return setupEngineer({
     name: 'Makram',
-    email: 'makram@amatrix.co'
+    email: 'makram@alemara.co.uk'
   });
 };
