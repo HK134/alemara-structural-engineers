@@ -5,7 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Medal, Award, Archive } from 'lucide-react';
-import { getProjectsEligibleForArchiving } from '@/utils/formSubmissionDB';
+import { getProjectsEligibleForArchiving } from '@/utils/db';
 
 // Define the type for engineer stats
 type EngineerStat = {

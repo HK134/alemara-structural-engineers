@@ -87,3 +87,35 @@ export const getProjectByReference = async (reference: string): Promise<Operatio
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };
+
+/**
+ * Gets projects eligible for archiving (completed over 30 days ago)
+ */
+export const getProjectsEligibleForArchiving = async (): Promise<OperationResult> => {
+  try {
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .eq('status', 'closed')
+      .eq('secured', true)
+      .lt('completion_date', thirtyDaysAgo.toISOString())
+      .is('archived_date', null);
+      
+    if (error) {
+      console.error('Error getting archivable projects:', error);
+      return { success: false, message: 'Failed to get archivable projects', error };
+    }
+
+    return { 
+      success: true, 
+      message: 'Archivable projects retrieved successfully',
+      data 
+    };
+  } catch (error) {
+    console.error('Error in getProjectsEligibleForArchiving:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
