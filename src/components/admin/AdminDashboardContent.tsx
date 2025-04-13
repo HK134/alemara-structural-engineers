@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { BarChart, LineChart } from 'lucide-react';
+import { LineChart } from 'lucide-react';
 import LeadAnalytics from '@/components/LeadAnalytics';
 import EngineerStats from '@/components/EngineerStats';
 import LeadsTabContent from './LeadsTabContent';
@@ -36,7 +36,7 @@ type FormSubmission = {
 }
 
 interface AdminDashboardContentProps {
-  viewMode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics';
+  viewMode: 'leads' | 'engineers' | 'analytics';
   submissions: FormSubmission[] | undefined;
   engineers: Engineer[] | undefined;
   searchQuery: string;
@@ -90,23 +90,8 @@ const AdminDashboardContent: React.FC<AdminDashboardContentProps> = ({
           onEngineerChange={onEngineerChange}
         />
       );
-    case 'map':
-      return <LeadAnalytics />;
     case 'engineers':
       return <EngineerStats />;
-    case 'seo':
-      return (
-        <div className="p-4 bg-gray-50 rounded-lg border">
-          <h2 className="text-xl font-semibold mb-4">SEO Analytics</h2>
-          <p className="mb-4">Track and analyze your website's SEO performance with our advanced tools.</p>
-          <Link to="/admin/seo">
-            <Button className="flex items-center gap-2">
-              <BarChart size={16} />
-              Go to SEO Dashboard
-            </Button>
-          </Link>
-        </div>
-      );
     case 'analytics':
       return (
         <div className="p-4 bg-gray-50 rounded-lg border">

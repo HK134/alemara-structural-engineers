@@ -1,95 +1,84 @@
 
 import { supabase } from '@/integrations/supabase/client';
-import { SubmissionData, OperationResult } from './types';
+import { OperationResult, FormSubmission } from './types';
 
 /**
- * Submits form data to the database
+ * Gets all submissions from the database
  */
-export const submitFormToDB = async (
-  formData: SubmissionData,
-  formType: string = 'contact'
-): Promise<OperationResult> => {
+export const getAllSubmissions = async (): Promise<OperationResult> => {
   try {
-    const { firstName, lastName, email, phone, message, serviceType, postcode, address } = formData;
-
-    const submission = {
-      form_type: formType,
-      first_name: firstName,
-      last_name: lastName,
-      email,
-      phone,
-      service_type: serviceType,
-      message,
-      status: 'new',
-      postcode,
-      address: address || '',
-      secured: false
-    };
-
     const { data, error } = await supabase
       .from('form_submissions')
-      .insert([submission as any])
-      .select();
+      .select('*')
+      .order('created_at', { ascending: false });
 
     if (error) {
-      console.error('Error submitting form to database:', error);
-      return { success: false, message: 'Database submission failed', error };
+      console.error('Error getting submissions:', error);
+      return { success: false, message: 'Failed to get submissions', error };
     }
 
-    console.log('Form submitted to database:', data);
-    return { success: true, message: 'Form submitted successfully', data };
+    return { 
+      success: true, 
+      message: 'Submissions retrieved successfully',
+      data 
+    };
   } catch (error) {
-    console.error('Error in form submission:', error);
+    console.error('Error in getAllSubmissions:', error);
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
-// Alias for backward compatibility
-export const saveFormSubmissionToDatabase = submitFormToDB;
-
 /**
- * Gets submission counts by status
+ * Gets a submission by ID
  */
-export const getSubmissionCounts = async (): Promise<OperationResult> => {
+export const getSubmissionById = async (id: string): Promise<OperationResult> => {
   try {
-    const { data: statusData, error: statusError } = await supabase
-      .rpc('get_status_counts');
-
-    if (statusError) {
-      console.error('Error getting status counts:', statusError);
-      return { success: false, message: 'Failed to get status counts', error: statusError };
-    }
-
-    const { count: totalCount, error: countError } = await supabase
+    const { data, error } = await supabase
       .from('form_submissions')
-      .select('*', { count: 'exact', head: true });
+      .select('*')
+      .eq('id', id)
+      .single();
 
-    if (countError) {
-      console.error('Error getting total count:', countError);
-      return { success: false, message: 'Failed to get total count', error: countError };
+    if (error) {
+      console.error('Error getting submission:', error);
+      return { success: false, message: 'Failed to get submission', error };
     }
 
-    const { count: newCount, error: newError } = await supabase
-      .from('form_submissions')
-      .select('*', { count: 'exact', head: true })
-      .eq('status', 'new' as any);
-
-    if (newError) {
-      console.error('Error getting new count:', newError);
-      return { success: false, message: 'Failed to get new count', error: newError };
-    }
-
-    return {
+    return { 
       success: true, 
-      message: 'Counts retrieved successfully',
-      counts: {
-        total: totalCount ?? 0,
-        new: newCount ?? 0,
-        byStatus: statusData ?? []
-      }
+      message: 'Submission retrieved successfully',
+      data 
     };
   } catch (error) {
-    console.error('Error in getSubmissionCounts:', error);
+    console.error('Error in getSubmissionById:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+/**
+ * Updates a submission
+ */
+export const updateSubmission = async (id: string, updates: Partial<FormSubmission>): Promise<OperationResult> => {
+  try {
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error updating submission:', error);
+      return { success: false, message: 'Failed to update submission', error };
+    }
+
+    return { 
+      success: true, 
+      message: 'Submission updated successfully',
+      data 
+    };
+  } catch (error) {
+    console.error('Error in updateSubmission:', error);
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };

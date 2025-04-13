@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { RefreshCcw, LogOut, DatabaseBackup, Database, Plus, FileSpreadsheet, Trash2 } from 'lucide-react';
@@ -20,8 +21,8 @@ interface AdminHeaderProps {
   onLogout: () => void;
   onRefresh: () => void;
   onCreateTestSubmission: () => void;
-  viewMode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics';
-  onViewChange: (mode: 'leads' | 'map' | 'engineers' | 'seo' | 'analytics') => void;
+  viewMode: 'leads' | 'engineers' | 'analytics';
+  onViewChange: (mode: 'leads' | 'engineers' | 'analytics') => void;
 }
 
 const AdminHeader: React.FC<AdminHeaderProps> = ({ 
@@ -128,16 +129,6 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
         </Button>
         
         <Button 
-          variant={viewMode === 'map' ? 'default' : 'outline'} 
-          size="sm"
-          onClick={() => onViewChange('map')}
-          className="flex items-center gap-1.5"
-        >
-          <FileSpreadsheet size={14} />
-          <span>Map</span>
-        </Button>
-        
-        <Button 
           variant={viewMode === 'engineers' ? 'default' : 'outline'} 
           size="sm"
           onClick={() => onViewChange('engineers')}
@@ -153,18 +144,8 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
           onClick={() => onViewChange('analytics')}
           className="flex items-center gap-1.5"
         >
-          <DatabaseBackup size={14} />
+          <FileSpreadsheet size={14} />
           <span>Analytics</span>
-        </Button>
-        
-        <Button 
-          variant={viewMode === 'seo' ? 'default' : 'outline'} 
-          size="sm"
-          onClick={() => onViewChange('seo')}
-          className="flex items-center gap-1.5"
-        >
-          <DatabaseBackup size={14} />
-          <span>SEO</span>
         </Button>
       </div>
     </div>

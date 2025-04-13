@@ -41,7 +41,7 @@ const Admin = () => {
   const [currentTab, setCurrentTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers' | 'seo' | 'analytics'>('leads');
+  const [viewMode, setViewMode] = useState<'leads' | 'engineers' | 'analytics'>('leads');
   const [selectedEngineerId, setSelectedEngineerId] = useState<string | null>(null);
   const itemsPerPage = 10;
 
