@@ -27,7 +27,8 @@ import {
   Search,
   BarChart,
   LineChart,
-  Home
+  Home,
+  UserCog
 } from "lucide-react";
 
 export const AdminSidebar = () => {
@@ -75,6 +76,17 @@ export const AdminSidebar = () => {
                   >
                     <LayoutDashboard className="h-5 w-5" />
                     <span>Dashboard</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    isActive={isActive("/admin/engineers")} 
+                    tooltip="Engineer Management"
+                    onClick={() => navigate("/admin/engineers")}
+                  >
+                    <UserCog className="h-5 w-5" />
+                    <span>Engineers</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 

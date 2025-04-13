@@ -21,6 +21,7 @@ import Login from '@/pages/Login';
 import EngineerLogin from '@/pages/EngineerLogin';
 import ClientLogin from '@/pages/ClientLogin';
 import Admin from '@/pages/Admin';
+import EngineerManagement from '@/pages/EngineerManagement';
 import EngineerDashboard from '@/pages/EngineerDashboard';
 import EngineerTimesheet from '@/pages/EngineerTimesheet';
 import EngineerCompanyPolicy from '@/pages/EngineerCompanyPolicy';
@@ -70,6 +71,7 @@ function App() {
             {/* Admin Routes */}
             <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
             <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
+            <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />
 
             {/* Engineer Routes */}
             <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />

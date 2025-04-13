@@ -1,153 +1,141 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { RefreshCcw, LogOut, DatabaseBackup, Database, Plus, FileSpreadsheet, Trash2 } from 'lucide-react';
+import ClientOnboardingLinkGenerator from './ClientOnboardingLinkGenerator';
 import { 
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { deleteAllSubmissions } from '@/utils/db/deletion';
+  RefreshCw, 
+  LogOut, 
+  Database, 
+  LayoutDashboard, 
+  Users, 
+  BarChart3,
+  UserPlus 
+} from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { setupMakramEngineer } from '@/utils/engineerSetup';
 import { toast } from 'sonner';
 
 interface AdminHeaderProps {
   title: string;
   onLogout: () => void;
   onRefresh: () => void;
-  onCreateTestSubmission: () => void;
+  onCreateTestSubmission: () => Promise<void>;
   viewMode: 'leads' | 'engineers' | 'analytics';
-  onViewChange: (mode: 'leads' | 'engineers' | 'analytics') => void;
+  onViewChange: (view: 'leads' | 'engineers' | 'analytics') => void;
 }
 
 const AdminHeader: React.FC<AdminHeaderProps> = ({ 
   title, 
   onLogout, 
   onRefresh, 
-  onCreateTestSubmission, 
-  viewMode, 
-  onViewChange 
+  onCreateTestSubmission,
+  viewMode,
+  onViewChange
 }) => {
-  const handleDeleteAllSubmissions = async () => {
+  const [creatingEngineer, setCreatingEngineer] = React.useState(false);
+
+  const handleCreateMakramEngineer = async () => {
     try {
-      const result = await deleteAllSubmissions();
+      setCreatingEngineer(true);
+      const result = await setupMakramEngineer();
       
-      if (!result.success) {
-        throw new Error(result.message);
+      if (result.success) {
+        toast.success(result.message);
+        if (result.credentials?.password) {
+          toast.info(`Generated password: ${result.credentials.password}`, {
+            duration: 10000
+          });
+        }
+      } else {
+        toast.error(result.message);
       }
-      
-      toast.success('All leads deleted successfully');
-      onRefresh();
     } catch (error) {
-      console.error('Error deleting all submissions:', error);
-      toast.error('Failed to delete all leads');
+      console.error('Error creating Makram engineer:', error);
+      toast.error('Failed to create engineer');
+    } finally {
+      setCreatingEngineer(false);
     }
   };
-
+  
   return (
     <div className="mb-8">
-      <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-        <h1 className="text-3xl font-bold text-slate-800">{title}</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
         
-        <div className="flex flex-wrap gap-2">
+        <div className="flex items-center space-x-2">
           <Button 
-            variant="outline" 
+            variant="ghost" 
             size="sm" 
-            onClick={onRefresh}
-            className="flex items-center gap-1.5"
+            onClick={onRefresh} 
+            className="hidden sm:flex items-center"
+            title="Refresh Data"
           >
-            <RefreshCcw size={14} />
-            <span>Refresh</span>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
           </Button>
           
           <Button 
-            variant="outline" 
+            variant="ghost" 
             size="sm" 
-            onClick={onCreateTestSubmission}
-            className="flex items-center gap-1.5"
+            onClick={onCreateTestSubmission} 
+            className="hidden sm:flex items-center"
+            title="Create Test Submission"
           >
-            <Plus size={14} />
-            <span>Test Lead</span>
+            <Database className="h-4 w-4 mr-2" />
+            Test Data
           </Button>
           
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="flex items-center gap-1.5 text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600"
-              >
-                <Trash2 size={14} />
-                <span>Delete All</span>
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Delete All Leads</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Are you sure you want to delete all leads? This action cannot be undone.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction 
-                  onClick={handleDeleteAllSubmissions}
-                  className="bg-red-500 text-white hover:bg-red-600"
-                >
-                  Delete All
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleCreateMakramEngineer}
+            className="hidden sm:flex items-center"
+            title="Create Makram Engineer Account"
+            disabled={creatingEngineer}
+          >
+            <UserPlus className="h-4 w-4 mr-2" />
+            {creatingEngineer ? 'Creating...' : 'Create Makram'}
+          </Button>
           
           <Button 
-            variant="destructive" 
-            size="sm" 
-            onClick={onLogout}
-            className="flex items-center gap-1.5"
+            variant="ghost" 
+            onClick={onLogout} 
+            size="sm"
+            className="text-red-500 hover:text-red-700 hover:bg-red-100"
+            title="Log Out"
           >
-            <LogOut size={14} />
-            <span>Logout</span>
+            <LogOut className="h-4 w-4" />
           </Button>
         </div>
       </div>
       
-      <div className="flex flex-wrap gap-2 mb-2">
-        <Button 
-          variant={viewMode === 'leads' ? 'default' : 'outline'} 
-          size="sm"
-          onClick={() => onViewChange('leads')}
-          className="flex items-center gap-1.5"
+      <div className="mb-6">
+        <Tabs
+          value={viewMode}
+          onValueChange={(value) => onViewChange(value as 'leads' | 'engineers' | 'analytics')}
         >
-          <Database size={14} />
-          <span>Leads</span>
-        </Button>
-        
-        <Button 
-          variant={viewMode === 'engineers' ? 'default' : 'outline'} 
-          size="sm"
-          onClick={() => onViewChange('engineers')}
-          className="flex items-center gap-1.5"
-        >
-          <DatabaseBackup size={14} />
-          <span>Engineers</span>
-        </Button>
-        
-        <Button 
-          variant={viewMode === 'analytics' ? 'default' : 'outline'} 
-          size="sm"
-          onClick={() => onViewChange('analytics')}
-          className="flex items-center gap-1.5"
-        >
-          <FileSpreadsheet size={14} />
-          <span>Analytics</span>
-        </Button>
+          <TabsList className="grid w-full max-w-md grid-cols-3">
+            <TabsTrigger value="leads" className="flex items-center justify-center">
+              <LayoutDashboard className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Leads</span>
+            </TabsTrigger>
+            <TabsTrigger value="engineers" className="flex items-center justify-center">
+              <Users className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Engineers</span>
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="flex items-center justify-center">
+              <BarChart3 className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Analytics</span>
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
+      
+      {viewMode === 'leads' && (
+        <div className="mb-6">
+          <ClientOnboardingLinkGenerator />
+        </div>
+      )}
     </div>
   );
 };

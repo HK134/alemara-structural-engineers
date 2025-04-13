@@ -67,3 +67,38 @@ export const isAuthorizedEngineer = async (email: string): Promise<boolean> => {
     return false;
   }
 };
+
+/**
+ * Updates an engineer's password
+ */
+export const updateEngineerPassword = async (
+  email: string,
+  currentPassword: string,
+  newPassword: string
+): Promise<{ success: boolean; message: string }> => {
+  try {
+    // First verify the current password by attempting to sign in
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password: currentPassword,
+    });
+    
+    if (signInError) {
+      return { success: false, message: 'Current password is incorrect' };
+    }
+    
+    // If verification was successful, update the password
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword
+    });
+    
+    if (updateError) {
+      return { success: false, message: `Failed to update password: ${updateError.message}` };
+    }
+    
+    return { success: true, message: 'Password updated successfully' };
+  } catch (error) {
+    console.error("Error updating engineer password:", error);
+    return { success: false, message: 'An unexpected error occurred' };
+  }
+};

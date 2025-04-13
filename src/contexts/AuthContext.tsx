@@ -3,12 +3,17 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
+type UserRole = 'admin' | 'engineer' | 'client' | null;
+
 type AuthContextType = {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
   logout: () => Promise<void>;
-  userRole: 'admin' | null;
+  userRole: UserRole;
+  updatePassword: (currentPassword: string, newPassword: string) => Promise<{ success: boolean; message: string }>;
+  userEmail: string | null;
+  userName: string | null;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -16,7 +21,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [userRole, setUserRole] = useState<'admin' | null>(null);
+  const [userRole, setUserRole] = useState<UserRole>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -24,10 +31,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAuthenticated(isAuthed);
       
       if (session?.user) {
-        // All users are considered admins now
-        setUserRole('admin');
+        // Get the user's role from their metadata
+        const role = session.user.user_metadata?.role as UserRole || null;
+        setUserRole(role);
+        setUserEmail(session.user.email);
+        setUserName(session.user.user_metadata?.name || null);
       } else {
         setUserRole(null);
+        setUserEmail(null);
+        setUserName(null);
       }
       
       setIsLoading(false);
@@ -51,8 +63,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsAuthenticated(!!data.session);
         
         if (data.session?.user) {
-          // All users are considered admins now
-          setUserRole('admin');
+          // Get the user's role from their metadata
+          const role = data.session.user.user_metadata?.role as UserRole || null;
+          setUserRole(role);
+          setUserEmail(data.session.user.email);
+          setUserName(data.session.user.user_metadata?.name || null);
         }
       } catch (error) {
         console.error("Error checking session:", error);
@@ -80,8 +95,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { success: false, message: error.message };
       }
 
-      // All users are considered admins now
-      setUserRole('admin');
       return { success: true, message: 'Login successful' };
     } catch (error) {
       console.error('Login error:', error);
@@ -94,9 +107,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       await supabase.auth.signOut();
       setUserRole(null);
       setIsAuthenticated(false);
+      setUserEmail(null);
+      setUserName(null);
     } catch (error) {
       console.error('Logout error:', error);
       toast.error('Failed to log out');
+    }
+  };
+
+  const updatePassword = async (currentPassword: string, newPassword: string) => {
+    if (!userEmail) {
+      return { success: false, message: 'You must be logged in to update your password' };
+    }
+    
+    try {
+      // First verify the current password by attempting to sign in
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: userEmail,
+        password: currentPassword,
+      });
+      
+      if (signInError) {
+        return { success: false, message: 'Current password is incorrect' };
+      }
+      
+      // If verification was successful, update the password
+      const { error: updateError } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+      
+      if (updateError) {
+        return { success: false, message: `Failed to update password: ${updateError.message}` };
+      }
+      
+      return { success: true, message: 'Password updated successfully' };
+    } catch (error) {
+      console.error("Error updating password:", error);
+      return { success: false, message: 'An unexpected error occurred' };
     }
   };
 
@@ -106,7 +153,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isLoading, 
       login,
       logout, 
-      userRole 
+      userRole,
+      updatePassword,
+      userEmail,
+      userName
     }}>
       {children}
     </AuthContext.Provider>

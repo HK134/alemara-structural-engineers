@@ -1,14 +1,19 @@
 
 import { supabase } from '@/integrations/supabase/client';
+import { generateSecurePassword } from './passwordGenerator';
+import { sendLoginCredentialsEmail } from './engineerEmailService';
 
 interface EngineerSetupParams {
   name: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 export const setupEngineer = async ({ name, email, password }: EngineerSetupParams) => {
   try {
+    // Generate a password if not provided
+    const engineerPassword = password || generateSecurePassword();
+    
     // Check if engineer already exists
     const { data: existingEngineer, error: checkError } = await supabase
       .from('engineers')
@@ -44,7 +49,7 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
     // Create auth user if it doesn't exist
     const { data: userData, error: userError } = await supabase.auth.signUp({
       email,
-      password,
+      password: engineerPassword,
       options: {
         data: {
           name,
@@ -62,12 +67,26 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
       console.log(`Created auth user for ${name}`);
     }
     
+    // Send login credentials via email
+    const emailSent = await sendLoginCredentialsEmail(email, engineerPassword);
+    
+    if (!emailSent) {
+      return { 
+        success: true, 
+        message: `Engineer ${name} set up successfully but failed to send email. Password: ${engineerPassword}`, 
+        credentials: {
+          email,
+          password: engineerPassword
+        }
+      };
+    }
+    
     return { 
       success: true, 
-      message: `Engineer ${name} set up successfully. A confirmation email has been sent to ${email}.`, 
+      message: `Engineer ${name} set up successfully. Login credentials sent to ${email}.`, 
       credentials: {
         email,
-        password
+        password: engineerPassword
       }
     };
   } catch (error) {
@@ -76,10 +95,9 @@ export const setupEngineer = async ({ name, email, password }: EngineerSetupPara
   }
 };
 
-export const setupAlexEngineer = async () => {
+export const setupMakramEngineer = async () => {
   return setupEngineer({
-    name: 'Alex',
-    email: 'dubiah@hotmail.com',
-    password: 'EngineerAlex123!'
+    name: 'Makram',
+    email: 'makram@amatrix.co'
   });
 };
