@@ -74,8 +74,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.log('Auth token refreshed');
       }
       
-      const confirmationEvents: AuthChangeEvent[] = ['SIGNED_IN'];
-      if (confirmationEvents.includes(event) && session?.user?.email_confirmed_at) {
+      // Check if email was confirmed
+      if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
         toast.success('Email confirmed successfully');
       }
     });

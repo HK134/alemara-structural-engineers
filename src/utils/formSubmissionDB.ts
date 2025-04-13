@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -302,15 +301,19 @@ export const getSubmissionCounts = async () => {
 export const createClientAccount = async (submission: any) => {
   try {
     // Check if a user with this email already exists
-    const { data, error } = await supabase.auth.admin.getUserByEmail(submission.email);
+    const { data: authData, error: authError } = await supabase.auth.admin.listUsers({
+      filters: {
+        email: submission.email,
+      },
+    });
     
-    if (!error && data) {
+    if (!authError && authData && authData.users.length > 0) {
       console.log('User already exists with this email:', submission.email);
       
       // Update the submission to mark client_auth_created as true
       await supabase
         .from('form_submissions')
-        .update({ client_auth_created: true })
+        .update({ client_auth_created: true } as any)
         .eq('id', submission.id);
         
       return { success: true, message: 'User already exists with this email' };
@@ -320,7 +323,7 @@ export const createClientAccount = async (submission: any) => {
     const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(10).slice(-2);
     
     // Create a new user
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+    const { data: userCreateData, error: userCreateError } = await supabase.auth.admin.createUser({
       email: submission.email,
       password: tempPassword,
       email_confirm: true,
@@ -331,9 +334,9 @@ export const createClientAccount = async (submission: any) => {
       }
     });
     
-    if (authError) {
-      console.error('Error creating client account:', authError);
-      return { success: false, message: authError.message };
+    if (userCreateError) {
+      console.error('Error creating client account:', userCreateError);
+      return { success: false, message: userCreateError.message };
     }
     
     // Update the submission to mark client_auth_created as true and store the temp password
@@ -342,7 +345,7 @@ export const createClientAccount = async (submission: any) => {
       .update({ 
         client_auth_created: true, 
         client_temp_password: tempPassword 
-      })
+      } as any)
       .eq('id', submission.id);
     
     console.log('Client account created:', {
