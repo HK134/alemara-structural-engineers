@@ -45,7 +45,6 @@ const ClientLogin = lazy(() => import('@/pages/ClientLogin'));
 const EngineerLogin = lazy(() => import('@/pages/EngineerLogin'));
 const ClientDashboard = lazy(() => import('@/pages/ClientDashboard'));
 const EngineerDashboard = lazy(() => import('@/pages/EngineerDashboard'));
-const EngineerProjectsMap = lazy(() => import('@/pages/EngineerProjectsMap'));
 const EngineerTimesheet = lazy(() => import('@/pages/EngineerTimesheet'));
 const EngineerInvoices = lazy(() => import('@/pages/EngineerInvoices'));
 const EngineerMessages = lazy(() => import('@/pages/EngineerMessages'));
@@ -54,7 +53,6 @@ const EngineerCompanyPolicy = lazy(() => import('@/pages/EngineerCompanyPolicy')
 const EngineerClientEtiquette = lazy(() => import('@/pages/EngineerClientEtiquette'));
 
 // Analytics pages
-const SEO = lazy(() => import('@/pages/SEO'));
 const Analytics = lazy(() => import('@/pages/Analytics'));
 
 // Loading fallback
@@ -112,7 +110,6 @@ function App() {
               }>
                 <Route index element={<Admin />} />
                 <Route path="analytics" element={<Analytics />} />
-                <Route path="seo" element={<SEO />} />
               </Route>
               
               {/* Client Portal Routes */}
@@ -131,7 +128,6 @@ function App() {
                 </ProtectedRoute>
               }>
                 <Route index element={<EngineerDashboard />} />
-                <Route path="projects-map" element={<EngineerProjectsMap />} />
                 <Route path="timesheet" element={<EngineerTimesheet />} />
                 <Route path="invoices" element={<EngineerInvoices />} />
                 <Route path="messages" element={<EngineerMessages />} />

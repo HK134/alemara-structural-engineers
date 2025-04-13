@@ -82,3 +82,71 @@ export const updateSubmission = async (id: string, updates: Partial<FormSubmissi
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };
+
+/**
+ * Saves a form submission to the database
+ */
+export const saveFormSubmissionToDatabase = async (formData: any, formType: string): Promise<OperationResult> => {
+  try {
+    const submission = {
+      form_type: formType,
+      first_name: formData.firstName,
+      last_name: formData.lastName || '',
+      email: formData.email,
+      phone: formData.phone,
+      service_type: formData.serviceType || 'Not specified',
+      message: formData.message || null,
+      status: 'new',
+      postcode: formData.postcode || '',
+      address: formData.address || null,
+      secured: false,
+    };
+
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .insert(submission)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error saving submission:', error);
+      return { success: false, message: 'Failed to save submission', error };
+    }
+
+    return { 
+      success: true, 
+      message: 'Submission saved successfully',
+      data 
+    };
+  } catch (error) {
+    console.error('Error in saveFormSubmissionToDatabase:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+/**
+ * Gets all engineer projects from the database
+ */
+export const getEngineerProjects = async (engineerId: string): Promise<OperationResult> => {
+  try {
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .eq('engineer_id', engineerId)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error getting engineer projects:', error);
+      return { success: false, message: 'Failed to get engineer projects', error };
+    }
+
+    return { 
+      success: true, 
+      message: 'Engineer projects retrieved successfully',
+      data 
+    };
+  } catch (error) {
+    console.error('Error in getEngineerProjects:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
