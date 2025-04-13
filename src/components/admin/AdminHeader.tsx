@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { RefreshCcw, LogOut, DatabaseBackup, Database, Plus, FileSpreadsheet, Trash2 } from 'lucide-react';
@@ -13,7 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { deleteAllSubmissions } from '@/utils/formSubmissionDB';
+import { deleteAllSubmissions } from '@/utils/db/deletion';
 import { toast } from 'sonner';
 
 interface AdminHeaderProps {

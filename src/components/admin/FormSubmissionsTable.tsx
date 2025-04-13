@@ -26,7 +26,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import { ChevronDown, ChevronUp, Edit, LockIcon, UnlockIcon, UserCheck, Trash2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import { assignEngineerToProject, unassignEngineerFromProject, deleteSubmission, createClientAccount } from '@/utils/formSubmissionDB';
+import { 
+  assignEngineerToProject, 
+  unassignEngineerFromProject, 
+  deleteSubmission, 
+  createClientAccount 
+} from '@/utils/db';
 
 type Engineer = {
   id: string;
