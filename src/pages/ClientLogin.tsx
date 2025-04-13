@@ -14,7 +14,7 @@ const ClientLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated, clientLogin } = useAuth();
   const location = useLocation();
   
   // Get the intended destination from location state, or default to client dashboard
@@ -31,8 +31,8 @@ const ClientLogin = () => {
     setIsLoading(true);
     
     try {
-      // Use the password instead of postcode
-      const result = await login(email, password);
+      // Use clientLogin instead of login
+      const result = await clientLogin(email, password);
       
       if (!result.success) {
         toast.error(result.message);

@@ -26,7 +26,6 @@ export const submitFormToDB = async (
   try {
     const { firstName, lastName, email, phone, message, serviceType, postcode, address } = formData;
 
-    // Use explicit typecasting to match Supabase types
     const submission = {
       form_type: formType,
       first_name: firstName,
@@ -41,7 +40,6 @@ export const submitFormToDB = async (
       secured: false
     };
 
-    // Insert as an array for Supabase
     const { data, error } = await supabase
       .from('form_submissions')
       .insert([submission as any])
@@ -153,7 +151,6 @@ export const getEngineerProjects = async (engineerId: string) => {
 
 export const getProjectsEligibleForArchiving = async () => {
   try {
-    // Get projects that are closed and older than 30 days
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     
@@ -204,7 +201,6 @@ export const markSubmissionComplete = async (
 
 export const generateProjectReference = async (submissionId: string) => {
   try {
-    // Get the submission
     const { data: submission, error: getError } = await supabase
       .from('form_submissions')
       .select('*')
@@ -216,21 +212,18 @@ export const generateProjectReference = async (submissionId: string) => {
       return { success: false, message: 'Failed to get submission', error: getError };
     }
 
-    // If it already has a project reference, return it
     if (submission?.project_reference) {
       return { success: true, projectReference: submission.project_reference };
     }
 
-    // Function to generate a unique project reference
     const generateReference = () => {
       const year = new Date().getFullYear().toString().slice(-2);
-      const randomPart = Math.floor(1000 + Math.random() * 9000); // 4-digit number
+      const randomPart = Math.floor(1000 + Math.random() * 9000);
       return `W-${year}-${randomPart}`;
     };
 
     const projectReference = generateReference();
 
-    // Update the submission with the new project reference
     const { data, error } = await supabase
       .from('form_submissions')
       .update({ project_reference: projectReference } as any)
@@ -275,7 +268,6 @@ export const archiveSubmission = async (submissionId: string) => {
 
 export const getSubmissionCounts = async () => {
   try {
-    // Get counts by status
     const { data: statusData, error: statusError } = await supabase
       .rpc('get_status_counts');
 
@@ -284,7 +276,6 @@ export const getSubmissionCounts = async () => {
       return { success: false, message: 'Failed to get status counts', error: statusError };
     }
 
-    // Get total count
     const { count: totalCount, error: countError } = await supabase
       .from('form_submissions')
       .select('*', { count: 'exact', head: true });
@@ -294,7 +285,6 @@ export const getSubmissionCounts = async () => {
       return { success: false, message: 'Failed to get total count', error: countError };
     }
 
-    // Get new submissions count (status = 'new')
     const { count: newCount, error: newError } = await supabase
       .from('form_submissions')
       .select('*', { count: 'exact', head: true })
@@ -316,5 +306,88 @@ export const getSubmissionCounts = async () => {
   } catch (error) {
     console.error('Error in getSubmissionCounts:', error);
     return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+/**
+ * Creates a client account for a secured submission
+ */
+export const createClientAccount = async (submission: any) => {
+  try {
+    const { data: existingUsers, error: checkError } = await supabase
+      .from('auth.users')
+      .select('email')
+      .eq('email', submission.email)
+      .maybeSingle();
+      
+    if (checkError) {
+      console.error('Error checking for existing user:', checkError);
+    } else if (existingUsers) {
+      console.log('User already exists with this email:', submission.email);
+      return { success: true, message: 'User already exists with this email' };
+    }
+    
+    const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(10).slice(-2);
+    
+    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+      email: submission.email,
+      password: tempPassword,
+      email_confirm: true,
+      user_metadata: { 
+        full_name: `${submission.first_name} ${submission.last_name}`,
+        project_id: submission.id,
+        project_reference: submission.project_reference 
+      }
+    });
+    
+    if (authError) {
+      console.error('Error creating client account:', authError);
+      
+      const { data, error } = await supabase.auth.signUp({
+        email: submission.email,
+        password: tempPassword,
+        options: {
+          data: { 
+            full_name: `${submission.first_name} ${submission.last_name}`,
+            project_id: submission.id,
+            project_reference: submission.project_reference 
+          }
+        }
+      });
+      
+      if (error) {
+        console.error('Error creating client account via signUp:', error);
+        return { success: false, message: error.message };
+      }
+      
+      await supabase
+        .from('form_submissions')
+        .update({ client_auth_created: true, client_temp_password: tempPassword })
+        .eq('id', submission.id);
+      
+      console.log('Client account created:', {
+        email: submission.email,
+        password: tempPassword,
+        name: `${submission.first_name} ${submission.last_name}`
+      });
+      
+      return { success: true, message: 'Client account created successfully' };
+    }
+    
+    await supabase
+      .from('form_submissions')
+      .update({ client_auth_created: true, client_temp_password: tempPassword })
+      .eq('id', submission.id);
+    
+    console.log('Client account created:', {
+      email: submission.email,
+      password: tempPassword,
+      name: `${submission.first_name} ${submission.last_name}`
+    });
+    
+    return { success: true, message: 'Client account created successfully' };
+  } catch (error) {
+    console.error('Error in createClientAccount:', error);
+    return { success: false, message: 'An unexpected error occurred' };
   }
 };
