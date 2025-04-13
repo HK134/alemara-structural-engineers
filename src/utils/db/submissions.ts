@@ -80,7 +80,8 @@ export const getSubmissionCounts = async (): Promise<OperationResult> => {
     }
 
     return {
-      success: true,
+      success: true, 
+      message: 'Counts retrieved successfully',
       counts: {
         total: totalCount ?? 0,
         new: newCount ?? 0,

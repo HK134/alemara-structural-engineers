@@ -1,11 +1,11 @@
 
 import { supabase } from '@/integrations/supabase/client';
-import { OperationResult } from './types';
+import { OperationResult, FormSubmission } from './types';
 
 /**
  * Creates a client account for a secured submission
  */
-export const createClientAccount = async (submission: any): Promise<OperationResult> => {
+export const createClientAccount = async (submission: FormSubmission): Promise<OperationResult> => {
   try {
     // Check if a user with this email already exists
     const { data: existingUsers, error: fetchError } = await supabase.auth.admin.listUsers({

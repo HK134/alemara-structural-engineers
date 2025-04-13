@@ -3,130 +3,87 @@ import { supabase } from '@/integrations/supabase/client';
 import { OperationResult } from './types';
 
 /**
- * Generates a project reference for a submission
+ * Gets all projects
  */
-export const generateProjectReference = async (submissionId: string): Promise<OperationResult> => {
+export const getAllProjects = async (): Promise<OperationResult> => {
   try {
-    const { data: submission, error: getError } = await supabase
+    const { data, error } = await supabase
       .from('form_submissions')
       .select('*')
-      .eq('id', submissionId as any)
+      .eq('secured', true)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error getting projects:', error);
+      return { success: false, message: 'Failed to get projects', error };
+    }
+
+    return { 
+      success: true, 
+      message: 'Projects retrieved successfully',
+      data 
+    };
+  } catch (error) {
+    console.error('Error in getAllProjects:', error);
+    return { success: false, message: 'An unexpected error occurred', error };
+  }
+};
+
+/**
+ * Gets a single project by ID
+ */
+export const getProjectById = async (projectId: string): Promise<OperationResult> => {
+  try {
+    const { data, error } = await supabase
+      .from('form_submissions')
+      .select('*')
+      .eq('id', projectId)
+      .eq('secured', true)
       .single();
 
-    if (getError) {
-      console.error('Error getting submission:', getError);
-      return { success: false, message: 'Failed to get submission', error: getError };
-    }
-
-    if (submission?.project_reference) {
-      return { success: true, projectReference: submission.project_reference };
-    }
-
-    const generateReference = () => {
-      const year = new Date().getFullYear().toString().slice(-2);
-      const randomPart = Math.floor(1000 + Math.random() * 9000);
-      return `W-${year}-${randomPart}`;
-    };
-
-    const projectReference = generateReference();
-
-    const { data, error } = await supabase
-      .from('form_submissions')
-      .update({ project_reference: projectReference } as any)
-      .eq('id', submissionId as any)
-      .select();
-
     if (error) {
-      console.error('Error updating project reference:', error);
-      return { success: false, message: 'Failed to generate project reference', error };
+      console.error('Error getting project:', error);
+      return { success: false, message: 'Failed to get project', error };
     }
 
-    return { success: true, projectReference };
+    return { 
+      success: true, 
+      message: 'Project retrieved successfully',
+      data 
+    };
   } catch (error) {
-    console.error('Error in generateProjectReference:', error);
+    console.error('Error in getProjectById:', error);
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };
 
 /**
- * Gets projects eligible for archiving (completed 30+ days ago)
+ * Gets a project by reference number
  */
-export const getProjectsEligibleForArchiving = async (): Promise<OperationResult> => {
+export const getProjectByReference = async (reference: string): Promise<OperationResult> => {
   try {
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    
     const { data, error } = await supabase
       .from('form_submissions')
       .select('*')
-      .eq('status', 'closed')
-      .lt('completion_date', thirtyDaysAgo.toISOString());
-    
-    if (error) {
-      console.error('Error getting eligible projects for archiving:', error);
-      return { success: false, message: 'Failed to get eligible projects', error };
-    }
-    
-    return { success: true, data };
-  } catch (error) {
-    console.error('Error in getProjectsEligibleForArchiving:', error);
-    return { success: false, message: 'An unexpected error occurred', error };
-  }
-};
-
-/**
- * Marks a submission as complete
- */
-export const markSubmissionComplete = async (
-  submissionId: string,
-  completionDate: Date = new Date()
-): Promise<OperationResult> => {
-  try {
-    const formattedDate = completionDate.toISOString();
-    const { data, error } = await supabase
-      .from('form_submissions')
-      .update({
-        status: 'closed',
-        completion_date: formattedDate
-      } as any)
-      .eq('id', submissionId as any)
-      .select();
+      .eq('project_reference', reference)
+      .eq('secured', true);
 
     if (error) {
-      console.error('Error marking submission complete:', error);
-      return { success: false, message: 'Failed to mark as complete', error };
+      console.error('Error getting project by reference:', error);
+      return { success: false, message: 'Failed to get project', error };
     }
 
-    return { success: true, message: 'Submission marked as complete', data };
-  } catch (error) {
-    console.error('Error in markSubmissionComplete:', error);
-    return { success: false, message: 'An unexpected error occurred', error };
-  }
-};
-
-/**
- * Archives a submission
- */
-export const archiveSubmission = async (submissionId: string): Promise<OperationResult> => {
-  try {
-    const formattedDate = new Date().toISOString();
-    const { data, error } = await supabase
-      .from('form_submissions')
-      .update({
-        status: 'archived',
-        archived_date: formattedDate
-      } as any)
-      .eq('id', submissionId as any)
-      .select();
-
-    if (error) {
-      console.error('Error archiving submission:', error);
-      return { success: false, message: 'Failed to archive submission', error };
+    if (!data || data.length === 0) {
+      return { success: false, message: 'Project not found' };
     }
 
-    return { success: true, message: 'Submission archived successfully', data };
+    return { 
+      success: true, 
+      message: 'Project retrieved successfully',
+      data: data[0] 
+    };
   } catch (error) {
-    console.error('Error in archiveSubmission:', error);
+    console.error('Error in getProjectByReference:', error);
     return { success: false, message: 'An unexpected error occurred', error };
   }
 };

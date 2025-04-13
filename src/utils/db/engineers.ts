@@ -82,7 +82,7 @@ export const getEngineerSubmissions = async (engineerId: string): Promise<Operat
       return { success: false, message: 'Failed to get engineer submissions', error };
     }
 
-    return { success: true, data };
+    return { success: true, message: 'Engineer submissions retrieved successfully', data };
   } catch (error) {
     console.error('Error in getEngineerSubmissions:', error);
     return { success: false, message: 'An unexpected error occurred', error };
