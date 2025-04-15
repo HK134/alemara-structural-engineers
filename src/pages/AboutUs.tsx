@@ -55,12 +55,6 @@ const AboutUs = () => {
     bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
     email: "jaya@alemara.co.uk"
   }, {
-    name: "Hassanien",
-    role: "Project Manager",
-    image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
-    bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
-    email: "hassanien@alemara.co.uk"
-  }, {
     name: "Nasrin",
     role: "Senior Structural Engineer",
     image: "",
