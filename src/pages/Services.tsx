@@ -37,9 +37,20 @@ const Services = () => {
       
       <ServiceHeader scrollToSection={scrollToSection} />
       <ServiceIntro />
-      <StructuralEngineeringServices />
-      <CivilEngineeringServices />
-      <SteelFabricationServices />
+      
+      {/* Add refs to these sections to enable scrolling */}
+      <div ref={el => scrollToRef.current['residential-work'] = el}>
+        <StructuralEngineeringServices />
+      </div>
+      
+      <div ref={el => scrollToRef.current['civil-engineering'] = el}>
+        <CivilEngineeringServices />
+      </div>
+      
+      <div ref={el => scrollToRef.current['commercial'] = el}>
+        <SteelFabricationServices />
+      </div>
+      
       <ServiceCTA />
       <Testimonials />
       <CommonQuestions />
