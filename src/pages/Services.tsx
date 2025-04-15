@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import ServiceIntro from '@/components/services/ServiceIntro';
+import ServiceHeader from '@/components/services/ServiceHeader';
 import StructuralEngineeringServices from '@/components/services/StructuralEngineeringServices';
 import CivilEngineeringServices from '@/components/services/CivilEngineeringServices';
 import SteelFabricationServices from '@/components/services/SteelFabricationServices';
@@ -15,6 +16,14 @@ import { Helmet } from 'react-helmet';
 import StickyBookingButton from '@/components/StickyBookingButton';
 
 const Services = () => {
+  const scrollToRef = useRef<Record<string, HTMLElement | null>>({});
+
+  const scrollToSection = (sectionId: string) => {
+    if (scrollToRef.current[sectionId]) {
+      scrollToRef.current[sectionId]?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -26,6 +35,7 @@ const Services = () => {
       <Navbar />
       <StickyBookingButton />
       
+      <ServiceHeader scrollToSection={scrollToSection} />
       <ServiceIntro />
       <StructuralEngineeringServices />
       <CivilEngineeringServices />

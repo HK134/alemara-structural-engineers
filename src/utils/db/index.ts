@@ -1,11 +1,16 @@
 
-// Export everything from the individual files
-// Using named exports to avoid conflicts
-export type * from './types';
-export { type OperationResult } from './types';
-export * from './submissions';
-export { getEngineerProjects as getEngineerProjectsFromSubmissions } from './submissions';
+// Export all database utility functions
 export * from './engineers';
-export * from './projects';
-export * from './deletion';
+export * from './users';
 export * from './clients';
+export * from './auth';
+export * from './projects';
+// Rename the conflicting export from submissions
+export { 
+  getSubmissions,
+  createSubmission,
+  getSubmissionById,
+  updateSubmission,
+  getRecentSubmissions,
+  getEngineerProjects as getEngineerProjectsFromSubmissions
+} from './submissions';
