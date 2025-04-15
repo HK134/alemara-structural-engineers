@@ -68,7 +68,7 @@ function App() {
             <Route path="/engineer-login" element={<EngineerLogin />} />
             <Route path="/client-login" element={<ClientLogin />} />
 
-            {/* Admin Routes */}
+            {/* Admin Routes - AdminLayout as parent with nested routes */}
             <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
             <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
             <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />

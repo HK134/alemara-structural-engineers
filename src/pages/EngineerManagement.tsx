@@ -5,9 +5,9 @@ import EngineerManagementComponent from '@/components/admin/EngineerManagement';
 
 const EngineerManagement: React.FC = () => {
   return (
-    <AdminLayout>
+    <div className="p-6">
       <EngineerManagementComponent />
-    </AdminLayout>
+    </div>
   );
 };
 
