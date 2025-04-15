@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
@@ -18,6 +17,9 @@ import BasementExtensions from '@/pages/services/BasementExtensions';
 import SubsidenceCrackSurveys from '@/pages/services/SubsidenceCrackSurveys';
 import NewBuilds from '@/pages/services/NewBuilds';
 import IslingtonHighbury from '@/pages/areas/IslingtonHighbury';
+import CamdenKentishTown from '@/pages/areas/CamdenKentishTown';
+import HackneyShoreditch from '@/pages/areas/HackneyShoreditch';
+import KensingtonChelsea from '@/pages/areas/KensingtonChelsea';
 import ClientOnboarding from '@/pages/ClientOnboarding';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import Terms from '@/pages/Terms';
@@ -73,6 +75,9 @@ function App() {
             
             {/* Area Pages */}
             <Route path="/areas/islington-highbury" element={<IslingtonHighbury />} />
+            <Route path="/areas/camden-kentish-town" element={<CamdenKentishTown />} />
+            <Route path="/areas/hackney-shoreditch" element={<HackneyShoreditch />} />
+            <Route path="/areas/kensington-chelsea" element={<KensingtonChelsea />} />
             
             <Route path="/client-onboarding" element={<ClientOnboarding />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
