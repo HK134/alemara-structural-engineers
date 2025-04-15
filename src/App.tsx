@@ -46,6 +46,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
+import LondonBoroughs from '@/pages/areas/LondonBoroughs';
+import WestminsterMayfair from '@/pages/areas/WestminsterMayfair';
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
