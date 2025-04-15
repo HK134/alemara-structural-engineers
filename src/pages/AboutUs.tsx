@@ -10,97 +10,81 @@ import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle,
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
-
 const AboutUs = () => {
-  const teamMembers = [
-    {
-      name: "Hayder",
-      role: "Practice Manager",
-      image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
-      bio: "With over 10 years in structural engineering management, Hayder oversees our practice operations and leads the major projects division, ensuring clients receive exceptional service and technical excellence.",
-      email: "hayder@alemara.co.uk"
-    },
-    {
-      name: "Matheos",
-      role: "Chartered Structural Engineer",
-      image: "/lovable-uploads/fdcd7944-f4b5-4001-89a1-17adf6b188df.png",
-      bio: "Matheos specializes in complex residential renovations and extensions, bringing creative structural solutions that balance design ambition with technical feasibility.",
-      email: "matheos@alemara.co.uk"
-    },
-    {
-      name: "Dr. Hassan",
-      role: "Principal Civil Engineer",
-      image: "/lovable-uploads/357c7682-51ff-4501-9504-dfa32e250d61.png",
-      bio: "With a PhD in Civil Engineering and extensive research background, Dr. Hassan leads our infrastructure projects and provides expert consultation on challenging technical problems.",
-      email: "hassan@alemara.co.uk"
-    },
-    {
-      name: "Neil",
-      role: "Chartered Structural Engineer",
-      image: "/lovable-uploads/0fa16540-97de-43ea-8d62-de381379aaab.png",
-      bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects.",
-      email: "neil@alemara.co.uk"
-    },
-    {
-      name: "Zoë",
-      role: "Operations Manager",
-      image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
-      bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
-      email: "zoe@alemara.co.uk"
-    },
-    {
-      name: "Mitch",
-      role: "Construction Manager",
-      image: "/lovable-uploads/a8a0964f-22e7-423b-bf2c-8222396bd389.png",
-      bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
-      email: "mitch@alemara.co.uk"
-    },
-    {
-      name: "Jaya",
-      role: "Senior Structural Engineer",
-      image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
-      bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
-      email: "jaya@alemara.co.uk"
-    },
-    {
-      name: "Hassanien",
-      role: "Project Manager",
-      image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
-      bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
-      email: "hassanien@alemara.co.uk"
-    },
-    {
-      name: "Nasrin",
-      role: "Senior Structural Engineer",
-      image: "",
-      bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
-      email: "nasrin@alemara.co.uk"
-    },
-    {
-      name: "Mirsad",
-      role: "Senior Structural Engineer",
-      image: "",
-      bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
-      email: "mirsad@alemara.co.uk"
-    },
-    {
-      name: "Sam",
-      role: "Senior Structural Engineer",
-      image: "",
-      bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
-      email: "sam@alemara.co.uk"
-    },
-    {
-      name: "Ahmed",
-      role: "Senior Structural Engineer",
-      image: "",
-      bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
-      email: "ahmed@alemara.co.uk"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  const teamMembers = [{
+    name: "Hayder",
+    role: "Practice Manager",
+    image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
+    bio: "With over 10 years in structural engineering management, Hayder oversees our practice operations and leads the major projects division, ensuring clients receive exceptional service and technical excellence.",
+    email: "hayder@alemara.co.uk"
+  }, {
+    name: "Matheos",
+    role: "Chartered Structural Engineer",
+    image: "/lovable-uploads/fdcd7944-f4b5-4001-89a1-17adf6b188df.png",
+    bio: "Matheos specializes in complex residential renovations and extensions, bringing creative structural solutions that balance design ambition with technical feasibility.",
+    email: "matheos@alemara.co.uk"
+  }, {
+    name: "Dr. Hassan",
+    role: "Principal Civil Engineer",
+    image: "/lovable-uploads/357c7682-51ff-4501-9504-dfa32e250d61.png",
+    bio: "With a PhD in Civil Engineering and extensive research background, Dr. Hassan leads our infrastructure projects and provides expert consultation on challenging technical problems.",
+    email: "hassan@alemara.co.uk"
+  }, {
+    name: "Neil",
+    role: "Chartered Structural Engineer",
+    image: "/lovable-uploads/0fa16540-97de-43ea-8d62-de381379aaab.png",
+    bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects.",
+    email: "neil@alemara.co.uk"
+  }, {
+    name: "Zoë",
+    role: "Operations Manager",
+    image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
+    bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
+    email: "zoe@alemara.co.uk"
+  }, {
+    name: "Mitch",
+    role: "Construction Manager",
+    image: "/lovable-uploads/a8a0964f-22e7-423b-bf2c-8222396bd389.png",
+    bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
+    email: "mitch@alemara.co.uk"
+  }, {
+    name: "Jaya",
+    role: "Senior Structural Engineer",
+    image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
+    bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
+    email: "jaya@alemara.co.uk"
+  }, {
+    name: "Hassanien",
+    role: "Project Manager",
+    image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
+    bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
+    email: "hassanien@alemara.co.uk"
+  }, {
+    name: "Nasrin",
+    role: "Senior Structural Engineer",
+    image: "",
+    bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
+    email: "nasrin@alemara.co.uk"
+  }, {
+    name: "Mirsad",
+    role: "Senior Structural Engineer",
+    image: "",
+    bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
+    email: "mirsad@alemara.co.uk"
+  }, {
+    name: "Sam",
+    role: "Senior Structural Engineer",
+    image: "",
+    bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
+    email: "sam@alemara.co.uk"
+  }, {
+    name: "Ahmed",
+    role: "Senior Structural Engineer",
+    image: "",
+    bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
+    email: "ahmed@alemara.co.uk"
+  }];
+  return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>About Structural Engineering Solutions | Alemara</title>
         <meta name="description" content="Discover Alemara's team of expert structural engineers providing innovative, reliable engineering solutions for London's residential and commercial projects." />
@@ -108,19 +92,19 @@ const AboutUs = () => {
         <link rel="canonical" href="https://yourwebsite.com/about-structural-engineering-solutions" />
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EngineeringFirm",
-            "name": "Alemara Structural Engineers",
-            "url": "https://yourwebsite.com",
-            "logo": "https://yourwebsite.com/logo.png",
-            "description": "Expert structural and civil engineering consultancy serving London and the UK.",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "London",
-              "addressRegion": "London",
-              "addressCountry": "UK"
-            }
-          })}
+          "@context": "https://schema.org",
+          "@type": "EngineeringFirm",
+          "name": "Alemara Structural Engineers",
+          "url": "https://yourwebsite.com",
+          "logo": "https://yourwebsite.com/logo.png",
+          "description": "Expert structural and civil engineering consultancy serving London and the UK.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "London",
+            "addressRegion": "London",
+            "addressCountry": "UK"
+          }
+        })}
         </script>
       </Helmet>
       
@@ -130,11 +114,7 @@ const AboutUs = () => {
         {/* Hero Section */}
         <section className="relative h-[500px] overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img 
-              src="/lovable-uploads/caa3f88b-b26d-43c1-910a-e50410f3d3d8.png" 
-              alt="Alemara Engineering Office" 
-              className="w-full h-full object-cover"
-            />
+            <img src="/lovable-uploads/caa3f88b-b26d-43c1-910a-e50410f3d3d8.png" alt="Alemara Engineering Office" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-[#1A1F2C]/70"></div>
           </div>
           
@@ -195,7 +175,7 @@ const AboutUs = () => {
                     <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
                       <Medal className="h-6 w-6 text-[#ea384c]" />
                     </div>
-                    <h3 className="text-xl font-semibold text-[#1A1F2C]">Chartered Members of IStructE</h3>
+                    <h3 className="text-xl font-semibold text-[#1A1F2C]">Members of IStructE &amp; ICE</h3>
                   </div>
                   <p className="text-gray-600">
                     Our engineers are chartered members of the Institution of Structural Engineers, the world's largest professional body dedicated to structural engineering.
@@ -207,11 +187,9 @@ const AboutUs = () => {
                     <div className="p-2 bg-[#ea384c]/10 rounded-full mr-4">
                       <Shield className="h-6 w-6 text-[#ea384c]" />
                     </div>
-                    <h3 className="text-xl font-semibold text-[#1A1F2C]">£10M Professional Indemnity</h3>
+                    <h3 className="text-xl font-semibold text-[#1A1F2C]">Professional Indemnity</h3>
                   </div>
-                  <p className="text-gray-600">
-                    We carry comprehensive £10 million professional indemnity insurance coverage, giving our clients complete peace of mind.
-                  </p>
+                  <p className="text-gray-600">We carry comprehensive professional indemnity insurance coverage, giving our clients complete peace of mind.</p>
                 </div>
                 
                 <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
@@ -254,25 +232,13 @@ const AboutUs = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
               <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img 
-                  src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png" 
-                  alt="Alemara Office Interior" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                />
+                <img src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png" alt="Alemara Office Interior" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img 
-                  src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png" 
-                  alt="Alemara Engineering Studio" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                />
+                <img src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png" alt="Alemara Engineering Studio" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img 
-                  src="/lovable-uploads/1538283d-b9c2-4605-b325-82f813edfcba.png" 
-                  alt="Alemara Meeting Room" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-                />
+                <img src="/lovable-uploads/1538283d-b9c2-4605-b325-82f813edfcba.png" alt="Alemara Meeting Room" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
               </div>
             </div>
           </div>
@@ -288,9 +254,7 @@ const AboutUs = () => {
               </div>
               
               <div className="prose prose-lg max-w-none mb-10">
-                <p>
-                  With over 50 years of combined experience, our team has developed specialized knowledge across all aspects of structural engineering, allowing us to tackle even the most challenging projects with confidence.
-                </p>
+                <p>Our team has developed specialized knowledge across all aspects of structural engineering, allowing us to tackle even the most challenging projects with confidence.</p>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -376,16 +340,7 @@ const AboutUs = () => {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {teamMembers.map((member, index) => (
-                <TeamMember 
-                  key={index}
-                  name={member.name}
-                  role={member.role}
-                  image={member.image}
-                  bio={member.bio}
-                  email={member.email}
-                />
-              ))}
+              {teamMembers.map((member, index) => <TeamMember key={index} name={member.name} role={member.role} image={member.image} bio={member.bio} email={member.email} />)}
             </div>
           </div>
         </section>
@@ -424,8 +379,6 @@ const AboutUs = () => {
       
       <Footer />
       <StickyBookingButton />
-    </div>
-  );
+    </div>;
 };
-
 export default AboutUs;
