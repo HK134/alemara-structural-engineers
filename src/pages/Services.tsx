@@ -14,6 +14,8 @@ import CommonQuestions from '@/components/CommonQuestions';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet';
 import StickyBookingButton from '@/components/StickyBookingButton';
+import BespokeDesignServices from '@/components/services/BespokeDesignServices';
+import StructuralSurveyServices from '@/components/services/StructuralSurveyServices';
 
 const Services = () => {
   const scrollToRef = useRef<Record<string, HTMLElement | null>>({});
@@ -38,17 +40,24 @@ const Services = () => {
       <ServiceHeader scrollToSection={scrollToSection} />
       <ServiceIntro />
       
-      {/* Add refs to these sections to enable scrolling */}
       <div ref={el => scrollToRef.current['residential-work'] = el}>
         <StructuralEngineeringServices />
       </div>
       
-      <div ref={el => scrollToRef.current['civil-engineering'] = el}>
-        <CivilEngineeringServices />
-      </div>
-      
       <div ref={el => scrollToRef.current['commercial'] = el}>
         <SteelFabricationServices />
+      </div>
+
+      <div ref={el => scrollToRef.current['bespoke-design'] = el}>
+        <BespokeDesignServices />
+      </div>
+      
+      <div ref={el => scrollToRef.current['structural-surveys'] = el}>
+        <StructuralSurveyServices />
+      </div>
+      
+      <div ref={el => scrollToRef.current['civil-engineering'] = el}>
+        <CivilEngineeringServices />
       </div>
       
       <ServiceCTA />
