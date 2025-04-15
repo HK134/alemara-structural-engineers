@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -8,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, CheckCircle } from 'lucide-react';
+import { Loader2, CheckCircle, Phone, Mail } from 'lucide-react';
 import { submitFormToEmail } from '@/utils/emailSubmission';
 
 const serviceOptions = [
@@ -88,11 +89,26 @@ const ContactForm = () => {
   return (
     <section id="contact" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Get in touch with our team of expert structural engineers. We'll respond to all inquiries within 4 hours during business hours.
           </p>
+        </div>
+        
+        <div className="bg-[#1A1F2C] text-white p-4 rounded-lg max-w-3xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Phone className="h-5 w-5 text-[#ea384c]" />
+            <a href="tel:02080049060" className="text-white hover:text-[#ea384c] transition-colors font-semibold">
+              020 8004 9060
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <Mail className="h-5 w-5 text-[#ea384c]" />
+            <a href="mailto:info@alemara.co.uk" className="text-white hover:text-[#ea384c] transition-colors font-semibold">
+              info@alemara.co.uk
+            </a>
+          </div>
         </div>
         
         <div className="w-full max-w-3xl mx-auto">
