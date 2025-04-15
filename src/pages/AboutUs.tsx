@@ -177,9 +177,7 @@ const AboutUs = () => {
                     </div>
                     <h3 className="text-xl font-semibold text-[#1A1F2C]">Members of IStructE &amp; ICE</h3>
                   </div>
-                  <p className="text-gray-600">
-                    Our engineers are chartered members of the Institution of Structural Engineers, the world's largest professional body dedicated to structural engineering.
-                  </p>
+                  <p className="text-gray-600">Our engineers are members of the Institution of Structural Engineers, the world's largest professional body dedicated to structural engineering.</p>
                 </div>
                 
                 <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
