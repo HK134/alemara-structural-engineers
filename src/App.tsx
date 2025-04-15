@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
@@ -41,10 +42,8 @@ import NotFound from '@/pages/NotFound';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/contexts/AuthContext';
 import './App.css';
-import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// Create a client
 const queryClient = new QueryClient();
 
 function App() {
@@ -62,7 +61,6 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
             
-            {/* Service Pages */}
             <Route path="/services/residential" element={<Residential />} />
             <Route path="/services/loft-conversions" element={<LoftConversions />} />
             <Route path="/services/extensions" element={<Extensions />} />
@@ -73,11 +71,12 @@ function App() {
             <Route path="/services/subsidence-crack-surveys" element={<SubsidenceCrackSurveys />} />
             <Route path="/services/new-builds" element={<NewBuilds />} />
             
-            {/* Area Pages */}
+            <Route path="/areas" element={<LondonBoroughs />} />
             <Route path="/areas/islington-highbury" element={<IslingtonHighbury />} />
             <Route path="/areas/camden-kentish-town" element={<CamdenKentishTown />} />
             <Route path="/areas/hackney-shoreditch" element={<HackneyShoreditch />} />
             <Route path="/areas/kensington-chelsea" element={<KensingtonChelsea />} />
+            <Route path="/areas/westminster-mayfair" element={<WestminsterMayfair />} />
             
             <Route path="/client-onboarding" element={<ClientOnboarding />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -86,12 +85,10 @@ function App() {
             <Route path="/engineer-login" element={<EngineerLogin />} />
             <Route path="/client-login" element={<ClientLogin />} />
 
-            {/* Admin Routes - AdminLayout as parent with nested routes */}
             <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
             <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
             <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />
 
-            {/* Engineer Routes */}
             <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
             <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
             <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
@@ -100,10 +97,8 @@ function App() {
             <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
             <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
 
-            {/* Client Routes */}
             <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
 
-            {/* Not Found Route */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
