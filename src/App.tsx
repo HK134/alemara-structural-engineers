@@ -9,11 +9,15 @@ import FAQPage from '@/pages/FAQPage';
 import Blog from '@/pages/Blog';
 import SiteVisits from '@/pages/BlogPost/SiteVisits';
 import Residential from '@/pages/services/Residential';
-import LoftConversions from '@/pages/residential/LoftConversions';
+import LoftConversions from '@/pages/services/LoftConversions';
 import Extensions from '@/pages/residential/Extensions';
 import StructuralSurveys from '@/pages/services/StructuralSurveys';
 import Commercial from '@/pages/services/Commercial';
 import CivilEngineering from '@/pages/services/CivilEngineering';
+import BasementExtensions from '@/pages/services/BasementExtensions';
+import SubsidenceCrackSurveys from '@/pages/services/SubsidenceCrackSurveys';
+import NewBuilds from '@/pages/services/NewBuilds';
+import IslingtonHighbury from '@/pages/areas/IslingtonHighbury';
 import ClientOnboarding from '@/pages/ClientOnboarding';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import Terms from '@/pages/Terms';
@@ -21,6 +25,7 @@ import Login from '@/pages/Login';
 import EngineerLogin from '@/pages/EngineerLogin';
 import ClientLogin from '@/pages/ClientLogin';
 import Admin from '@/pages/Admin';
+import Analytics from '@/pages/Analytics';
 import EngineerManagement from '@/pages/EngineerManagement';
 import EngineerDashboard from '@/pages/EngineerDashboard';
 import EngineerTimesheet from '@/pages/EngineerTimesheet';
@@ -31,7 +36,6 @@ import EngineerInvoices from '@/pages/EngineerInvoices';
 import EngineerMessages from '@/pages/EngineerMessages';
 import ClientDashboard from '@/pages/ClientDashboard';
 import NotFound from '@/pages/NotFound';
-import Analytics from '@/pages/Analytics';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/contexts/AuthContext';
 import './App.css';
@@ -55,12 +59,21 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
+            
+            {/* Service Pages */}
             <Route path="/services/residential" element={<Residential />} />
             <Route path="/services/loft-conversions" element={<LoftConversions />} />
             <Route path="/services/extensions" element={<Extensions />} />
             <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
             <Route path="/services/commercial" element={<Commercial />} />
             <Route path="/services/civil-engineering" element={<CivilEngineering />} />
+            <Route path="/services/basement-extensions" element={<BasementExtensions />} />
+            <Route path="/services/subsidence-crack-surveys" element={<SubsidenceCrackSurveys />} />
+            <Route path="/services/new-builds" element={<NewBuilds />} />
+            
+            {/* Area Pages */}
+            <Route path="/areas/islington-highbury" element={<IslingtonHighbury />} />
+            
             <Route path="/client-onboarding" element={<ClientOnboarding />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />

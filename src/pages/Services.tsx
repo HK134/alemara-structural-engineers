@@ -23,6 +23,9 @@ const Services = () => {
   const scrollToSection = (sectionId: string) => {
     if (scrollToRef.current[sectionId]) {
       scrollToRef.current[sectionId]?.scrollIntoView({ behavior: 'smooth' });
+      
+      // Add title visibility by scrolling slightly above the section
+      window.scrollBy(0, -80); // Adjust for header height
     }
   };
 
@@ -40,23 +43,23 @@ const Services = () => {
       <ServiceHeader scrollToSection={scrollToSection} />
       <ServiceIntro />
       
-      <div ref={el => scrollToRef.current['residential-work'] = el}>
+      <div ref={el => scrollToRef.current['residential-work'] = el} id="residential-work">
         <StructuralEngineeringServices />
       </div>
       
-      <div ref={el => scrollToRef.current['commercial'] = el}>
+      <div ref={el => scrollToRef.current['commercial'] = el} id="commercial">
         <SteelFabricationServices />
       </div>
 
-      <div ref={el => scrollToRef.current['bespoke-design'] = el}>
+      <div ref={el => scrollToRef.current['bespoke-design'] = el} id="bespoke-design">
         <BespokeDesignServices />
       </div>
       
-      <div ref={el => scrollToRef.current['structural-surveys'] = el}>
+      <div ref={el => scrollToRef.current['structural-surveys'] = el} id="structural-surveys">
         <StructuralSurveyServices />
       </div>
       
-      <div ref={el => scrollToRef.current['civil-engineering'] = el}>
+      <div ref={el => scrollToRef.current['civil-engineering'] = el} id="civil-engineering">
         <CivilEngineeringServices />
       </div>
       

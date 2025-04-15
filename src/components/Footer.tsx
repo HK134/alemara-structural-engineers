@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -37,24 +38,24 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">London Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Property Surveys</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Basement Extensions</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">London Subsidence Solutions</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Period Property Inspections</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Bulging Walls & Movement Analysis</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Structural Defect Analysis</a></li>
+              <li><Link to="/services/loft-conversions" className="text-gray-300 hover:text-[#ea384c] transition-colors">Loft Conversions</Link></li>
+              <li><Link to="/services/extensions" className="text-gray-300 hover:text-[#ea384c] transition-colors">Rear & Side Extensions</Link></li>
+              <li><Link to="/services/basement-extensions" className="text-gray-300 hover:text-[#ea384c] transition-colors">Basement Extensions</Link></li>
+              <li><Link to="/services/subsidence-crack-surveys" className="text-gray-300 hover:text-[#ea384c] transition-colors">Subsidence & Crack Surveys</Link></li>
+              <li><Link to="/services/commercial" className="text-gray-300 hover:text-[#ea384c] transition-colors">Commercial Engineering</Link></li>
+              <li><Link to="/services/new-builds" className="text-gray-300 hover:text-[#ea384c] transition-colors">New Builds & Developments</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="text-xl font-bold mb-4">London Areas We Cover</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Islington & Highbury</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Camden & Kentish Town</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Hackney & Shoreditch</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Kensington & Chelsea</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">Westminster & Mayfair</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#ea384c] transition-colors">All London Boroughs</a></li>
+              <li><Link to="/areas/islington-highbury" className="text-gray-300 hover:text-[#ea384c] transition-colors">Islington & Highbury</Link></li>
+              <li><Link to="/areas/camden-kentish-town" className="text-gray-300 hover:text-[#ea384c] transition-colors">Camden & Kentish Town</Link></li>
+              <li><Link to="/areas/hackney-shoreditch" className="text-gray-300 hover:text-[#ea384c] transition-colors">Hackney & Shoreditch</Link></li>
+              <li><Link to="/areas/kensington-chelsea" className="text-gray-300 hover:text-[#ea384c] transition-colors">Kensington & Chelsea</Link></li>
+              <li><Link to="/areas/westminster-mayfair" className="text-gray-300 hover:text-[#ea384c] transition-colors">Westminster & Mayfair</Link></li>
+              <li><Link to="/areas/london-boroughs" className="text-gray-300 hover:text-[#ea384c] transition-colors">All London Boroughs</Link></li>
             </ul>
           </div>
           
