@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -55,7 +54,6 @@ const Footer = () => {
               <li><Link to="/areas/hackney-shoreditch" className="text-gray-300 hover:text-[#ea384c] transition-colors">Hackney & Shoreditch</Link></li>
               <li><Link to="/areas/kensington-chelsea" className="text-gray-300 hover:text-[#ea384c] transition-colors">Kensington & Chelsea</Link></li>
               <li><Link to="/areas/westminster-mayfair" className="text-gray-300 hover:text-[#ea384c] transition-colors">Westminster & Mayfair</Link></li>
-              <li><Link to="/areas/london-boroughs" className="text-gray-300 hover:text-[#ea384c] transition-colors">All London Boroughs</Link></li>
             </ul>
           </div>
           
