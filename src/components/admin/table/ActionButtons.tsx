@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Edit, LockIcon, UnlockIcon, Trash2 } from 'lucide-react';
@@ -14,7 +13,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from 'sonner';
-import { deleteSubmission } from '@/utils/db';
+import { updateSubmission } from '@/utils/db';
 import { FormSubmission } from '@/utils/db/types';
 
 interface ActionButtonsProps {
@@ -32,7 +31,10 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 }) => {
   const handleDeleteSubmission = async (id: string) => {
     try {
-      const result = await deleteSubmission(id);
+      const result = await updateSubmission(id, { 
+        status: 'archived',
+        archived_date: new Date().toISOString()
+      });
       
       if (!result.success) {
         throw new Error(result.message);
@@ -41,7 +43,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       toast.success('Lead deleted successfully');
       onRefetch();
     } catch (error) {
-      console.error('Error deleting submission:', error);
+      console.error('Error archiving submission:', error);
       toast.error('Failed to delete lead');
     }
   };

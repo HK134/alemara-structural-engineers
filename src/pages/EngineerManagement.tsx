@@ -1,6 +1,6 @@
 
 import React from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import EngineerManagementComponent from '@/components/admin/EngineerManagement';
 
 const EngineerManagement: React.FC = () => {
