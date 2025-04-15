@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -13,12 +12,13 @@ import { Loader2, CheckCircle, Phone, Mail } from 'lucide-react';
 import { submitFormToEmail } from '@/utils/emailSubmission';
 
 const serviceOptions = [
-  { value: "structural-design", label: "Structural Design & Calculations" },
-  { value: "loft-conversion", label: "Loft Conversion" },
-  { value: "rear-extension", label: "Rear Extension" },
-  { value: "structural-survey", label: "Structural Survey" },
-  { value: "commercial", label: "Commercial Project" },
-  { value: "bespoke-design", label: "Bespoke Design Solution" },
+  { value: "rear-side-extension", label: "Rear or side extension" },
+  { value: "loft-conversion", label: "Loft conversion" },
+  { value: "internal-renovation", label: "Internal renovation" },
+  { value: "chimney-removal", label: "Chimney breast removal" },
+  { value: "structural-survey", label: "Structural survey" },
+  { value: "commercial", label: "Commercial project" },
+  { value: "bespoke-design", label: "Bespoke design solution" },
   { value: "other", label: "Other" },
 ];
 
@@ -276,4 +276,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
