@@ -38,12 +38,16 @@ import EngineerClientEtiquette from '@/pages/EngineerClientEtiquette';
 import EngineerAvailability from '@/pages/EngineerAvailability';
 import EngineerInvoices from '@/pages/EngineerInvoices';
 import EngineerMessages from '@/pages/EngineerMessages';
+import EngineerWhiteboardPage from '@/pages/EngineerWhiteboardPage';
 import ClientDashboard from '@/pages/ClientDashboard';
 import NotFound from '@/pages/NotFound';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/contexts/AuthContext';
 import './App.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import EngineerLayout from '@/components/EngineerLayout';
+import AdminLayout from '@/components/AdminLayout';
+import ClientLayout from '@/components/ClientLayout';
 
 const queryClient = new QueryClient();
 
@@ -89,10 +93,12 @@ function App() {
             <Route path="/engineer-login" element={<EngineerLogin />} />
             <Route path="/client-login" element={<ClientLogin />} />
 
+            {/* Admin Routes */}
             <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
             <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
             <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />
 
+            {/* Engineer Routes */}
             <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
             <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
             <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
@@ -100,8 +106,11 @@ function App() {
             <Route path="/engineer/availability" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerAvailability /></ProtectedRoute>} />
             <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
             <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
+            <Route path="/engineer/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerWhiteboardPage /></ProtectedRoute>} />
 
+            {/* Client Routes */}
             <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
+            <Route path="/client/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['client']}><EngineerWhiteboardPage /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
