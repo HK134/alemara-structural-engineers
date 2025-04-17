@@ -1,9 +1,12 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, Shield, Building, MapPin, History } from "lucide-react";
 import BookingDialog from "./BookingDialog";
+
 const CTA = () => {
-  return <section className="py-16 bg-[#1A1F2C] text-white relative overflow-hidden">
+  return (
+    <section className="py-16 bg-[#1A1F2C] text-white relative overflow-hidden">
       {/* London-themed background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-20 h-20 bg-[url('/lovable-uploads/london-icon.png')] bg-no-repeat bg-contain"></div>
@@ -64,7 +67,7 @@ const CTA = () => {
                   </Button>
                 </BookingDialog>
                 <a href="tel:02080049060">
-                  <Button size="lg" variant="outline" className="border-white hover:bg-white text-lg w-full sm:w-auto text-slate-950">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full sm:w-auto">
                     Call 020 8004 9060
                   </Button>
                 </a>
@@ -91,6 +94,8 @@ const CTA = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default CTA;

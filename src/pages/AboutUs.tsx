@@ -10,7 +10,6 @@ import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle,
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
-
 const AboutUs = () => {
   const teamMembers = [{
     name: "Hayder",
@@ -40,7 +39,7 @@ const AboutUs = () => {
     name: "Zoë",
     role: "Operations Manager",
     image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
-    bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule. In her spare time, she enjoys horse riding.",
+    bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
     email: "zoe@alemara.co.uk"
   }, {
     name: "Mitch",
@@ -54,6 +53,12 @@ const AboutUs = () => {
     image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
     bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
     email: "jaya@alemara.co.uk"
+  }, {
+    name: "Hassanien",
+    role: "Project Manager",
+    image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
+    bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
+    email: "hassanien@alemara.co.uk"
   }, {
     name: "Nasrin",
     role: "Senior Structural Engineer",
@@ -79,7 +84,6 @@ const AboutUs = () => {
     bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
     email: "ahmed@alemara.co.uk"
   }];
-
   return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>About Structural Engineering Solutions | Alemara</title>
@@ -209,6 +213,30 @@ const AboutUs = () => {
                     Our designs maintain a perfect 100% approval rate with local building control authorities across all London boroughs.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Our Workspace - Image Gallery */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-[#1A1F2C]">Our Workspace</h2>
+              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Our modern offices provide the perfect environment for innovation and collaboration, enabling our team to deliver exceptional engineering solutions.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              <div className="rounded-lg overflow-hidden shadow-md h-64">
+                <img src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png" alt="Alemara Office Interior" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-md h-64">
+                <img src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png" alt="Alemara Engineering Studio" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-md h-64">
+                <img src="/lovable-uploads/1538283d-b9c2-4605-b325-82f813edfcba.png" alt="Alemara Meeting Room" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
               </div>
             </div>
           </div>
@@ -351,5 +379,4 @@ const AboutUs = () => {
       <StickyBookingButton />
     </div>;
 };
-
 export default AboutUs;
