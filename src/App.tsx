@@ -9,7 +9,7 @@ import FAQPage from '@/pages/FAQPage';
 import Blog from '@/pages/Blog';
 import SiteVisits from '@/pages/BlogPost/SiteVisits';
 import Residential from '@/pages/services/Residential';
-import LoftConversions from '@/pages/services/LoftConversions';
+import LoftConversions from '@/pages/residential/LoftConversions';
 import Extensions from '@/pages/residential/Extensions';
 import StructuralSurveys from '@/pages/services/StructuralSurveys';
 import Commercial from '@/pages/services/Commercial';
