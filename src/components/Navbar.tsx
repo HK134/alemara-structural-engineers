@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Phone, Clock, Shield, MapPin, Menu, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home, UserCircle } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import ContactDialog from './ContactDialog';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,6 +21,7 @@ import {
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +39,16 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleCurrentPageNav = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const currentPath = location.pathname;
+    const linkPath = event.currentTarget.getAttribute('href');
+    
+    if (linkPath === currentPath) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className={`${scrolled ? 'bg-[#1A1F2C]' : 'bg-[#1A1F2C]'} py-4 w-full z-50 sticky top-0 transition-all duration-300`}>
@@ -58,12 +69,45 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors">About</Link>
-          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors">Services</Link>
-          <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors">Portfolio</Link>
-          <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors">Blog</Link>
-          <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors">FAQ</Link>
-          <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors">Contact</a>
+          <Link to="/" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Home</Link>
+          <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>About</Link>
+          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Services</Link>
+          <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Portfolio</Link>
+          <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Blog</Link>
+          <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>FAQ</Link>
+          
+          <ContactDialog>
+            <button className="text-white hover:text-[#ea384c] transition-colors">Contact</button>
+          </ContactDialog>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="bg-[#ea384c] text-white border-white hover:bg-[#ea384c]/90 hover:text-white">
+                <UserCircle className="mr-1 h-4 w-4" />
+                Login
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-white p-2 rounded-md shadow-lg w-48 border border-gray-200">
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/client-login">
+                  <UserCircle className="mr-2 h-4 w-4 text-blue-600" />
+                  <span>Client Portal</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/engineer-login">
+                  <Shield className="mr-2 h-4 w-4 text-green-600" />
+                  <span>Engineer Login</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/login">
+                  <MapPin className="mr-2 h-4 w-4 text-red-600" />
+                  <span>Admin Panel</span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
@@ -97,12 +141,38 @@ const Navbar = () => {
             </DialogTrigger>
             <DialogContent className="bg-[#1A1F2C] text-white border-gray-700">
               <div className="flex flex-col space-y-4 py-4">
-                <Link to="/about" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">About</Link>
-                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Services</Link>
-                <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Portfolio</Link>
-                <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Blog</Link>
-                <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">FAQ</Link>
-                <a href="/#contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2">Contact</a>
+                <Link to="/" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>
+                  <span className="flex items-center">
+                    <Home className="h-4 w-4 mr-2" />
+                    Home
+                  </span>
+                </Link>
+                <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>About</Link>
+                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Services</Link>
+                <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Portfolio</Link>
+                <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Blog</Link>
+                <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>FAQ</Link>
+                
+                <ContactDialog>
+                  <button className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 text-left">Contact</button>
+                </ContactDialog>
+                
+                <div className="border-t border-gray-700 pt-4 space-y-2">
+                  <p className="text-sm text-gray-400 px-4">Login Portals:</p>
+                  <Link to="/client-login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                    <UserCircle className="mr-2 h-4 w-4" />
+                    Client Portal
+                  </Link>
+                  <Link to="/engineer-login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                    <Shield className="mr-2 h-4 w-4" />
+                    Engineer Login
+                  </Link>
+                  <Link to="/login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Admin Panel
+                  </Link>
+                </div>
+                
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
                     <Shield className="h-4 w-4 text-[#ea384c] mr-2" />

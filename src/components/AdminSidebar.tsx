@@ -26,7 +26,9 @@ import {
   Settings,
   Search,
   BarChart,
-  LineChart
+  LineChart,
+  Home,
+  UserCog
 } from "lucide-react";
 
 export const AdminSidebar = () => {
@@ -40,7 +42,7 @@ export const AdminSidebar = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/admin-login");
+    navigate("/"); // Navigate to home page after logout
   };
 
   return (
@@ -74,6 +76,17 @@ export const AdminSidebar = () => {
                   >
                     <LayoutDashboard className="h-5 w-5" />
                     <span>Dashboard</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    isActive={isActive("/admin/engineers")} 
+                    tooltip="Engineer Management"
+                    onClick={() => navigate("/admin/engineers")}
+                  >
+                    <UserCog className="h-5 w-5" />
+                    <span>Engineers</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 
@@ -154,6 +167,15 @@ export const AdminSidebar = () => {
                   >
                     <Settings className="h-5 w-5" />
                     <span>Settings</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    tooltip="Go to Website"
+                    onClick={() => navigate("/")}
+                  >
+                    <Home className="h-5 w-5" />
+                    <span>Back to Main Site</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

@@ -14,9 +14,9 @@ export const sendLoginCredentialsEmail = async (
     // Check if this is an authorized engineer first
     const { data: engineerData, error: engineerError } = await supabase
       .from('engineers')
-      .select('name')
-      .eq('email', email)
-      .eq('active', true)
+      .select('*')
+      .eq('email', email as string)
+      .eq('active', true as boolean)
       .single();
     
     if (engineerError || !engineerData) {
@@ -26,7 +26,7 @@ export const sendLoginCredentialsEmail = async (
     
     // Prepare email data for the engineer
     const emailData = {
-      firstName: engineerData.name,
+      firstName: engineerData?.name || '',
       lastName: '',
       email: email,
       phone: '',
@@ -56,14 +56,49 @@ export const isAuthorizedEngineer = async (email: string): Promise<boolean> => {
   try {
     const { data, error } = await supabase
       .from('engineers')
-      .select('email')
-      .eq('email', email)
-      .eq('active', true)
+      .select('*')
+      .eq('email', email as string)
+      .eq('active', true as boolean)
       .single();
     
     return !!data && !error;
   } catch (error) {
     console.error("Error checking engineer authorization:", error);
     return false;
+  }
+};
+
+/**
+ * Updates an engineer's password
+ */
+export const updateEngineerPassword = async (
+  email: string,
+  currentPassword: string,
+  newPassword: string
+): Promise<{ success: boolean; message: string }> => {
+  try {
+    // First verify the current password by attempting to sign in
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password: currentPassword,
+    });
+    
+    if (signInError) {
+      return { success: false, message: 'Current password is incorrect' };
+    }
+    
+    // If verification was successful, update the password
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword
+    });
+    
+    if (updateError) {
+      return { success: false, message: `Failed to update password: ${updateError.message}` };
+    }
+    
+    return { success: true, message: 'Password updated successfully' };
+  } catch (error) {
+    console.error("Error updating engineer password:", error);
+    return { success: false, message: 'An unexpected error occurred' };
   }
 };

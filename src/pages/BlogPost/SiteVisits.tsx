@@ -2,66 +2,62 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StickyBookingButton from '@/components/StickyBookingButton';
-
-// Import all components
-import SiteVisitSEO from '@/components/blog/SiteVisitSEO';
+import { Helmet } from 'react-helmet';
 import SiteVisitHero from '@/components/blog/SiteVisitHero';
 import SiteVisitReasons from '@/components/blog/SiteVisitReasons';
 import SiteVisitInspection from '@/components/blog/SiteVisitInspection';
 import SiteVisitAssessment from '@/components/blog/SiteVisitAssessment';
-import SiteVisitCommonIssues from '@/components/blog/SiteVisitCommonIssues';
 import SiteVisitConstruction from '@/components/blog/SiteVisitConstruction';
+import SiteVisitCommonIssues from '@/components/blog/SiteVisitCommonIssues';
 import SiteVisitCaseStudy from '@/components/blog/SiteVisitCaseStudy';
 import SiteVisitBenefits from '@/components/blog/SiteVisitBenefits';
 import SiteVisitFAQ from '@/components/blog/SiteVisitFAQ';
 import SiteVisitCTA from '@/components/blog/SiteVisitCTA';
-import SiteVisitSidebar from '@/components/blog/SiteVisitSidebar';
 import SiteVisitBottomCTA from '@/components/blog/SiteVisitBottomCTA';
+import SiteVisitSidebar from '@/components/blog/SiteVisitSidebar';
 
-const SiteVisitsPage = () => {
+const SiteVisits = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteVisitSEO />
+    <>
+      <Helmet>
+        <title>The Importance of Structural Engineering Site Visits | London Structural Surveys</title>
+        <meta 
+          name="description" 
+          content="Learn why site visits by structural engineers are crucial for your building project's success, safety, and compliance with regulations." 
+        />
+        <meta 
+          name="keywords" 
+          content="structural engineer site visit, structural inspection, building assessment, structural survey, London structural engineer" 
+        />
+      </Helmet>
+      
       <Navbar />
-
-      <main className="flex-grow">
-        <SiteVisitHero />
-
-        {/* Article Content */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 max-w-[1400px]">
-            <div className="flex flex-col lg:flex-row gap-12">
-              {/* Main Content */}
-              <div className="lg:w-2/3">
-                <article className="prose prose-lg max-w-none">
-                  <p className="lead text-xl text-gray-700">
-                    Site visits are a crucial component of any structural engineering project in London. They provide our engineers with firsthand insights about the property that simply cannot be gained from plans or photos alone. Here's why these visits are essential and what to expect when our engineers visit your property.
-                  </p>
-
-                  <SiteVisitReasons />
-                  <SiteVisitInspection />
-                  <SiteVisitAssessment />
-                  <SiteVisitCommonIssues />
-                  <SiteVisitConstruction />
-                  <SiteVisitCaseStudy />
-                  <SiteVisitBenefits />
-                  <SiteVisitFAQ />
-                  <SiteVisitCTA />
-                </article>
-              </div>
-
-              <SiteVisitSidebar />
-            </div>
+      
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-3/4">
+            <SiteVisitHero />
+            <SiteVisitReasons />
+            <SiteVisitInspection />
+            <SiteVisitAssessment />
+            <SiteVisitConstruction />
+            <SiteVisitCommonIssues />
+            <SiteVisitCaseStudy />
+            <SiteVisitBenefits />
+            <SiteVisitFAQ />
+            <SiteVisitCTA />
+            <SiteVisitBottomCTA />
           </div>
-        </section>
-        
-        <SiteVisitBottomCTA />
-      </main>
+          
+          <div className="lg:w-1/4">
+            <SiteVisitSidebar />
+          </div>
+        </div>
+      </div>
+      
       <Footer />
-      <StickyBookingButton />
-    </div>
+    </>
   );
 };
 
-export default SiteVisitsPage;
+export default SiteVisits;

@@ -41,7 +41,8 @@ const Admin = () => {
   const [currentTab, setCurrentTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState<'leads' | 'map' | 'engineers' | 'seo' | 'analytics'>('leads');
+  const [viewMode, setViewMode] = useState<'leads' | 'engineers' | 'analytics'>('leads');
+  const [selectedEngineerId, setSelectedEngineerId] = useState<string | null>(null);
   const itemsPerPage = 10;
 
   // Fetch engineers
@@ -64,24 +65,33 @@ const Admin = () => {
 
   // Fetch form submissions
   const { data: submissions, isLoading, error, refetch } = useQuery({
-    queryKey: ['formSubmissions', currentTab, searchQuery, currentPage],
+    queryKey: ['formSubmissions', currentTab, searchQuery, currentPage, selectedEngineerId],
     queryFn: async () => {
-      console.log("Fetching submissions with filters:", { currentTab, searchQuery, currentPage });
+      console.log("Fetching submissions with filters:", { currentTab, searchQuery, currentPage, selectedEngineerId });
       
       let query = supabase
         .from('form_submissions')
         .select('*');
 
+      // Apply status filter
       if (currentTab !== 'all') {
         console.log(`Applying status filter: ${currentTab}`);
         query = query.eq('status', currentTab);
       }
 
+      // Apply search query
       if (searchQuery) {
         console.log(`Applying search query: ${searchQuery}`);
         query = query.or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%`);
       }
+      
+      // Apply engineer filter
+      if (selectedEngineerId) {
+        console.log(`Applying engineer filter: ${selectedEngineerId}`);
+        query = query.eq('engineer_id', selectedEngineerId);
+      }
 
+      // Apply pagination
       const from = (currentPage - 1) * itemsPerPage;
       const to = from + itemsPerPage - 1;
       console.log(`Applying pagination: rows ${from} to ${to}`);
@@ -104,7 +114,7 @@ const Admin = () => {
 
   // Fetch total count for pagination
   const { data: totalCount } = useQuery({
-    queryKey: ['formSubmissionsCount', currentTab, searchQuery],
+    queryKey: ['formSubmissionsCount', currentTab, searchQuery, selectedEngineerId],
     queryFn: async () => {
       let query = supabase
         .from('form_submissions')
@@ -116,6 +126,10 @@ const Admin = () => {
 
       if (searchQuery) {
         query = query.or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%`);
+      }
+      
+      if (selectedEngineerId) {
+        query = query.eq('engineer_id', selectedEngineerId);
       }
 
       const { count, error } = await query;
@@ -129,6 +143,11 @@ const Admin = () => {
       return count || 0;
     }
   });
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [currentTab, searchQuery, selectedEngineerId]);
 
   useEffect(() => {
     const checkSubmissions = async () => {
@@ -184,6 +203,11 @@ const Admin = () => {
     }
   };
 
+  const handleEngineerChange = (engineerId: string | null) => {
+    setSelectedEngineerId(engineerId);
+    console.log(`Engineer filter changed to: ${engineerId || 'All Engineers'}`);
+  };
+
   return (
     <div className="container mx-auto py-8 px-4">
       <AdminHeader 
@@ -212,6 +236,8 @@ const Admin = () => {
         isLoading={isLoading}
         error={error as Error}
         onRefetch={refetch}
+        selectedEngineerId={selectedEngineerId}
+        onEngineerChange={handleEngineerChange}
       />
     </div>
   );

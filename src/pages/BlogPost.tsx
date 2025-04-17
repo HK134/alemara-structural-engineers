@@ -2,11 +2,11 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Calendar, User, Tag, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
-// This is a placeholder - we'll replace it with real data later
 const blogPosts = [
   {
     id: 1,
@@ -75,16 +75,13 @@ const blogPosts = [
     author: "Michael Patel, BSc CEng MIStructE",
     relatedPosts: [1, 5]
   },
-  // ... other posts would be defined here
 ];
 
 const BlogPost = () => {
   const { slug } = useParams();
   
-  // Find the current post based on slug
   const currentPost = blogPosts.find(post => post.slug === slug);
   
-  // Get related posts
   const relatedPosts = currentPost?.relatedPosts
     ? blogPosts.filter(post => currentPost.relatedPosts?.includes(post.id))
     : [];
@@ -112,9 +109,9 @@ const BlogPost = () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="min-h-screen bg-gray-50">
+      <main className="flex-grow">
         {/* Hero section with blog image */}
         <div className="w-full h-64 md:h-96 relative">
           <img 
@@ -200,7 +197,8 @@ const BlogPost = () => {
         </div>
       </main>
       <Footer />
-    </>
+      <StickyBookingButton />
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ import { saveFormSubmissionToDatabase } from './formSubmissionDB';
  * This uses EmailJS to send emails from the client-side and also stores in Supabase
  */
 export const submitFormToEmail = async (formData: any, formType: string) => {
-  console.log(`Sending ${formType} form data to info@londonstructuralsurveys.com:`, formData);
+  console.log(`Sending ${formType} form data to info@alemara.co.uk:`, formData);
   
   try {
     // Save to database first
@@ -24,7 +24,7 @@ export const submitFormToEmail = async (formData: any, formType: string) => {
     // Prepare template parameters to match what we want to collect from our website
     const templateParams = {
       to_name: "London Structural Surveys", 
-      to_email: 'info@londonstructuralsurveys.com',
+      to_email: 'info@alemara.co.uk',
       bcc: 'info@alemara.co.uk',
       form_type: formType,
       first_name: formData.firstName,

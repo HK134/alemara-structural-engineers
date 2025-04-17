@@ -1,13 +1,13 @@
-
 // Civil engineering projects data
 export const civilProjects = [
   // Hinkley Point C project
   {
     id: 11,
-    title: 'Hinkley Point C',
+    title: 'HPC, Somerset',
     type: 'civil',
     image: '/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png',
     description: 'Structural engineering and temporary works design for the UK\'s first new nuclear power station in a generation, ensuring compliance and safety across this landmark energy infrastructure project.',
+    completion: '',
     client: 'EDF Energy',
     location: 'Somerset, UK',
     images: [
@@ -37,10 +37,11 @@ Through our commitment to quality and detailed oversight, we ensured that all te
   // HS2 High Speed Rail project
   {
     id: 12,
-    title: 'HS2',
+    title: 'HS2 - High Speed Rail Infrastructure',
     type: 'civil',
     image: '/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png',
     description: 'Engineering and assurance services for key HS2 packages across London and Central areas, delivering innovative solutions for this transformative rail infrastructure project.',
+    completion: '',
     client: 'High Speed Two (HS2) Ltd',
     location: 'London & Central England',
     images: [
@@ -77,6 +78,7 @@ Our work on the HS2 project underscores our expertise in delivering innovative, 
     type: 'civil',
     image: 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Watford%20Stadium/Alemara%20Structural%20Engineers%20Watford%20Stadium%202.jpg',
     description: 'Comprehensive structural assessment and improvement recommendations for Watford Football Stadium, focusing on stand safety and expansion potential.',
+    completion: '',
     client: 'Watford FC',
     location: 'Watford, Hertfordshire',
     images: [

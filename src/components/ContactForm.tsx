@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2, CheckCircle } from 'lucide-react';
+import { Loader2, CheckCircle, Phone, Mail } from 'lucide-react';
 import { submitFormToEmail } from '@/utils/emailSubmission';
 
 const serviceOptions = [
-  { value: "structural-design", label: "Structural Design & Calculations" },
-  { value: "loft-conversion", label: "Loft Conversion" },
-  { value: "rear-extension", label: "Rear Extension" },
-  { value: "structural-survey", label: "Structural Survey" },
-  { value: "commercial", label: "Commercial Project" },
-  { value: "bespoke-design", label: "Bespoke Design Solution" },
+  { value: "rear-side-extension", label: "Rear or side extension" },
+  { value: "loft-conversion", label: "Loft conversion" },
+  { value: "internal-renovation", label: "Internal renovation" },
+  { value: "chimney-removal", label: "Chimney breast removal" },
+  { value: "structural-survey", label: "Structural survey" },
+  { value: "commercial", label: "Commercial project" },
+  { value: "bespoke-design", label: "Bespoke design solution" },
   { value: "other", label: "Other" },
 ];
 
@@ -61,15 +62,7 @@ const ContactForm = () => {
       if (result.success) {
         setIsSuccess(true);
         toast.success(result.message || "Thank you for your message! We'll be in touch soon.");
-        form.reset({
-          firstName: '',
-          email: '',
-          phone: '',
-          address: '',
-          postcode: '',
-          serviceType: '',
-          message: '',
-        });
+        form.reset();
         
         setTimeout(() => {
           setIsSuccess(false);
@@ -86,30 +79,46 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-16 bg-gray-50">
+    <section id="contact" className="py-8 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Get in touch with our team of expert structural engineers. We'll respond to all inquiries within 4 hours during business hours.
+        <div className="text-center mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Contact Us</h2>
+          <p className="text-gray-600 text-sm max-w-2xl mx-auto">
+            Get in touch with our team of expert structural engineers.
           </p>
         </div>
         
-        <div className="w-full max-w-3xl mx-auto">
+        <div className="bg-[#1A1F2C] text-white p-3 rounded-lg max-w-3xl mx-auto mb-4 flex flex-col md:flex-row justify-between items-center gap-2">
+          <div className="flex items-center gap-2">
+            <Phone className="h-4 w-4 text-[#ea384c]" />
+            <a href="tel:02080049060" className="text-white text-sm hover:text-[#ea384c] transition-colors font-semibold">
+              020 8004 9060
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <Mail className="h-4 w-4 text-[#ea384c]" />
+            <a href="mailto:info@alemara.co.uk" className="text-white text-sm hover:text-[#ea384c] transition-colors font-semibold">
+              info@alemara.co.uk
+            </a>
+          </div>
+        </div>
+        
+        <div className="w-full max-w-xl mx-auto">
           {isSuccess ? (
-            <div className="bg-green-50 p-8 rounded-lg border border-green-100 text-center">
-              <div className="flex justify-center mb-4">
-                <div className="bg-green-100 p-3 rounded-full">
-                  <CheckCircle className="h-8 w-8 text-green-600" />
+            <div className="bg-green-50 p-4 rounded-lg border border-green-100 text-center">
+              <div className="flex justify-center mb-2">
+                <div className="bg-green-100 p-2 rounded-full">
+                  <CheckCircle className="h-6 w-6 text-green-600" />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-green-800 mb-2">Thank You!</h3>
-              <p className="text-green-700 mb-4">
-                Your message has been successfully submitted. One of our structural engineers will contact you within 24 hours.
+              <h3 className="text-lg font-semibold text-green-800 mb-1">Thank You!</h3>
+              <p className="text-green-700 text-sm mb-3">
+                Your message has been successfully submitted.
               </p>
               <Button 
                 variant="outline" 
                 onClick={() => setIsSuccess(false)}
+                size="sm"
                 className="hover:bg-green-100"
               >
                 Submit Another Inquiry
@@ -117,8 +126,8 @@ const ContactForm = () => {
             </div>
           ) : (
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="firstName"
@@ -128,7 +137,7 @@ const ContactForm = () => {
                         <FormControl>
                           <Input placeholder="Enter your name" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
@@ -142,13 +151,13 @@ const ContactForm = () => {
                         <FormControl>
                           <Input type="email" placeholder="Enter your email" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="phone"
@@ -158,7 +167,7 @@ const ContactForm = () => {
                         <FormControl>
                           <Input placeholder="Enter your phone number" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
@@ -186,13 +195,13 @@ const ContactForm = () => {
                             ))}
                           </SelectContent>
                         </Select>
-                        <FormMessage />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="address"
@@ -202,7 +211,7 @@ const ContactForm = () => {
                         <FormControl>
                           <Input placeholder="Enter first line of address" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
@@ -216,7 +225,7 @@ const ContactForm = () => {
                         <FormControl>
                           <Input placeholder="Enter your postcode" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs" />
                       </FormItem>
                     )}
                   />
@@ -230,25 +239,15 @@ const ContactForm = () => {
                       <FormLabel>Message (Optional)</FormLabel>
                       <FormControl>
                         <Textarea 
-                          placeholder="Please provide any additional information about your requirements" 
-                          className="min-h-[120px]" 
+                          placeholder="Additional information" 
+                          className="min-h-[80px]" 
                           {...field} 
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
-
-                <div className="bg-blue-50 p-4 rounded-lg text-sm text-blue-800 flex items-start mb-6">
-                  <div className="mr-2 mt-0.5">
-                    <CheckCircle className="h-4 w-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Privacy Notice</p>
-                    <p>Your information is securely protected and will only be used to respond to your inquiry.</p>
-                  </div>
-                </div>
 
                 <div className="flex justify-center">
                   <Button 
