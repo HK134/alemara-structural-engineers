@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from '@/contexts/AuthContext';
-import EngineerLayout from '@/components/EngineerLayout';
-import ClientLayout from '@/components/ClientLayout';
 import WhiteboardCanvas from '@/components/WhiteboardCanvas';
 import { MessageSquare, Save } from "lucide-react";
 
@@ -74,82 +72,84 @@ const EngineerWhiteboardPage = () => {
   };
 
   // Determine which layout to use based on user role
-  const LayoutComponent = userRole === 'client' ? ClientLayout : EngineerLayout;
-
-  return (
-    <LayoutComponent>
-      <div className="container mx-auto p-6">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-2xl font-bold">{mockProject.title}</h1>
-            <p className="text-gray-500">
-              Client: {mockProject.client} • Engineer: {mockProject.engineer} • Last saved: {mockProject.lastSaved}
-            </p>
-          </div>
-          <div className="flex space-x-2">
-            <Button variant="outline" onClick={() => navigate(-1)}>
-              Back
-            </Button>
-          </div>
+  const LayoutContent = (
+    <div className="container mx-auto p-6">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h1 className="text-2xl font-bold">{mockProject.title}</h1>
+          <p className="text-gray-500">
+            Client: {mockProject.client} • Engineer: {mockProject.engineer} • Last saved: {mockProject.lastSaved}
+          </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Comments Section (Sidebar) */}
-          <div className="md:col-span-1">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <MessageSquare className="mr-2 h-5 w-5" />
-                  Comments
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="max-h-[600px] overflow-y-auto space-y-4 mb-4">
-                    {comments.map((comment) => (
-                      <div key={comment.id} className={`p-3 rounded-lg ${comment.role === userRole ? 'bg-blue-50' : 'bg-gray-50'}`}>
-                        <div className="flex justify-between items-start">
-                          <div className="font-medium">{comment.user} <span className="text-xs text-gray-500">({comment.role})</span></div>
-                          <div className="text-xs text-gray-500">{comment.timestamp}</div>
-                        </div>
-                        <p className="mt-1">{comment.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Textarea 
-                      placeholder="Add your comment here..." 
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                      className="min-h-24"
-                    />
-                    <Button 
-                      onClick={handleAddComment}
-                      className="w-full bg-blue-600 hover:bg-blue-700">
-                      Add Comment
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          
-          {/* Whiteboard Canvas */}
-          <div className="md:col-span-3">
-            <Card>
-              <CardContent className="p-4">
-                <WhiteboardCanvas 
-                  projectId={projectId || "new"} 
-                  readOnly={false} 
-                  onSave={handleSaveWhiteboard}
-                />
-              </CardContent>
-            </Card>
-          </div>
+        <div className="flex space-x-2">
+          <Button variant="outline" onClick={() => navigate(-1)}>
+            Back
+          </Button>
         </div>
       </div>
-    </LayoutComponent>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Comments Section (Sidebar) */}
+        <div className="md:col-span-1">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <MessageSquare className="mr-2 h-5 w-5" />
+                Comments
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="max-h-[600px] overflow-y-auto space-y-4 mb-4">
+                  {comments.map((comment) => (
+                    <div key={comment.id} className={`p-3 rounded-lg ${comment.role === userRole ? 'bg-blue-50' : 'bg-gray-50'}`}>
+                      <div className="flex justify-between items-start">
+                        <div className="font-medium">{comment.user} <span className="text-xs text-gray-500">({comment.role})</span></div>
+                        <div className="text-xs text-gray-500">{comment.timestamp}</div>
+                      </div>
+                      <p className="mt-1">{comment.text}</p>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="space-y-2">
+                  <Textarea 
+                    placeholder="Add your comment here..." 
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    className="min-h-24"
+                  />
+                  <Button 
+                    onClick={handleAddComment}
+                    className="w-full bg-blue-600 hover:bg-blue-700">
+                    Add Comment
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        
+        {/* Whiteboard Canvas */}
+        <div className="md:col-span-3">
+          <Card>
+            <CardContent className="p-4">
+              <WhiteboardCanvas 
+                projectId={projectId || "new"} 
+                readOnly={false} 
+                onSave={handleSaveWhiteboard}
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+
+  return userRole === 'client' ? (
+    <div>{LayoutContent}</div>
+  ) : (
+    <div>{LayoutContent}</div>
   );
 };
 

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { Canvas, IEvent, Point, Rect, Circle, Textbox, fabric } from "fabric";
+import { Canvas, TEvent, Point, Rect, Circle, Textbox } from "fabric";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -24,7 +24,7 @@ interface WhiteboardCanvasProps {
 const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [fabricCanvas, setFabricCanvas] = useState<Canvas | null>(null);
-  const [activeObject, setActiveObject] = useState<fabric.Object | null>(null);
+  const [activeObject, setActiveObject] = useState<any | null>(null);
   const [activeTool, setActiveTool] = useState<"select" | "draw" | "rectangle" | "circle" | "text" | "eraser">("select");
   const { toast } = useToast();
 
@@ -44,13 +44,13 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     canvas.freeDrawingBrush.color = "#000000";
     
     // Event listeners
-    canvas.on("selection:created", (e: IEvent) => {
+    canvas.on("selection:created", (e: TEvent) => {
       if (e.selected && e.selected.length > 0) {
         setActiveObject(e.selected[0]);
       }
     });
     
-    canvas.on("selection:updated", (e: IEvent) => {
+    canvas.on("selection:updated", (e: TEvent) => {
       if (e.selected && e.selected.length > 0) {
         setActiveObject(e.selected[0]);
       }
@@ -119,7 +119,7 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     if (!fabricCanvas) return;
     
     // Get canvas coordinates
-    const pointer = fabricCanvas.getPointer(event);
+    const pointer = fabricCanvas.getPointer(event.nativeEvent as any);
     
     // Add shapes based on active tool
     switch (activeTool) {
@@ -222,6 +222,7 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     const dataURL = fabricCanvas.toDataURL({
       format: "png",
       quality: 1,
+      multiplier: 1
     });
     
     toast({
@@ -238,6 +239,7 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     const dataURL = fabricCanvas.toDataURL({
       format: "png",
       quality: 1,
+      multiplier: 1
     });
     
     const link = document.createElement("a");
