@@ -24,7 +24,14 @@ const Portfolio = () => {
         {/* Recent projects grid - with SEO optimized images */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {previewProjects.map((item) => (
-            <PortfolioCard key={item?.id} project={item!} />
+            <PortfolioCard key={item?.id} project={item || {
+              id: 0,
+              title: "Project",
+              type: "residential",
+              image: "/placeholder.svg",
+              description: "Project description",
+              completion: "2023",
+            }} />
           ))}
         </div>
         

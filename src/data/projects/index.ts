@@ -17,17 +17,44 @@ export { residentialProjects, commercialProjects, civilProjects, featuredProject
 
 // Helper function to get featured projects
 export const getFeaturedProjects = () => {
-  return featuredProjects.map(id => 
-    portfolioItems.find(project => project.id === id)
-  ).filter(Boolean);
+  return featuredProjects.map(id => {
+    const project = portfolioItems.find(project => project.id === id);
+    // Ensure all required fields are present
+    if (project && !project.completion) {
+      return {
+        ...project,
+        completion: "2023" // Default completion date if missing
+      };
+    }
+    return project;
+  }).filter(Boolean);
 };
 
 // Helper function to get project by ID
 export const getProjectById = (id: number) => {
-  return portfolioItems.find(project => project.id === id);
+  const project = portfolioItems.find(project => project.id === id);
+  // Ensure the completion field exists
+  if (project && !project.completion) {
+    return {
+      ...project,
+      completion: "2023" // Default completion date if missing
+    };
+  }
+  return project;
 };
 
 // Helper function to get projects by type
 export const getProjectsByType = (type: string) => {
-  return portfolioItems.filter(project => project.type === type);
+  return portfolioItems
+    .filter(project => project.type === type)
+    .map(project => {
+      // Ensure the completion field exists
+      if (!project.completion) {
+        return {
+          ...project,
+          completion: "2023" // Default completion date if missing
+        };
+      }
+      return project;
+    });
 };

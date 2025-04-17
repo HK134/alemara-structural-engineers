@@ -24,18 +24,24 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     if (id) {
-      const currentProject = portfolioItems.find(item => item.id === parseInt(id));
+      console.log("Project ID from URL:", id);
+      const projectId = parseInt(id);
+      const currentProject = portfolioItems.find(item => item.id === projectId);
+      
+      console.log("Found project:", currentProject);
       
       if (currentProject) {
         setProject(currentProject);
         
         // Find previous and next projects
-        const currentIndex = portfolioItems.findIndex(item => item.id === parseInt(id));
+        const currentIndex = portfolioItems.findIndex(item => item.id === projectId);
         setPrevProject(currentIndex > 0 ? portfolioItems[currentIndex - 1] : null);
         setNextProject(currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null);
         
         // Set initial related projects
         updateRelatedProjects(currentProject.type);
+      } else {
+        console.error("Project not found with ID:", id);
       }
     }
     setLoading(false);

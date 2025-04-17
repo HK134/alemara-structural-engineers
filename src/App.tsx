@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from '@/pages/Index';
@@ -59,7 +60,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/project/:id" element={<ProjectDetail />} />
+            <Route path="/portfolio/:id" element={<ProjectDetail />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
