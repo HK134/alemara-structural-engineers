@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Hammer, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ContactDialog from '@/components/ContactDialog';
 
 interface SteelServiceItem {
   icon: React.ReactNode;
@@ -94,11 +93,11 @@ const SteelFabricationServices = () => {
               </Tabs>
               
               <div className="mt-8 flex justify-center md:justify-start">
-                <ContactDialog>
+                <Link to="/#contact">
                   <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center gap-2 px-6 py-6 text-base">
                     Request Steel Services <ArrowRight className="h-4 w-4" />
                   </Button>
-                </ContactDialog>
+                </Link>
               </div>
             </div>
           </div>

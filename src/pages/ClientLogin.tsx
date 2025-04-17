@@ -17,8 +17,8 @@ const ClientLogin = () => {
   const { isAuthenticated, login } = useAuth();
   const location = useLocation();
   
-  // Get the intended destination from location state, or default to admin dashboard
-  const from = location.state?.from?.pathname || '/admin';
+  // Get the intended destination from location state, or default to client dashboard
+  const from = location.state?.from?.pathname || '/client';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,19 +31,20 @@ const ClientLogin = () => {
     setIsLoading(true);
     
     try {
+      // Use the password instead of postcode
       const result = await login(email, password);
       
       if (!result.success) {
         toast.error(result.message);
       } else {
-        toast.success('Login successful');
+        toast.success('Welcome to your client portal!');
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  // If already authenticated, redirect to the admin dashboard
+  // If already authenticated, redirect to the client dashboard
   if (isAuthenticated) {
     return <Navigate to={from} replace />;
   }

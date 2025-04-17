@@ -1,8 +1,8 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import ContactDialog from '@/components/ContactDialog';
 
 const ServiceCTA = () => {
   return (
@@ -13,11 +13,11 @@ const ServiceCTA = () => {
           <p className="text-xl mb-8">
             Our team of chartered structural and civil engineers is ready to help with your project.
           </p>
-          <ContactDialog>
-            <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+          <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
+            <Link to="/#contact" className="flex items-center">
               Book a Consultation <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </ContactDialog>
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

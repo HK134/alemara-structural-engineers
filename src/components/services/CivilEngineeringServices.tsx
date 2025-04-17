@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Construction, Workflow, FileText, ArrowRight } from "lucide-react";
-import ContactDialog from '@/components/ContactDialog';
 
 interface CivilServiceItem {
   icon: React.ReactNode;
@@ -69,11 +68,11 @@ const CivilEngineeringServices = () => {
                 services for major infrastructure projects throughout the UK, including High Speed 2 (HS2), 
                 highways schemes, and energy infrastructure.
               </p>
-              <ContactDialog>
-                <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+              <Link to="/#contact">
+                <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
                   Inquire About Major Projects <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-              </ContactDialog>
+              </Link>
             </div>
           </article>
           
@@ -88,11 +87,11 @@ const CivilEngineeringServices = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-gray-300 text-base mb-4">{service.description}</CardDescription>
-                  <ContactDialog>
+                  <Link to="/#contact">
                     <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
                       Request This Service <ArrowRight className="ml-1 h-4 w-4" />
                     </Button>
-                  </ContactDialog>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -106,11 +105,11 @@ const CivilEngineeringServices = () => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-gray-300 text-base mb-4">{civilEngineeringServices[2].description}</CardDescription>
-                <ContactDialog>
+                <Link to="/#contact">
                   <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
                     Request This Service <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
-                </ContactDialog>
+                </Link>
               </CardContent>
             </Card>
           </div>

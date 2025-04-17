@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -30,7 +29,7 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
     } else if (location.pathname.startsWith("/client")) {
       loginPath = "/client-login";
     } else if (location.pathname.startsWith("/admin")) {
-      loginPath = "/login";
+      loginPath = "/admin-login";
     }
     
     // Redirect to appropriate login page, saving the current location

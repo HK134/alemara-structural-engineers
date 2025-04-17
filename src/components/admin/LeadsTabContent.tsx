@@ -4,9 +4,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AdminSearchBar from './AdminSearchBar';
 import FormSubmissionsTable from './FormSubmissionsTable';
 import AdminPagination from './AdminPagination';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Filter } from 'lucide-react';
-import ClientOnboardingLinkGenerator from './ClientOnboardingLinkGenerator';
 
 type Engineer = {
   id: string;
@@ -49,8 +46,6 @@ interface LeadsTabContentProps {
   isLoading: boolean;
   error: Error | null;
   onRefetch: () => void;
-  selectedEngineerId?: string | null;
-  onEngineerChange?: (engineerId: string | null) => void;
 }
 
 const LeadsTabContent: React.FC<LeadsTabContentProps> = ({
@@ -65,43 +60,15 @@ const LeadsTabContent: React.FC<LeadsTabContentProps> = ({
   onTabChange,
   isLoading,
   error,
-  onRefetch,
-  selectedEngineerId,
-  onEngineerChange
+  onRefetch
 }) => {
   return (
     <>
-      <div className="mb-6">
-        <ClientOnboardingLinkGenerator />
-      </div>
-    
       <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">
         <AdminSearchBar 
           searchQuery={searchQuery} 
           onSearchChange={onSearchChange} 
         />
-        
-        {engineers && engineers.length > 0 && onEngineerChange && (
-          <div className="flex items-center gap-2">
-            <Filter size={18} className="text-gray-500" />
-            <Select
-              value={selectedEngineerId || "all"}
-              onValueChange={(value) => onEngineerChange(value === "all" ? null : value)}
-            >
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Filter by engineer" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Engineers</SelectItem>
-                {engineers.map((engineer) => (
-                  <SelectItem key={engineer.id} value={engineer.id}>
-                    {engineer.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
       </div>
 
       <Tabs defaultValue="all" value={currentTab} onValueChange={onTabChange} className="w-full">
@@ -109,7 +76,6 @@ const LeadsTabContent: React.FC<LeadsTabContentProps> = ({
           <TabsTrigger value="all">All Leads</TabsTrigger>
           <TabsTrigger value="new">New</TabsTrigger>
           <TabsTrigger value="contacted">Contacted</TabsTrigger>
-          <TabsTrigger value="live">Live</TabsTrigger>
           <TabsTrigger value="closed">Closed</TabsTrigger>
           <TabsTrigger value="archived">Archived</TabsTrigger>
         </TabsList>

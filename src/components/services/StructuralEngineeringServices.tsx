@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Home, Warehouse, PencilRuler, Building } from "lucide-react";
-import ContactDialog from '@/components/ContactDialog';
 
 interface StructuralServiceFeature {
   title: string;
@@ -151,11 +150,11 @@ const StructuralEngineeringServices = () => {
                       </div>
                     )}
                     
-                    <ContactDialog>
-                      <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center">
+                    <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
+                      <Link to="/#contact" className="flex items-center">
                         Request This Service <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </ContactDialog>
+                      </Link>
+                    </Button>
                   </div>
                 </div>
                 

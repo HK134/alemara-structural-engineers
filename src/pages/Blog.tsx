@@ -2,12 +2,11 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StickyBookingButton from '@/components/StickyBookingButton';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Calendar, ArrowRight, Tag } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ArrowRight, Calendar, Search, Tag } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Sample blog post data - this will be replaced with actual data later
 const blogPosts = [
@@ -93,7 +92,7 @@ const blogPosts = [
 // Get unique categories
 const allCategories = ["All", ...new Set(blogPosts.map(post => post.category))];
 
-const Blog = () => {
+const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   
@@ -106,9 +105,9 @@ const Blog = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
       <Navbar />
-      <main className="flex-grow">
+      <main className="min-h-screen bg-gray-50">
         {/* Hero section */}
         <section className="bg-[#1A1F2C] py-16">
           <div className="container mx-auto px-4">
@@ -237,9 +236,8 @@ const Blog = () => {
         </section>
       </main>
       <Footer />
-      <StickyBookingButton />
-    </div>
+    </>
   );
 };
 
-export default Blog;
+export default BlogPage;

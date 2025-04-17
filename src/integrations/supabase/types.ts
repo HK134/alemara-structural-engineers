@@ -9,21 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      Admin: {
-        Row: {
-          created_at: string
-          id: number
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-        }
-        Update: {
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
       engineer_timesheets: {
         Row: {
           created_at: string
@@ -90,8 +75,6 @@ export type Database = {
         Row: {
           address: string | null
           archived_date: string | null
-          client_auth_created: boolean | null
-          client_temp_password: string | null
           completion_date: string | null
           created_at: string
           email: string
@@ -111,8 +94,6 @@ export type Database = {
         Insert: {
           address?: string | null
           archived_date?: string | null
-          client_auth_created?: boolean | null
-          client_temp_password?: string | null
           completion_date?: string | null
           created_at?: string
           email: string
@@ -132,8 +113,6 @@ export type Database = {
         Update: {
           address?: string | null
           archived_date?: string | null
-          client_auth_created?: boolean | null
-          client_temp_password?: string | null
           completion_date?: string | null
           created_at?: string
           email?: string
