@@ -32,6 +32,7 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
   useEffect(() => {
     if (!canvasRef.current) return;
     
+    // Create the canvas instance
     const canvas = new Canvas(canvasRef.current, {
       width: canvasRef.current.clientWidth,
       height: 600,
@@ -39,9 +40,11 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       isDrawingMode: false,
     });
 
-    // Set up drawing brush
-    canvas.freeDrawingBrush.width = 2;
-    canvas.freeDrawingBrush.color = "#000000";
+    // Initialize the drawing brush only AFTER canvas is fully created
+    if (canvas.freeDrawingBrush) {
+      canvas.freeDrawingBrush.width = 2;
+      canvas.freeDrawingBrush.color = "#000000";
+    }
     
     // Event listeners - fixing the TypeScript errors with proper types
     canvas.on("selection:created", (options) => {
@@ -74,6 +77,12 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     if (!fabricCanvas) return;
     
     fabricCanvas.isDrawingMode = activeTool === "draw";
+    
+    // Only update brush properties if the brush exists and we're in drawing mode
+    if (activeTool === "draw" && fabricCanvas.freeDrawingBrush) {
+      fabricCanvas.freeDrawingBrush.color = "#000000";
+      fabricCanvas.freeDrawingBrush.width = 2;
+    }
     
     // Set cursor based on active tool
     switch (activeTool) {
