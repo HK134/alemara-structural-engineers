@@ -40,6 +40,7 @@ import EngineerInvoices from '@/pages/EngineerInvoices';
 import EngineerMessages from '@/pages/EngineerMessages';
 import EngineerWhiteboardPage from '@/pages/EngineerWhiteboardPage';
 import ClientDashboard from '@/pages/ClientDashboard';
+import ClientProjectDetail from '@/pages/ClientProjectDetail';
 import NotFound from '@/pages/NotFound';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -119,7 +120,7 @@ function App() {
             {/* Client Portal Routes */}
             <Route element={<ClientLayout />}>
               <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
-              <Route path="/client/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['client']}><EngineerWhiteboardPage /></ProtectedRoute>} />
+              <Route path="/client/project/:projectId" element={<ProtectedRoute allowedRoles={['client']}><ClientProjectDetail /></ProtectedRoute>} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

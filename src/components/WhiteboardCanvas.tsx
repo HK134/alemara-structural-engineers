@@ -1,6 +1,6 @@
 
-import React, { useEffect, useRef, useState } from "react";
-import { Canvas, TEvent, Point, Rect, Circle, Textbox } from "fabric";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Canvas, Point, Rect, Circle, Textbox } from "fabric";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { 
@@ -12,8 +12,11 @@ import {
   Pencil,
   MousePointer,
   ArrowUp,
-  ArrowDown
+  ArrowDown,
+  Save
 } from "lucide-react";
+import { saveWhiteboardData, loadWhiteboardData, subscribeToWhiteboardChanges } from "@/utils/db/whiteboards";
+import { Spinner } from "@/components/ui/spinner";
 
 interface WhiteboardCanvasProps {
   projectId: string | number;
@@ -26,6 +29,8 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
   const [fabricCanvas, setFabricCanvas] = useState<Canvas | null>(null);
   const [activeObject, setActiveObject] = useState<any | null>(null);
   const [activeTool, setActiveTool] = useState<"select" | "draw" | "rectangle" | "circle" | "text" | "eraser">("select");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
   // Initialize fabric canvas
@@ -39,21 +44,18 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       backgroundColor: "#ffffff",
       isDrawingMode: false,
     });
-
-    // Initialize the drawing brush only AFTER canvas is fully created
-    if (canvas.freeDrawingBrush) {
-      canvas.freeDrawingBrush.width = 2;
-      canvas.freeDrawingBrush.color = "#000000";
-    }
     
-    // Event listeners - fixing the TypeScript errors with proper types
-    canvas.on("selection:created", (options) => {
+    // Set canvas for component use
+    setFabricCanvas(canvas);
+    
+    // Event listeners with proper TypeScript types
+    canvas.on("selection:created", (options: any) => {
       if (options.selected && options.selected.length > 0) {
         setActiveObject(options.selected[0]);
       }
     });
     
-    canvas.on("selection:updated", (options) => {
+    canvas.on("selection:updated", (options: any) => {
       if (options.selected && options.selected.length > 0) {
         setActiveObject(options.selected[0]);
       }
@@ -63,14 +65,71 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       setActiveObject(null);
     });
     
-    // Set canvas for component use
-    setFabricCanvas(canvas);
+    // Load canvas data after initialization
+    const loadCanvas = async () => {
+      try {
+        const result = await loadWhiteboardData(projectId.toString());
+        if (result.success && result.data && result.data.canvas_data) {
+          canvas.loadFromJSON(result.data.canvas_data, canvas.renderAll.bind(canvas));
+          toast({
+            title: "Whiteboard loaded",
+            description: "Latest whiteboard data loaded successfully"
+          });
+        }
+      } catch (error) {
+        console.error("Error loading whiteboard:", error);
+        toast({
+          title: "Error",
+          description: "Failed to load whiteboard data",
+          variant: "destructive"
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadCanvas();
+    
+    // Subscribe to real-time updates
+    const unsubscribe = subscribeToWhiteboardChanges(
+      projectId.toString(),
+      (payload) => {
+        try {
+          if (payload.new && payload.new.canvas_data) {
+            // Only update if we didn't trigger this change ourselves
+            const { data: sessionData } = supabase.auth.getSession();
+            const currentUserId = sessionData.session?.user.id;
+            
+            if (payload.new.last_updated_by !== currentUserId) {
+              canvas.loadFromJSON(payload.new.canvas_data, canvas.renderAll.bind(canvas));
+              toast({
+                title: "Whiteboard updated",
+                description: "Someone else updated the whiteboard"
+              });
+            }
+          }
+        } catch (error) {
+          console.error("Error processing whiteboard update:", error);
+        }
+      }
+    );
     
     // Cleanup
     return () => {
+      unsubscribe();
       canvas.dispose();
     };
-  }, []);
+  }, [projectId, toast]);
+  
+  // Initialize brush after canvas is created
+  useEffect(() => {
+    if (!fabricCanvas) return;
+    
+    if (fabricCanvas.freeDrawingBrush) {
+      fabricCanvas.freeDrawingBrush.width = 2;
+      fabricCanvas.freeDrawingBrush.color = "#000000";
+    }
+  }, [fabricCanvas]);
   
   // Update canvas mode based on active tool
   useEffect(() => {
@@ -218,28 +277,41 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     });
   };
   
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!fabricCanvas) return;
     
-    // Convert canvas to JSON and save
-    const canvasData = JSON.stringify(fabricCanvas.toJSON());
-    if (onSave) {
-      onSave(canvasData);
+    setIsSaving(true);
+    
+    try {
+      // Convert canvas to JSON and save
+      const canvasData = JSON.stringify(fabricCanvas.toJSON());
+      
+      // Save to Supabase
+      const result = await saveWhiteboardData(projectId.toString(), canvasData);
+      
+      if (!result.success) {
+        throw new Error(result.message);
+      }
+      
+      // Call the onSave callback if provided
+      if (onSave) {
+        onSave(canvasData);
+      }
+      
+      toast({
+        title: "Whiteboard saved",
+        description: "Your whiteboard has been saved successfully",
+      });
+    } catch (error) {
+      console.error("Error saving whiteboard:", error);
+      toast({
+        title: "Error",
+        description: "Failed to save whiteboard",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSaving(false);
     }
-    
-    // Also offer download of image
-    const dataURL = fabricCanvas.toDataURL({
-      format: "png",
-      quality: 1,
-      multiplier: 1
-    });
-    
-    toast({
-      title: "Whiteboard saved",
-      description: "Your whiteboard has been saved successfully",
-    });
-    
-    return dataURL;
   };
   
   const handleDownload = () => {
@@ -273,6 +345,15 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     activeObject.sendToBack();
     fabricCanvas.renderAll();
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center p-8 h-96">
+        <Spinner size="lg" />
+        <span className="ml-3 text-lg">Loading whiteboard...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="whiteboard-container">
@@ -384,8 +465,19 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
               size="sm"
               onClick={handleSave}
               className="bg-emerald-600 hover:bg-emerald-700"
+              disabled={isSaving}
             >
-              Save
+              {isSaving ? (
+                <>
+                  <Spinner className="mr-2 h-4 w-4" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save className="h-4 w-4 mr-2" />
+                  Save
+                </>
+              )}
             </Button>
           </div>
         </div>
