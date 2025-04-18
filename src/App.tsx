@@ -60,6 +60,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about-us" element={<AboutUs />} />
@@ -69,6 +70,7 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
             
+            {/* Service Routes */}
             <Route path="/services/residential" element={<Residential />} />
             <Route path="/services/loft-conversions" element={<LoftConversions />} />
             <Route path="/services/extensions" element={<Extensions />} />
@@ -79,6 +81,7 @@ function App() {
             <Route path="/services/subsidence-crack-surveys" element={<SubsidenceCrackSurveys />} />
             <Route path="/services/new-builds" element={<NewBuilds />} />
             
+            {/* Area Routes */}
             <Route path="/areas" element={<LondonBoroughs />} />
             <Route path="/areas/islington-highbury" element={<IslingtonHighbury />} />
             <Route path="/areas/camden-kentish-town" element={<CamdenKentishTown />} />
@@ -86,6 +89,7 @@ function App() {
             <Route path="/areas/kensington-chelsea" element={<KensingtonChelsea />} />
             <Route path="/areas/westminster-mayfair" element={<WestminsterMayfair />} />
             
+            {/* Authentication Routes */}
             <Route path="/client-onboarding" element={<ClientOnboarding />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
@@ -93,24 +97,30 @@ function App() {
             <Route path="/engineer-login" element={<EngineerLogin />} />
             <Route path="/client-login" element={<ClientLogin />} />
 
-            {/* Admin Routes */}
-            <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
-            <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
-            <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />
+            {/* Admin Portal Routes */}
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
+              <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
+              <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />
+            </Route>
 
-            {/* Engineer Routes */}
-            <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
-            <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
-            <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
-            <Route path="/engineer/client-etiquette" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerClientEtiquette /></ProtectedRoute>} />
-            <Route path="/engineer/availability" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerAvailability /></ProtectedRoute>} />
-            <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
-            <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
-            <Route path="/engineer/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerWhiteboardPage /></ProtectedRoute>} />
+            {/* Engineer Portal Routes */}
+            <Route element={<EngineerLayout />}>
+              <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
+              <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
+              <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
+              <Route path="/engineer/client-etiquette" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerClientEtiquette /></ProtectedRoute>} />
+              <Route path="/engineer/availability" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerAvailability /></ProtectedRoute>} />
+              <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
+              <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
+              <Route path="/engineer/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerWhiteboardPage /></ProtectedRoute>} />
+            </Route>
 
-            {/* Client Routes */}
-            <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
-            <Route path="/client/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['client']}><EngineerWhiteboardPage /></ProtectedRoute>} />
+            {/* Client Portal Routes */}
+            <Route element={<ClientLayout />}>
+              <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
+              <Route path="/client/whiteboard/:projectId" element={<ProtectedRoute allowedRoles={['client']}><EngineerWhiteboardPage /></ProtectedRoute>} />
+            </Route>
 
             <Route path="*" element={<NotFound />} />
           </Routes>
