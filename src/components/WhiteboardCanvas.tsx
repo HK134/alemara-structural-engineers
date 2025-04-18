@@ -43,16 +43,16 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     canvas.freeDrawingBrush.width = 2;
     canvas.freeDrawingBrush.color = "#000000";
     
-    // Event listeners
-    canvas.on("selection:created", (e: TEvent) => {
-      if (e.selected && e.selected.length > 0) {
-        setActiveObject(e.selected[0]);
+    // Event listeners - fixing the TypeScript errors with proper types
+    canvas.on("selection:created", (options) => {
+      if (options.selected && options.selected.length > 0) {
+        setActiveObject(options.selected[0]);
       }
     });
     
-    canvas.on("selection:updated", (e: TEvent) => {
-      if (e.selected && e.selected.length > 0) {
-        setActiveObject(e.selected[0]);
+    canvas.on("selection:updated", (options) => {
+      if (options.selected && options.selected.length > 0) {
+        setActiveObject(options.selected[0]);
       }
     });
     
@@ -118,8 +118,8 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!fabricCanvas) return;
     
-    // Get canvas coordinates
-    const pointer = fabricCanvas.getPointer(event.nativeEvent as any);
+    // Get canvas coordinates using native event
+    const pointer = fabricCanvas.getPointer(event.nativeEvent);
     
     // Add shapes based on active tool
     switch (activeTool) {
