@@ -6,10 +6,11 @@ export interface AuthContextType {
   userRole: string | null;
   userId: string | null;
   userName: string | null;
-  userEmail: string | null; // Add this property
+  userEmail: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
   logout: () => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<{ success: boolean; message: string }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -41,20 +42,25 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           setUserId(session.user.id);
           setUserEmail(session.user.email || null);
 
-          // Fetch user details from the 'users' table
-          const { data: userDetails, error: userError } = await supabase
-            .from('users')
+          // Fetch engineer details if the user is an engineer
+          const { data: engineerDetails, error: engineerError } = await supabase
+            .from('engineers')
             .select('*')
-            .eq('id', session.user.id)
+            .eq('email', session.user.email)
             .single();
 
-          if (userError) {
-            console.error("Error fetching user details:", userError);
-            setUserRole(null);
-            setUserName(null);
+          if (engineerError && engineerError.code !== 'PGRST116') {
+            console.error("Error fetching engineer details:", engineerError);
+          } else if (engineerDetails) {
+            setUserRole('engineer');
+            setUserName(engineerDetails.name);
           } else {
-            setUserRole(userDetails?.role || null);
-            setUserName(userDetails?.full_name || null);
+            // Check if user is an admin (you might want to adjust this based on your admin identification logic)
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user?.user_metadata?.role === 'admin') {
+              setUserRole('admin');
+              setUserName(user.user_metadata.name || null);
+            }
           }
         } else {
           setIsAuthenticated(false);
@@ -66,46 +72,47 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       } catch (error) {
         console.error("Error checking session:", error);
         setIsAuthenticated(false);
-        setUserId(null);
-        setUserRole(null);
-        setUserName(null);
-        setUserEmail(null);
+        resetUserState();
       } finally {
         setLoading(false);
       }
     };
 
+    const resetUserState = () => {
+      setUserId(null);
+      setUserRole(null);
+      setUserName(null);
+      setUserEmail(null);
+    };
+
     checkSession();
 
-    // Subscribe to auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session) {
         setIsAuthenticated(true);
-        setUserId(session?.user.id || null);
-        setUserEmail(session?.user.email || null);
+        setUserId(session.user.id);
+        setUserEmail(session.user.email);
 
-        // Fetch user details after sign-in
-        supabase
-          .from('users')
+        // Fetch engineer details
+        const { data: engineerDetails } = await supabase
+          .from('engineers')
           .select('*')
-          .eq('id', session?.user.id)
-          .single()
-          .then(({ data: userDetails, error: userError }) => {
-            if (userError) {
-              console.error("Error fetching user details after sign-in:", userError);
-              setUserRole(null);
-              setUserName(null);
-            } else {
-              setUserRole(userDetails?.role || null);
-              setUserName(userDetails?.full_name || null);
-            }
-          });
+          .eq('email', session.user.email)
+          .single();
+
+        if (engineerDetails) {
+          setUserRole('engineer');
+          setUserName(engineerDetails.name);
+        } else {
+          // Check if admin
+          if (session.user.user_metadata?.role === 'admin') {
+            setUserRole('admin');
+            setUserName(session.user.user_metadata.name || null);
+          }
+        }
       } else if (event === 'SIGNED_OUT') {
         setIsAuthenticated(false);
-        setUserId(null);
-        setUserRole(null);
-        setUserName(null);
-        setUserEmail(null);
+        resetUserState();
       }
     });
 
@@ -117,34 +124,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = async (email: string, password: string) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
+        email,
+        password,
       });
 
-      if (error) {
-        console.error("Login failed:", error);
-        return { success: false, message: error.message };
-      }
-
-      setIsAuthenticated(true);
-      setUserId(data.user?.id || null);
-      setUserEmail(data.user?.email || null);
-
-      // Fetch user details after login
-      const { data: userDetails, error: userError } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', data.user?.id)
-        .single();
-
-      if (userError) {
-        console.error("Error fetching user details after login:", userError);
-        setUserRole(null);
-        setUserName(null);
-      } else {
-        setUserRole(userDetails?.role || null);
-        setUserName(userDetails?.full_name || null);
-      }
+      if (error) return { success: false, message: error.message };
 
       return { success: true, message: "Login successful" };
     } catch (error) {
@@ -153,20 +137,31 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-
   const logout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
-      if (error) {
-        console.error("Logout failed:", error);
-      }
+      if (error) throw error;
       setIsAuthenticated(false);
-      setUserId(null);
-      setUserRole(null);
-      setUserName(null);
-      setUserEmail(null);
+      resetUserState();
     } catch (error) {
       console.error("Logout error:", error);
+    }
+  };
+
+  const updatePassword = async (newPassword: string) => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) {
+        return { success: false, message: error.message };
+      }
+
+      return { success: true, message: "Password updated successfully" };
+    } catch (error) {
+      console.error("Password update error:", error);
+      return { success: false, message: "Failed to update password" };
     }
   };
 
@@ -179,6 +174,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     loading,
     login,
     logout,
+    updatePassword,
   };
 
   return (

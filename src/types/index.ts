@@ -1,4 +1,4 @@
-// Centralized type definitions
+
 export type ProjectStage = 
   | 'Site Visit' 
   | 'Schematic Submission' 
@@ -16,4 +16,12 @@ export type ProjectStatus = {
   visible_to_client?: boolean;
   last_updated_by?: string;
   updated_at?: string;
+};
+
+export type EngineerAssignment = {
+  id: string;
+  project_id: string;
+  engineer_id: string;
+  assigned_at: string;
+  assigned_by: string;
 };
