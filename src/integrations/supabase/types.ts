@@ -160,6 +160,85 @@ export type Database = {
           },
         ]
       }
+      project_statuses: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_updated_by: string | null
+          notes: string | null
+          project_id: string | null
+          stage: string | null
+          status: string
+          updated_at: string | null
+          visible_to_client: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_updated_by?: string | null
+          notes?: string | null
+          project_id?: string | null
+          stage?: string | null
+          status: string
+          updated_at?: string | null
+          visible_to_client?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_updated_by?: string | null
+          notes?: string | null
+          project_id?: string | null
+          stage?: string | null
+          status?: string
+          updated_at?: string | null
+          visible_to_client?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_statuses_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "form_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_whiteboards: {
+        Row: {
+          canvas_data: Json
+          created_at: string | null
+          id: string
+          last_updated_by: string | null
+          project_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          canvas_data?: Json
+          created_at?: string | null
+          id?: string
+          last_updated_by?: string | null
+          project_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          canvas_data?: Json
+          created_at?: string | null
+          id?: string
+          last_updated_by?: string | null
+          project_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_whiteboards_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "form_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

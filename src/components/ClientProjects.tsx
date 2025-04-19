@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,17 +11,16 @@ import { FileText, Clock, Calendar, ArrowRight } from 'lucide-react';
 const ClientProjects = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { userId } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // In a real implementation, we would fetch projects associated with the client's user ID
         const { data, error } = await supabase
           .from('form_submissions')
           .select('*')
-          .eq('client_auth_id', userId)
+          .eq('email', user?.email)
           .order('created_at', { ascending: false });
           
         if (error) throw error;
@@ -35,29 +33,30 @@ const ClientProjects = () => {
       }
     };
     
-    fetchProjects();
-    
-    // Set up realtime subscription to project updates
-    const channel = supabase
-      .channel('client-projects')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'form_submissions',
-          filter: `client_auth_id=eq.${userId}`
-        },
-        () => {
-          fetchProjects();
-        }
-      )
-      .subscribe();
+    if (user) {
+      fetchProjects();
       
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [userId]);
+      const channel = supabase
+        .channel('client-projects')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'form_submissions',
+            filter: `email=eq.${user.email}`
+          },
+          () => {
+            fetchProjects();
+          }
+        )
+        .subscribe();
+        
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [user]);
   
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

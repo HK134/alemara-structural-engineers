@@ -1,7 +1,6 @@
 
 import React from 'react';
-
-export type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
+import { ProjectStage } from '@/types';
 
 type ProjectStatusProps = {
   status: string;
@@ -14,16 +13,16 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage, size = 'md
   let textColor = '';
   
   // Determine colors based on overall status
-  switch (status) {
-    case 'Completed':
+  switch (status.toLowerCase()) {
+    case 'completed':
       bgColor = 'bg-green-100';
       textColor = 'text-green-800';
       break;
-    case 'In Progress':
+    case 'in progress':
       bgColor = 'bg-blue-100';
       textColor = 'text-blue-800';
       break;
-    case 'Awaiting Info':
+    case 'awaiting info':
       bgColor = 'bg-amber-100';
       textColor = 'text-amber-800';
       break;
@@ -54,3 +53,4 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage, size = 'md
 };
 
 export default ProjectStatus;
+export { ProjectStage };

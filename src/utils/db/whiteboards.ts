@@ -1,10 +1,6 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { OperationResult } from './types';
 
-/**
- * Saves whiteboard canvas data for a project
- */
 export const saveWhiteboardData = async (
   projectId: string, 
   canvasData: string

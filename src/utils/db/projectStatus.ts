@@ -1,23 +1,7 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { OperationResult } from './types';
+import { ProjectStage } from '@/types';
 
-export type ProjectStatus = {
-  id: string;
-  project_id: string;
-  status: string;
-  stage?: string;
-  notes?: string;
-  updated_by: string;
-  updated_at: string;
-  visible_to_client: boolean;
-};
-
-export type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
-
-/**
- * Updates the status of a project
- */
 export const updateProjectStatus = async (
   projectId: string, 
   status: string,
@@ -45,7 +29,7 @@ export const updateProjectStatus = async (
         status,
         stage,
         notes,
-        updated_by: updatedBy,
+        last_updated_by: updatedBy,
         visible_to_client: visibleToClient
       })
       .select()

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Canvas, Point, Rect, Circle, Textbox } from "fabric";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import {
   ArrowDown,
   Save
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { saveWhiteboardData, loadWhiteboardData, subscribeToWhiteboardChanges } from "@/utils/db/whiteboards";
 import { Spinner } from "@/components/ui/spinner";
 
@@ -33,11 +33,9 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
-  // Initialize fabric canvas
   useEffect(() => {
     if (!canvasRef.current) return;
     
-    // Create the canvas instance
     const canvas = new Canvas(canvasRef.current, {
       width: canvasRef.current.clientWidth,
       height: 600,
@@ -45,10 +43,8 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       isDrawingMode: false,
     });
     
-    // Set canvas for component use
     setFabricCanvas(canvas);
     
-    // Event listeners with proper TypeScript types
     canvas.on("selection:created", (options: any) => {
       if (options.selected && options.selected.length > 0) {
         setActiveObject(options.selected[0]);
@@ -65,7 +61,6 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       setActiveObject(null);
     });
     
-    // Load canvas data after initialization
     const loadCanvas = async () => {
       try {
         const result = await loadWhiteboardData(projectId.toString());
@@ -90,13 +85,11 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     
     loadCanvas();
     
-    // Subscribe to real-time updates
     const unsubscribe = subscribeToWhiteboardChanges(
       projectId.toString(),
       (payload) => {
         try {
           if (payload.new && payload.new.canvas_data) {
-            // Only update if we didn't trigger this change ourselves
             const { data: sessionData } = supabase.auth.getSession();
             const currentUserId = sessionData.session?.user.id;
             
@@ -114,14 +107,12 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       }
     );
     
-    // Cleanup
     return () => {
       unsubscribe();
       canvas.dispose();
     };
   }, [projectId, toast]);
   
-  // Initialize brush after canvas is created
   useEffect(() => {
     if (!fabricCanvas) return;
     
@@ -131,19 +122,16 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     }
   }, [fabricCanvas]);
   
-  // Update canvas mode based on active tool
   useEffect(() => {
     if (!fabricCanvas) return;
     
     fabricCanvas.isDrawingMode = activeTool === "draw";
     
-    // Only update brush properties if the brush exists and we're in drawing mode
     if (activeTool === "draw" && fabricCanvas.freeDrawingBrush) {
       fabricCanvas.freeDrawingBrush.color = "#000000";
       fabricCanvas.freeDrawingBrush.width = 2;
     }
     
-    // Set cursor based on active tool
     switch (activeTool) {
       case "select":
         fabricCanvas.defaultCursor = "default";
@@ -162,10 +150,8 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
       default:
         fabricCanvas.defaultCursor = "default";
     }
-    
   }, [activeTool, fabricCanvas]);
   
-  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       if (!fabricCanvas || !canvasRef.current) return;
@@ -186,10 +172,8 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
   const handleCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!fabricCanvas) return;
     
-    // Get canvas coordinates using native event
     const pointer = fabricCanvas.getPointer(event.nativeEvent);
     
-    // Add shapes based on active tool
     switch (activeTool) {
       case "rectangle":
         const rect = new Rect({
@@ -232,7 +216,6 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
         break;
         
       case "eraser":
-        // Erase objects under pointer
         const objects = fabricCanvas.getObjects();
         for (let i = objects.length - 1; i >= 0; i--) {
           const object = objects[i];
@@ -283,17 +266,14 @@ const WhiteboardCanvas = ({ projectId, readOnly = false, onSave }: WhiteboardCan
     setIsSaving(true);
     
     try {
-      // Convert canvas to JSON and save
       const canvasData = JSON.stringify(fabricCanvas.toJSON());
       
-      // Save to Supabase
       const result = await saveWhiteboardData(projectId.toString(), canvasData);
       
       if (!result.success) {
         throw new Error(result.message);
       }
       
-      // Call the onSave callback if provided
       if (onSave) {
         onSave(canvasData);
       }
