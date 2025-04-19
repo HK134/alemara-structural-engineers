@@ -1,6 +1,11 @@
-
 // Centralized type definitions
-export type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
+export type ProjectStage = 
+  | 'Site Visit' 
+  | 'Schematic Submission' 
+  | 'Final Package' 
+  | 'Completed' 
+  | 'Awaiting Info' 
+  | 'In Progress';
 
 export type ProjectStatus = {
   id: string;

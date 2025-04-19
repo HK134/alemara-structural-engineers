@@ -1,5 +1,6 @@
+
 import React, { useEffect, useRef, useState } from 'react';
-import { fabric } from 'fabric';
+import { Canvas, IEvent } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { saveWhiteboardData, loadWhiteboardData, subscribeToWhiteboardChanges } from '@/utils/db/whiteboards';
@@ -9,17 +10,24 @@ import { Spinner } from '@/components/ui/spinner';
 interface WhiteboardCanvasProps {
   projectId: string;
   readOnly?: boolean;
+  onSave?: (data: string) => void;
 }
 
-const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly = false }) => {
+const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ 
+  projectId, 
+  readOnly = false,
+  onSave 
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const fabricRef = useRef<fabric.Canvas | null>(null);
+  const fabricRef = useRef<Canvas | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const initCanvas = () => {
-      const canvas = new fabric.Canvas(canvasRef.current, {
+      if (!canvasRef.current) return null;
+      
+      const canvas = new Canvas(canvasRef.current, {
         isDrawingMode: !readOnly,
         backgroundColor: '#fff',
         selection: !readOnly,
@@ -34,7 +42,7 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly
       return canvas;
     };
 
-    const loadData = async (canvas: fabric.Canvas) => {
+    const loadData = async (canvas: Canvas) => {
       setIsLoading(true);
       try {
         const result = await loadWhiteboardData(projectId);
@@ -51,7 +59,7 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly
       }
     };
 
-    const subscribeToChanges = (canvas: fabric.Canvas) => {
+    const subscribeToChanges = (canvas: Canvas) => {
       return subscribeToWhiteboardChanges(projectId, (payload: any) => {
         if (payload.new?.canvas_data) {
           canvas.loadFromJSON(payload.new.canvas_data, () => {
@@ -61,10 +69,12 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly
       });
     };
 
-    let canvasInstance: fabric.Canvas | null = null;
+    let canvasInstance: Canvas | null = null;
 
     const initialize = async () => {
       canvasInstance = initCanvas();
+      if (!canvasInstance) return;
+      
       await loadData(canvasInstance);
 
       if (!readOnly) {
@@ -102,6 +112,8 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly
         if (!result.success) {
           console.error("Failed to save whiteboard data:", result.message);
           setError("Failed to save whiteboard data.");
+        } else if (onSave) {
+          onSave(canvasData);
         }
       } catch (err) {
         console.error("Error saving whiteboard data:", err);
@@ -118,8 +130,13 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly
   };
 
   const clearCanvas = () => {
-    fabricRef.current?.clear();
-    fabricRef.current?.backgroundColor = '#fff';
+    if (fabricRef.current) {
+      fabricRef.current.clear();
+      // Use proper non-optional assignment after null check
+      fabricRef.current.setBackgroundColor('#fff', () => {
+        fabricRef.current?.renderAll();
+      });
+    }
   };
 
   const toggleDrawingMode = () => {
@@ -130,13 +147,13 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ projectId, readOnly
 
   const getSession = async () => {
     try {
-      const { data: { session }, error } = await supabase.auth.getSession();
+      const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
-      if (!session) {
+      if (!data.session) {
         console.log("No active session");
         return null;
       }
-      return session.user.id;
+      return data.session.user.id;
     } catch (error) {
       console.error("Error getting session:", error);
       return null;

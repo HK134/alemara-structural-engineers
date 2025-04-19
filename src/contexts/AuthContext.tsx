@@ -1,172 +1,189 @@
-
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { toast } from 'sonner';
 
-type UserRole = 'admin' | 'engineer' | 'client' | null;
-
-type AuthContextType = {
+export interface AuthContextType {
   isAuthenticated: boolean;
-  isLoading: boolean;
+  userRole: string | null;
+  userId: string | null;
+  userName: string | null;
+  userEmail: string | null; // Add this property
+  loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
   logout: () => Promise<void>;
-  userRole: UserRole;
-  updatePassword: (currentPassword: string, newPassword: string) => Promise<{ success: boolean; message: string }>;
-  userEmail: string | null;
-  userName: string | null;
-};
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [userRole, setUserRole] = useState<UserRole>(null);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      const isAuthed = !!session;
-      setIsAuthenticated(isAuthed);
-      
-      if (session?.user) {
-        // Get the user's role from their metadata
-        const role = session.user.user_metadata?.role as UserRole || null;
-        setUserRole(role);
-        setUserEmail(session.user.email);
-        setUserName(session.user.user_metadata?.name || null);
-      } else {
-        setUserRole(null);
-        setUserEmail(null);
-        setUserName(null);
-      }
-      
-      setIsLoading(false);
-      
-      if (event === 'SIGNED_IN') {
-        toast.success('Signed in successfully');
-      } else if (event === 'SIGNED_OUT') {
-        toast.success('Signed out successfully');
-      } else if (event === 'PASSWORD_RECOVERY') {
-        toast.info('Please check your email for password reset instructions');
-      } else if (event === 'USER_UPDATED') {
-        toast.success('Your profile has been updated');
-      } else if (event === 'TOKEN_REFRESHED') {
-        console.log('Auth token refreshed');
-      }
-    });
-
     const checkSession = async () => {
+      setLoading(true);
       try {
-        const { data } = await supabase.auth.getSession();
-        setIsAuthenticated(!!data.session);
-        
-        if (data.session?.user) {
-          // Get the user's role from their metadata
-          const role = data.session.user.user_metadata?.role as UserRole || null;
-          setUserRole(role);
-          setUserEmail(data.session.user.email);
-          setUserName(data.session.user.user_metadata?.name || null);
+        const { data: { session } } = await supabase.auth.getSession();
+
+        if (session) {
+          setIsAuthenticated(true);
+          setUserId(session.user.id);
+          setUserEmail(session.user.email || null);
+
+          // Fetch user details from the 'users' table
+          const { data: userDetails, error: userError } = await supabase
+            .from('users')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+
+          if (userError) {
+            console.error("Error fetching user details:", userError);
+            setUserRole(null);
+            setUserName(null);
+          } else {
+            setUserRole(userDetails?.role || null);
+            setUserName(userDetails?.full_name || null);
+          }
+        } else {
+          setIsAuthenticated(false);
+          setUserId(null);
+          setUserRole(null);
+          setUserName(null);
+          setUserEmail(null);
         }
       } catch (error) {
         console.error("Error checking session:", error);
+        setIsAuthenticated(false);
+        setUserId(null);
+        setUserRole(null);
+        setUserName(null);
+        setUserEmail(null);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
     checkSession();
 
+    // Subscribe to auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+        setIsAuthenticated(true);
+        setUserId(session?.user.id || null);
+        setUserEmail(session?.user.email || null);
+
+        // Fetch user details after sign-in
+        supabase
+          .from('users')
+          .select('*')
+          .eq('id', session?.user.id)
+          .single()
+          .then(({ data: userDetails, error: userError }) => {
+            if (userError) {
+              console.error("Error fetching user details after sign-in:", userError);
+              setUserRole(null);
+              setUserName(null);
+            } else {
+              setUserRole(userDetails?.role || null);
+              setUserName(userDetails?.full_name || null);
+            }
+          });
+      } else if (event === 'SIGNED_OUT') {
+        setIsAuthenticated(false);
+        setUserId(null);
+        setUserRole(null);
+        setUserName(null);
+        setUserEmail(null);
+      }
+    });
+
     return () => {
-      subscription.unsubscribe();
+      subscription?.unsubscribe();
     };
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
       });
 
       if (error) {
-        console.error("Login error:", error.message);
+        console.error("Login failed:", error);
         return { success: false, message: error.message };
       }
 
-      return { success: true, message: 'Login successful' };
+      setIsAuthenticated(true);
+      setUserId(data.user?.id || null);
+      setUserEmail(data.user?.email || null);
+
+      // Fetch user details after login
+      const { data: userDetails, error: userError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', data.user?.id)
+        .single();
+
+      if (userError) {
+        console.error("Error fetching user details after login:", userError);
+        setUserRole(null);
+        setUserName(null);
+      } else {
+        setUserRole(userDetails?.role || null);
+        setUserName(userDetails?.full_name || null);
+      }
+
+      return { success: true, message: "Login successful" };
     } catch (error) {
-      console.error('Login error:', error);
-      return { success: false, message: 'An unexpected error occurred' };
+      console.error("Login error:", error);
+      return { success: false, message: "Login failed" };
     }
   };
+
 
   const logout = async () => {
     try {
-      await supabase.auth.signOut();
-      setUserRole(null);
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Logout failed:", error);
+      }
       setIsAuthenticated(false);
-      setUserEmail(null);
+      setUserId(null);
+      setUserRole(null);
       setUserName(null);
+      setUserEmail(null);
     } catch (error) {
-      console.error('Logout error:', error);
-      toast.error('Failed to log out');
+      console.error("Logout error:", error);
     }
   };
 
-  const updatePassword = async (currentPassword: string, newPassword: string) => {
-    if (!userEmail) {
-      return { success: false, message: 'You must be logged in to update your password' };
-    }
-    
-    try {
-      // First verify the current password by attempting to sign in
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: userEmail,
-        password: currentPassword,
-      });
-      
-      if (signInError) {
-        return { success: false, message: 'Current password is incorrect' };
-      }
-      
-      // If verification was successful, update the password
-      const { error: updateError } = await supabase.auth.updateUser({
-        password: newPassword
-      });
-      
-      if (updateError) {
-        return { success: false, message: `Failed to update password: ${updateError.message}` };
-      }
-      
-      return { success: true, message: 'Password updated successfully' };
-    } catch (error) {
-      console.error("Error updating password:", error);
-      return { success: false, message: 'An unexpected error occurred' };
-    }
+  const value: AuthContextType = {
+    isAuthenticated,
+    userRole,
+    userId,
+    userName,
+    userEmail,
+    loading,
+    login,
+    logout,
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      isAuthenticated, 
-      isLoading, 
-      login,
-      logout, 
-      userRole,
-      updatePassword,
-      userEmail,
-      userName
-    }}>
-      {children}
+    <AuthContext.Provider value={value}>
+      {!loading && children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 };

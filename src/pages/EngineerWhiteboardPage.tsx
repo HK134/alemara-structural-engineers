@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,7 +22,6 @@ const EngineerWhiteboardPage = () => {
   const [project, setProject] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load project data
   useEffect(() => {
     const fetchProject = async () => {
       if (!projectId) return;
@@ -126,14 +124,12 @@ const EngineerWhiteboardPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          {/* Status Update */}
           <ProjectStatusUpdate 
             projectId={projectId || ''} 
             currentStatus={project.status} 
             readOnly={userRole === 'client'} 
           />
           
-          {/* Whiteboard Canvas */}
           <Card>
             <CardHeader>
               <CardTitle>Project Whiteboard</CardTitle>
@@ -149,10 +145,8 @@ const EngineerWhiteboardPage = () => {
         </div>
         
         <div className="space-y-6">
-          {/* Status History */}
           <ProjectStatusHistory projectId={projectId || ''} />
           
-          {/* Comments Section (Sidebar) */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
@@ -195,7 +189,6 @@ const EngineerWhiteboardPage = () => {
             </CardContent>
           </Card>
           
-          {/* Project Details */}
           <Card>
             <CardHeader>
               <CardTitle>Project Details</CardTitle>
