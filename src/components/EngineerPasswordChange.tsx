@@ -45,7 +45,9 @@ const EngineerPasswordChange = () => {
     setIsLoading(true);
     
     try {
-      const result = await updatePassword(currentPassword, newPassword);
+      // Note: We're only passing the new password here, not the current one
+      // as the Supabase updateUser API only requires the new password
+      const result = await updatePassword(newPassword);
       
       if (result.success) {
         toast.success(result.message);

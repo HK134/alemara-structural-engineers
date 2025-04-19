@@ -9,10 +9,10 @@ type ProtectedRouteProps = {
 };
 
 const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
-  const { isAuthenticated, isLoading, userRole } = useAuth();
+  const { isAuthenticated, loading, userRole } = useAuth();
   const location = useLocation();
 
-  if (isLoading) {
+  if (loading) {
     // Show loading state while checking authentication
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -38,7 +38,7 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
   }
 
   // If roles are specified, check if the user has the required role
-  if (allowedRoles && userRole && !allowedRoles.includes(userRole)) {
+  if (allowedRoles && userRole && !allowedRoles.includes(userRole as 'admin' | 'engineer' | 'client')) {
     // Redirect based on user's role
     if (userRole === 'admin') {
       return <Navigate to="/admin" replace />;

@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -30,6 +31,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [userName, setUserName] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const resetUserState = () => {
+    setUserId(null);
+    setUserRole(null);
+    setUserName(null);
+    setUserEmail(null);
+  };
 
   useEffect(() => {
     const checkSession = async () => {
@@ -64,10 +72,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           }
         } else {
           setIsAuthenticated(false);
-          setUserId(null);
-          setUserRole(null);
-          setUserName(null);
-          setUserEmail(null);
+          resetUserState();
         }
       } catch (error) {
         console.error("Error checking session:", error);
@@ -76,13 +81,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       } finally {
         setLoading(false);
       }
-    };
-
-    const resetUserState = () => {
-      setUserId(null);
-      setUserRole(null);
-      setUserName(null);
-      setUserEmail(null);
     };
 
     checkSession();

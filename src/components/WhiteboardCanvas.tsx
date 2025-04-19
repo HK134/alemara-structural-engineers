@@ -1,5 +1,6 @@
+
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, IEvent } from 'fabric';
+import { Canvas, TEvent } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { saveWhiteboardData, loadWhiteboardData, subscribeToWhiteboardChanges } from '@/utils/db/whiteboards';
@@ -14,7 +15,8 @@ interface WhiteboardCanvasProps {
 
 const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ 
   projectId, 
-  readOnly = false 
+  readOnly = false,
+  onSave
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricRef = useRef<Canvas | null>(null);
