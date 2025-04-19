@@ -84,14 +84,11 @@ const EngineerAvailability = () => {
       if (error) throw error;
       */
       
-      toast("Availability Saved", {
-        description: "Your availability has been updated successfully.",
-      });
+      toast("Your availability has been updated successfully.");
     } catch (error) {
       console.error("Error saving availability:", error);
-      toast("Error", {
-        description: "There was a problem saving your availability.",
-        variant: "destructive",
+      toast("There was a problem saving your availability.", {
+        variant: "destructive"
       });
     }
   };

@@ -38,9 +38,7 @@ const EngineerWhiteboardPage = () => {
         setProject(data);
       } catch (error) {
         console.error("Error fetching project:", error);
-        toast({
-          title: "Error",
-          description: "Failed to load project data",
+        toast("Failed to load project data", {
           variant: "destructive"
         });
       } finally {
@@ -65,17 +63,11 @@ const EngineerWhiteboardPage = () => {
     setComments([...comments, newComment]);
     setComment("");
     
-    toast({
-      title: "Comment added",
-      description: "Your comment has been added to the whiteboard",
-    });
+    toast("Your comment has been added to the whiteboard");
   };
 
   const handleSaveWhiteboard = (data: string) => {
-    toast({
-      title: "Whiteboard saved",
-      description: "All changes have been saved successfully",
-    });
+    toast("All changes have been saved successfully");
   };
 
   if (isLoading) {

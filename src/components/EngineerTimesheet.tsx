@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -109,19 +108,14 @@ const EngineerTimesheet = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['engineerTimesheets'] });
-      toast({
-        title: "Timesheet Entry Added",
-        description: "Your timesheet entry has been successfully recorded.",
-      });
+      toast("Your timesheet entry has been successfully recorded.");
       // Reset form
       setDescription("");
       setHours(1);
     },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to add timesheet entry: ${error.message}`,
-        variant: "destructive",
+    onError: (error: any) => {
+      toast(`Failed to add timesheet entry: ${error.message}`, {
+        variant: "destructive"
       });
     }
   });
@@ -139,17 +133,12 @@ const EngineerTimesheet = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['engineerTimesheets'] });
-      toast({
-        title: "Timesheet Entry Deleted",
-        description: "The timesheet entry has been removed.",
-      });
+      toast("The timesheet entry has been removed.");
       setIsDeleteDialogOpen(false);
     },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: `Failed to delete timesheet entry: ${error.message}`,
-        variant: "destructive",
+    onError: (error: any) => {
+      toast(`Failed to delete timesheet entry: ${error.message}`, {
+        variant: "destructive"
       });
     }
   });
@@ -158,10 +147,8 @@ const EngineerTimesheet = () => {
     e.preventDefault();
     
     if (!date || !selectedProject || hours <= 0 || !description) {
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields with valid values.",
-        variant: "destructive",
+      toast("Please fill in all required fields with valid values.", {
+        variant: "destructive"
       });
       return;
     }

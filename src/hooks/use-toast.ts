@@ -2,7 +2,24 @@
 import { toast as sonnerToast } from "sonner";
 
 // Create a compatibility layer for our app
-export const toast = sonnerToast;
+export const toast = (messageOrTitle: string, options?: {
+  description?: string;
+  variant?: "default" | "destructive";
+  duration?: number;
+  [key: string]: any;
+}) => {
+  if (options?.variant === "destructive") {
+    return sonnerToast.error(messageOrTitle, { 
+      description: options?.description, 
+      duration: options?.duration
+    });
+  }
+  
+  return sonnerToast(messageOrTitle, { 
+    description: options?.description, 
+    duration: options?.duration
+  });
+};
 
 // Export a dummy useToast function to maintain compatibility with existing code
 export const useToast = () => {

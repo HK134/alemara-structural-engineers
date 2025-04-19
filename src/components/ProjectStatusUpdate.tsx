@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -47,10 +46,7 @@ const ProjectStatusUpdate: React.FC<ProjectStatusUpdateProps> = ({
         throw new Error(result.message);
       }
       
-      toast({
-        title: "Status updated",
-        description: "Project status has been updated successfully"
-      });
+      toast("Project status has been updated successfully");
       
       // Clear notes after successful update
       setNotes('');
@@ -61,9 +57,7 @@ const ProjectStatusUpdate: React.FC<ProjectStatusUpdateProps> = ({
       }
     } catch (error) {
       console.error("Error updating status:", error);
-      toast({
-        title: "Error",
-        description: "Failed to update project status",
+      toast("Failed to update project status", {
         variant: "destructive"
       });
     } finally {

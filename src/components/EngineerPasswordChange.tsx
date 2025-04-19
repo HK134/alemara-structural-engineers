@@ -14,8 +14,7 @@ const EngineerPasswordChange = () => {
 
   const handlePasswordChange = async () => {
     if (newPassword !== confirmPassword) {
-      toast("Error", {
-        description: "New passwords do not match",
+      toast("New passwords do not match", {
         variant: "destructive"
       });
       return;
@@ -27,22 +26,18 @@ const EngineerPasswordChange = () => {
       const result = await updatePassword(newPassword);
       
       if (result.success) {
-        toast("Success", {
-          description: "Password updated successfully"
-        });
+        toast("Password updated successfully");
         // Reset form
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
       } else {
-        toast("Error", {
-          description: result.message,
+        toast(result.message, {
           variant: "destructive"
         });
       }
     } catch (error) {
-      toast("Error", {
-        description: "An unexpected error occurred",
+      toast("An unexpected error occurred", {
         variant: "destructive"
       });
     } finally {
