@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
 
 const EngineerPasswordChange = () => {
@@ -10,16 +10,11 @@ const EngineerPasswordChange = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
   const { updatePassword } = useAuth();
 
   const handlePasswordChange = async () => {
     if (newPassword !== confirmPassword) {
-      toast({
-        title: "Error",
-        description: "New passwords do not match",
-        variant: "destructive"
-      });
+      toast.error("New passwords do not match");
       return;
     }
 
@@ -29,28 +24,16 @@ const EngineerPasswordChange = () => {
       const result = await updatePassword(newPassword);
       
       if (result.success) {
-        toast({
-          title: "Success",
-          description: "Password updated successfully",
-          variant: "default"
-        });
+        toast.success("Password updated successfully");
         // Reset form
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
       } else {
-        toast({
-          title: "Error",
-          description: result.message,
-          variant: "destructive"
-        });
+        toast.error(result.message);
       }
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive"
-      });
+      toast.error("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
