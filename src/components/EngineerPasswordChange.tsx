@@ -29,7 +29,11 @@ const EngineerPasswordChange = () => {
       const result = await updatePassword(newPassword);
       
       if (result.success) {
-        toast.success(result.message);
+        toast({
+          title: "Success",
+          description: "Password updated successfully",
+          variant: "default"
+        });
         // Reset form
         setCurrentPassword('');
         setNewPassword('');
