@@ -1,6 +1,14 @@
 
-import { useToast as useSonnerToast, toast as sonnerToast } from "sonner";
+import { toast as sonnerToast } from "sonner";
 
-// Re-export sonner's toast functionality 
-export const useToast = useSonnerToast;
+// Create a compatibility layer for our app
 export const toast = sonnerToast;
+
+// Export a dummy useToast function to maintain compatibility with existing code
+export const useToast = () => {
+  return {
+    toast: sonnerToast,
+    // Return an empty array for the toasts property to maintain compatibility with shadcn/ui toast
+    toasts: []
+  };
+};

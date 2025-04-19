@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
+import { toast } from "@/hooks/use-toast";
 import { useAuth } from '@/contexts/AuthContext';
 
 const EngineerPasswordChange = () => {
@@ -14,7 +14,10 @@ const EngineerPasswordChange = () => {
 
   const handlePasswordChange = async () => {
     if (newPassword !== confirmPassword) {
-      toast.error("New passwords do not match");
+      toast("Error", {
+        description: "New passwords do not match",
+        variant: "destructive"
+      });
       return;
     }
 
@@ -24,16 +27,24 @@ const EngineerPasswordChange = () => {
       const result = await updatePassword(newPassword);
       
       if (result.success) {
-        toast.success("Password updated successfully");
+        toast("Success", {
+          description: "Password updated successfully"
+        });
         // Reset form
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
       } else {
-        toast.error(result.message);
+        toast("Error", {
+          description: result.message,
+          variant: "destructive"
+        });
       }
     } catch (error) {
-      toast.error("An unexpected error occurred");
+      toast("Error", {
+        description: "An unexpected error occurred",
+        variant: "destructive"
+      });
     } finally {
       setIsLoading(false);
     }
