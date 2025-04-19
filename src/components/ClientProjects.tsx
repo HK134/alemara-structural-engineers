@@ -11,7 +11,7 @@ import { FileText, Clock, Calendar, ArrowRight } from 'lucide-react';
 const ClientProjects = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { user } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -20,7 +20,7 @@ const ClientProjects = () => {
         const { data, error } = await supabase
           .from('form_submissions')
           .select('*')
-          .eq('email', user?.email)
+          .eq('email', currentUser?.email)
           .order('created_at', { ascending: false });
           
         if (error) throw error;
@@ -33,7 +33,7 @@ const ClientProjects = () => {
       }
     };
     
-    if (user) {
+    if (currentUser) {
       fetchProjects();
       
       const channel = supabase
@@ -44,7 +44,7 @@ const ClientProjects = () => {
             event: '*',
             schema: 'public',
             table: 'form_submissions',
-            filter: `email=eq.${user.email}`
+            filter: `email=eq.${currentUser.email}`
           },
           () => {
             fetchProjects();
@@ -56,7 +56,7 @@ const ClientProjects = () => {
         supabase.removeChannel(channel);
       };
     }
-  }, [user]);
+  }, [currentUser]);
   
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

@@ -53,4 +53,5 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage, size = 'md
 };
 
 export default ProjectStatus;
-export { ProjectStage };
+// Using export type to avoid TS1205 error when re-exporting
+export type { ProjectStage };

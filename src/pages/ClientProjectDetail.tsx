@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import ClientDashboardHeader from '@/components/ClientDashboardHeader';
 import WhiteboardCanvas from '@/components/WhiteboardCanvas';
-import { ProjectStatus } from '@/components/ProjectStatus';
+import ProjectStatus from '@/components/ProjectStatus';
 import ProjectStatusHistory from '@/components/ProjectStatusHistory';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, FileText, Calendar, MessageSquare } from "lucide-react";
