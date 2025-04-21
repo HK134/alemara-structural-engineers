@@ -1,58 +1,19 @@
 
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-  }, [location.pathname]);
-
   return (
-    <>
-      <Navbar />
-      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-[#f8f9fa] py-20">
-        <div className="text-center max-w-3xl px-4">
-          <h1 className="text-8xl font-bold text-[#1A1F2C] mb-6">404</h1>
-          <h2 className="text-3xl font-semibold text-[#1A1F2C] mb-4">Oops! Page not found</h2>
-          <p className="text-lg text-gray-600 mb-8">
-            The page you are looking for might have been removed, had its name changed, 
-            or is temporarily unavailable.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/">
-              <Button className="bg-[#ea384c] hover:bg-[#c82b3c] text-white px-6 py-6 h-auto text-lg">
-                Return to Home
-              </Button>
-            </Link>
-            <Link to="/about-us">
-              <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white px-6 py-6 h-auto text-lg">
-                About Us
-              </Button>
-            </Link>
-            <Link to="/services">
-              <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white px-6 py-6 h-auto text-lg">
-                Our Services
-              </Button>
-            </Link>
-            <Link to="/#contact">
-              <Button variant="outline" className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C] hover:text-white px-6 py-6 h-auto text-lg">
-                Contact Us
-              </Button>
-            </Link>
-          </div>
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h2>
+        <p className="text-gray-600 mb-8">The page you are looking for doesn't exist or has been moved.</p>
+        <Link to="/" className="px-6 py-3 bg-[#ea384c] text-white rounded-md hover:bg-[#ea384c]/90 transition-colors">
+          Return Home
+        </Link>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

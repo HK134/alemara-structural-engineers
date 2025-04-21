@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminLayout from "./components/AdminLayout";
@@ -7,6 +8,15 @@ import LeadsPage from "./pages/LeadsPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Index from "./pages/Index";
+import Login from "./pages/Login";
+import ClientLogin from "./pages/ClientLogin";
+import EngineerLogin from "./pages/EngineerLogin";
+import ClientLayout from "./components/ClientLayout";
+import ClientDashboard from "./pages/ClientDashboard";
+import EngineerLayout from "./components/EngineerLayout";
+import EngineerDashboard from "./pages/EngineerDashboard";
+import NotFound from "./pages/NotFound";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -17,6 +27,12 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/client-login" element={<ClientLogin />} />
+            <Route path="/engineer-login" element={<EngineerLogin />} />
+            
             {/* Admin Routes */}
             <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><AdminLayout /></ProtectedRoute>}>
               <Route index element={<Admin />} />
@@ -24,8 +40,20 @@ function App() {
               <Route path="clients" element={<ClientsPage />} />
             </Route>
 
+            {/* Client Routes */}
+            <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientLayout /></ProtectedRoute>}>
+              <Route index element={<ClientDashboard />} />
+              {/* Additional client routes can be added here */}
+            </Route>
+
+            {/* Engineer Routes */}
+            <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerLayout /></ProtectedRoute>}>
+              <Route index element={<EngineerDashboard />} />
+              {/* Additional engineer routes can be added here */}
+            </Route>
+
             {/* Not Found Route */}
-            <Route path="*" element={<div>Page Not Found</div>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
       </Router>
