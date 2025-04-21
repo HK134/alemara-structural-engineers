@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -36,6 +35,26 @@ type Engineer = {
   created_at: string;
 }
 
+const dummyProject = {
+  id: 'dummy-id',
+  form_type: 'contact',
+  first_name: 'Dummy',
+  last_name: 'Project',
+  email: 'dummy@project.com',
+  phone: '0000000000',
+  service_type: 'Extension',
+  message: 'This is a dummy/test project submission.',
+  created_at: new Date().toISOString(),
+  status: 'new',
+  postcode: 'N/A',
+  secured: false,
+  project_reference: 'W-25-001',
+  engineer_id: null,
+  address: '123 Test Lane, London',
+  completion_date: null,
+  archived_date: null,
+};
+
 const Admin = () => {
   const { logout } = useAuth();
   const [currentTab, setCurrentTab] = useState('all');
@@ -45,7 +64,6 @@ const Admin = () => {
   const [selectedEngineerId, setSelectedEngineerId] = useState<string | null>(null);
   const itemsPerPage = 10;
 
-  // Fetch engineers
   const { data: engineers, isLoading: engineersLoading } = useQuery({
     queryKey: ['engineers'],
     queryFn: async () => {
@@ -63,56 +81,40 @@ const Admin = () => {
     }
   });
 
-  // Fetch form submissions
   const { data: submissions, isLoading, error, refetch } = useQuery({
     queryKey: ['formSubmissions', currentTab, searchQuery, currentPage, selectedEngineerId],
     queryFn: async () => {
-      console.log("Fetching submissions with filters:", { currentTab, searchQuery, currentPage, selectedEngineerId });
-      
       let query = supabase
         .from('form_submissions')
         .select('*');
 
-      // Apply status filter
       if (currentTab !== 'all') {
-        console.log(`Applying status filter: ${currentTab}`);
         query = query.eq('status', currentTab);
       }
 
-      // Apply search query
       if (searchQuery) {
-        console.log(`Applying search query: ${searchQuery}`);
         query = query.or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%`);
       }
       
-      // Apply engineer filter
       if (selectedEngineerId) {
-        console.log(`Applying engineer filter: ${selectedEngineerId}`);
         query = query.eq('engineer_id', selectedEngineerId);
       }
 
-      // Apply pagination
       const from = (currentPage - 1) * itemsPerPage;
       const to = from + itemsPerPage - 1;
-      console.log(`Applying pagination: rows ${from} to ${to}`);
       query = query.range(from, to).order('created_at', { ascending: false });
 
-      console.log("Executing Supabase query...");
       const { data, error } = await query;
-      
-      if (error) {
-        console.error("Error fetching submissions:", error);
-        throw new Error(`Error fetching submissions: ${error.message}`);
+      if (error) throw new Error(`Error fetching submissions: ${error.message}`);
+      if (!data || data.length === 0) {
+        return [dummyProject];
       }
-      
-      console.log("Fetched submissions:", data);
       return data as FormSubmission[];
     },
     refetchOnWindowFocus: true,
     retry: 2
   });
 
-  // Fetch total count for pagination
   const { data: totalCount } = useQuery({
     queryKey: ['formSubmissionsCount', currentTab, searchQuery, selectedEngineerId],
     queryFn: async () => {
@@ -133,57 +135,18 @@ const Admin = () => {
       }
 
       const { count, error } = await query;
-      
-      if (error) {
-        console.error("Error counting submissions:", error);
-        throw new Error(`Error counting submissions: ${error.message}`);
-      }
-      
-      console.log("Total count of submissions:", count);
-      return count || 0;
+      if (error) throw new Error(`Error counting submissions: ${error.message}`);
+      return count || 1;
     }
   });
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [currentTab, searchQuery, selectedEngineerId]);
 
-  useEffect(() => {
-    const checkSubmissions = async () => {
-      console.log("Debug: Checking for submissions in database...");
-      const { data, error } = await supabase
-        .from('form_submissions')
-        .select('*');
-      
-      if (error) {
-        console.error("Debug check failed:", error);
-        toast.error("Error fetching form submissions. Please check console for details.");
-      } else {
-        console.log("Debug: All submissions in database:", data);
-        if (data && data.length > 0) {
-          console.log("Database has submissions, but they may not be shown due to filters");
-        } else {
-          console.log("No submissions found in database");
-          toast.info("No submissions found in the database. Try submitting a new form.");
-        }
-      }
-    };
-    
-    checkSubmissions();
-    
-    const refreshTimer = setTimeout(() => {
-      console.log("Forcing refetch of submissions...");
-      refetch();
-    }, 1000);
-    
-    return () => clearTimeout(refreshTimer);
-  }, [refetch]);
-
   const totalPages = totalCount ? Math.ceil(totalCount / itemsPerPage) : 1;
 
   const handleManualRefresh = () => {
-    console.log("Manual refresh requested");
     toast.info("Refreshing data...");
     refetch();
   };
@@ -198,14 +161,12 @@ const Admin = () => {
         toast.error('Failed to create test submission');
       }
     } catch (error) {
-      console.error('Error creating test submission:', error);
       toast.error('Failed to create test submission');
     }
   };
 
   const handleEngineerChange = (engineerId: string | null) => {
     setSelectedEngineerId(engineerId);
-    console.log(`Engineer filter changed to: ${engineerId || 'All Engineers'}`);
   };
 
   return (

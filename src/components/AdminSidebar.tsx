@@ -28,7 +28,8 @@ import {
   BarChart,
   LineChart,
   Home,
-  UserCog
+  UserCog,
+  User,
 } from "lucide-react";
 
 export const AdminSidebar = () => {
@@ -92,23 +93,23 @@ export const AdminSidebar = () => {
                 
                 <SidebarMenuItem>
                   <SidebarMenuButton 
-                    isActive={isActive("/admin/users")} 
-                    tooltip="Users"
-                    onClick={() => navigate("/admin/users")}
-                  >
-                    <Users className="h-5 w-5" />
-                    <span>Users</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                
-                <SidebarMenuItem>
-                  <SidebarMenuButton 
                     isActive={isActive("/admin/leads")} 
                     tooltip="Leads"
                     onClick={() => navigate("/admin/leads")}
                   >
                     <FileText className="h-5 w-5" />
                     <span>Leads</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    isActive={isActive("/admin/clients")} 
+                    tooltip="Clients"
+                    onClick={() => navigate("/admin/clients")}
+                  >
+                    <User className="h-5 w-5" />
+                    <span>Clients</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
