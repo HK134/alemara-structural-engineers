@@ -42,6 +42,9 @@ import './App.css';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import AdminLayout from '@/components/AdminLayout';
+import EngineerLayout from '@/components/EngineerLayout';
+
 // Create a client
 const queryClient = new QueryClient();
 
@@ -59,7 +62,7 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
-            
+
             {/* Service Pages */}
             <Route path="/services/residential" element={<Residential />} />
             <Route path="/services/loft-conversions" element={<LoftConversions />} />
@@ -70,10 +73,10 @@ function App() {
             <Route path="/services/basement-extensions" element={<BasementExtensions />} />
             <Route path="/services/subsidence-crack-surveys" element={<SubsidenceCrackSurveys />} />
             <Route path="/services/new-builds" element={<NewBuilds />} />
-            
+
             {/* Area Pages */}
             <Route path="/areas/islington-highbury" element={<IslingtonHighbury />} />
-            
+
             <Route path="/client-onboarding" element={<ClientOnboarding />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
@@ -81,19 +84,23 @@ function App() {
             <Route path="/engineer-login" element={<EngineerLogin />} />
             <Route path="/client-login" element={<ClientLogin />} />
 
-            {/* Admin Routes - AdminLayout as parent with nested routes */}
-            <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><Admin /></ProtectedRoute>} />
-            <Route path="/admin/analytics" element={<ProtectedRoute allowedRoles={['admin']}><Analytics /></ProtectedRoute>} />
-            <Route path="/admin/engineers" element={<ProtectedRoute allowedRoles={['admin']}><EngineerManagement /></ProtectedRoute>} />
+            {/* Admin Routes: use AdminLayout */}
+            <Route element={<ProtectedRoute allowedRoles={['admin']}><AdminLayout /></ProtectedRoute>}>
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/analytics" element={<Analytics />} />
+              <Route path="/admin/engineers" element={<EngineerManagement />} />
+            </Route>
 
-            {/* Engineer Routes */}
-            <Route path="/engineer" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerDashboard /></ProtectedRoute>} />
-            <Route path="/engineer/timesheet" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerTimesheet /></ProtectedRoute>} />
-            <Route path="/engineer/company-policy" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerCompanyPolicy /></ProtectedRoute>} />
-            <Route path="/engineer/client-etiquette" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerClientEtiquette /></ProtectedRoute>} />
-            <Route path="/engineer/availability" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerAvailability /></ProtectedRoute>} />
-            <Route path="/engineer/invoices" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerInvoices /></ProtectedRoute>} />
-            <Route path="/engineer/messages" element={<ProtectedRoute allowedRoles={['engineer']}><EngineerMessages /></ProtectedRoute>} />
+            {/* Engineer Routes: use EngineerLayout */}
+            <Route element={<ProtectedRoute allowedRoles={['engineer']}><EngineerLayout /></ProtectedRoute>}>
+              <Route path="/engineer" element={<EngineerDashboard />} />
+              <Route path="/engineer/timesheet" element={<EngineerTimesheet />} />
+              <Route path="/engineer/company-policy" element={<EngineerCompanyPolicy />} />
+              <Route path="/engineer/client-etiquette" element={<EngineerClientEtiquette />} />
+              <Route path="/engineer/availability" element={<EngineerAvailability />} />
+              <Route path="/engineer/invoices" element={<EngineerInvoices />} />
+              <Route path="/engineer/messages" element={<EngineerMessages />} />
+            </Route>
 
             {/* Client Routes */}
             <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
@@ -108,3 +115,4 @@ function App() {
 }
 
 export default App;
+
