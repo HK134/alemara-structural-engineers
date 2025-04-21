@@ -115,7 +115,7 @@ const AdminProjectWhiteboard = () => {
     };
     
     fetchProject();
-  }, [projectId, toast]);
+  }, [projectId]);
 
   const handleAddComment = () => {
     if (!comment.trim()) return;
@@ -206,9 +206,8 @@ const AdminProjectWhiteboard = () => {
               <CardTitle>Project Whiteboard</CardTitle>
             </CardHeader>
             <CardContent className="p-4">
-              <WhiteboardCanvas 
-                projectId={projectId || "dummy-project"} 
-                readOnly={false} 
+              <SimpleWhiteboard 
+                projectId={projectId || "dummy-project"}
                 onSave={handleSaveWhiteboard}
               />
             </CardContent>
@@ -220,9 +219,11 @@ const AdminProjectWhiteboard = () => {
           
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <MessageSquare className="mr-2 h-5 w-5" />
-                Discussion
+              <CardTitle>
+                <div className="flex items-center">
+                  <MessageSquare className="mr-2 h-5 w-5" />
+                  <span>Discussion</span>
+                </div>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -262,7 +263,9 @@ const AdminProjectWhiteboard = () => {
           
           <Card>
             <CardHeader>
-              <CardTitle>Project Details</CardTitle>
+              <CardTitle>
+                <span>Project Details</span>
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
