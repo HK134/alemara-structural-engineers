@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -55,7 +56,7 @@ const dummyProject = {
   archived_date: null,
 };
 
-const Admin = () => {
+const LeadsPage = () => {
   const { logout } = useAuth();
   const [currentTab, setCurrentTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -171,37 +172,38 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white shadow rounded p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold text-primary mb-2">30</div>
-          <div className="text-muted-foreground">Projects Secured</div>
-        </div>
-        <div className="bg-white shadow rounded p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold text-primary mb-2">£120,000</div>
-          <div className="text-muted-foreground">Total Revenue In</div>
-        </div>
-        <div className="bg-white shadow rounded p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold text-primary mb-2">9</div>
-          <div className="text-muted-foreground">Clients to Contact</div>
-        </div>
-        <div className="bg-white shadow rounded p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold text-primary mb-2">4</div>
-          <div className="text-muted-foreground">Pending Actions</div>
-        </div>
-      </div>
+      <AdminHeader 
+        title="Lead Management Dashboard"
+        onLogout={logout}
+        onRefresh={handleManualRefresh}
+        onCreateTestSubmission={handleCreateTestSubmission}
+        viewMode={viewMode}
+        onViewChange={setViewMode}
+      />
 
-      <div className="bg-white shadow rounded p-6">
-        <h2 className="text-lg font-semibold mb-4">Recent Activity</h2>
-        <ul className="text-muted-foreground">
-          <li>Lead assigned to Engineer John Doe</li>
-          <li>New client onboarded: Jane Smith</li>
-          <li>Project "House Extension" marked as secured</li>
-          {/* etc */}
-        </ul>
-      </div>
+      <AdminDashboardContent 
+        viewMode={viewMode}
+        submissions={submissions}
+        engineers={engineers}
+        searchQuery={searchQuery}
+        onSearchChange={(query) => {
+          setSearchQuery(query);
+          setCurrentPage(1);
+        }}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        currentTab={currentTab}
+        onTabChange={setCurrentTab}
+        isLoading={isLoading}
+        error={error as Error}
+        onRefetch={refetch}
+        selectedEngineerId={selectedEngineerId}
+        onEngineerChange={handleEngineerChange}
+      />
     </div>
   );
 };
 
-export default Admin;
+export default LeadsPage;
+
