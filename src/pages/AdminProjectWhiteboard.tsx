@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -100,11 +101,7 @@ const AdminProjectWhiteboard = () => {
         }
       } catch (error) {
         console.error("Error fetching project:", error);
-        toast({
-          title: "Error",
-          description: "Failed to load project data",
-          variant: "destructive"
-        });
+        toast("Error: Failed to load project data");
       } finally {
         setIsLoading(false);
       }
@@ -127,17 +124,11 @@ const AdminProjectWhiteboard = () => {
     setComments([...comments, newComment]);
     setComment("");
     
-    toast({
-      title: "Comment added",
-      description: "Your comment has been added to the whiteboard discussion"
-    });
+    toast("Comment added to the whiteboard discussion");
   };
 
   const handleSaveWhiteboard = (data: string) => {
-    toast({
-      title: "Whiteboard saved",
-      description: "All changes have been saved successfully"
-    });
+    toast("Whiteboard saved successfully");
   };
 
   if (isLoading) {

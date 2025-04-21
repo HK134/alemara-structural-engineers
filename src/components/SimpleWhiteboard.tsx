@@ -1,12 +1,15 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, TEvent, Rect, Circle } from 'fabric';
+import { Canvas, TEventCallback } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Spinner } from '@/components/ui/spinner';
 import { toast } from 'sonner';
 import { Pencil, Eraser, Circle as CircleIcon, Square, Text } from 'lucide-react';
+
+// Import specific fabric elements
+import { Rect, Circle, Textbox } from 'fabric';
 
 interface SimpleWhiteboardProps {
   projectId: string;
@@ -43,10 +46,10 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
       selection: !readOnly,
     });
 
-    // Set up event listeners
-    canvas.on('object:added', handleCanvasChange);
-    canvas.on('object:modified', handleCanvasChange);
-    canvas.on('object:removed', handleCanvasChange);
+    // Set up event listeners with proper types
+    canvas.on('object:added', () => handleCanvasChange());
+    canvas.on('object:modified', () => handleCanvasChange());
+    canvas.on('object:removed', () => handleCanvasChange());
 
     // Update fabric canvas reference
     fabricRef.current = canvas;
@@ -55,14 +58,14 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
     loadData(canvas);
 
     return () => {
-      canvas.off('object:added', handleCanvasChange);
-      canvas.off('object:modified', handleCanvasChange);
-      canvas.off('object:removed', handleCanvasChange);
+      canvas.off('object:added', () => handleCanvasChange());
+      canvas.off('object:modified', () => handleCanvasChange());
+      canvas.off('object:removed', () => handleCanvasChange());
       canvas.dispose();
     };
   }, []);
 
-  const handleCanvasChange = (e: TEvent) => {
+  const handleCanvasChange = () => {
     if (readOnly) return;
     // Save data after each change (debounced in a real app)
     if (fabricRef.current) {
@@ -104,11 +107,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
       }
     } catch (err) {
       console.error('Error loading whiteboard data:', err);
-      toast({
-        title: 'Error',
-        description: 'Failed to load whiteboard data',
-        variant: 'destructive',
-      });
+      toast('Error: Failed to load whiteboard data');
     } finally {
       setIsLoading(false);
     }
@@ -127,11 +126,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
       }
     } catch (err) {
       console.error('Error saving whiteboard data:', err);
-      toast({
-        title: 'Error',
-        description: 'Failed to save whiteboard data',
-        variant: 'destructive',
-      });
+      toast('Error: Failed to save whiteboard data');
     }
   };
 
@@ -198,7 +193,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
         fabricRef.current.setActiveObject(circle);
         break;
       case 'text':
-        const textbox = new fabric.Textbox('Edit this text', {
+        const textbox = new Textbox('Edit this text', {
           left: 100,
           top: 100,
           fontFamily: 'Arial',
@@ -218,10 +213,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
       fabricRef.current.clear();
       fabricRef.current.backgroundColor = '#ffffff';
       fabricRef.current.renderAll();
-      toast({
-        title: 'Canvas Cleared',
-        description: 'The whiteboard has been cleared',
-      });
+      toast('Canvas Cleared');
     }
   };
 
