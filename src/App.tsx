@@ -17,6 +17,8 @@ import ClientDashboard from "./pages/ClientDashboard";
 import EngineerLayout from "./components/EngineerLayout";
 import EngineerDashboard from "./pages/EngineerDashboard";
 import NotFound from "./pages/NotFound";
+import LiveProjectsPage from "./pages/LiveProjectsPage";
+import AdminProjectWhiteboard from "./pages/AdminProjectWhiteboard";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -38,6 +40,8 @@ function App() {
               <Route index element={<Admin />} />
               <Route path="leads" element={<LeadsPage />} />
               <Route path="clients" element={<ClientsPage />} />
+              <Route path="live-projects" element={<LiveProjectsPage />} />
+              <Route path="project/:projectId/whiteboard" element={<AdminProjectWhiteboard />} />
             </Route>
 
             {/* Client Routes */}

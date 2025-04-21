@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -99,6 +98,17 @@ export const AdminSidebar = () => {
                   >
                     <FileText className="h-5 w-5" />
                     <span>Leads</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    isActive={isActive("/admin/live-projects")} 
+                    tooltip="Live Projects"
+                    onClick={() => navigate("/admin/live-projects")}
+                  >
+                    <BarChart className="h-5 w-5" />
+                    <span>Live Projects</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 
