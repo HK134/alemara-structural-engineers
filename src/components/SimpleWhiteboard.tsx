@@ -1,12 +1,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, IEvent, Rect, Circle, Path } from 'fabric';
+import { Canvas, TEvent, Rect, Circle } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Spinner } from '@/components/ui/spinner';
 import { toast } from 'sonner';
-import { pencil, eraser, circle, square, text } from 'lucide-react';
+import { Pencil, Eraser, Circle as CircleIcon, Square, Text } from 'lucide-react';
 
 interface SimpleWhiteboardProps {
   projectId: string;
@@ -62,7 +62,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
     };
   }, []);
 
-  const handleCanvasChange = (e: IEvent) => {
+  const handleCanvasChange = (e: TEvent) => {
     if (readOnly) return;
     // Save data after each change (debounced in a real app)
     if (fabricRef.current) {
@@ -198,15 +198,15 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
         fabricRef.current.setActiveObject(circle);
         break;
       case 'text':
-        const text = new fabric.Textbox('Edit this text', {
+        const textbox = new fabric.Textbox('Edit this text', {
           left: 100,
           top: 100,
           fontFamily: 'Arial',
           fill: activeColor,
           width: 200,
         });
-        fabricRef.current.add(text);
-        fabricRef.current.setActiveObject(text);
+        fabricRef.current.add(textbox);
+        fabricRef.current.setActiveObject(textbox);
         break;
     }
   };
@@ -241,7 +241,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
                     variant={activeTool === 'select' ? 'default' : 'outline'} 
                     size="sm" 
                     onClick={() => handleToolChange('select')}
-                    title="Select"
+                    aria-label="Select tool"
                   >
                     Select
                   </Button>
@@ -249,45 +249,45 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
                     variant={activeTool === 'draw' ? 'default' : 'outline'} 
                     size="sm" 
                     onClick={() => handleToolChange('draw')}
-                    title="Draw"
+                    aria-label="Draw tool"
                   >
-                    <pencil className="w-4 h-4 mr-1" />
+                    <Pencil className="w-4 h-4 mr-1" />
                     Draw
                   </Button>
                   <Button 
                     variant={activeTool === 'erase' ? 'default' : 'outline'} 
                     size="sm" 
                     onClick={() => handleToolChange('erase')}
-                    title="Erase"
+                    aria-label="Erase tool"
                   >
-                    <eraser className="w-4 h-4 mr-1" />
+                    <Eraser className="w-4 h-4 mr-1" />
                     Erase
                   </Button>
                   <Button 
                     variant={activeTool === 'rect' ? 'default' : 'outline'} 
                     size="sm" 
                     onClick={() => { handleToolChange('rect'); addShape(); }}
-                    title="Rectangle"
+                    aria-label="Rectangle tool"
                   >
-                    <square className="w-4 h-4 mr-1" />
+                    <Square className="w-4 h-4 mr-1" />
                     Rect
                   </Button>
                   <Button 
                     variant={activeTool === 'circle' ? 'default' : 'outline'} 
                     size="sm" 
                     onClick={() => { handleToolChange('circle'); addShape(); }}
-                    title="Circle"
+                    aria-label="Circle tool"
                   >
-                    <circle className="w-4 h-4 mr-1" />
+                    <CircleIcon className="w-4 h-4 mr-1" />
                     Circle
                   </Button>
                   <Button 
                     variant={activeTool === 'text' ? 'default' : 'outline'} 
                     size="sm" 
                     onClick={() => { handleToolChange('text'); addShape(); }}
-                    title="Text"
+                    aria-label="Text tool"
                   >
-                    <text className="w-4 h-4 mr-1" />
+                    <Text className="w-4 h-4 mr-1" />
                     Text
                   </Button>
                 </div>
@@ -321,7 +321,7 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
                     variant="destructive"
                     size="sm"
                     onClick={clearCanvas}
-                    title="Clear Canvas"
+                    aria-label="Clear Canvas"
                     className="ml-2"
                   >
                     Clear

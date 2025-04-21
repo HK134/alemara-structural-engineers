@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useAuth } from '@/contexts/AuthContext';
-import WhiteboardCanvas from '@/components/WhiteboardCanvas';
+import SimpleWhiteboard from '@/components/SimpleWhiteboard';
 import ProjectStatusUpdate from '@/components/ProjectStatusUpdate';
 import ProjectStatusHistory from '@/components/ProjectStatusHistory';
 import { MessageSquare, ArrowLeft } from "lucide-react";
@@ -23,7 +22,6 @@ const AdminProjectWhiteboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [engineerData, setEngineerData] = useState<any>(null);
 
-  // Load dummy data for the demonstration project
   useEffect(() => {
     if (projectId === "dummy-project") {
       setProject({
@@ -75,7 +73,6 @@ const AdminProjectWhiteboard = () => {
       return;
     }
     
-    // Fetch real project data from database
     const fetchProject = async () => {
       if (!projectId) return;
       
@@ -90,7 +87,6 @@ const AdminProjectWhiteboard = () => {
         
         setProject(data);
         
-        // Fetch assigned engineer data
         if (data.engineer_id) {
           const { data: engineerData, error: engineerError } = await supabase
             .from('engineers')
