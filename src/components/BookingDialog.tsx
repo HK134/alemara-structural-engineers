@@ -69,7 +69,9 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: 
       }, "Structural Engineering Service Request");
       
       if (result.success) {
-        toast("Our structural engineers will be in touch within 24 hours to discuss your requirements.", {
+        toast({
+          title: "Request submitted successfully!",
+          description: "Our structural engineers will be in touch within 24 hours to discuss your requirements.",
           duration: 5000,
         });
         
@@ -80,7 +82,9 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: 
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast("There was an error submitting your request. Please try again later.", {
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your request. Please try again later.",
         variant: "destructive",
         duration: 5000,
       });

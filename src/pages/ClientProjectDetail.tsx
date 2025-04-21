@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,7 +35,9 @@ const ClientProjectDetail = () => {
         setProject(data);
       } catch (error) {
         console.error("Error fetching project:", error);
-        toast("Failed to load project data", {
+        toast({
+          title: "Error",
+          description: "Failed to load project data",
           variant: "destructive"
         });
       } finally {
@@ -58,7 +61,10 @@ const ClientProjectDetail = () => {
         (payload) => {
           setProject(payload.new);
           
-          toast("Project information has been updated");
+          toast({
+            title: "Project updated",
+            description: "Project information has been updated"
+          });
         }
       )
       .subscribe();

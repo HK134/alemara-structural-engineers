@@ -1,4 +1,6 @@
+
 import { supabase } from '@/integrations/supabase/client';
+import { v4 as uuidv4 } from 'uuid';
 
 export const createTestSubmission = async () => {
   try {
@@ -7,7 +9,7 @@ export const createTestSubmission = async () => {
     const lastName = `User${Math.floor(Math.random() * 1000)}`;
     const email = `test${Math.floor(Math.random() * 10000)}@example.com`;
     const phone = `0${Math.floor(Math.random() * 10000000000)}`.substring(0, 11);
-    const message = `This is a test submission created on ${new Date().toISOString()} for a structural engineering project. The client is requesting a site visit and structural survey.`;
+    const message = `This is a test submission created on ${new Date().toISOString()}`;
     const serviceType = ['Structural Survey', 'Building Regulations', 'Loft Conversion', 'Extension'][
       Math.floor(Math.random() * 4)
     ];
@@ -16,7 +18,7 @@ export const createTestSubmission = async () => {
     )}${Math.floor(Math.random() * 10)} ${Math.floor(Math.random() * 10)}${String.fromCharCode(
       65 + Math.floor(Math.random() * 26)
     )}${String.fromCharCode(65 + Math.floor(Math.random() * 26))}`;
-    const address = `${Math.floor(Math.random() * 200)} ${['Oak', 'Maple', 'Cedar', 'Pine'][Math.floor(Math.random() * 4)]} Street, London`;
+    const address = `${Math.floor(Math.random() * 200)} Example Street, London`;
 
     // Create the submission
     const { data, error } = await supabase

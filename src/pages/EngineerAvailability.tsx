@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { format, startOfWeek, addDays, isAfter, isBefore } from 'date-fns';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "@/components/ui/use-toast";
 import { CalendarClock, Clock, Save } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -84,11 +85,16 @@ const EngineerAvailability = () => {
       if (error) throw error;
       */
       
-      toast("Your availability has been updated successfully.");
+      toast({
+        title: "Availability Saved",
+        description: "Your availability has been updated successfully.",
+      });
     } catch (error) {
       console.error("Error saving availability:", error);
-      toast("There was a problem saving your availability.", {
-        variant: "destructive"
+      toast({
+        title: "Error",
+        description: "There was a problem saving your availability.",
+        variant: "destructive",
       });
     }
   };

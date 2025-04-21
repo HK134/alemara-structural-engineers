@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, TEvent } from 'fabric';
+import { Canvas, IEvent } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { saveWhiteboardData, loadWhiteboardData, subscribeToWhiteboardChanges } from '@/utils/db/whiteboards';
@@ -16,7 +16,7 @@ interface WhiteboardCanvasProps {
 const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ 
   projectId, 
   readOnly = false,
-  onSave
+  onSave 
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricRef = useRef<Canvas | null>(null);
@@ -124,6 +124,7 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({
 
   const handleObjectChange = () => {
     if (!readOnly) {
+      // Debounce or throttle this if needed
       handleSave();
     }
   };
@@ -131,8 +132,10 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({
   const clearCanvas = () => {
     if (fabricRef.current) {
       fabricRef.current.clear();
-      fabricRef.current.set('backgroundColor', '#fff');
-      fabricRef.current.renderAll();
+      // Use proper non-optional assignment after null check
+      fabricRef.current.setBackgroundColor('#fff', () => {
+        fabricRef.current?.renderAll();
+      });
     }
   };
 
