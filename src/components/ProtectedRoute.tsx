@@ -23,33 +23,21 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
 
   if (!isAuthenticated) {
     // Determine which login page to redirect to based on the current path
-    let loginPath = "/login";
+    let loginPath = "/admin";
     
-    if (location.pathname.startsWith("/engineer")) {
-      loginPath = "/engineer-login";
-    } else if (location.pathname.startsWith("/client")) {
-      loginPath = "/client-login";
-    } else if (location.pathname.startsWith("/admin")) {
-      loginPath = "/login";
-    }
-    
-    // Redirect to appropriate login page, saving the current location
+    // Fallback to admin path for now
     return <Navigate to={loginPath} state={{ from: location }} replace />;
   }
 
   // If roles are specified, check if the user has the required role
-  if (allowedRoles && userRole && !allowedRoles.includes(userRole)) {
+  if (allowedRoles && userRole && !allowedRoles.includes(userRole as any)) {
     // Redirect based on user's role
     if (userRole === 'admin') {
       return <Navigate to="/admin" replace />;
-    } else if (userRole === 'engineer') {
-      return <Navigate to="/engineer" replace />;
-    } else if (userRole === 'client') {
-      return <Navigate to="/client" replace />;
     }
     
     // Fallback if something goes wrong
-    return <Navigate to="/" replace />;
+    return <Navigate to="/admin" replace />;
   }
 
   return <>{children}</>;

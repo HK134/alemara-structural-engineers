@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from "@/components/ui/button";
@@ -45,16 +44,21 @@ const EngineerPasswordChange = () => {
     setIsLoading(true);
     
     try {
-      const result = await updatePassword(currentPassword, newPassword);
-      
-      if (result.success) {
-        toast.success(result.message);
-        // Clear form
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
+      // Check if updatePassword function exists
+      if (updatePassword) {
+        const result = await updatePassword(currentPassword, newPassword);
+        
+        if (result.success) {
+          toast.success(result.message);
+          // Clear form
+          setCurrentPassword('');
+          setNewPassword('');
+          setConfirmPassword('');
+        } else {
+          toast.error(result.message);
+        }
       } else {
-        toast.error(result.message);
+        toast.error('Password update function not available');
       }
     } catch (error) {
       console.error('Error updating password:', error);

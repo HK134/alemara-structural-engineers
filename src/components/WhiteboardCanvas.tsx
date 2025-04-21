@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, IEvent } from 'fabric';
+import { Canvas } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { saveWhiteboardData, loadWhiteboardData, subscribeToWhiteboardChanges } from '@/utils/db/whiteboards';
@@ -132,10 +132,9 @@ const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({
   const clearCanvas = () => {
     if (fabricRef.current) {
       fabricRef.current.clear();
-      // Use proper non-optional assignment after null check
-      fabricRef.current.setBackgroundColor('#fff', () => {
-        fabricRef.current?.renderAll();
-      });
+      // Fix: Use backgroundColor property directly instead of setBackgroundColor
+      fabricRef.current.backgroundColor = '#fff';
+      fabricRef.current.renderAll();
     }
   };
 
