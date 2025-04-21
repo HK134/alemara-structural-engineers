@@ -6,23 +6,29 @@ import Admin from "./pages/Admin";
 import ClientsPage from "./pages/ClientsPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          {/* Admin Routes */}
-          <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><AdminLayout /></ProtectedRoute>}>
-            <Route index element={<Admin />} />
-            <Route path="clients" element={<ClientsPage />} />
-          </Route>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            {/* Admin Routes */}
+            <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><AdminLayout /></ProtectedRoute>}>
+              <Route index element={<Admin />} />
+              <Route path="clients" element={<ClientsPage />} />
+            </Route>
 
-          {/* Not Found Route */}
-          <Route path="*" element={<div>Page Not Found</div>} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+            {/* Not Found Route */}
+            <Route path="*" element={<div>Page Not Found</div>} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
