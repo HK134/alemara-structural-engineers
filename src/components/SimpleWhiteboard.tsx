@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, TEventCallback } from 'fabric';
+import { Canvas } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
@@ -46,10 +46,11 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
       selection: !readOnly,
     });
 
-    // Set up event listeners with proper types
-    canvas.on('object:added', () => handleCanvasChange());
-    canvas.on('object:modified', () => handleCanvasChange());
-    canvas.on('object:removed', () => handleCanvasChange());
+    // Set up event listeners
+    const handleChange = () => handleCanvasChange();
+    canvas.on('object:added', handleChange);
+    canvas.on('object:modified', handleChange);
+    canvas.on('object:removed', handleChange);
 
     // Update fabric canvas reference
     fabricRef.current = canvas;
@@ -58,9 +59,9 @@ const SimpleWhiteboard: React.FC<SimpleWhiteboardProps> = ({
     loadData(canvas);
 
     return () => {
-      canvas.off('object:added', () => handleCanvasChange());
-      canvas.off('object:modified', () => handleCanvasChange());
-      canvas.off('object:removed', () => handleCanvasChange());
+      canvas.off('object:added', handleChange);
+      canvas.off('object:modified', handleChange);
+      canvas.off('object:removed', handleChange);
       canvas.dispose();
     };
   }, []);
