@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
+import ClientOnboardingLinkGenerator from './ClientOnboardingLinkGenerator';
 import { 
   RefreshCw, 
   LogOut, 
@@ -8,8 +9,11 @@ import {
   LayoutDashboard, 
   Users, 
   BarChart3,
+  UserPlus 
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { setupMakramEngineer } from '@/utils/engineerSetup';
+import { toast } from 'sonner';
 
 interface AdminHeaderProps {
   title: string;
@@ -28,10 +32,36 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
   viewMode,
   onViewChange
 }) => {
+  const [creatingEngineer, setCreatingEngineer] = React.useState(false);
+
+  const handleCreateMakramEngineer = async () => {
+    try {
+      setCreatingEngineer(true);
+      const result = await setupMakramEngineer();
+      
+      if (result.success) {
+        toast.success(result.message);
+        if (result.credentials?.password) {
+          toast.info(`Generated password: ${result.credentials.password}`, {
+            duration: 10000
+          });
+        }
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.error('Error creating Makram engineer:', error);
+      toast.error('Failed to create engineer');
+    } finally {
+      setCreatingEngineer(false);
+    }
+  };
+  
   return (
     <div className="mb-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
+        
         <div className="flex items-center space-x-2">
           <Button 
             variant="ghost" 
@@ -53,6 +83,18 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
           >
             <Database className="h-4 w-4 mr-2" />
             Test Data
+          </Button>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleCreateMakramEngineer}
+            className="hidden sm:flex items-center"
+            title="Create Makram Engineer Account"
+            disabled={creatingEngineer}
+          >
+            <UserPlus className="h-4 w-4 mr-2" />
+            {creatingEngineer ? 'Creating...' : 'Create Makram'}
           </Button>
           
           <Button 
@@ -88,6 +130,13 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
           </TabsList>
         </Tabs>
       </div>
+      
+      {/* Only show ClientOnboardingLinkGenerator in the leads view */}
+      {viewMode === 'leads' && (
+        <div className="mb-6">
+          <ClientOnboardingLinkGenerator />
+        </div>
+      )}
     </div>
   );
 };

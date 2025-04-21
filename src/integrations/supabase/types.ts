@@ -24,30 +24,6 @@ export type Database = {
         }
         Relationships: []
       }
-      clients: {
-        Row: {
-          created_at: string | null
-          email: string | null
-          id: string
-          name: string
-          phone: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email?: string | null
-          id?: string
-          name: string
-          phone?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email?: string | null
-          id?: string
-          name?: string
-          phone?: string | null
-        }
-        Relationships: []
-      }
       engineer_timesheets: {
         Row: {
           created_at: string
@@ -127,7 +103,6 @@ export type Database = {
           message: string | null
           phone: string
           postcode: string | null
-          project_id: string | null
           project_reference: string | null
           secured: boolean | null
           service_type: string
@@ -149,7 +124,6 @@ export type Database = {
           message?: string | null
           phone: string
           postcode?: string | null
-          project_id?: string | null
           project_reference?: string | null
           secured?: boolean | null
           service_type: string
@@ -171,7 +145,6 @@ export type Database = {
           message?: string | null
           phone?: string
           postcode?: string | null
-          project_id?: string | null
           project_reference?: string | null
           secured?: boolean | null
           service_type?: string
@@ -181,169 +154,6 @@ export type Database = {
           {
             foreignKeyName: "form_submissions_engineer_id_fkey"
             columns: ["engineer_id"]
-            isOneToOne: false
-            referencedRelation: "engineers"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "form_submissions_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      project_engineer_assignments: {
-        Row: {
-          assigned_at: string | null
-          assigned_by: string | null
-          engineer_id: string | null
-          id: string
-          project_id: string | null
-        }
-        Insert: {
-          assigned_at?: string | null
-          assigned_by?: string | null
-          engineer_id?: string | null
-          id?: string
-          project_id?: string | null
-        }
-        Update: {
-          assigned_at?: string | null
-          assigned_by?: string | null
-          engineer_id?: string | null
-          id?: string
-          project_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_engineer_assignments_engineer_id_fkey"
-            columns: ["engineer_id"]
-            isOneToOne: false
-            referencedRelation: "engineers"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "project_engineer_assignments_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "form_submissions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      project_statuses: {
-        Row: {
-          created_at: string | null
-          id: string
-          last_updated_by: string | null
-          notes: string | null
-          project_id: string | null
-          stage: string | null
-          status: string
-          updated_at: string | null
-          visible_to_client: boolean | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          last_updated_by?: string | null
-          notes?: string | null
-          project_id?: string | null
-          stage?: string | null
-          status: string
-          updated_at?: string | null
-          visible_to_client?: boolean | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          last_updated_by?: string | null
-          notes?: string | null
-          project_id?: string | null
-          stage?: string | null
-          status?: string
-          updated_at?: string | null
-          visible_to_client?: boolean | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_statuses_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "form_submissions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      project_whiteboards: {
-        Row: {
-          canvas_data: Json
-          created_at: string | null
-          id: string
-          last_updated_by: string | null
-          project_id: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          canvas_data?: Json
-          created_at?: string | null
-          id?: string
-          last_updated_by?: string | null
-          project_id?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          canvas_data?: Json
-          created_at?: string | null
-          id?: string
-          last_updated_by?: string | null
-          project_id?: string | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_whiteboards_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "form_submissions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      projects: {
-        Row: {
-          client_id: string | null
-          created_at: string | null
-          id: string
-          name: string
-          primary_engineer_id: string | null
-          stage: Database["public"]["Enums"]["project_stage"] | null
-          updated_at: string | null
-        }
-        Insert: {
-          client_id?: string | null
-          created_at?: string | null
-          id?: string
-          name: string
-          primary_engineer_id?: string | null
-          stage?: Database["public"]["Enums"]["project_stage"] | null
-          updated_at?: string | null
-        }
-        Update: {
-          client_id?: string | null
-          created_at?: string | null
-          id?: string
-          name?: string
-          primary_engineer_id?: string | null
-          stage?: Database["public"]["Enums"]["project_stage"] | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "projects_primary_engineer_id_fkey"
-            columns: ["primary_engineer_id"]
             isOneToOne: false
             referencedRelation: "engineers"
             referencedColumns: ["id"]
@@ -377,7 +187,7 @@ export type Database = {
       }
     }
     Enums: {
-      project_stage: "New" | "Contacted" | "Live" | "Archived" | "Unconverted"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -492,8 +302,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      project_stage: ["New", "Contacted", "Live", "Archived", "Unconverted"],
-    },
+    Enums: {},
   },
 } as const

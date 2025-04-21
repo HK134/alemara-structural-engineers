@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { ProjectStage } from '@/types';
+
+export type ProjectStage = 'Site Visit' | 'Schematic Submission' | 'Final Package' | 'Completed' | 'Awaiting Info' | 'In Progress';
 
 type ProjectStatusProps = {
   status: string;
@@ -13,16 +14,16 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage, size = 'md
   let textColor = '';
   
   // Determine colors based on overall status
-  switch (status.toLowerCase()) {
-    case 'completed':
+  switch (status) {
+    case 'Completed':
       bgColor = 'bg-green-100';
       textColor = 'text-green-800';
       break;
-    case 'in progress':
+    case 'In Progress':
       bgColor = 'bg-blue-100';
       textColor = 'text-blue-800';
       break;
-    case 'awaiting info':
+    case 'Awaiting Info':
       bgColor = 'bg-amber-100';
       textColor = 'text-amber-800';
       break;
@@ -53,5 +54,3 @@ const ProjectStatus: React.FC<ProjectStatusProps> = ({ status, stage, size = 'md
 };
 
 export default ProjectStatus;
-// Using export type to avoid TS1205 error when re-exporting
-export type { ProjectStage };

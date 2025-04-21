@@ -6,8 +6,7 @@ import EngineerProjects from '@/components/EngineerProjects';
 import EngineerPasswordChange from '@/components/EngineerPasswordChange';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from '@/contexts/AuthContext';
-import { LockKeyhole, ClipboardList, UserCircle, Pencil } from 'lucide-react';
-import EngineerWhiteboard from '@/components/EngineerWhiteboard';
+import { LockKeyhole, ClipboardList, UserCircle } from 'lucide-react';
 
 const EngineerDashboard = () => {
   const { userRole, userName } = useAuth();
@@ -23,7 +22,7 @@ const EngineerDashboard = () => {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <TabsList className="grid grid-cols-4 mb-8">
+          <TabsList className="grid grid-cols-3 mb-8">
             <TabsTrigger value="projects" className="flex items-center gap-2">
               <ClipboardList className="h-4 w-4" />
               <span>My Projects</span>
@@ -35,10 +34,6 @@ const EngineerDashboard = () => {
             <TabsTrigger value="password" className="flex items-center gap-2">
               <LockKeyhole className="h-4 w-4" />
               <span>Password</span>
-            </TabsTrigger>
-            <TabsTrigger value="whiteboard" className="flex items-center gap-2">
-              <Pencil className="h-4 w-4" />
-              <span>Whiteboard</span>
             </TabsTrigger>
           </TabsList>
           
@@ -69,10 +64,6 @@ const EngineerDashboard = () => {
           
           <TabsContent value="password">
             <EngineerPasswordChange />
-          </TabsContent>
-          
-          <TabsContent value="whiteboard">
-            <EngineerWhiteboard />
           </TabsContent>
         </Tabs>
       </div>

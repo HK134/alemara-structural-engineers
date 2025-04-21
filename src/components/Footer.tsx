@@ -55,6 +55,7 @@ const Footer = () => {
               <li><Link to="/areas/hackney-shoreditch" className="text-gray-300 hover:text-[#ea384c] transition-colors">Hackney & Shoreditch</Link></li>
               <li><Link to="/areas/kensington-chelsea" className="text-gray-300 hover:text-[#ea384c] transition-colors">Kensington & Chelsea</Link></li>
               <li><Link to="/areas/westminster-mayfair" className="text-gray-300 hover:text-[#ea384c] transition-colors">Westminster & Mayfair</Link></li>
+              <li><Link to="/areas/london-boroughs" className="text-gray-300 hover:text-[#ea384c] transition-colors">All London Boroughs</Link></li>
             </ul>
           </div>
           
@@ -67,7 +68,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <Mail className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
-                <span className="text-gray-300">info@alemara.co.uk</span>
+                <span className="text-gray-300">info@londonstructuralsurveys.com</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />

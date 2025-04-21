@@ -13,7 +13,7 @@ interface ProjectInfoProps {
     type: string;
     image: string;
     description: string;
-    completion?: string;
+    completion: string;
     architect?: string;
     location?: string;
     fullDescription?: string;
@@ -27,12 +27,6 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
   const allImages = project.images && project.images.length > 0 
     ? project.images 
     : [project.image];
-
-  // Ensure project has a completion date
-  const projectWithDefaults = {
-    ...project,
-    completion: project.completion || '2023',
-  };
   
   return (
     <div className="max-w-4xl mx-auto">
@@ -42,12 +36,12 @@ const ProjectInfo = ({ project }: ProjectInfoProps) => {
             {/* Main project image with navigation arrows */}
             <ProjectImageCarousel 
               images={allImages} 
-              project={projectWithDefaults} 
+              project={project} 
             />
             
             {/* Project details */}
             <div>
-              <ProjectMetadata project={projectWithDefaults} />
+              <ProjectMetadata project={project} />
               <ProjectDescription description={project.description} />
             </div>
           </div>

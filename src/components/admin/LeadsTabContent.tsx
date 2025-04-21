@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AdminSearchBar from './AdminSearchBar';
 import FormSubmissionsTable from './FormSubmissionsTable';
 import AdminPagination from './AdminPagination';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Filter, Link2 } from 'lucide-react';
+import { Filter } from 'lucide-react';
+import ClientOnboardingLinkGenerator from './ClientOnboardingLinkGenerator';
 
 type Engineer = {
   id: string;
@@ -52,31 +53,6 @@ interface LeadsTabContentProps {
   onEngineerChange?: (engineerId: string | null) => void;
 }
 
-const ClientOnboardingButton = () => {
-  const onboardingLink = `${window.location.origin}/client-onboarding`;
-  const [copied, setCopied] = React.useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(onboardingLink)
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1800);
-      });
-  };
-
-  return (
-    <button
-      className="inline-flex px-3 py-1 items-center border rounded shadow-sm text-sm bg-white hover:bg-gray-50 transition mr-2"
-      onClick={handleCopy}
-      title="Copy client onboarding link"
-    >
-      <Link2 className="mr-2 h-4 w-4 text-primary" />
-      Client Onboarding Link
-      <span className="ml-2 px-2 py-0.5 rounded bg-muted text-xs">{copied ? "Copied!" : "Copy"}</span>
-    </button>
-  );
-};
-
 const LeadsTabContent: React.FC<LeadsTabContentProps> = ({
   submissions,
   engineers,
@@ -95,8 +71,8 @@ const LeadsTabContent: React.FC<LeadsTabContentProps> = ({
 }) => {
   return (
     <>
-      <div className="flex items-center gap-4 mb-6">
-        <ClientOnboardingButton />
+      <div className="mb-6">
+        <ClientOnboardingLinkGenerator />
       </div>
     
       <div className="mb-6 flex flex-wrap gap-4 justify-between items-center">

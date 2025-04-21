@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Dialog, 
@@ -61,11 +62,13 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: 
     setIsSubmitting(true);
     
     try {
+      // Log form data for development purposes
       console.log("Form submission data:", data);
       
+      // Send form data to email with empty lastName for compatibility
       const result = await submitFormToEmail({
         ...data,
-        lastName: ""
+        lastName: "" // Pass empty lastName for backend compatibility
       }, "Structural Engineering Service Request");
       
       if (result.success) {
@@ -75,6 +78,7 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: 
           duration: 5000,
         });
         
+        // Reset form and close dialog
         form.reset();
         setIsOpen(false);
       } else {
@@ -180,14 +184,16 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: 
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="rear-side-extension">Rear or side extension</SelectItem>
-                      <SelectItem value="loft-conversion">Loft conversion</SelectItem>
-                      <SelectItem value="internal-renovation">Internal renovation</SelectItem>
-                      <SelectItem value="chimney-removal">Chimney breast removal</SelectItem>
-                      <SelectItem value="structural-survey">Structural survey</SelectItem>
-                      <SelectItem value="commercial">Commercial project</SelectItem>
-                      <SelectItem value="bespoke-design">Bespoke design solution</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="structural-design">Structural Design & Calculations</SelectItem>
+                      <SelectItem value="rics-follow">Post-RICS Survey Assessment</SelectItem>
+                      <SelectItem value="crack">Crack Assessment</SelectItem>
+                      <SelectItem value="extension">Extension & Loft Design</SelectItem>
+                      <SelectItem value="subsidence">Subsidence Investigation</SelectItem>
+                      <SelectItem value="prepurchase">Pre-Purchase Structural Inspection</SelectItem>
+                      <SelectItem value="party">Party Wall Assessment</SelectItem>
+                      <SelectItem value="defect">Structural Defect Analysis</SelectItem>
+                      <SelectItem value="commercial">Commercial Project</SelectItem>
+                      <SelectItem value="unsure">Not Sure - Need Advice</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
