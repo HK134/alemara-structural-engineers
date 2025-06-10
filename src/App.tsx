@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
@@ -67,7 +66,9 @@ function App() {
             {/* Service Pages */}
             <Route path="/services/residential" element={<Residential />} />
             <Route path="/services/loft-conversions" element={<LoftConversions />} />
+            <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
             <Route path="/services/extensions" element={<Extensions />} />
+            <Route path="/services/residential/extensions" element={<Extensions />} />
             <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
             <Route path="/services/commercial" element={<Commercial />} />
             <Route path="/services/civil-engineering" element={<CivilEngineering />} />
