@@ -1,14 +1,23 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Calendar, X } from "lucide-react";
-import BookingDialog from "./BookingDialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useLocation } from 'react-router-dom';
 
 const StickyBookingButton = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const location = useLocation();
+  
+  useEffect(() => {
+    // Load Typeform embed script if not already loaded
+    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+      const script = document.createElement('script');
+      script.src = '//embed.typeform.com/next/embed.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
   
   // Don't show on admin/login/portal pages
   const adminOrPortalPages = [
@@ -55,20 +64,15 @@ const StickyBookingButton = () => {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-0 w-[340px] border-2 border-[#ea384c]/20" side="top" align="end">
-          <div className="bg-white rounded-md overflow-hidden shadow-xl">
+        <PopoverContent className="p-0 w-[400px] h-[600px] border-2 border-[#ea384c]/20" side="top" align="end">
+          <div className="bg-white rounded-md overflow-hidden shadow-xl h-full">
             <div className="p-4 bg-[#ea384c]/10">
-              <h3 className="text-lg font-semibold text-[#1A1F2C]">Quick Booking Form</h3>
-              <p className="text-sm text-gray-600">Complete in under 1 minute</p>
+              <h3 className="text-lg font-semibold text-[#1A1F2C]">Book a Structural Engineer</h3>
+              <p className="text-sm text-gray-600">Complete in under 2 minutes</p>
             </div>
-            <BookingDialog>
-              <Button 
-                size="lg" 
-                className="w-full bg-[#ea384c] hover:bg-[#ea384c]/90 text-white py-6 rounded-none"
-              >
-                <span className="font-medium">Open Booking Form</span>
-              </Button>
-            </BookingDialog>
+            <div className="p-4 h-[calc(100%-80px)]">
+              <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" style={{ width: '100%', height: '100%' }}></div>
+            </div>
           </div>
         </PopoverContent>
       </Popover>
