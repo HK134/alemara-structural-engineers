@@ -29,7 +29,7 @@ const Services = () => {
     
     if (scrollToRef.current[sectionId]) {
       const element = scrollToRef.current[sectionId];
-      console.log('Commercial element found:', element);
+      console.log('Element found:', element);
       console.log('Element offsetTop:', element!.offsetTop);
       
       const navbarHeight = 120; // Approximate navbar height including the red banner
@@ -79,7 +79,7 @@ const Services = () => {
         scrollToRef.current['commercial'] = el;
         console.log('Commercial section ref set:', el);
       }}>
-        <SteelFabricationServices />
+        <CivilEngineeringServices />
       </section>
 
       <section id="bespoke-design" ref={el => scrollToRef.current['bespoke-design'] = el}>
@@ -91,7 +91,7 @@ const Services = () => {
       </section>
       
       <section id="civil-engineering" ref={el => scrollToRef.current['civil-engineering'] = el}>
-        <CivilEngineeringServices />
+        <SteelFabricationServices />
       </section>
       
       <ServiceCTA />
