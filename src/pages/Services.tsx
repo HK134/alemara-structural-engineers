@@ -79,7 +79,7 @@ const Services = () => {
         scrollToRef.current['commercial'] = el;
         console.log('Commercial section ref set:', el);
       }}>
-        <CivilEngineeringServices />
+        <StructuralEngineeringServices />
       </section>
 
       <section id="bespoke-design" ref={el => scrollToRef.current['bespoke-design'] = el}>
@@ -91,7 +91,7 @@ const Services = () => {
       </section>
       
       <section id="civil-engineering" ref={el => scrollToRef.current['civil-engineering'] = el}>
-        <SteelFabricationServices />
+        <CivilEngineeringServices />
       </section>
       
       <ServiceCTA />
