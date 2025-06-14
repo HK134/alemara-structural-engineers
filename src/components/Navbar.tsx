@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home, UserCircle } from "lucide-react";
@@ -17,6 +18,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
@@ -71,7 +73,68 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-6">
           <Link to="/" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Home</Link>
           <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>About</Link>
-          <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Services</Link>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="text-white hover:text-[#ea384c] transition-colors flex items-center">
+                Services <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="bg-white p-2 rounded-md shadow-lg w-64 border border-gray-200 z-50">
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services">
+                  <span>All Services</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/residential">
+                  <span>Residential Services</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/loft-conversions">
+                  <span>Loft Conversions</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/extensions">
+                  <span>Extensions</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/commercial">
+                  <span>Commercial Projects</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/structural-surveys">
+                  <span>Structural Surveys</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/civil-engineering">
+                  <span>Civil Engineering</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/basement-extensions">
+                  <span>Basement Extensions</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/subsidence-crack-surveys">
+                  <span>Subsidence & Crack Surveys</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <Link to="/services/new-builds">
+                  <span>New Builds</span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
           <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Portfolio</Link>
           <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Blog</Link>
           <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>FAQ</Link>
@@ -148,7 +211,23 @@ const Navbar = () => {
                   </span>
                 </Link>
                 <Link to="/about-us" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>About</Link>
-                <Link to="/services" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Services</Link>
+                
+                <div className="px-4 py-2">
+                  <p className="text-sm text-gray-400 mb-2">Services:</p>
+                  <div className="space-y-2 ml-4">
+                    <Link to="/services" className="block text-white hover:text-[#ea384c] transition-colors">All Services</Link>
+                    <Link to="/services/residential" className="block text-white hover:text-[#ea384c] transition-colors">Residential</Link>
+                    <Link to="/services/loft-conversions" className="block text-white hover:text-[#ea384c] transition-colors">Loft Conversions</Link>
+                    <Link to="/services/extensions" className="block text-white hover:text-[#ea384c] transition-colors">Extensions</Link>
+                    <Link to="/services/commercial" className="block text-white hover:text-[#ea384c] transition-colors">Commercial</Link>
+                    <Link to="/services/structural-surveys" className="block text-white hover:text-[#ea384c] transition-colors">Structural Surveys</Link>
+                    <Link to="/services/civil-engineering" className="block text-white hover:text-[#ea384c] transition-colors">Civil Engineering</Link>
+                    <Link to="/services/basement-extensions" className="block text-white hover:text-[#ea384c] transition-colors">Basement Extensions</Link>
+                    <Link to="/services/subsidence-crack-surveys" className="block text-white hover:text-[#ea384c] transition-colors">Subsidence & Crack Surveys</Link>
+                    <Link to="/services/new-builds" className="block text-white hover:text-[#ea384c] transition-colors">New Builds</Link>
+                  </div>
+                </div>
+                
                 <Link to="/portfolio" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Portfolio</Link>
                 <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Blog</Link>
                 <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>FAQ</Link>
