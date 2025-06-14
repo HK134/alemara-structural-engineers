@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home, UserCircle } from "lucide-react";
@@ -139,9 +138,7 @@ const Navbar = () => {
           <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Blog</Link>
           <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>FAQ</Link>
           
-          <ContactDialog>
-            <button className="text-white hover:text-[#ea384c] transition-colors">Contact</button>
-          </ContactDialog>
+          <Link to="/contact" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Contact</Link>
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -232,9 +229,7 @@ const Navbar = () => {
                 <Link to="/blog" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Blog</Link>
                 <Link to="/faq" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>FAQ</Link>
                 
-                <ContactDialog>
-                  <button className="text-white hover:text-[#ea384c] transition-colors px-4 py-2 text-left">Contact</button>
-                </ContactDialog>
+                <Link to="/contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Contact</Link>
                 
                 <div className="border-t border-gray-700 pt-4 space-y-2">
                   <p className="text-sm text-gray-400 px-4">Login Portals:</p>
