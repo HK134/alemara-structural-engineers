@@ -38,6 +38,10 @@ const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
     }
   ];
 
+  const handleCategoryClick = (categoryId: string) => {
+    scrollToSection(categoryId);
+  };
+
   return (
     <section className="bg-[#1A1F2C] py-20 text-white">
       <div className="container mx-auto px-4">
@@ -51,11 +55,12 @@ const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => scrollToSection(category.id)}
+                onClick={() => handleCategoryClick(category.id)}
                 onMouseEnter={() => setHoveredCategory(category.id)}
                 className={`${hoveredCategory === category.id ? 'bg-[#ea384c]' : 'bg-[#1A1F2C]'} 
                   text-white p-4 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg 
-                  flex flex-col items-center justify-center h-28 border border-white/10`}
+                  flex flex-col items-center justify-center h-28 border border-white/10 cursor-pointer
+                  hover:bg-[#ea384c]`}
               >
                 {category.icon}
                 <span className="font-medium">{category.name}</span>
