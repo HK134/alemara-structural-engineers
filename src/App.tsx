@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
@@ -6,6 +7,7 @@ import Portfolio from '@/pages/Portfolio';
 import ProjectDetail from '@/pages/ProjectDetail';
 import FAQPage from '@/pages/FAQPage';
 import Blog from '@/pages/Blog';
+import Contact from '@/pages/Contact';
 import SiteVisits from '@/pages/BlogPost/SiteVisits';
 import Residential from '@/pages/services/Residential';
 import LoftConversions from '@/pages/residential/LoftConversions';
@@ -62,6 +64,7 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
+            <Route path="/contact" element={<Contact />} />
 
             {/* Service Pages */}
             <Route path="/services/residential" element={<Residential />} />
