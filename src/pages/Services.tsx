@@ -28,15 +28,14 @@ const Services = () => {
     console.log('Target element:', scrollToRef.current[sectionId]);
     
     if (scrollToRef.current[sectionId]) {
-      scrollToRef.current[sectionId]?.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      const element = scrollToRef.current[sectionId];
+      const navbarHeight = 120; // Approximate navbar height including the red banner
+      const elementPosition = element!.offsetTop - navbarHeight;
       
-      // Add title visibility by scrolling slightly above the section
-      setTimeout(() => {
-        window.scrollBy(0, -100); // Adjust for header height
-      }, 100);
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
     } else {
       console.warn('Section not found:', sectionId);
     }
@@ -67,25 +66,25 @@ const Services = () => {
       <ServiceHeader scrollToSection={scrollToSection} />
       <ServiceIntro />
       
-      <div ref={el => scrollToRef.current['residential-work'] = el} id="residential-work">
+      <section id="residential-work" ref={el => scrollToRef.current['residential-work'] = el}>
         <StructuralEngineeringServices />
-      </div>
+      </section>
       
-      <div ref={el => scrollToRef.current['commercial'] = el} id="commercial">
+      <section id="commercial" ref={el => scrollToRef.current['commercial'] = el}>
         <SteelFabricationServices />
-      </div>
+      </section>
 
-      <div ref={el => scrollToRef.current['bespoke-design'] = el} id="bespoke-design">
+      <section id="bespoke-design" ref={el => scrollToRef.current['bespoke-design'] = el}>
         <BespokeDesignServices />
-      </div>
+      </section>
       
-      <div ref={el => scrollToRef.current['structural-surveys'] = el} id="structural-surveys">
+      <section id="structural-surveys" ref={el => scrollToRef.current['structural-surveys'] = el}>
         <StructuralSurveyServices />
-      </div>
+      </section>
       
-      <div ref={el => scrollToRef.current['civil-engineering'] = el} id="civil-engineering">
+      <section id="civil-engineering" ref={el => scrollToRef.current['civil-engineering'] = el}>
         <CivilEngineeringServices />
-      </div>
+      </section>
       
       <ServiceCTA />
       <Testimonials />
