@@ -17,10 +17,27 @@ const StickyBookingButton = () => {
       script.async = true;
       script.onload = () => {
         console.log('Typeform script loaded in StickyBookingButton');
+        // Force re-initialization
+        setTimeout(() => {
+          if (window.tf && window.tf.load) {
+            window.tf.load();
+          }
+        }, 100);
       };
       document.head.appendChild(script);
     }
   }, []);
+
+  // Re-initialize Typeform when popover opens
+  useEffect(() => {
+    if (isFormOpen) {
+      setTimeout(() => {
+        if (window.tf && window.tf.load) {
+          window.tf.load();
+        }
+      }, 100);
+    }
+  }, [isFormOpen]);
   
   // Don't show on admin/login/portal pages
   const adminOrPortalPages = [

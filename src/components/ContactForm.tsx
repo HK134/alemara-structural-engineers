@@ -3,17 +3,23 @@ import React, { useEffect } from 'react';
 
 const ContactForm = () => {
   useEffect(() => {
-    // Remove any existing Typeform scripts
+    // Clean up any existing Typeform scripts
     const existingScripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
     existingScripts.forEach(script => script.remove());
 
-    // Load fresh Typeform embed script
+    // Create and load the Typeform script
     const script = document.createElement('script');
     script.src = '//embed.typeform.com/next/embed.js';
     script.async = true;
+    
     script.onload = () => {
       console.log('Typeform script loaded successfully in ContactForm');
+      // Force re-initialization
+      if (window.tf && window.tf.load) {
+        window.tf.load();
+      }
     };
+    
     document.head.appendChild(script);
 
     return () => {
