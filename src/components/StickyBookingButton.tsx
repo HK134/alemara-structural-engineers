@@ -15,6 +15,9 @@ const StickyBookingButton = () => {
       const script = document.createElement('script');
       script.src = '//embed.typeform.com/next/embed.js';
       script.async = true;
+      script.onload = () => {
+        console.log('Typeform script loaded in StickyBookingButton');
+      };
       document.head.appendChild(script);
     }
   }, []);

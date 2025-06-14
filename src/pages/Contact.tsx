@@ -8,13 +8,24 @@ import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {
   useEffect(() => {
-    // Load Typeform embed script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
+    // Remove any existing Typeform scripts
+    const existingScripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
+    existingScripts.forEach(script => script.remove());
+
+    // Load fresh Typeform embed script
+    const script = document.createElement('script');
+    script.src = '//embed.typeform.com/next/embed.js';
+    script.async = true;
+    script.onload = () => {
+      console.log('Typeform script loaded successfully');
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup on unmount
+      const scripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
+      scripts.forEach(script => script.remove());
+    };
   }, []);
 
   return (
