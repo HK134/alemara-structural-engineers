@@ -29,8 +29,13 @@ const Services = () => {
     
     if (scrollToRef.current[sectionId]) {
       const element = scrollToRef.current[sectionId];
+      console.log('Commercial element found:', element);
+      console.log('Element offsetTop:', element!.offsetTop);
+      
       const navbarHeight = 120; // Approximate navbar height including the red banner
       const elementPosition = element!.offsetTop - navbarHeight;
+      
+      console.log('Scrolling to position:', elementPosition);
       
       window.scrollTo({
         top: elementPosition,
@@ -70,7 +75,10 @@ const Services = () => {
         <StructuralEngineeringServices />
       </section>
       
-      <section id="commercial" ref={el => scrollToRef.current['commercial'] = el}>
+      <section id="commercial" ref={el => { 
+        scrollToRef.current['commercial'] = el;
+        console.log('Commercial section ref set:', el);
+      }}>
         <SteelFabricationServices />
       </section>
 
