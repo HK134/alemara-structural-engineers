@@ -39,6 +39,7 @@ const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
   ];
 
   const handleCategoryClick = (categoryId: string) => {
+    console.log('Clicking category:', categoryId);
     scrollToSection(categoryId);
   };
 

@@ -21,11 +21,22 @@ const Services = () => {
   const scrollToRef = useRef<Record<string, HTMLElement | null>>({});
 
   const scrollToSection = (sectionId: string) => {
+    console.log('Attempting to scroll to section:', sectionId);
+    console.log('Available refs:', Object.keys(scrollToRef.current));
+    console.log('Target element:', scrollToRef.current[sectionId]);
+    
     if (scrollToRef.current[sectionId]) {
-      scrollToRef.current[sectionId]?.scrollIntoView({ behavior: 'smooth' });
+      scrollToRef.current[sectionId]?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
       
       // Add title visibility by scrolling slightly above the section
-      window.scrollBy(0, -80); // Adjust for header height
+      setTimeout(() => {
+        window.scrollBy(0, -100); // Adjust for header height
+      }, 100);
+    } else {
+      console.warn('Section not found:', sectionId);
     }
   };
 
