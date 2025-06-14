@@ -1,12 +1,37 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Clock, Shield, MapPin } from "lucide-react";
-import BookingDialog from "./BookingDialog";
+import { Check, Clock, Shield, MapPin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
   const isMobile = useIsMobile();
+  
+  useEffect(() => {
+    // Load Typeform embed script if not already loaded
+    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+      const script = document.createElement('script');
+      script.src = '//embed.typeform.com/next/embed.js';
+      script.async = true;
+      script.onload = () => {
+        console.log('Typeform script loaded in Hero');
+        // Force re-initialization
+        setTimeout(() => {
+          if (window.tf && window.tf.load) {
+            window.tf.load();
+          }
+        }, 100);
+      };
+      document.head.appendChild(script);
+    } else {
+      // Script already exists, just reinitialize
+      setTimeout(() => {
+        if (window.tf && window.tf.load) {
+          window.tf.load();
+        }
+      }, 100);
+    }
+  }, []);
   
   return (
     <section className="relative bg-[#1A1F2C] py-20 text-white">
@@ -28,14 +53,9 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <div className={`relative ${isMobile ? 'mb-8' : ''}`}>
-              <BookingDialog>
-                <Button size="lg" className="w-full bg-[#ea384c] hover:bg-opacity-90 text-white text-lg">
-                  <span className="flex items-center">
-                    Book a Structural Engineer
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </span>
-                </Button>
-              </BookingDialog>
+              <div className="bg-white rounded-lg p-4 w-full max-w-md">
+                <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" style={{ width: '100%', height: '400px' }}></div>
+              </div>
               {isMobile ? (
                 <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                   <span className="flex items-center bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-xs">
