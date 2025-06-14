@@ -2,13 +2,16 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Home, Warehouse, PencilRuler, Building, Search } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface ServiceHeaderProps {
-  scrollToSection: (sectionId: string) => void;
+  scrollToSection?: (sectionId: string) => void;
 }
 
 const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
   const [hoveredCategory, setHoveredCategory] = useState("residential-work");
+  const navigate = useNavigate();
+  const location = useLocation();
   
   const serviceCategories = [
     {
@@ -40,7 +43,14 @@ const ServiceHeader = ({ scrollToSection }: ServiceHeaderProps) => {
 
   const handleCategoryClick = (categoryId: string) => {
     console.log('Clicking category:', categoryId);
-    scrollToSection(categoryId);
+    
+    // If we're already on the services page, just scroll
+    if (location.pathname === '/services' && scrollToSection) {
+      scrollToSection(categoryId);
+    } else {
+      // Navigate to services page with hash
+      navigate(`/services#${categoryId}`);
+    }
   };
 
   return (

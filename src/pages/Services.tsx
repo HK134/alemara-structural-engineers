@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ServiceIntro from '@/components/services/ServiceIntro';
 import ServiceHeader from '@/components/services/ServiceHeader';
@@ -16,9 +16,11 @@ import { Helmet } from 'react-helmet';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import BespokeDesignServices from '@/components/services/BespokeDesignServices';
 import StructuralSurveyServices from '@/components/services/StructuralSurveyServices';
+import { useLocation } from 'react-router-dom';
 
 const Services = () => {
   const scrollToRef = useRef<Record<string, HTMLElement | null>>({});
+  const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     console.log('Attempting to scroll to section:', sectionId);
@@ -39,6 +41,17 @@ const Services = () => {
       console.warn('Section not found:', sectionId);
     }
   };
+
+  // Handle hash navigation when component mounts or hash changes
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      // Wait a bit for the page to render
+      setTimeout(() => {
+        scrollToSection(hash);
+      }, 500);
+    }
+  }, [location.hash]);
 
   return (
     <>
