@@ -12,7 +12,18 @@ const Contact = () => {
       const script = document.createElement('script');
       script.src = '//embed.typeform.com/next/embed.js';
       script.async = true;
+      script.onload = () => {
+        // Initialize Typeform after script loads
+        if (window.tf && window.tf.load) {
+          window.tf.load();
+        }
+      };
       document.head.appendChild(script);
+    } else {
+      // If script is already loaded, just initialize
+      if (window.tf && window.tf.load) {
+        window.tf.load();
+      }
     }
   }, []);
 
@@ -93,7 +104,10 @@ const Contact = () => {
           
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK"></div>
+              <div 
+                data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK"
+                style={{ minHeight: '500px' }}
+              ></div>
             </div>
           </div>
         </div>
