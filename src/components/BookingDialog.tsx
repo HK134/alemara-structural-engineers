@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   Dialog, 
   DialogContent, 
@@ -18,16 +18,6 @@ interface BookingDialogProps {
 const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: BookingDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    // Load Typeform embed script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
-  }, []);
-
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -43,7 +33,10 @@ const BookingDialog = ({ children, buttonText = "Book a Structural Engineer" }: 
         </DialogHeader>
         
         <div className="p-6 pt-2">
-          <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" style={{ width: '100%', height: '600px' }}></div>
+          <div className="text-center py-20">
+            <h4 className="text-lg font-semibold mb-4">Booking Form</h4>
+            <p className="text-gray-600">Booking form will be implemented here</p>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

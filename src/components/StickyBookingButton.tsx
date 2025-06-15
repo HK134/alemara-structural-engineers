@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Calendar, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -8,36 +8,6 @@ import { useLocation } from 'react-router-dom';
 const StickyBookingButton = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const location = useLocation();
-  
-  useEffect(() => {
-    // Load Typeform embed script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      script.onload = () => {
-        console.log('Typeform script loaded in StickyBookingButton');
-        // Force re-initialization
-        setTimeout(() => {
-          if (window.tf && window.tf.load) {
-            window.tf.load();
-          }
-        }, 100);
-      };
-      document.head.appendChild(script);
-    }
-  }, []);
-
-  // Re-initialize Typeform when popover opens
-  useEffect(() => {
-    if (isFormOpen) {
-      setTimeout(() => {
-        if (window.tf && window.tf.load) {
-          window.tf.load();
-        }
-      }, 100);
-    }
-  }, [isFormOpen]);
   
   // Don't show on admin/login/portal pages
   const adminOrPortalPages = [
@@ -91,7 +61,10 @@ const StickyBookingButton = () => {
               <p className="text-sm text-gray-600">Complete in under 2 minutes</p>
             </div>
             <div className="p-4 h-[calc(100%-80px)]">
-              <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" style={{ width: '100%', height: '100%' }}></div>
+              <div className="text-center py-20">
+                <h4 className="text-lg font-semibold mb-4">Booking Form</h4>
+                <p className="text-gray-600">Booking form will be implemented here</p>
+              </div>
             </div>
           </div>
         </PopoverContent>

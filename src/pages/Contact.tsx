@@ -1,31 +1,11 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet';
 import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {
-  useEffect(() => {
-    // Remove any existing Typeform scripts to avoid conflicts
-    const existingScripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
-    existingScripts.forEach(script => script.remove());
-
-    // Load the new Typeform embed script
-    const script = document.createElement('script');
-    script.src = '//embed.typeform.com/next/embed.js';
-    script.async = true;
-    document.head.appendChild(script);
-
-    // Clean up script on component unmount
-    return () => {
-      const scriptToRemove = document.querySelector('script[src="//embed.typeform.com/next/embed.js"]');
-      if (scriptToRemove) {
-        scriptToRemove.remove();
-      }
-    };
-  }, []);
-
   return (
     <>
       <Helmet>
@@ -60,10 +40,10 @@ const Contact = () => {
           
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div 
-                data-tf-live="01JXTJ5CFBZ6S88JWXVAXA0P1G"
-                style={{ width: '100%', height: '600px' }}
-              ></div>
+              <div className="text-center py-20">
+                <h3 className="text-xl font-semibold mb-4">Contact Form</h3>
+                <p className="text-gray-600">Contact form will be implemented here</p>
+              </div>
             </div>
           </div>
         </div>

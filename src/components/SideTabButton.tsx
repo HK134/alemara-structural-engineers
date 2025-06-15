@@ -1,34 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X } from "lucide-react";
 
 const SideTabButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    // Load Typeform embed script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
-  }, []);
-
-  // Re-initialize Typeform when panel opens
-  useEffect(() => {
-    if (isOpen) {
-      // Give a moment for the DOM to update, then load Typeform
-      const timer = setTimeout(() => {
-        if (window.tf && window.tf.load) {
-          window.tf.load();
-        }
-      }, 300);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
 
   return (
     <>
@@ -75,15 +51,11 @@ const SideTabButton = () => {
               </div>
               <p className="text-sm text-gray-600 mt-1">Complete in under 2 minutes</p>
             </div>
-            <div className="flex-1 overflow-hidden">
-              <div 
-                data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%',
-                  minHeight: '500px'
-                }}
-              ></div>
+            <div className="flex-1 overflow-hidden p-8">
+              <div className="text-center py-20">
+                <h4 className="text-lg font-semibold mb-4">Booking Form</h4>
+                <p className="text-gray-600">Booking form will be implemented here</p>
+              </div>
             </div>
           </div>
         </div>
