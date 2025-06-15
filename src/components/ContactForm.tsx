@@ -37,7 +37,15 @@ const ContactForm = () => {
           <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
             <div 
               data-tf-live="01JXTRNZW6VRXQD5M9GFNHN81Z"
-              style={{ minHeight: '500px' }}
+              data-tf-opacity="100"
+              data-tf-iframe-props="title=Contact Form"
+              data-tf-transitive-search-params
+              data-tf-medium="snippet"
+              style={{ 
+                width: '100%', 
+                height: '500px',
+                border: 'none'
+              }}
             ></div>
           </div>
         </div>
