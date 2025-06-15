@@ -1,7 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ContactForm = () => {
+  useEffect(() => {
+    // Load Typeform script if not already loaded
+    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+      const script = document.createElement('script');
+      script.src = '//embed.typeform.com/next/embed.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
   return (
     <section id="contact" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -14,10 +24,7 @@ const ContactForm = () => {
         
         <div className="w-full max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-            <div className="text-center py-20">
-              <h3 className="text-xl font-semibold mb-4">Contact Form</h3>
-              <p className="text-gray-600">Contact form will be implemented here</p>
-            </div>
+            <div data-tf-live="01JXTRNZW6VRXQD5M9GFNHN81Z" style={{ minHeight: '500px' }}></div>
           </div>
         </div>
       </div>
