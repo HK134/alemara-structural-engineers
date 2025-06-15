@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,13 +7,27 @@ import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {
   useEffect(() => {
-    // Load Typeform script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
+    // Remove any existing Typeform scripts to avoid conflicts
+    const existingScripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
+    existingScripts.forEach(script => script.remove());
+
+    // Load Typeform script
+    const script = document.createElement('script');
+    script.src = '//embed.typeform.com/next/embed.js';
+    script.async = true;
+    script.onload = () => {
+      // Force refresh of Typeform embeds after script loads
+      if (window.tf && window.tf.load) {
+        window.tf.load();
+      }
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup on unmount
+      const scripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
+      scripts.forEach(script => script.remove());
+    };
   }, []);
 
   return (
@@ -49,7 +64,7 @@ const Contact = () => {
           
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div data-tf-live="01JXTRNZW6VRXQD5M9GFNHN81Z" style={{ minHeight: '500px' }}></div>
+              <div data-tf-live="01JXTRNZW6VRXQD5M9GFNHN81Z" style={{ minHeight: '600px', width: '100%' }}></div>
             </div>
           </div>
         </div>
