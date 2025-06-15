@@ -1,12 +1,11 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin, CheckCircle } from "lucide-react";
+import { ArrowRight, MapPin, CheckCircle, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import ContactDialog from '@/components/ContactDialog';
 import { Helmet } from 'react-helmet';
-import StickyBookingButton from '@/components/StickyBookingButton';
 
 interface AreaTemplateProps {
   areaName: string;
@@ -45,11 +44,19 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
             <p className="text-xl mb-8">
               Specialist structural engineering services tailored for {areaName} properties
             </p>
-            <ContactDialog>
-              <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
-                Book a Consultation <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </ContactDialog>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact">
+                <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
+                  Get Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/portfolio">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
+                  <Eye className="mr-2 h-5 w-5" />
+                  View Our Work
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -124,11 +131,19 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
             <p className="text-xl mb-8">
               Our team of certified structural engineers is ready to help with your project in {areaName}.
             </p>
-            <ContactDialog>
-              <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
-                Book a Consultation <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </ContactDialog>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact">
+                <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
+                  Get Free Consultation <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/portfolio">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
+                  <Eye className="mr-2 h-5 w-5" />
+                  View Our Portfolio
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
