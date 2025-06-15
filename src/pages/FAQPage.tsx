@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import ContactForm from '@/components/ContactForm';
 import CTA from '@/components/CTA';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { Helmet } from "react-helmet";
 
 const FAQPage = () => {
@@ -33,6 +34,7 @@ const FAQPage = () => {
         <CTA />
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

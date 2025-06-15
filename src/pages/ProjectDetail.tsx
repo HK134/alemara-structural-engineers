@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { portfolioItems, getProjectsByType } from '@/data/projects';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Building, Home, HardHat } from 'lucide-react';
@@ -150,6 +152,7 @@ const ProjectDetail = () => {
         <ServiceCTA />
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

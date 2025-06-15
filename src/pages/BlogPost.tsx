@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Calendar, User, Tag, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -197,6 +197,7 @@ const BlogPost = () => {
         </div>
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ServiceIntro from '@/components/services/ServiceIntro';
@@ -11,6 +12,7 @@ import FAQ from '@/components/FAQ';
 import CommonQuestions from '@/components/CommonQuestions';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import BespokeDesignServices from '@/components/services/BespokeDesignServices';
 import StructuralSurveyServices from '@/components/services/StructuralSurveyServices';
 import { useLocation } from 'react-router-dom';
@@ -63,6 +65,7 @@ const Services = () => {
       </Helmet>
 
       <Navbar />
+      <StickyBookingButton />
       
       <ServiceHeader scrollToSection={scrollToSection} />
       <ServiceIntro />

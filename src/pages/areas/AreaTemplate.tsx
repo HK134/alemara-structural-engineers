@@ -7,6 +7,7 @@ import { ArrowRight, MapPin, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactDialog from '@/components/ContactDialog';
 import { Helmet } from 'react-helmet';
+import StickyBookingButton from '@/components/StickyBookingButton';
 
 interface AreaTemplateProps {
   areaName: string;
@@ -36,6 +37,7 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
       </Helmet>
 
       <Navbar />
+      <StickyBookingButton />
       
       {/* Hero Section */}
       <section className="bg-[#1A1F2C] py-20 text-white">

@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -235,6 +237,7 @@ const Blog = () => {
         </section>
       </main>
       <Footer />
+      <StickyBookingButton />
     </div>
   );
 };

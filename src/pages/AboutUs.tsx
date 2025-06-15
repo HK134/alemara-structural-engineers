@@ -10,7 +10,6 @@ import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle,
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
-
 const AboutUs = () => {
   const teamMembers = [{
     name: "Hayder",

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,6 +7,7 @@ import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactDialog from '@/components/ContactDialog';
 import { Helmet } from 'react-helmet';
+import StickyBookingButton from '@/components/StickyBookingButton';
 import { Badge } from "@/components/ui/badge";
 
 interface ServiceTemplateProps {
@@ -46,6 +48,7 @@ const ServiceTemplate: React.FC<ServiceTemplateProps> = ({
       </Helmet>
 
       <Navbar />
+      <StickyBookingButton />
       
       {/* Hero Section */}
       <section className="bg-[#1A1F2C] py-20 text-white">
