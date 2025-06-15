@@ -8,34 +8,13 @@ import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {
   useEffect(() => {
-    // Clean up any existing Typeform scripts and elements
-    const existingScripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
-    existingScripts.forEach(script => script.remove());
-
-    // Create and append the script
-    const script = document.createElement('script');
-    script.src = '//embed.typeform.com/next/embed.js';
-    script.async = true;
-    
-    script.onload = () => {
-      console.log('Typeform script loaded successfully');
-      // Force re-initialization of Typeform embeds
-      if (window.tf && window.tf.load) {
-        window.tf.load();
-      }
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load Typeform script');
-    };
-    
-    document.head.appendChild(script);
-
-    return () => {
-      // Cleanup on unmount
-      const scripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
-      scripts.forEach(script => script.remove());
-    };
+    // Load Typeform embed script if not already loaded
+    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+      const script = document.createElement('script');
+      script.src = '//embed.typeform.com/next/embed.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
   }, []);
 
   return (
@@ -116,7 +95,8 @@ const Contact = () => {
           
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" style={{ width: '100%', height: '700px' }}></div>
+              <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK"></div>
+              <script src="//embed.typeform.com/next/embed.js"></script>
             </div>
           </div>
         </div>
