@@ -1,21 +1,18 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Check, Clock, Shield, MapPin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 const Hero = () => {
   const isMobile = useIsMobile();
-  
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-  
-  return (
-    <section className="relative bg-[#1A1F2C] py-20 text-white">
+  return <section className="relative bg-[#1A1F2C] py-20 text-white">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
       
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-[url('/lovable-uploads/london-skyline-silhouette.png')] bg-repeat-x bg-bottom opacity-20"></div>
@@ -33,15 +30,11 @@ const Hero = () => {
             Comprehensive structural design, assessment and consultancy services. From property surveys to complex engineering projects, we deliver expert solutions across Greater London.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button 
-              size="lg" 
-              className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white text-lg"
-              onClick={scrollToContact}
-            >
+            <Button size="lg" className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white text-lg" onClick={scrollToContact}>
               Book a Structural Engineer
             </Button>
             <a href="tel:02080049060">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-white hover:bg-white text-lg w-full sm:w-auto text-slate-950">
                 Call Us: 020 8004 9060
               </Button>
             </a>
@@ -70,8 +63,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
