@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, Shield, MapPin, Menu, ChevronDown, Home, UserCircle } from "lucide-react";
@@ -140,7 +141,8 @@ const Navbar = () => {
           
           <Link to="/contact" className="text-white hover:text-[#ea384c] transition-colors" onClick={handleCurrentPageNav}>Contact</Link>
           
-          <DropdownMenu>
+          {/* Login button temporarily hidden */}
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="bg-[#ea384c] text-white border-white hover:bg-[#ea384c]/90 hover:text-white">
                 <UserCircle className="mr-1 h-4 w-4" />
@@ -167,7 +169,7 @@ const Navbar = () => {
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
           
           <div className="border-l border-gray-600 pl-6 flex items-center">
             <div className="mr-4">
@@ -231,7 +233,8 @@ const Navbar = () => {
                 
                 <Link to="/contact" className="text-white hover:text-[#ea384c] transition-colors px-4 py-2" onClick={handleCurrentPageNav}>Contact</Link>
                 
-                <div className="border-t border-gray-700 pt-4 space-y-2">
+                {/* Login portals temporarily hidden in mobile menu */}
+                {/* <div className="border-t border-gray-700 pt-4 space-y-2">
                   <p className="text-sm text-gray-400 px-4">Login Portals:</p>
                   <Link to="/client-login" className="flex items-center text-white hover:text-[#ea384c] transition-colors px-4 py-2">
                     <UserCircle className="mr-2 h-4 w-4" />
@@ -245,7 +248,7 @@ const Navbar = () => {
                     <MapPin className="mr-2 h-4 w-4" />
                     Admin Panel
                   </Link>
-                </div>
+                </div> */}
                 
                 <div className="border-t border-gray-700 pt-4 mt-2">
                   <div className="flex items-center mb-2 px-4">
