@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,7 +6,6 @@ import { ArrowRight, MapPin, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactDialog from '@/components/ContactDialog';
 import { Helmet } from 'react-helmet';
-import StickyBookingButton from '@/components/StickyBookingButton';
 
 interface AreaTemplateProps {
   areaName: string;
