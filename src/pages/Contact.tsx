@@ -49,10 +49,31 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Contact Information */}
+      {/* Contact Form Section - Now First */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Project Started</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Fill out our quick form below and one of our structural engineers will get back to you within 4 hours during business hours.
+            </p>
+          </div>
+          
+          <div className="w-full max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
+              <div 
+                data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK"
+                style={{ minHeight: '500px' }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information - Now Second */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="bg-[#ea384c]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="h-8 w-8 text-[#ea384c]" />
@@ -87,27 +108,6 @@ const Contact = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Service Area</h3>
               <p className="text-gray-600">Greater London<br />& Surrounding Areas</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Project Started</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Fill out our quick form below and one of our structural engineers will get back to you within 4 hours during business hours.
-            </p>
-          </div>
-          
-          <div className="w-full max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div 
-                data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK"
-                style={{ minHeight: '500px' }}
-              ></div>
             </div>
           </div>
         </div>
