@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -68,7 +67,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <Mail className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
-                <span className="text-gray-300">info@londonstructuralsurveys.com</span>
+                <span className="text-gray-300">info@alemara.co.uk</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="text-[#ea384c] mr-2 h-5 w-5 mt-0.5" />
@@ -94,7 +93,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center mb-6">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} London Structural Surveys, powered by Alemara Ltd. All rights reserved.
+              &copy; {new Date().getFullYear()} Powered by Alemara Ltd. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <Link to="/privacy-policy" className="text-gray-400 hover:text-[#ea384c] text-sm transition-colors">

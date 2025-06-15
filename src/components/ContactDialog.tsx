@@ -35,8 +35,8 @@ const ContactDialog = ({ children }: ContactDialogProps) => {
               <Mail className="h-5 w-5 text-[#ea384c] mr-3" />
               <div>
                 <p className="text-sm text-gray-300">Email us</p>
-                <a href="mailto:info@londonstructuralsurveys.com" className="text-lg font-bold hover:text-[#ea384c] transition-colors">
-                  info@londonstructuralsurveys.com
+                <a href="mailto:info@alemara.co.uk" className="text-lg font-bold hover:text-[#ea384c] transition-colors">
+                  info@alemara.co.uk
                 </a>
               </div>
             </div>
