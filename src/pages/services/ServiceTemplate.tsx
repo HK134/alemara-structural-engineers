@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -58,11 +57,11 @@ const ServiceTemplate: React.FC<ServiceTemplateProps> = ({
             <p className="text-xl mb-8">
               Expert structural engineering solutions for {serviceName.toLowerCase()} across London
             </p>
-            <ContactDialog>
+            <Link to="/contact">
               <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
                 Book a Consultation <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-            </ContactDialog>
+            </Link>
           </div>
         </div>
       </section>
@@ -183,11 +182,11 @@ const ServiceTemplate: React.FC<ServiceTemplateProps> = ({
             <p className="text-xl mb-8">
               Our team of certified structural engineers is ready to help with your {serviceName.toLowerCase()} needs.
             </p>
-            <ContactDialog>
+            <Link to="/contact">
               <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
                 Book a Consultation <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-            </ContactDialog>
+            </Link>
           </div>
         </div>
       </section>

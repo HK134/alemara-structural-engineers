@@ -11,6 +11,7 @@ import Process from '@/components/Process';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import BookingDialog from '@/components/BookingDialog';
 import { Checkbox } from '@/components/ui/checkbox';
+
 const faqItems = [{
   question: "When should I get a structural survey done?",
   answer: "You should get a structural survey when buying a property, noticing visible defects (cracks, sloping floors, bulging walls), planning renovations that affect load-bearing elements, or if your mortgage lender requires one. They're particularly important for older London properties or those with unusual construction."
@@ -30,6 +31,7 @@ const faqItems = [{
   question: "What credentials do your structural engineers have?",
   answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have 10 years of experience in structural assessments of residential and commercial properties across London."
 }];
+
 const testimonials = [{
   quote: "The structural survey identified serious issues with the Victorian property we were about to purchase. The detailed report helped us negotiate £15,000 off the asking price to cover the necessary repairs.",
   author: "James Wilson",
@@ -46,6 +48,7 @@ const testimonials = [{
   location: "Richmond, London",
   rating: 5
 }];
+
 const StructuralSurveys = () => {
   return <div className="min-h-screen flex flex-col">
       <Helmet>
@@ -122,13 +125,13 @@ const StructuralSurveys = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <BookingDialog>
+                <Link to="/contact">
                   <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40] text-white">
                     <span className="flex items-center">
                       Book a Structural Survey <ArrowRight className="ml-2 h-4 w-4" />
                     </span>
                   </Button>
-                </BookingDialog>
+                </Link>
                 <Button size="lg" variant="outline" className="border-white text-white hover:text-[#1A1F2C] bg-slate-50">
                   <a href="tel:02080049060" className="flex items-center">
                     Call 020 8004 9060
@@ -395,13 +398,13 @@ const StructuralSurveys = () => {
               </div>
               
               <div className="text-center">
-                <BookingDialog>
+                <Link to="/contact">
                   <Button className="bg-[#ea384c] hover:bg-[#d02e40]">
                     <span className="flex items-center">
                       Request a Survey <ArrowRight className="ml-2 h-4 w-4" />
                     </span>
                   </Button>
-                </BookingDialog>
+                </Link>
               </div>
             </div>
           </div>
@@ -568,14 +571,14 @@ const StructuralSurveys = () => {
                   </p>
                 </div>
                 <div className="md:w-1/4">
-                  <BookingDialog>
+                  <Link to="/contact">
                     <Button size="lg" className="w-full bg-[#ea384c] hover:bg-[#d02e40] text-white">
                       <span className="flex items-center">
                         Book Survey
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </span>
                     </Button>
-                  </BookingDialog>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -614,13 +617,13 @@ const StructuralSurveys = () => {
                 Our team of certified structural engineers is ready to inspect your property and provide expert advice.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <BookingDialog>
+                <Link to="/contact">
                   <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
                     <span className="flex items-center">
                       Book a Structural Survey <ArrowRight className="ml-2 h-4 w-4" />
                     </span>
                   </Button>
-                </BookingDialog>
+                </Link>
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
                   <a href="tel:02080049060" className="flex items-center">
                     Call 020 8004 9060
@@ -641,4 +644,5 @@ const StructuralSurveys = () => {
       <StickyBookingButton />
     </div>;
 };
+
 export default StructuralSurveys;

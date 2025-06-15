@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Search, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import ContactDialog from '@/components/ContactDialog';
+import { Link } from "react-router-dom";
 
 const StructuralSurveyServices = () => {
   return (
@@ -49,11 +49,11 @@ const StructuralSurveyServices = () => {
               </div>
               
               <div className="mt-8">
-                <ContactDialog>
+                <Link to="/contact">
                   <Button className="bg-[#ea384c] hover:bg-[#d02e40] flex items-center gap-2">
                     Book a Survey <ArrowRight className="h-4 w-4" />
                   </Button>
-                </ContactDialog>
+                </Link>
               </div>
             </div>
           </div>

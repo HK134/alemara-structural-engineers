@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
-import BookingDialog from '@/components/BookingDialog';
+import { Link } from "react-router-dom";
 
 const SiteVisitBottomCTA = () => {
   return (
@@ -14,13 +14,13 @@ const SiteVisitBottomCTA = () => {
             Get expert structural engineering assessments for your London property from our team of certified professionals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <BookingDialog>
+            <Link to="/contact">
               <Button size="lg" className="bg-[#ea384c] hover:bg-[#d02e40]">
                 <span className="flex items-center">
                   Book a Site Visit <ArrowRight className="ml-2 h-4 w-4" />
                 </span>
               </Button>
-            </BookingDialog>
+            </Link>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
               <a href="tel:02080049060" className="flex items-center">
                 Call 020 8004 9060
