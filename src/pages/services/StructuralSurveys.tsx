@@ -3,94 +3,51 @@ import { Helmet } from 'react-helmet';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
-import { 
-  ArrowRight, 
-  Search, 
-  AlertTriangle, 
-  Scale, 
-  Ruler, 
-  Building, 
-  Shield, 
-  Clock, 
-  Image, 
-  Check,
-  CheckCircle,
-  MapPin,
-  Phone,
-  ThumbsUp,
-  Star,
-  Microscope,
-  FlaskConical,
-  Wrench,
-  CalendarClock,
-  Calendar
-} from "lucide-react";
+import { ArrowRight, Search, AlertTriangle, Scale, Ruler, Building, Shield, Clock, Image, Check, CheckCircle, MapPin, Phone, ThumbsUp, Star, Microscope, FlaskConical, Wrench, CalendarClock, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Process from '@/components/Process';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import BookingDialog from '@/components/BookingDialog';
 import { Checkbox } from '@/components/ui/checkbox';
-
-const faqItems = [
-  {
-    question: "When should I get a structural survey done?",
-    answer: "You should get a structural survey when buying a property, noticing visible defects (cracks, sloping floors, bulging walls), planning renovations that affect load-bearing elements, or if your mortgage lender requires one. They're particularly important for older London properties or those with unusual construction."
-  },
-  {
-    question: "How is a structural survey different from a RICS HomeBuyer Report?",
-    answer: "A RICS HomeBuyer Report provides a general overview of a property's condition, while a structural survey focuses specifically on the structural integrity of the building. Our structural surveys are more detailed and technical when it comes to structural elements, providing in-depth analysis of structural defects and specific recommendations for repairs."
-  },
-  {
-    question: "How quickly can you provide a structural survey report?",
-    answer: "We typically deliver our structural survey reports within 48 hours of completing the inspection. For urgent cases, we offer a premium service with same-day or next-day report delivery, subject to our engineers' availability."
-  },
-  {
-    question: "Can your structural survey help me negotiate on a property price?",
-    answer: "Absolutely. Our detailed reports often identify structural issues that were not apparent during initial viewings. These findings, along with our cost estimates for repairs, provide concrete evidence you can use to negotiate the purchase price or ask the seller to rectify issues before completion."
-  },
-  {
-    question: "Do your structural engineers cover all London boroughs?",
-    answer: "Yes, our team of structural engineers covers all 32 London boroughs and surrounding areas. We have extensive experience with London's diverse building stock, from historic Georgian and Victorian properties to modern developments."
-  },
-  {
-    question: "What credentials do your structural engineers have?",
-    answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have 10 years of experience in structural assessments of residential and commercial properties across London."
-  }
-];
-
-const testimonials = [
-  {
-    quote: "The structural survey identified serious issues with the Victorian property we were about to purchase. The detailed report helped us negotiate £15,000 off the asking price to cover the necessary repairs.",
-    author: "James Wilson",
-    location: "Hackney, London",
-    rating: 5
-  },
-  {
-    quote: "After noticing concerning cracks in our walls, we called Alemara. Their engineer not only identified the cause but also reassured us it wasn't subsidence as we feared. Saved us thousands in unnecessary work.",
-    author: "Sarah Thompson",
-    location: "Kensington, London",
-    rating: 5
-  },
-  {
-    quote: "As a property developer, I've used Alemara for dozens of pre-purchase structural assessments. Their reports are thorough yet clear, and their engineers' expertise with London properties is unmatched.",
-    author: "Michael Chen",
-    location: "Richmond, London",
-    rating: 5
-  }
-];
-
+const faqItems = [{
+  question: "When should I get a structural survey done?",
+  answer: "You should get a structural survey when buying a property, noticing visible defects (cracks, sloping floors, bulging walls), planning renovations that affect load-bearing elements, or if your mortgage lender requires one. They're particularly important for older London properties or those with unusual construction."
+}, {
+  question: "How is a structural survey different from a RICS HomeBuyer Report?",
+  answer: "A RICS HomeBuyer Report provides a general overview of a property's condition, while a structural survey focuses specifically on the structural integrity of the building. Our structural surveys are more detailed and technical when it comes to structural elements, providing in-depth analysis of structural defects and specific recommendations for repairs."
+}, {
+  question: "How quickly can you provide a structural survey report?",
+  answer: "We typically deliver our structural survey reports within 48 hours of completing the inspection. For urgent cases, we offer a premium service with same-day or next-day report delivery, subject to our engineers' availability."
+}, {
+  question: "Can your structural survey help me negotiate on a property price?",
+  answer: "Absolutely. Our detailed reports often identify structural issues that were not apparent during initial viewings. These findings, along with our cost estimates for repairs, provide concrete evidence you can use to negotiate the purchase price or ask the seller to rectify issues before completion."
+}, {
+  question: "Do your structural engineers cover all London boroughs?",
+  answer: "Yes, our team of structural engineers covers all 32 London boroughs and surrounding areas. We have extensive experience with London's diverse building stock, from historic Georgian and Victorian properties to modern developments."
+}, {
+  question: "What credentials do your structural engineers have?",
+  answer: "All our structural engineers are certified members of either the Institution of Structural Engineers (IStructE) or the Institution of Civil Engineers (ICE). They have 10 years of experience in structural assessments of residential and commercial properties across London."
+}];
+const testimonials = [{
+  quote: "The structural survey identified serious issues with the Victorian property we were about to purchase. The detailed report helped us negotiate £15,000 off the asking price to cover the necessary repairs.",
+  author: "James Wilson",
+  location: "Hackney, London",
+  rating: 5
+}, {
+  quote: "After noticing concerning cracks in our walls, we called Alemara. Their engineer not only identified the cause but also reassured us it wasn't subsidence as we feared. Saved us thousands in unnecessary work.",
+  author: "Sarah Thompson",
+  location: "Kensington, London",
+  rating: 5
+}, {
+  quote: "As a property developer, I've used Alemara for dozens of pre-purchase structural assessments. Their reports are thorough yet clear, and their engineers' expertise with London properties is unmatched.",
+  author: "Michael Chen",
+  location: "Richmond, London",
+  rating: 5
+}];
 const StructuralSurveys = () => {
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>Expert Structural Surveys London | Alemara Engineering</title>
         <meta name="description" content="Professional structural survey reports for London homeowners, buyers and landlords. Our certified engineers provide detailed assessments and practical solutions within 48 hours." />
@@ -172,7 +129,7 @@ const StructuralSurveys = () => {
                     </span>
                   </Button>
                 </BookingDialog>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
+                <Button size="lg" variant="outline" className="border-white text-white hover:text-[#1A1F2C] bg-slate-50">
                   <a href="tel:02080049060" className="flex items-center">
                     Call 020 8004 9060
                   </a>
@@ -465,16 +422,14 @@ const StructuralSurveys = () => {
             
             <div className="max-w-3xl mx-auto">
               <Accordion type="single" collapsible className="w-full">
-                {faqItems.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
+                {faqItems.map((item, index) => <AccordionItem key={index} value={`item-${index}`}>
                     <AccordionTrigger className="text-left text-lg font-medium text-[#1A1F2C] hover:text-[#ea384c]">
                       {item.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-gray-700">
                       {item.answer}
                     </AccordionContent>
-                  </AccordionItem>
-                ))}
+                  </AccordionItem>)}
               </Accordion>
             </div>
             
@@ -497,13 +452,10 @@ const StructuralSurveys = () => {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {testimonials.map((testimonial, index) => (
-                  <Card key={index} className="bg-white/10 backdrop-blur-sm border-none hover:bg-white/15 transition-colors">
+                {testimonials.map((testimonial, index) => <Card key={index} className="bg-white/10 backdrop-blur-sm border-none hover:bg-white/15 transition-colors">
                     <CardContent className="pt-6">
                       <div className="flex mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="h-5 w-5 fill-[#ea384c] text-[#ea384c]" />
-                        ))}
+                        {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 fill-[#ea384c] text-[#ea384c]" />)}
                       </div>
                       <p className="mb-4 text-gray-100 italic">"{testimonial.quote}"</p>
                     </CardContent>
@@ -511,8 +463,7 @@ const StructuralSurveys = () => {
                       <p className="font-semibold">{testimonial.author}</p>
                       <p className="text-sm text-gray-300">{testimonial.location}</p>
                     </CardFooter>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </div>
           </div>
@@ -688,8 +639,6 @@ const StructuralSurveys = () => {
       </main>
       <Footer />
       <StickyBookingButton />
-    </div>
-  );
+    </div>;
 };
-
 export default StructuralSurveys;
