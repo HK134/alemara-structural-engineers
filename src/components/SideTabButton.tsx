@@ -41,18 +41,23 @@ const SideTabButton = () => {
         if (window.tf && window.tf.load) {
           window.tf.load();
         }
-      }, 100);
+      }, 200);
     }
   }, [isOpen, isTypeformReady]);
 
   return (
     <>
-      {/* Side Tab Button */}
+      {/* Side Tab Button - Fixed positioning */}
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-50">
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white rounded-l-lg rounded-r-none px-3 py-8 shadow-lg writing-mode-vertical"
-          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+          className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white rounded-l-lg rounded-r-none px-4 py-6 shadow-lg"
+          style={{ 
+            writingMode: 'vertical-rl', 
+            textOrientation: 'mixed',
+            minWidth: '60px',
+            height: 'auto'
+          }}
         >
           <div className="flex flex-col items-center space-y-2">
             {isOpen ? (
@@ -60,7 +65,7 @@ const SideTabButton = () => {
             ) : (
               <MessageCircle className="h-5 w-5" />
             )}
-            <span className="text-sm font-medium tracking-wider">
+            <span className="text-sm font-medium tracking-wider whitespace-nowrap">
               {isOpen ? 'Close' : 'Book Engineer'}
             </span>
           </div>
@@ -69,7 +74,7 @@ const SideTabButton = () => {
 
       {/* Side Panel */}
       {isOpen && (
-        <div className="fixed right-0 top-0 h-full w-[400px] bg-white shadow-2xl z-40 transform transition-transform duration-300 ease-in-out">
+        <div className="fixed right-0 top-0 h-full w-[450px] bg-white shadow-2xl z-40 transform transition-transform duration-300 ease-in-out">
           <div className="h-full flex flex-col">
             <div className="p-4 bg-[#ea384c]/10 border-b">
               <div className="flex justify-between items-center">
@@ -85,7 +90,7 @@ const SideTabButton = () => {
               </div>
               <p className="text-sm text-gray-600 mt-1">Complete in under 2 minutes</p>
             </div>
-            <div className="flex-1 p-4">
+            <div className="flex-1 overflow-hidden">
               {!isTypeformReady && (
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center">
@@ -99,6 +104,7 @@ const SideTabButton = () => {
                 style={{ 
                   width: '100%', 
                   height: '100%',
+                  minHeight: '500px',
                   display: isTypeformReady ? 'block' : 'none'
                 }}
               ></div>
