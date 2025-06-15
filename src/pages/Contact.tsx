@@ -1,11 +1,20 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet';
 import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {
+  useEffect(() => {
+    // Load Typeform script if not already loaded
+    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+      const script = document.createElement('script');
+      script.src = '//embed.typeform.com/next/embed.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -40,10 +49,7 @@ const Contact = () => {
           
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div className="text-center py-20">
-                <h3 className="text-xl font-semibold mb-4">Contact Form</h3>
-                <p className="text-gray-600">Contact form will be implemented here</p>
-              </div>
+              <div data-tf-live="01JXTRNZW6VRXQD5M9GFNHN81Z" style={{ minHeight: '500px' }}></div>
             </div>
           </div>
         </div>
