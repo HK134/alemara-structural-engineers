@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StickyBookingButton from '@/components/StickyBookingButton';
 import { portfolioItems } from '@/data/projects';
 import { Helmet } from "react-helmet";
 import ServiceCTA from '@/components/services/ServiceCTA';
@@ -127,7 +125,6 @@ const Portfolio = () => {
         <ServiceCTA />
       </main>
       <Footer />
-      <StickyBookingButton />
     </div>
   );
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import { Helmet } from "react-helmet";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StickyBookingButton from '@/components/StickyBookingButton';
 import AccreditationSection from '@/components/AccreditationSection';
 import TeamMember from '@/components/about/TeamMember';
 import ServiceCTA from '@/components/services/ServiceCTA';
@@ -10,8 +9,8 @@ import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle,
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
-const AboutUs = () => {
-  const teamMembers = [{
+
+const teamMembers = [{
     name: "Hayder",
     role: "Practice Manager",
     image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
@@ -84,6 +83,8 @@ const AboutUs = () => {
     bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
     email: "ahmed@alemara.co.uk"
   }];
+
+const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>About Structural Engineering Solutions | Alemara</title>
@@ -376,7 +377,6 @@ const AboutUs = () => {
       </main>
       
       <Footer />
-      <StickyBookingButton />
     </div>;
 };
 export default AboutUs;
