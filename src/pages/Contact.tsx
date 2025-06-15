@@ -7,24 +7,23 @@ import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {
   useEffect(() => {
-    // Load Typeform embed script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      script.onload = () => {
-        // Initialize Typeform after script loads
-        if (window.tf && window.tf.load) {
-          window.tf.load();
-        }
-      };
-      document.head.appendChild(script);
-    } else {
-      // If script is already loaded, just initialize
-      if (window.tf && window.tf.load) {
-        window.tf.load();
+    // Remove any existing Typeform scripts to avoid conflicts
+    const existingScripts = document.querySelectorAll('script[src*="embed.typeform.com"]');
+    existingScripts.forEach(script => script.remove());
+
+    // Load the new Typeform embed script
+    const script = document.createElement('script');
+    script.src = '//embed.typeform.com/next/embed.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    // Clean up script on component unmount
+    return () => {
+      const scriptToRemove = document.querySelector('script[src="//embed.typeform.com/next/embed.js"]');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
       }
-    }
+    };
   }, []);
 
   return (
@@ -49,7 +48,7 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Contact Form Section - Now First */}
+      {/* Contact Form Section - First */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -63,14 +62,14 @@ const Contact = () => {
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
               <div 
                 data-tf-live="01JXTJ5CFBZ6S88JWXVAXA0P1G"
-                style={{ minHeight: '500px' }}
+                style={{ width: '100%', height: '600px' }}
               ></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Information - Now Second */}
+      {/* Contact Information - Second */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
