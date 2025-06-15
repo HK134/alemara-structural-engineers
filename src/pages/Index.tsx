@@ -1,52 +1,48 @@
 
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import GoogleAnalytics from '@/components/GoogleAnalytics';
-import StickyBookingButton from '@/components/StickyBookingButton';
+import Services from '@/components/Services';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import Process from '@/components/Process';
 import Testimonials from '@/components/Testimonials';
-
-// Lazy load components that are below the fold
-const Services = lazy(() => import('@/components/Services'));
-const WhyChooseUs = lazy(() => import('@/components/WhyChooseUs'));
-const Process = lazy(() => import('@/components/Process'));
-const Portfolio = lazy(() => import('@/components/Portfolio'));
-const CommonQuestions = lazy(() => import('@/components/CommonQuestions'));
-const AccreditationSection = lazy(() => import('@/components/AccreditationSection'));
-const FAQ = lazy(() => import('@/components/FAQ'));
-const ContactForm = lazy(() => import('@/components/ContactForm'));
-const CTA = lazy(() => import('@/components/CTA'));
-const Footer = lazy(() => import('@/components/Footer'));
+import Portfolio from '@/components/Portfolio';
+import ContactForm from '@/components/ContactForm';
+import Footer from '@/components/Footer';
+import StickyBookingButton from '@/components/StickyBookingButton';
+import SideTabButton from '@/components/SideTabButton';
+import { Helmet } from 'react-helmet';
 
 const Index = () => {
   return (
     <>
-      <GoogleAnalytics measurementId="G-MEASUREMENT_ID" />
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main>
-          <Hero />
-          <Suspense fallback={<div className="w-full h-20 bg-gray-100"></div>}>
-            <Services />
-            <WhyChooseUs />
-            <Process />
-            <Portfolio />
-            <CommonQuestions />
-            <AccreditationSection />
-          </Suspense>
-          {/* Testimonials is directly imported, so it's outside the Suspense boundary */}
-          <Testimonials />
-          <Suspense fallback={<div className="w-full h-20 bg-gray-100"></div>}>
-            <FAQ />
-            <ContactForm />
-            <CTA />
-          </Suspense>
-        </main>
-        <Suspense fallback={<div className="w-full h-10 bg-[#1A1F2C]"></div>}>
-          <Footer />
-        </Suspense>
-        <StickyBookingButton />
-      </div>
+      <Helmet>
+        <title>London Structural Surveys | Expert Structural Engineers</title>
+        <meta name="description" content="London's trusted structural engineers providing comprehensive design, assessment and consultancy services. From property surveys to complex engineering projects across Greater London." />
+        <meta name="keywords" content="structural engineer London, structural survey, building survey, structural design, London structural consultancy" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="London Structural Surveys | Expert Structural Engineers" />
+        <meta property="og:description" content="London's trusted structural engineers providing comprehensive design, assessment and consultancy services." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://londonstructuralsurveys.com" />
+        <meta property="og:image" content="/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="London Structural Surveys | Expert Structural Engineers" />
+        <meta name="twitter:description" content="London's trusted structural engineers providing comprehensive design, assessment and consultancy services." />
+        <meta name="twitter:image" content="/og-image.png" />
+        <link rel="canonical" href="https://londonstructuralsurveys.com" />
+      </Helmet>
+      <Navbar />
+      <Hero />
+      <Services />
+      <WhyChooseUs />
+      <Process />
+      <Testimonials />
+      <Portfolio />
+      <ContactForm />
+      <Footer />
+      <StickyBookingButton />
+      <SideTabButton />
     </>
   );
 };
