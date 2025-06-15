@@ -1,60 +1,11 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Check, Clock, Shield, MapPin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
   const isMobile = useIsMobile();
-  const [isTypeformReady, setIsTypeformReady] = useState(false);
-  
-  useEffect(() => {
-    // Function to initialize Typeform
-    const initTypeform = () => {
-      if (window.tf && window.tf.load) {
-        window.tf.load();
-        setIsTypeformReady(true);
-        console.log('Typeform initialized successfully');
-      }
-    };
-
-    // Check if script already exists
-    const existingScript = document.querySelector('script[src*="embed.typeform.com"]');
-    
-    if (existingScript) {
-      // Script exists, try to initialize
-      if (window.tf) {
-        initTypeform();
-      } else {
-        // Wait for script to load
-        existingScript.addEventListener('load', initTypeform);
-      }
-    } else {
-      // Create and load the script
-      const script = document.createElement('script');
-      script.src = '//embed.typeform.com/next/embed.js';
-      script.async = true;
-      
-      script.onload = () => {
-        console.log('Typeform script loaded in Hero');
-        // Small delay to ensure script is fully ready
-        setTimeout(initTypeform, 200);
-      };
-      
-      script.onerror = () => {
-        console.error('Failed to load Typeform script');
-      };
-      
-      document.head.appendChild(script);
-    }
-
-    // Cleanup function
-    return () => {
-      if (existingScript) {
-        existingScript.removeEventListener('load', initTypeform);
-      }
-    };
-  }, []);
   
   return (
     <section className="relative bg-[#1A1F2C] py-20 text-white">
@@ -75,41 +26,9 @@ const Hero = () => {
             Comprehensive structural design, assessment and consultancy services. From property surveys to complex engineering projects, we deliver expert solutions across Greater London.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <div className={`relative ${isMobile ? 'mb-8' : ''}`}>
-              <div className="bg-white rounded-lg p-4 w-full max-w-md">
-                {!isTypeformReady && (
-                  <div className="flex items-center justify-center h-[400px] bg-gray-50 rounded">
-                    <div className="text-center">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ea384c] mx-auto mb-2"></div>
-                      <p className="text-gray-600 text-sm">Loading form...</p>
-                    </div>
-                  </div>
-                )}
-                <div 
-                  data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" 
-                  style={{ 
-                    width: '100%', 
-                    height: '400px',
-                    display: isTypeformReady ? 'block' : 'none'
-                  }}
-                ></div>
-              </div>
-              {isMobile ? (
-                <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                  <span className="flex items-center bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-xs">
-                    <Clock className="mr-1 h-3 w-3 text-[#ea384c]" />
-                    Only takes 2 minutes
-                  </span>
-                </div>
-              ) : (
-                <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                  <span className="flex items-center bg-black bg-opacity-30 text-white px-2 py-1 rounded-full text-xs">
-                    <Clock className="mr-1 h-3 w-3 text-[#ea384c]" />
-                    Only takes 2 minutes
-                  </span>
-                </div>
-              )}
-            </div>
+            <Button size="lg" className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white text-lg">
+              Book a Structural Engineer
+            </Button>
             <a href="tel:02080049060">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C] text-lg w-full sm:w-auto">
                 Call Us: 020 8004 9060
