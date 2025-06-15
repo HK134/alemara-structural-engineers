@@ -1,36 +1,59 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Check, Clock, Shield, MapPin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
   const isMobile = useIsMobile();
+  const [isTypeformReady, setIsTypeformReady] = useState(false);
   
   useEffect(() => {
-    // Load Typeform embed script if not already loaded
-    if (!document.querySelector('script[src*="embed.typeform.com"]')) {
+    // Function to initialize Typeform
+    const initTypeform = () => {
+      if (window.tf && window.tf.load) {
+        window.tf.load();
+        setIsTypeformReady(true);
+        console.log('Typeform initialized successfully');
+      }
+    };
+
+    // Check if script already exists
+    const existingScript = document.querySelector('script[src*="embed.typeform.com"]');
+    
+    if (existingScript) {
+      // Script exists, try to initialize
+      if (window.tf) {
+        initTypeform();
+      } else {
+        // Wait for script to load
+        existingScript.addEventListener('load', initTypeform);
+      }
+    } else {
+      // Create and load the script
       const script = document.createElement('script');
       script.src = '//embed.typeform.com/next/embed.js';
       script.async = true;
+      
       script.onload = () => {
         console.log('Typeform script loaded in Hero');
-        // Force re-initialization
-        setTimeout(() => {
-          if (window.tf && window.tf.load) {
-            window.tf.load();
-          }
-        }, 100);
+        // Small delay to ensure script is fully ready
+        setTimeout(initTypeform, 200);
       };
+      
+      script.onerror = () => {
+        console.error('Failed to load Typeform script');
+      };
+      
       document.head.appendChild(script);
-    } else {
-      // Script already exists, just reinitialize
-      setTimeout(() => {
-        if (window.tf && window.tf.load) {
-          window.tf.load();
-        }
-      }, 100);
     }
+
+    // Cleanup function
+    return () => {
+      if (existingScript) {
+        existingScript.removeEventListener('load', initTypeform);
+      }
+    };
   }, []);
   
   return (
@@ -54,7 +77,22 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
             <div className={`relative ${isMobile ? 'mb-8' : ''}`}>
               <div className="bg-white rounded-lg p-4 w-full max-w-md">
-                <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" style={{ width: '100%', height: '400px' }}></div>
+                {!isTypeformReady && (
+                  <div className="flex items-center justify-center h-[400px] bg-gray-50 rounded">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ea384c] mx-auto mb-2"></div>
+                      <p className="text-gray-600 text-sm">Loading form...</p>
+                    </div>
+                  </div>
+                )}
+                <div 
+                  data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" 
+                  style={{ 
+                    width: '100%', 
+                    height: '400px',
+                    display: isTypeformReady ? 'block' : 'none'
+                  }}
+                ></div>
               </div>
               {isMobile ? (
                 <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
