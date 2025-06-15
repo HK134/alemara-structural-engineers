@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -35,7 +36,6 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
       </Helmet>
 
       <Navbar />
-      <StickyBookingButton />
       
       {/* Hero Section */}
       <section className="bg-[#1A1F2C] py-20 text-white">

@@ -197,7 +197,6 @@ const BlogPost = () => {
         </div>
       </main>
       <Footer />
-      <StickyBookingButton />
     </div>
   );
 };
