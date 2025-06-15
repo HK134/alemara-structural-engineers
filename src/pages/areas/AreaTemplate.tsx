@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, CheckCircle, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
-
 interface AreaTemplateProps {
   areaName: string;
   areaDescription: string;
@@ -16,7 +14,6 @@ interface AreaTemplateProps {
   nearbyLandmarks?: string;
   historicalContext?: string;
 }
-
 const AreaTemplate: React.FC<AreaTemplateProps> = ({
   areaName,
   areaDescription,
@@ -26,8 +23,7 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
   nearbyLandmarks,
   historicalContext
 }) => {
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Structural Engineers in {areaName} | London Structural Surveys</title>
         <meta name="description" content={metaDescription} />
@@ -51,7 +47,7 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
                 </Button>
               </Link>
               <Link to="/portfolio">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
+                <Button size="lg" variant="outline" className="border-white text-white hover:text-[#1A1F2C] bg-slate-50">
                   <Eye className="mr-2 h-5 w-5" />
                   View Our Work
                 </Button>
@@ -72,12 +68,10 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
             <p className="text-lg text-gray-700 mb-6">
               {areaDescription}
             </p>
-            {historicalContext && (
-              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+            {historicalContext && <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
                 <h3 className="text-xl font-semibold text-[#1A1F2C] mb-3">Historical Context</h3>
                 <p className="text-gray-700">{historicalContext}</p>
-              </div>
-            )}
+              </div>}
           </div>
         </div>
       </section>
@@ -91,34 +85,28 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
             <div className="bg-white rounded-xl shadow-md p-8 mb-10">
               <h3 className="text-2xl font-bold text-[#1A1F2C] mb-4">Specialised Services for {areaName} Properties</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                {specificFeatures.map((feature, index) => (
-                  <div key={index} className="flex items-start">
+                {specificFeatures.map((feature, index) => <div key={index} className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-[#ea384c] mt-1 mr-3" />
                     <p className="text-gray-700">{feature}</p>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
             
             <h3 className="text-2xl font-bold text-[#1A1F2C] mb-6">Common Projects in {areaName}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-              {commonProjects.map((project, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              {commonProjects.map((project, index) => <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                   <h4 className="text-xl font-semibold text-[#1A1F2C] mb-2">{project}</h4>
                   <p className="text-gray-600 mb-4">Our certified engineers provide comprehensive structural solutions for {project.toLowerCase()} in {areaName}.</p>
                   <Link to={`/services/${project.toLowerCase().replace(/\s+/g, '-')}`} className="text-[#ea384c] font-semibold hover:underline inline-flex items-center">
                     Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
-                </div>
-              ))}
+                </div>)}
             </div>
             
-            {nearbyLandmarks && (
-              <div className="bg-white rounded-xl shadow-md p-8 mb-10">
+            {nearbyLandmarks && <div className="bg-white rounded-xl shadow-md p-8 mb-10">
                 <h3 className="text-2xl font-bold text-[#1A1F2C] mb-4">Local Knowledge</h3>
                 <p className="text-gray-700">{nearbyLandmarks}</p>
-              </div>
-            )}
+              </div>}
           </div>
         </div>
       </section>
@@ -138,7 +126,7 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
                 </Button>
               </Link>
               <Link to="/portfolio">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#1A1F2C]">
+                <Button size="lg" variant="outline" className="border-white text-white hover:text-[#1A1F2C] bg-slate-50">
                   <Eye className="mr-2 h-5 w-5" />
                   View Our Portfolio
                 </Button>
@@ -149,8 +137,6 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
       </section>
 
       <Footer />
-    </>
-  );
+    </>;
 };
-
 export default AreaTemplate;
