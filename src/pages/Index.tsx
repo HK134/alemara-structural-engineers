@@ -9,8 +9,6 @@ import Testimonials from '@/components/Testimonials';
 import Portfolio from '@/components/Portfolio';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
-import StickyBookingButton from '@/components/StickyBookingButton';
-import SideTabButton from '@/components/SideTabButton';
 import { Helmet } from 'react-helmet';
 
 const Index = () => {
@@ -41,8 +39,6 @@ const Index = () => {
       <Portfolio />
       <ContactForm />
       <Footer />
-      <StickyBookingButton />
-      <SideTabButton />
     </>
   );
 };

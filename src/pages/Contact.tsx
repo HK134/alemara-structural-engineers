@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StickyBookingButton from '@/components/StickyBookingButton';
 import { Helmet } from 'react-helmet';
 import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
@@ -26,7 +25,6 @@ const Contact = () => {
       </Helmet>
 
       <Navbar />
-      <StickyBookingButton />
       
       {/* Hero Section */}
       <div className="bg-[#1A1F2C] text-white py-16">
