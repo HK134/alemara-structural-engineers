@@ -53,7 +53,7 @@ const Contact = () => {
       </div>
 
       {/* Contact Form Section - First */}
-      <section className="py-16 bg-gray-50">
+      <section id="contact" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Project Started</h2>
@@ -64,7 +64,7 @@ const Contact = () => {
           
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
-              <div data-tf-live="01JXTRNZW6VRXQD5M9GFNHN81Z" style={{ minHeight: '600px', width: '100%' }}></div>
+              <div data-tf-live="01JXTJ5CFBZ6S88JWXVAXA0P1G" style={{ minHeight: '600px', width: '100%' }}></div>
             </div>
           </div>
         </div>
