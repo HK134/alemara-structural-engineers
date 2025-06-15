@@ -1,10 +1,16 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, Shield, Building, MapPin, History } from "lucide-react";
 import BookingDialog from "./BookingDialog";
 
 const CTA = () => {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-16 bg-[#1A1F2C] text-white relative overflow-hidden">
       {/* London-themed background pattern */}
@@ -58,7 +64,11 @@ const CTA = () => {
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <BookingDialog buttonText="Book a Structural Engineer">
-                  <Button size="lg" className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden">
+                  <Button 
+                    size="lg" 
+                    className="bg-[#ea384c] hover:bg-opacity-90 text-white text-lg group relative overflow-hidden"
+                    onClick={scrollToContact}
+                  >
                     <span className="relative z-10 flex items-center">
                       Book a Structural Engineer
                       <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

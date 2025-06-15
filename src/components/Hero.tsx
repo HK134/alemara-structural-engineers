@@ -7,6 +7,13 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const Hero = () => {
   const isMobile = useIsMobile();
   
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
   return (
     <section className="relative bg-[#1A1F2C] py-20 text-white">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
@@ -26,7 +33,11 @@ const Hero = () => {
             Comprehensive structural design, assessment and consultancy services. From property surveys to complex engineering projects, we deliver expert solutions across Greater London.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-12">
-            <Button size="lg" className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white text-lg">
+            <Button 
+              size="lg" 
+              className="bg-[#ea384c] hover:bg-[#ea384c]/90 text-white text-lg"
+              onClick={scrollToContact}
+            >
               Book a Structural Engineer
             </Button>
             <a href="tel:02080049060">
