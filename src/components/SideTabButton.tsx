@@ -5,7 +5,6 @@ import { MessageCircle, X } from "lucide-react";
 
 const SideTabButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isTypeformReady, setIsTypeformReady] = useState(false);
 
   useEffect(() => {
     // Load Typeform embed script if not already loaded
@@ -13,37 +12,23 @@ const SideTabButton = () => {
       const script = document.createElement('script');
       script.src = '//embed.typeform.com/next/embed.js';
       script.async = true;
-      script.onload = () => {
-        console.log('Typeform script loaded in SideTabButton');
-        setTimeout(() => {
-          if (window.tf && window.tf.load) {
-            window.tf.load();
-            setIsTypeformReady(true);
-          }
-        }, 100);
-      };
       document.head.appendChild(script);
-    } else {
-      // Script already exists, try to initialize
-      setTimeout(() => {
-        if (window.tf && window.tf.load) {
-          window.tf.load();
-          setIsTypeformReady(true);
-        }
-      }, 100);
     }
   }, []);
 
   // Re-initialize Typeform when panel opens
   useEffect(() => {
-    if (isOpen && isTypeformReady) {
-      setTimeout(() => {
+    if (isOpen) {
+      // Give a moment for the DOM to update, then load Typeform
+      const timer = setTimeout(() => {
         if (window.tf && window.tf.load) {
           window.tf.load();
         }
-      }, 200);
+      }, 300);
+      
+      return () => clearTimeout(timer);
     }
-  }, [isOpen, isTypeformReady]);
+  }, [isOpen]);
 
   return (
     <>
@@ -91,21 +76,12 @@ const SideTabButton = () => {
               <p className="text-sm text-gray-600 mt-1">Complete in under 2 minutes</p>
             </div>
             <div className="flex-1 overflow-hidden">
-              {!isTypeformReady && (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ea384c] mx-auto mb-2"></div>
-                    <p className="text-gray-600 text-sm">Loading form...</p>
-                  </div>
-                </div>
-              )}
               <div 
                 data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK" 
                 style={{ 
                   width: '100%', 
                   height: '100%',
-                  minHeight: '500px',
-                  display: isTypeformReady ? 'block' : 'none'
+                  minHeight: '500px'
                 }}
               ></div>
             </div>
