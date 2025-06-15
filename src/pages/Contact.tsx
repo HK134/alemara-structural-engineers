@@ -96,7 +96,6 @@ const Contact = () => {
           <div className="w-full max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
               <div data-tf-live="01JKMCBJRZQJH52ACHS9JVY1AK"></div>
-              <script src="//embed.typeform.com/next/embed.js"></script>
             </div>
           </div>
         </div>
