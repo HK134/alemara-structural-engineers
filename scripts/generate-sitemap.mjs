@@ -29,6 +29,8 @@ const urlEl = ({ loc, lastmod, changefreq = 'monthly', priority = '0.7', images 
   </url>`;
 };
 
+const createSlug = (title) => title.toLowerCase().trim().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
 async function getPortfolioIds() {
   // Read TS data files and extract numeric IDs via regex
   const dataDir = path.resolve(process.cwd(), 'src', 'data', 'projects');
@@ -48,6 +50,28 @@ async function getPortfolioIds() {
     }
   }
   return Array.from(idSet);
+}
+
+async function getProjectSlugs() {
+  const dataDir = path.resolve(process.cwd(), 'src', 'data', 'projects');
+  const files = ['residential.ts', 'commercial.ts', 'civil.ts'];
+  const slugs = [];
+  for (const f of files) {
+    const filePath = path.join(dataDir, f);
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const titleRegex = /title:\s*'([^']+)'/g;
+      let m;
+      while ((m = titleRegex.exec(content)) !== null) {
+        const title = m[1];
+        const slug = createSlug(title);
+        slugs.push(slug);
+      }
+    } catch (e) {
+      console.warn('Failed to parse titles from', f, e?.message);
+    }
+  }
+  return slugs;
 }
 
 async function getBlogPosts() {
@@ -97,9 +121,10 @@ async function main() {
     '/blog',
   ];
 
-  const [portfolioIds, blogPosts] = await Promise.all([
+  const [portfolioIds, blogPosts, projectSlugs] = await Promise.all([
     getPortfolioIds().catch(() => []),
     getBlogPosts().catch(() => []),
+    getProjectSlugs().catch(() => []),
   ]);
 
   const urls = [];
@@ -110,9 +135,15 @@ async function main() {
     urls.push(urlEl({ loc: `${SITE_URL}${route}`, lastmod: today, priority: route === '/' ? '1.0' : '0.8' }));
   }
 
-  // Portfolio detail pages
-  for (const id of portfolioIds) {
-    urls.push(urlEl({ loc: `${SITE_URL}/portfolio/${id}`, lastmod: today, priority: '0.7' }));
+  // Portfolio detail pages (prefer slug-based; fallback to IDs if empty)
+  if (projectSlugs.length > 0) {
+    for (const slug of projectSlugs) {
+      urls.push(urlEl({ loc: `${SITE_URL}/portfolio/${slug}`, lastmod: today, priority: '0.7' }));
+    }
+  } else {
+    for (const id of portfolioIds) {
+      urls.push(urlEl({ loc: `${SITE_URL}/portfolio/${id}`, lastmod: today, priority: '0.7' }));
+    }
   }
 
   // Blog posts

@@ -12,6 +12,24 @@ export const portfolioItems = [
   ...civilProjects
 ];
 
+// Slug helpers
+export const createProjectSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+export const getProjectSlug = (project: { title: string }): string => {
+  return createProjectSlug(project.title);
+};
+
+export const getProjectBySlug = (slug: string) => {
+  return portfolioItems.find(p => createProjectSlug(p.title) === slug);
+};
+
 // Export individual project type arrays
 export { residentialProjects, commercialProjects, civilProjects, featuredProjects };
 

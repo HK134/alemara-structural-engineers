@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StickyBookingButton from '@/components/StickyBookingButton';
-import { portfolioItems, getProjectsByType } from '@/data/projects';
+import { portfolioItems, getProjectsByType, getProjectBySlug, getProjectById, getProjectSlug } from '@/data/projects';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Building, Home, HardHat } from 'lucide-react';
 import PortfolioCard from '@/components/PortfolioCard';
@@ -14,7 +14,9 @@ import ProjectNavigation from '@/components/project/ProjectNavigation';
 import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
 
 const ProjectDetail = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const navigate = useNavigate();
+  const slugOrId = (params as any).slug || (params as any).id as string; // support slug or id
   const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [prevProject, setPrevProject] = useState<any>(null);
@@ -23,23 +25,31 @@ const ProjectDetail = () => {
   const [filterType, setFilterType] = useState<string>('all');
 
   useEffect(() => {
-    if (id) {
-      const currentProject = portfolioItems.find(item => item.id === parseInt(id));
-      
-      if (currentProject) {
-        setProject(currentProject);
-        
-        // Find previous and next projects
-        const currentIndex = portfolioItems.findIndex(item => item.id === parseInt(id));
-        setPrevProject(currentIndex > 0 ? portfolioItems[currentIndex - 1] : null);
-        setNextProject(currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null);
-        
-        // Set initial related projects
-        updateRelatedProjects(currentProject.type);
+    if (!slugOrId) return;
+
+    // Try to resolve by slug first
+    let current = getProjectBySlug(slugOrId);
+
+    // If not found, try numeric ID and redirect to slug URL for canonical consistency
+    if (!current && /^\d+$/.test(slugOrId)) {
+      const byId = getProjectById(parseInt(slugOrId, 10));
+      if (byId) {
+        const canonical = `/portfolio/${getProjectSlug(byId)}`;
+        navigate(canonical, { replace: true });
+        current = byId;
       }
     }
+
+    if (current) {
+      setProject(current);
+      const currentIndex = portfolioItems.findIndex(item => item.id === current!.id);
+      setPrevProject(currentIndex > 0 ? portfolioItems[currentIndex - 1] : null);
+      setNextProject(currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null);
+      updateRelatedProjects(current.type);
+    }
+
     setLoading(false);
-  }, [id]);
+  }, [slugOrId]);
   
   // Update related projects when filter changes
   useEffect(() => {
