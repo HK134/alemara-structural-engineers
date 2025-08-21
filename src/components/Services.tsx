@@ -67,7 +67,7 @@ const Services = () => {
                 <CardDescription className="text-gray-700 text-base mb-4">{service.description}</CardDescription>
                 <Link to={service.link}>
                   <Button variant="link" className="text-[#ea384c] p-0 h-auto font-semibold flex items-center">
-                    Read More <ArrowRight className="ml-1 h-4 w-4" />
+                    View Our Services <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>

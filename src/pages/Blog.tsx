@@ -185,7 +185,7 @@ const Blog = () => {
                         </div>
                         <Link to={post.slug}>
                           <Button variant="link" className="text-[#ea384c]">
-                            Read more <ArrowRight className="h-4 w-4 ml-1" />
+                            Read Full Article <ArrowRight className="h-4 w-4 ml-1" />
                           </Button>
                         </Link>
                       </CardFooter>

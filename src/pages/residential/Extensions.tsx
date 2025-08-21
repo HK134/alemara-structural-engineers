@@ -75,7 +75,7 @@ const Extensions = () => {
                 </Button>
                 <Button variant="outline" className="text-white border-white hover:bg-white/10">
                   <Link to="#benefits" className="flex items-center">
-                    Learn More
+                    View Extension Services
                   </Link>
                 </Button>
               </div>

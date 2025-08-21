@@ -62,6 +62,7 @@ const Services = () => {
         <title>Structural Engineering Services | London Structural Surveys</title>
         <meta name="description" content="Professional structural engineering services including loft conversions, extensions, design calculations, and structural inspections across London." />
         <meta name="keywords" content="structural engineer, structural engineering services, London structural engineer, structural calculations, building regulations, structural inspections" />
+        <link rel="canonical" href="https://alemara.co.uk/services" />
       </Helmet>
 
       <Navbar />

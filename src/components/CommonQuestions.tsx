@@ -125,7 +125,7 @@ const CommonQuestions = () => {
                     className="text-[#ea384c] p-0 hover:text-[#ea384c]/80"
                     onClick={() => navigate(post.slug)}
                   >
-                    Read more <ArrowRight className="ml-1 h-4 w-4" />
+                                          Read Full Article <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </div>
               </div>

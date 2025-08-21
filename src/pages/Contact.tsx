@@ -37,6 +37,7 @@ const Contact = () => {
         <title>Contact Us | London Structural Surveys</title>
         <meta name="description" content="Get in touch with London Structural Surveys. Contact our expert structural engineers for consultations, quotes, and project inquiries." />
         <meta name="keywords" content="contact structural engineer, London structural engineering, structural survey quote, engineering consultation" />
+        <link rel="canonical" href="https://alemara.co.uk/contact" />
       </Helmet>
 
       <Navbar />

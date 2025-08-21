@@ -75,7 +75,7 @@ const LoftConversions = () => {
                 </Button>
                 <Button variant="outline" className="text-white border-white hover:bg-white/10">
                   <Link to="#benefits" className="flex items-center">
-                    Learn More
+                    View Loft Services
                   </Link>
                 </Button>
               </div>
