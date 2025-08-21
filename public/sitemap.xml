@@ -1,138 +1,268 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://londonstructuralsurveys.com/</loc>
-    <lastmod>2024-06-19</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/about-us</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/services</loc>
-    <lastmod>2024-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/residential</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://londonstructuralsurveys.com/services/commercial</loc>
-    <lastmod>2024-06-10</lastmod>
+    <loc>https://londonstructuralsurveys.com/services/residential</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/loft-conversions</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/residential/loft-conversions</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/extensions</loc>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/services/residential/extensions</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/services/residential/loft-conversions</loc>
-    <lastmod>2024-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/services/structural-surveys</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/commercial</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/civil-engineering</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/basement-extensions</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/subsidence-crack-surveys</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/services/new-builds</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/areas/islington-highbury</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/areas/camden-kentish-town</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/areas/hackney-shoreditch</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/areas/kensington-chelsea</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/areas/westminster-mayfair</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/areas/london-boroughs</loc>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio</loc>
-    <lastmod>2024-06-19</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/2af65380-85a4-471b-8571-e5e94646b7c0.png</image:loc>
-      <image:title>Halcyon Gallery - Persian Pergola Ceiling</image:title>
-      <image:caption>Colorful glass installation ceiling at Halcyon Gallery with visitor walking through illuminated corridor</image:caption>
-    </image:image>
+    <priority>0.8</priority>
   </url>
-  <!-- Portfolio Item URLs -->
   <url>
-    <loc>https://londonstructuralsurveys.com/portfolio/2</loc>
-    <lastmod>2024-06-18</lastmod>
+    <loc>https://londonstructuralsurveys.com/faq</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/contact</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/privacy-policy</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/terms</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/blog</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/15</loc>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png</image:loc>
-      <image:title>Victoria Park Project - Open Plan Living</image:title>
-      <image:caption>Modern bright open plan living space with blue sofa, dining table, and white kitchen after structural refurbishment</image:caption>
-    </image:image>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/2</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio/13</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/16</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/17</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/18</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/23</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/24</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/25</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/26</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/27</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/28</loc>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio/14</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://londonstructuralsurveys.com/portfolio/1</loc>
-    <lastmod>2024-06-10</lastmod>
+    <loc>https://londonstructuralsurveys.com/portfolio/20</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://londonstructuralsurveys.com/portfolio/21</loc>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio/11</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/592dddf9-ecec-47bf-893a-cf6ceb0b395a.png</image:loc>
-      <image:title>Hinkley Point C Nuclear Power Station</image:title>
-      <image:caption>Aerial view of the Hinkley Point C nuclear power station construction site</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/3ed68382-f152-4207-a9a2-9c03d22055ab.png</image:loc>
-      <image:title>Big Carl Crane at Hinkley Point C</image:title>
-      <image:caption>The world's largest land-based crane operating at Hinkley Point C</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://londonstructuralsurveys.com/portfolio/12</loc>
-    <lastmod>2024-06-10</lastmod>
+    <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/4cf66701-a794-43d4-aa2b-151109a11333.png</image:loc>
-      <image:title>HS2 Construction Site Aerial View</image:title>
-      <image:caption>Aerial view of HS2 construction site showing extensive groundworks and rail infrastructure development in an urban setting</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://londonstructuralsurveys.com/lovable-uploads/b14325b1-4b96-4238-9f62-d04e2fb4406a.png</image:loc>
-      <image:title>HS2 Bridge Construction</image:title>
-      <image:caption>HS2 bridge construction showing concrete span and specialized red and yellow gantry crane system</image:caption>
-    </image:image>
   </url>
   <url>
-    <loc>https://londonstructuralsurveys.com/privacy-policy</loc>
-    <lastmod>2024-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://londonstructuralsurveys.com/terms</loc>
-    <lastmod>2024-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://londonstructuralsurveys.com/portfolio/22</loc>
+    <lastmod>2025-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

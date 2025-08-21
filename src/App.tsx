@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
 import AboutUs from '@/pages/AboutUs';
@@ -54,11 +54,24 @@ import EngineerLayout from '@/components/EngineerLayout';
 // Create a client
 const queryClient = new QueryClient();
 
+function GAListener() {
+  const location = useLocation();
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('config', 'G-T6RTP11HPR', {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location.pathname, location.search]);
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
+          <GAListener />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />

@@ -88,14 +88,14 @@ const AboutUs = () => {
         <title>About Structural Engineering Solutions | Alemara</title>
         <meta name="description" content="Discover Alemara's team of expert structural engineers providing innovative, reliable engineering solutions for London's residential and commercial projects." />
         <meta name="keywords" content="structural engineers London, civil engineering consultancy, building structural assessment, Alemara engineering team" />
-        <link rel="canonical" href="https://yourwebsite.com/about-structural-engineering-solutions" />
+        <link rel="canonical" href="https://londonstructuralsurveys.com/about-us" />
         <script type="application/ld+json">
           {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "EngineeringFirm",
           "name": "Alemara Structural Engineers",
-          "url": "https://yourwebsite.com",
-          "logo": "https://yourwebsite.com/logo.png",
+          "url": "https://londonstructuralsurveys.com",
+          "logo": "https://londonstructuralsurveys.com/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png",
           "description": "Expert structural and civil engineering consultancy serving London and the UK.",
           "address": {
             "@type": "PostalAddress",
