@@ -13,7 +13,7 @@ const FAQPage = () => {
         <title>FAQ | London Structural Engineering Questions Answered</title>
         <meta name="description" content="Get answers to common questions about structural engineering, building regulations, planning requirements, and our services across London." />
         <meta name="keywords" content="structural engineering FAQ, building regulations, planning permission, London structural engineer, engineering costs" />
-        <link rel="canonical" href="https://londonstructuralsurveys.com/faq" />
+        <link rel="canonical" href="https://alemara.co.uk/faq" />
       </Helmet>
       
       <Navbar />

@@ -41,7 +41,7 @@ const Extensions = () => {
         <title>House Extension Structural Engineering London | Alemara Engineers</title>
         <meta name="description" content="Specialist structural engineering for London house extensions. Expert calculations and drawings for side, rear and wrap-around extensions across London." />
         <meta name="keywords" content="house extension, structural engineer London, side extension, rear extension, wrap-around extension, single storey, double storey" />
-        <link rel="canonical" href="https://londonstructuralsurveys.com/services/residential/extensions" />
+        <link rel="canonical" href="https://alemara.co.uk/services/residential/extensions" />
         <script type="application/ld+json">
           {JSON.stringify(schema)}
         </script>

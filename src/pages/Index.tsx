@@ -23,13 +23,13 @@ const Index = () => {
         <meta property="og:title" content="London Structural Surveys | Expert Structural Engineers" />
         <meta property="og:description" content="London's trusted structural engineers providing comprehensive design, assessment and consultancy services." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://londonstructuralsurveys.com" />
+        <meta property="og:url" content="https://alemara.co.uk" />
         <meta property="og:image" content="/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="London Structural Surveys | Expert Structural Engineers" />
         <meta name="twitter:description" content="London's trusted structural engineers providing comprehensive design, assessment and consultancy services." />
         <meta name="twitter:image" content="/og-image.png" />
-        <link rel="canonical" href="https://londonstructuralsurveys.com" />
+        <link rel="canonical" href="https://alemara.co.uk" />
       </Helmet>
       <Navbar />
       <Hero />

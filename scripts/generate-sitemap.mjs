@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { createClient } from '@supabase/supabase-js';
 
 // Config
-const SITE_URL = 'https://londonstructuralsurveys.com';
+const SITE_URL = 'https://alemara.co.uk';
 const OUTPUT_PATH = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 
 // Supabase client (reuse existing env if available, else inline from client.ts)

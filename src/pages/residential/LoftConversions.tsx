@@ -41,7 +41,7 @@ const LoftConversions = () => {
         <title>Loft Conversion Structural Engineering London | Alemara Engineers</title>
         <meta name="description" content="Expert structural engineering for loft conversions in London. Get detailed calculations and drawings for Building Regulations approval for all conversion types." />
         <meta name="keywords" content="loft conversion, London structural engineer, mansard conversion, dormer conversion, hip to gable, roof structural design, building regulations" />
-        <link rel="canonical" href="https://londonstructuralsurveys.com/services/residential/loft-conversions" />
+        <link rel="canonical" href="https://alemara.co.uk/services/residential/loft-conversions" />
         <script type="application/ld+json">
           {JSON.stringify(schema)}
         </script>

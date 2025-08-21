@@ -42,7 +42,7 @@ const Portfolio = () => {
         <title>Portfolio | London Structural Surveys | Engineering Projects</title>
         <meta name="description" content="Explore our portfolio of structural engineering projects across London, including residential extensions, commercial renovations, and civil engineering work." />
         <meta name="keywords" content="structural engineering projects, London engineering portfolio, residential extensions, commercial structural work, civil engineering projects" />
-        <link rel="canonical" href="https://londonstructuralsurveys.com/portfolio" />
+        <link rel="canonical" href="https://alemara.co.uk/portfolio" />
       </Helmet>
       
       <Navbar />

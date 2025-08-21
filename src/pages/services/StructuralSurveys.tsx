@@ -54,7 +54,7 @@ const StructuralSurveys = () => {
       <Helmet>
         <title>Expert Structural Surveys London | Alemara Engineering</title>
         <meta name="description" content="Professional structural survey reports for London homeowners, buyers and landlords. Our certified engineers provide detailed assessments and practical solutions within 48 hours." />
-        <link rel="canonical" href="https://londonstructuralsurveys.com/services/structural-surveys" />
+        <link rel="canonical" href="https://alemara.co.uk/services/structural-surveys" />
         <script type="application/ld+json">
           {`
             {
