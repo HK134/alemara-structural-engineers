@@ -1,5 +1,5 @@
 
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
 import AboutUs from '@/pages/AboutUs';
@@ -74,6 +74,7 @@ function App() {
           <GAListener />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/portfolio" element={<Portfolio />} />

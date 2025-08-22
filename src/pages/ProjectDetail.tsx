@@ -12,6 +12,7 @@ import ServiceCTA from '@/components/services/ServiceCTA';
 import ProjectInfo from '@/components/project/ProjectInfo';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
+import { Helmet } from 'react-helmet';
 
 const ProjectDetail = () => {
   const params = useParams();
@@ -92,9 +93,15 @@ const ProjectDetail = () => {
 
   const pageTitle = `${project.title} | London Structural Engineering Project`;
   const pageDescription = project.description?.substring(0, 160);
+  const canonicalUrl = `https://alemara.co.uk/portfolio/${getProjectSlug(project)}`;
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+      </Helmet>
       <Navbar />
       <main className="flex-grow">
         {isInfrastructureProject ? (

@@ -21,14 +21,8 @@ const SiteVisits = () => {
     <>
       <Helmet>
         <title>The Importance of Structural Engineering Site Visits | London Structural Surveys</title>
-        <meta 
-          name="description" 
-          content="Learn why site visits by structural engineers are crucial for your building project's success, safety, and compliance with regulations." 
-        />
-        <meta 
-          name="keywords" 
-          content="structural engineer site visit, structural inspection, building assessment, structural survey, London structural engineer" 
-        />
+        <meta name="description" content="Learn why site visits by structural engineers are crucial for your building project's success, safety, and compliance with regulations." />
+        <link rel="canonical" href="https://alemara.co.uk/blog/importance-of-site-visits" />
       </Helmet>
       
       <Navbar />

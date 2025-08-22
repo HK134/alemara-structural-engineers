@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, Calendar, ArrowRight, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 // Sample blog post data - this will be replaced with actual data later
 const blogPosts = [
@@ -107,6 +108,11 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Blog | Structural Engineering Insights</title>
+        <meta name="description" content="Expert articles from Alemara Structural Engineers on structural surveys, extensions, loft conversions, regulations, and property issues in London." />
+        <link rel="canonical" href="https://alemara.co.uk/blog" />
+      </Helmet>
       <Navbar />
       <main className="flex-grow">
         {/* Hero section */}
