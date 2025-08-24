@@ -1,6 +1,26 @@
 # API redirects for dynamic content
 /generate-sitemap.xml /api/sitemap 200
 
+# Portfolio ID redirects - 301 redirects for SEO
+/portfolio/15 /portfolio/cheval-place-knightsbridge 301!
+/portfolio/2 /portfolio/victoria-park-project-east-london 301!
+/portfolio/13 /portfolio/warrington-crescent-maida-vale 301!
+/portfolio/16 /portfolio/burrows-court-residential-development 301!
+/portfolio/17 /portfolio/carlton-road-victorian-conversion 301!
+/portfolio/18 /portfolio/gloucester-gardens-heritage-renovation 301!
+/portfolio/23 /portfolio/gloucester-gardens-2-period-property-restoration 301!
+/portfolio/24 /portfolio/gloucester-terrace-classic-london-terrace 301!
+/portfolio/25 /portfolio/pimlico 301!
+/portfolio/26 /portfolio/hanningfield-timber-structure 301!
+/portfolio/27 /portfolio/mollands-riba-feature-project 301!
+/portfolio/28 /portfolio/ongar-new-build-project 301!
+/portfolio/14 /portfolio/five-miles-music-venue 301!
+/portfolio/20 /portfolio/mayfair 301!
+/portfolio/21 /portfolio/riverbank-plaza-hotel-structural-upgrade 301!
+/portfolio/11 /portfolio/hpc-somerset 301!
+/portfolio/12 /portfolio/hs2-high-speed-rail-infrastructure 301!
+/portfolio/22 /portfolio/watford-stadium-structural-assessment 301!
+
 # Domain redirects - ensure clean canonical URLs
 http://amatrix.co/* https://alemara.co.uk/:splat 301!
 https://amatrix.co/* https://alemara.co.uk/:splat 301!

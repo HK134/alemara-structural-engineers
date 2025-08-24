@@ -1,6 +1,26 @@
 User-agent: *
 Allow: /
 
+# Block old portfolio ID URLs from being indexed (they redirect to slug URLs)
+Disallow: /portfolio/2
+Disallow: /portfolio/11
+Disallow: /portfolio/12
+Disallow: /portfolio/13
+Disallow: /portfolio/14
+Disallow: /portfolio/15
+Disallow: /portfolio/16
+Disallow: /portfolio/17
+Disallow: /portfolio/18
+Disallow: /portfolio/20
+Disallow: /portfolio/21
+Disallow: /portfolio/22
+Disallow: /portfolio/23
+Disallow: /portfolio/24
+Disallow: /portfolio/25
+Disallow: /portfolio/26
+Disallow: /portfolio/27
+Disallow: /portfolio/28
+
 # Canonical domain specification
 Host: alemara.co.uk
 
