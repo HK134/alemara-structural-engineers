@@ -7,7 +7,7 @@ export interface BlogPost {
   excerpt: string | null;
   content: string;
   tags: string[];
-  image_url: string | null;
+  image_path: string | null;
   author: string;
   date_published: string;
   updated_at: string;
@@ -84,7 +84,7 @@ export const fetchBlogPosts = async (
     const totalPages = Math.ceil((count || 0) / pagination.limit);
 
     return {
-      data: data || [],
+      data: (data || []) as unknown as BlogPost[],
       count: count || 0,
       totalPages,
       currentPage: pagination.page
@@ -111,7 +111,7 @@ export const fetchBlogPostBySlug = async (slug: string): Promise<BlogPost | null
       throw error;
     }
 
-    return data;
+    return data as unknown as BlogPost | null;
   } catch (error) {
     console.error('Error fetching blog post:', error);
     throw error;
@@ -135,7 +135,7 @@ export const fetchFeaturedBlogPosts = async (limit: number = 3): Promise<BlogPos
       throw error;
     }
 
-    return data || [];
+    return (data || []) as unknown as BlogPost[];
   } catch (error) {
     console.error('Error fetching featured blog posts:', error);
     throw error;
@@ -188,6 +188,19 @@ export const fetchBlogTags = async (): Promise<string[]> => {
     console.error('Error fetching blog tags:', error);
     return [];
   }
+};
+
+/**
+ * Get public URL for blog image from Supabase storage
+ */
+export const getBlogImageUrl = (imagePath: string | null): string => {
+  if (!imagePath) return '/placeholder.svg';
+  
+  const { data } = supabase.storage
+    .from('alemarablogimages')
+    .getPublicUrl(imagePath);
+  
+  return data.publicUrl;
 };
 
 /**
