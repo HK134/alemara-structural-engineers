@@ -9,8 +9,7 @@
     "build:dev": "npm run generate:sitemap && vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "sitemap:webhook": "node scripts/webhook-sitemap.mjs"
+    "generate:sitemap": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
