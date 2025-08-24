@@ -4,18 +4,18 @@
 The website now includes a dynamic sitemap generator that can be triggered via a web endpoint. This allows you to update the sitemap without redeploying the entire website.
 
 ## API Endpoint
-**URL:** `https://alemara.co.uk/api/sitemap-update.html`
+**URL:** `https://alemara.co.uk/sitemap-generator`
 
 ## Usage
 
 ### 1. Manual Trigger (Browser)
-Visit: `https://alemara.co.uk/api/sitemap-update.html`
+Visit: `https://alemara.co.uk/sitemap-generator`
 - Shows a user-friendly interface
 - Automatically downloads the generated sitemap.xml
 - Displays generation status and preview
 
 ### 2. JSON API Response (for automation)
-Visit: `https://alemara.co.uk/api/sitemap-update.html?format=json`
+Visit: `https://alemara.co.uk/sitemap-generator?format=json`
 Returns JSON with:
 ```json
 {
@@ -31,7 +31,7 @@ Returns JSON with:
 ### Setup Daily Automation:
 1. **HTTP Request Node** in n8n:
    - Method: GET
-   - URL: `https://alemara.co.uk/api/sitemap-update.html?format=json`
+   - URL: `https://alemara.co.uk/sitemap-generator?format=json`
    - Headers: `Accept: application/json`
 
 2. **Schedule Trigger**:
@@ -73,8 +73,8 @@ The generated sitemap includes:
 ## Deployment Notes
 
 After deploying this update:
-1. Test the endpoint: `https://alemara.co.uk/api/sitemap-update.html`
+1. Test the endpoint: `https://alemara.co.uk/sitemap-generator?format=json`
 2. Set up your n8n daily automation
 3. Submit the sitemap URL to Google Search Console: `https://alemara.co.uk/sitemap.xml`
 4. The endpoint will generate fresh sitemaps with current blog posts daily
-5. You'll need to manually upload the generated sitemap.xml to replace the static one 
+5. Use the `sitemap_xml` field from the JSON response to get the generated sitemap content 
