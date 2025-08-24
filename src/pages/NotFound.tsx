@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet";
 
 const NotFound = () => {
   const location = useLocation();
@@ -18,6 +19,11 @@ const NotFound = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Page Not Found | Alemara Structural Engineers</title>
+        <meta name="description" content="The page you're looking for doesn't exist. Explore our structural engineering services for London properties or return to our homepage." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <Navbar />
       <div className="min-h-[60vh] flex flex-col items-center justify-center bg-[#f8f9fa] py-20">
         <div className="text-center max-w-3xl px-4">

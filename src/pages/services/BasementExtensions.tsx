@@ -85,6 +85,7 @@ const BasementExtensions = () => {
         "Subsidence Solutions",
         "Party Wall Matters"
       ]}
+      canonicalUrl="https://alemara.co.uk/services/basement-extensions"
     />
   );
 };

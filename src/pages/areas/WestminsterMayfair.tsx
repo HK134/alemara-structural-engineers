@@ -26,6 +26,7 @@ const WestminsterMayfair = () => {
       ]}
       nearbyLandmarks="We have extensive experience working near Buckingham Palace, Houses of Parliament, Bond Street, and Berkeley Square, understanding the unique security, heritage, and planning considerations that apply in these internationally significant locations."
       historicalContext="Westminster and Mayfair feature exceptional examples of Georgian (1714-1830) and Regency (1811-1820) architecture, including some of London's finest terraced houses and mansion blocks. These buildings require specialist structural knowledge to preserve their historical significance while meeting modern commercial and residential needs."
+      canonicalUrl="https://alemara.co.uk/areas/westminster-mayfair"
     />
   );
 };

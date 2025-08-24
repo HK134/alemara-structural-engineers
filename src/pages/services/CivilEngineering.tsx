@@ -5,10 +5,17 @@ import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Droplets, Construction, Trees } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 const CivilEngineering = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Civil Engineering Services London | Infrastructure & Development</title>
+        <meta name="description" content="Professional civil engineering services for London infrastructure projects. Comprehensive solutions for drainage, site development, and civil engineering works." />
+        <meta name="keywords" content="civil engineering London, infrastructure projects, drainage solutions, site development, civil engineering services" />
+        <link rel="canonical" href="https://alemara.co.uk/services/civil-engineering" />
+      </Helmet>
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}

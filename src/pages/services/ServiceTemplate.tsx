@@ -25,6 +25,7 @@ interface ServiceTemplateProps {
   }[];
   icon: React.ReactNode;
   relatedServices: string[];
+  canonicalUrl: string;
 }
 
 const ServiceTemplate: React.FC<ServiceTemplateProps> = ({
@@ -36,7 +37,8 @@ const ServiceTemplate: React.FC<ServiceTemplateProps> = ({
   process,
   faqs,
   icon,
-  relatedServices
+  relatedServices,
+  canonicalUrl
 }) => {
   return (
     <>
@@ -44,6 +46,7 @@ const ServiceTemplate: React.FC<ServiceTemplateProps> = ({
         <title>{serviceName} | London Structural Engineers</title>
         <meta name="description" content={metaDescription} />
         <meta name="keywords" content={`${serviceName.toLowerCase()}, structural engineer london, ${serviceName.toLowerCase()} london, structural engineering`} />
+        <link rel="canonical" href={canonicalUrl} />
       </Helmet>
 
       <Navbar />

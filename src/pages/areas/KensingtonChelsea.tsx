@@ -26,6 +26,7 @@ const KensingtonChelsea = () => {
       ]}
       nearbyLandmarks="Our portfolio includes work near Hyde Park, the Royal Albert Hall, Chelsea Embankment, and South Kensington's museum district, areas requiring the highest standards of structural engineering and architectural sensitivity."
       historicalContext="Kensington and Chelsea showcase some of London's finest Georgian (1714-1830) and Victorian (1837-1901) architecture. These prestigious properties often feature complex structural systems, ornate facades, and require specialist knowledge to maintain their architectural integrity while incorporating modern living requirements."
+      canonicalUrl="https://alemara.co.uk/areas/kensington-chelsea"
     />
   );
 };

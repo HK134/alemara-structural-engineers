@@ -26,6 +26,7 @@ const HackneyShoreditch = () => {
       ]}
       nearbyLandmarks="We've worked extensively around Old Street, Brick Lane, Columbia Road, and the Olympic Park area, understanding the unique blend of heritage conservation requirements and modern development opportunities that define this dynamic area."
       historicalContext="Hackney and Shoreditch feature a rich industrial heritage with many 19th and early 20th-century warehouse and factory buildings. These structures typically feature robust brick and steel construction that, with proper structural assessment, can be successfully adapted for modern residential and commercial use."
+      canonicalUrl="https://alemara.co.uk/areas/hackney-shoreditch"
     />
   );
 };

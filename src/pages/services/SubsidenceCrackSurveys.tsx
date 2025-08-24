@@ -85,6 +85,7 @@ const SubsidenceCrackSurveys = () => {
         "Foundation Design",
         "Insurance Assessment"
       ]}
+      canonicalUrl="https://alemara.co.uk/services/subsidence-crack-surveys"
     />
   );
 };

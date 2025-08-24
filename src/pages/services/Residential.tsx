@@ -5,10 +5,17 @@ import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Home, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 const Residential = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Residential Structural Engineering Services London | Alemara</title>
+        <meta name="description" content="Expert residential structural engineering services for London homes. From Victorian terraces to modern apartments, we provide comprehensive design and assessment solutions." />
+        <meta name="keywords" content="residential structural engineering, London homes, Victorian terraces, modern apartments, structural design, structural assessment" />
+        <link rel="canonical" href="https://alemara.co.uk/services/residential" />
+      </Helmet>
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}

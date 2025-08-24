@@ -26,6 +26,7 @@ const LondonBoroughs = () => {
       ]}
       nearbyLandmarks="Our extensive portfolio covers projects from the historic buildings of the City of London to the suburban developments of the outer boroughs, including work near major landmarks, transport hubs, and regeneration areas throughout Greater London."
       historicalContext="London's building stock spans over 300 years of architectural history, from surviving pre-Georgian buildings through to contemporary developments. Each borough has its own character and typical building types, requiring tailored structural engineering approaches that respect local architectural heritage while meeting modern building standards."
+      canonicalUrl="https://alemara.co.uk/areas/london-boroughs"
     />
   );
 };

@@ -4,10 +4,17 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const PrivacyPolicy = () => {
   return (
     <>
+      <Helmet>
+        <title>Privacy Policy | Alemara Structural Engineers</title>
+        <meta name="description" content="Privacy Policy for Alemara Structural Engineers. Learn how we collect, use, and protect your personal information when using our structural engineering services." />
+        <meta name="keywords" content="privacy policy, data protection, Alemara structural engineers, London structural engineering" />
+        <link rel="canonical" href="https://alemara.co.uk/privacy-policy" />
+      </Helmet>
       <Navbar />
       <div className="container mx-auto px-4 py-12">
         <Link to="/" className="inline-flex items-center text-[#ea384c] hover:underline mb-6">

@@ -1,0 +1,16 @@
+# Domain redirects - ensure clean canonical URLs
+http://amatrix.co/* https://alemara.co.uk/:splat 301!
+https://amatrix.co/* https://alemara.co.uk/:splat 301!
+http://www.amatrix.co/* https://alemara.co.uk/:splat 301!
+https://www.amatrix.co/* https://alemara.co.uk/:splat 301!
+
+# Ensure www redirects to non-www
+https://www.alemara.co.uk/* https://alemara.co.uk/:splat 301!
+http://www.alemara.co.uk/* https://alemara.co.uk/:splat 301!
+
+# Ensure HTTP redirects to HTTPS
+http://alemara.co.uk/* https://alemara.co.uk/:splat 301!
+
+# Legacy route redirects (already handled in React Router but good to have as backup)
+/services/loft-conversions /services/residential/loft-conversions 301!
+/services/extensions /services/residential/extensions 301! 

@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alemara.co.uk/sitemap.xml 
+# Canonical domain specification
+Host: alemara.co.uk
+
+# Sitemaps
+Sitemap: https://alemara.co.uk/sitemap.xml
+Sitemap: https://alemara.co.uk/generate-sitemap.xml 

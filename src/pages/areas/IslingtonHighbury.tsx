@@ -27,6 +27,7 @@ const IslingtonHighbury = () => {
       ]}
       nearbyLandmarks="Our team is familiar with properties near landmarks such as Highbury Fields, Emirates Stadium, and the Islington Square development, understanding the specific structural challenges and planning considerations for each area."
       historicalContext="Islington and Highbury feature many properties built in the Georgian and Victorian eras (1714-1901). These buildings often have specific structural characteristics including load-bearing brick walls, timber floor joists, and shallow foundations that require specialist knowledge when undertaking modern alterations."
+      canonicalUrl="https://alemara.co.uk/areas/islington-highbury"
     />
   );
 };

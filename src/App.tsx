@@ -50,12 +50,39 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import './App.css';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet';
 
 import AdminLayout from '@/components/AdminLayout';
 import EngineerLayout from '@/components/EngineerLayout';
 
 // Create a client
 const queryClient = new QueryClient();
+
+function DomainCheck() {
+  React.useEffect(() => {
+    // Check if we're on the wrong domain and redirect
+    const currentDomain = window.location.hostname;
+    const canonicalDomain = 'alemara.co.uk';
+    
+    if (currentDomain !== canonicalDomain && currentDomain !== 'localhost') {
+      // Redirect to canonical domain
+      window.location.replace(`https://${canonicalDomain}${window.location.pathname}${window.location.search}`);
+    }
+  }, []);
+
+  const currentDomain = typeof window !== 'undefined' ? window.location.hostname : '';
+  const isWrongDomain = currentDomain !== 'alemara.co.uk' && currentDomain !== 'localhost';
+
+  if (isWrongDomain) {
+    return (
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+    );
+  }
+
+  return null;
+}
 
 function GAListener() {
   const location = useLocation();
@@ -74,6 +101,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
+          <DomainCheck />
           <GAListener />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -92,9 +120,9 @@ function App() {
 
             {/* Service Pages */}
             <Route path="/services/residential" element={<Residential />} />
-            <Route path="/services/loft-conversions" element={<LoftConversions />} />
+            <Route path="/services/loft-conversions" element={<Navigate to="/services/residential/loft-conversions" replace />} />
             <Route path="/services/residential/loft-conversions" element={<LoftConversions />} />
-            <Route path="/services/extensions" element={<Extensions />} />
+            <Route path="/services/extensions" element={<Navigate to="/services/residential/extensions" replace />} />
             <Route path="/services/residential/extensions" element={<Extensions />} />
             <Route path="/services/structural-surveys" element={<StructuralSurveys />} />
             <Route path="/services/commercial" element={<Commercial />} />

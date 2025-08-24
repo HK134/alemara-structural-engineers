@@ -26,6 +26,7 @@ const CamdenKentishTown = () => {
       ]}
       nearbyLandmarks="Our engineers have extensive experience working near Camden Market, Regent's Canal, Primrose Hill, and the historic Roundhouse, understanding the specific planning considerations and structural challenges in these culturally significant areas."
       historicalContext="Camden and Kentish Town feature predominantly Victorian housing stock (1837-1901) with some Georgian elements. These properties often feature solid brick construction, timber floor systems, and require careful consideration when adding modern structural elements or creating open-plan living spaces."
+      canonicalUrl="https://alemara.co.uk/areas/camden-kentish-town"
     />
   );
 };

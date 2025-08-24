@@ -85,6 +85,7 @@ const NewBuilds = () => {
         "Foundation Design",
         "Structural Calculations"
       ]}
+      canonicalUrl="https://alemara.co.uk/services/new-builds"
     />
   );
 };

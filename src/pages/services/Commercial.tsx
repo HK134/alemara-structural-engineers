@@ -5,10 +5,17 @@ import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building, Store, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 const Commercial = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Commercial Structural Engineering Services London | Alemara</title>
+        <meta name="description" content="Comprehensive commercial structural engineering solutions for London. Expert services for office buildings, retail spaces, and commercial developments." />
+        <meta name="keywords" content="commercial structural engineering, office buildings, retail spaces, commercial developments, London structural solutions" />
+        <link rel="canonical" href="https://alemara.co.uk/services/commercial" />
+      </Helmet>
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}

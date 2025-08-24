@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, CheckCircle, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+
 interface AreaTemplateProps {
   areaName: string;
   areaDescription: string;
@@ -13,7 +14,9 @@ interface AreaTemplateProps {
   commonProjects: string[];
   nearbyLandmarks?: string;
   historicalContext?: string;
+  canonicalUrl: string;
 }
+
 const AreaTemplate: React.FC<AreaTemplateProps> = ({
   areaName,
   areaDescription,
@@ -21,13 +24,15 @@ const AreaTemplate: React.FC<AreaTemplateProps> = ({
   specificFeatures,
   commonProjects,
   nearbyLandmarks,
-  historicalContext
+  historicalContext,
+  canonicalUrl
 }) => {
   return <>
       <Helmet>
         <title>Structural Engineers in {areaName} | London Structural Surveys</title>
         <meta name="description" content={metaDescription} />
         <meta name="keywords" content={`structural engineer ${areaName}, structural engineering ${areaName}, structural calculations ${areaName}, building regulations ${areaName}, structural inspections ${areaName}, London`} />
+        <link rel="canonical" href={canonicalUrl} />
       </Helmet>
 
       <Navbar />
