@@ -28,7 +28,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  const POSTS_PER_PAGE = 9;
+  const POSTS_PER_PAGE = 6;
 
   // Load categories on component mount
   useEffect(() => {
