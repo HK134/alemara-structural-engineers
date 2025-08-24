@@ -75,19 +75,19 @@ async function getProjectSlugs() {
 }
 
 async function getBlogPosts() {
-  // Expect a blogs table with slug, updated_at, status
+  // Expect a blogs table with slug, updated_at, published
   const { data, error } = await supabase
     .from('blogs')
-    .select('slug, updated_at, published_at, status')
-    .eq('status', 'published')
-    .order('published_at', { ascending: false });
+    .select('slug, updated_at, date_published, published')
+    .eq('published', true)
+    .order('date_published', { ascending: false });
   if (error) {
     console.warn('Supabase blogs fetch error (will proceed without blogs):', error.message);
     return [];
   }
   return (data || []).map(row => ({
     slug: row.slug,
-    lastmod: iso(row.updated_at || row.published_at || new Date()),
+    lastmod: iso(row.updated_at || row.date_published || new Date()),
   }));
 }
 
