@@ -26,6 +26,7 @@ import KensingtonChelsea from '@/pages/areas/KensingtonChelsea';
 import WestminsterMayfair from '@/pages/areas/WestminsterMayfair';
 import LondonBoroughs from '@/pages/areas/LondonBoroughs';
 import SitemapUpdater from '@/pages/SitemapUpdater';
+import SitemapXML from '@/pages/SitemapXML';
 import ClientOnboarding from '@/pages/ClientOnboarding';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import Terms from '@/pages/Terms';
@@ -140,6 +141,7 @@ function App() {
             
             {/* API Endpoints */}
             <Route path="/sitemap-generator" element={<SitemapUpdater />} />
+            <Route path="/generate-sitemap.xml" element={<SitemapXML />} />
 
             {/* Not Found Route */}
             <Route path="*" element={<NotFound />} />

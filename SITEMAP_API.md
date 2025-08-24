@@ -3,8 +3,13 @@
 ## Overview
 The website now includes a dynamic sitemap generator that can be triggered via a web endpoint. This allows you to update the sitemap without redeploying the entire website.
 
-## API Endpoint
+## API Endpoints
+
+### For Manual Use:
 **URL:** `https://alemara.co.uk/sitemap-generator`
+
+### For N8N/Automation (Raw XML):
+**URL:** `https://alemara.co.uk/generate-sitemap.xml`
 
 ## Usage
 
@@ -31,8 +36,8 @@ Returns JSON with:
 ### Setup Daily Automation:
 1. **HTTP Request Node** in n8n:
    - Method: GET
-   - URL: `https://alemara.co.uk/sitemap-generator?format=json`
-   - Headers: `Accept: application/json`
+   - URL: `https://alemara.co.uk/generate-sitemap.xml`
+   - Headers: `Accept: application/xml`
 
 2. **Schedule Trigger**:
    - Set to run daily at your preferred time
@@ -45,7 +50,7 @@ Returns JSON with:
 
 ### Sample N8N Workflow:
 ```
-[Schedule Trigger] → [HTTP Request (Generate Sitemap)] → [Success Notification]
+[Schedule Trigger] → [HTTP Request (Get XML)] → [Save as sitemap.xml] → [Upload to GitHub] → [Deploy]
 ```
 
 ## What Gets Included
@@ -72,9 +77,24 @@ The generated sitemap includes:
 
 ## Deployment Notes
 
-After deploying this update:
-1. Test the endpoint: `https://alemara.co.uk/sitemap-generator?format=json`
-2. Set up your n8n daily automation
-3. Submit the sitemap URL to Google Search Console: `https://alemara.co.uk/sitemap.xml`
-4. The endpoint will generate fresh sitemaps with current blog posts daily
-5. Use the `sitemap_xml` field from the JSON response to get the generated sitemap content 
+## The Issue with Static Sitemaps
+
+The current sitemap at [https://alemara.co.uk/sitemap.xml](https://alemara.co.uk/sitemap.xml) is a **static file** built during deployment. It won't automatically update when you add new blog posts.
+
+## Solution Options
+
+### Option 1: Manual Update Process
+1. Visit: `https://alemara.co.uk/sitemap-generator`
+2. Download the generated sitemap.xml 
+3. Replace the static file in your project
+4. Redeploy
+
+### Option 2: N8N Automation (Recommended)
+1. **Daily N8N workflow** calls: `https://alemara.co.uk/generate-sitemap.xml`
+2. **Save the response directly** as `sitemap.xml` (it's already pure XML)
+3. **Upload/commit** the updated sitemap.xml to your repository
+4. **Deploy** to replace the static sitemap
+
+### Option 3: Build Process Integration
+- Modify your build process to call the endpoint and update the static sitemap
+- Ensures fresh sitemaps on every deployment 
