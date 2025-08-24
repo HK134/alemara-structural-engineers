@@ -7,7 +7,7 @@ import StickyBookingButton from '@/components/StickyBookingButton';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, Tag, ArrowLeft, ArrowRight, User } from "lucide-react";
-import { fetchBlogPostBySlug, fetchFeaturedBlogPosts, formatBlogDate, getBlogImageUrl, type BlogPost } from '@/utils/blogService';
+import { fetchBlogPostBySlug, fetchFeaturedBlogPosts, formatBlogDate, type BlogPost } from '@/utils/blogService';
 import { useToast } from "@/components/ui/use-toast";
 
 const BlogPostPage = () => {
@@ -94,7 +94,7 @@ const BlogPostPage = () => {
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={pageDescription} />
-        <meta property="og:image" content={getBlogImageUrl(post.image_path) || ''} />
+        <meta property="og:image" content={post.image_url || ''} />
         <meta property="og:url" content={canonicalUrl} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
@@ -102,7 +102,7 @@ const BlogPostPage = () => {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": post.title,
-            "image": getBlogImageUrl(post.image_path) || "",
+            "image": post.image_url || "",
             "author": {
               "@type": "Person",
               "name": post.author
@@ -170,10 +170,10 @@ const BlogPostPage = () => {
               </header>
 
               {/* Featured Image */}
-              {post.image_path && (
+              {post.image_url && (
                 <div className="mb-8">
                   <img 
-                    src={getBlogImageUrl(post.image_path)!} 
+                    src={post.image_url} 
                     alt={post.title}
                     className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
                   />
@@ -239,7 +239,7 @@ const BlogPostPage = () => {
                     <Card key={relatedPost.id} className="hover:shadow-lg transition-shadow duration-300">
                       <div className="h-48 overflow-hidden">
                         <img 
-                          src={getBlogImageUrl(relatedPost.image_path) || '/placeholder.svg'} 
+                          src={relatedPost.image_url || '/placeholder.svg'} 
                           alt={relatedPost.title}
                           className="w-full h-full object-cover"
                         />
