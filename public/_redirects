@@ -1,3 +1,6 @@
+# API redirects for dynamic content
+/generate-sitemap.xml /api/sitemap 200
+
 # Domain redirects - ensure clean canonical URLs
 http://amatrix.co/* https://alemara.co.uk/:splat 301!
 https://amatrix.co/* https://alemara.co.uk/:splat 301!
