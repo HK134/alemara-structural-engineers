@@ -13,6 +13,7 @@ import {
   fetchBlogPosts, 
   fetchBlogCategories, 
   formatBlogDate,
+  getBlogImageUrl,
   type BlogPost,
   type BlogResponse 
 } from '@/utils/blogService';
@@ -177,7 +178,7 @@ const Blog = () => {
                     <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
                       <div className="h-48 overflow-hidden">
                         <img 
-                          src={post.image_url || '/placeholder.svg'} 
+                          src={getBlogImageUrl(post.image_path) || '/placeholder.svg'} 
                           alt={post.title} 
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                         />

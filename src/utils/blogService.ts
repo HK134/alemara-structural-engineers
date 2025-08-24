@@ -7,7 +7,7 @@ export interface BlogPost {
   excerpt: string | null;
   content: string;
   tags: string[];
-  image_url: string | null;
+  image_path: string | null;
   author: string;
   date_published: string;
   updated_at: string;
@@ -188,6 +188,19 @@ export const fetchBlogTags = async (): Promise<string[]> => {
     console.error('Error fetching blog tags:', error);
     return [];
   }
+};
+
+/**
+ * Get public URL for blog image from storage
+ */
+export const getBlogImageUrl = (imagePath: string | null): string | null => {
+  if (!imagePath) return null;
+  
+  const { data } = supabase.storage
+    .from('alemarablogimages')
+    .getPublicUrl(imagePath);
+  
+  return data.publicUrl;
 };
 
 /**
