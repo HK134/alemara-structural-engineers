@@ -1,110 +1,100 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Calendar, ArrowRight, Tag } from "lucide-react";
+import { Search, Calendar, ArrowRight, Tag, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
-
-// Sample blog post data - this will be replaced with actual data later
-const blogPosts = [
-  {
-    id: 1,
-    title: "5 Things to Consider Before Starting a Loft Conversion",
-    excerpt: "Planning a loft conversion? Our structural engineers share the key considerations to ensure success.",
-    content: "Full article content goes here...",
-    date: "June 15, 2023",
-    slug: "/blog/loft-conversion-considerations",
-    category: "Residential",
-    image: "/lovable-uploads/bb746e6a-6105-42d2-81e9-1c0805d61938.png",
-    author: "Sarah Johnson, MEng CEng"
-  },
-  {
-    id: 2,
-    title: "Understanding Building Regulations for House Extensions",
-    excerpt: "Navigate the complexities of building regulations with our expert guide for homeowners.",
-    content: "Full article content goes here...",
-    date: "May 22, 2023",
-    slug: "/blog/building-regulations-for-extensions",
-    category: "Regulations",
-    image: "/lovable-uploads/551ecc30-f655-4a5d-8c6a-775bbc45da9e.png",
-    author: "Michael Patel, BSc CEng MIStructE"
-  },
-  {
-    id: 3,
-    title: "Structural Issues in Period Properties: What to Look For",
-    excerpt: "Own a period property? Learn to identify common structural issues before they become major problems.",
-    content: "Full article content goes here...",
-    date: "April 10, 2023",
-    slug: "/blog/period-property-structural-issues",
-    category: "Historic Buildings",
-    image: "/lovable-uploads/30f1d92e-b72a-4c9c-9edd-e07196399814.png",
-    author: "Emma Roberts, PhD CEng MICE"
-  },
-  {
-    id: 4,
-    title: "Commercial Property Surveys: A Complete Guide",
-    excerpt: "Essential information for business owners and property investors about structural surveys for commercial buildings.",
-    content: "Full article content goes here...",
-    date: "March 5, 2023",
-    slug: "/blog/commercial-property-surveys-guide",
-    category: "Commercial",
-    image: "/lovable-uploads/8f1a8336-2983-4ee5-8e70-4663c95ced97.png",
-    author: "David Wilson, MSc CEng MIStructE"
-  },
-  {
-    id: 5,
-    title: "Subsidence in London Properties: Causes and Solutions",
-    excerpt: "London's clay soil makes subsidence a common issue. Learn about the causes, signs, and effective remediation approaches.",
-    content: "Full article content goes here...",
-    date: "February 18, 2023",
-    slug: "/blog/london-property-subsidence",
-    category: "London Properties",
-    image: "/lovable-uploads/b73082d3-f4cd-498f-93a3-137ac572ed47.png",
-    author: "Thomas Chen, MEng CEng MICE"
-  },
-  {
-    id: 6,
-    title: "How to Choose a Structural Engineer for Your Project",
-    excerpt: "Not all structural engineers are equal. Learn what qualifications and experience to look for when hiring an engineer.",
-    content: "Full article content goes here...",
-    date: "January 7, 2023",
-    slug: "/blog/choosing-structural-engineer",
-    category: "Advice",
-    image: "/lovable-uploads/be2ffdaf-904e-4449-b8bf-ba820e52e28f.png",
-    author: "Olivia Martinez, CEng MIStructE"
-  },
-  {
-    id: 7,
-    title: "Why We Conduct Structural Engineering Site Visits",
-    excerpt: "Understand the crucial importance of professional site visits before starting any structural project in London.",
-    content: "Full article content goes here...",
-    date: "March 28, 2023",
-    slug: "/blog/structural-engineering-site-visits",
-    category: "Professional Practice",
-    image: "/lovable-uploads/57084614-f16d-4202-afe0-c331511bca8c.png",
-    author: "James Thompson, MEng CEng MIStructE"
-  }
-];
-
-// Get unique categories
-const allCategories = ["All", ...new Set(blogPosts.map(post => post.category))];
+import { 
+  fetchBlogPosts, 
+  fetchBlogCategories, 
+  formatBlogDate,
+  type BlogPost,
+  type BlogResponse 
+} from '@/utils/blogService';
+import { useToast } from "@/components/ui/use-toast";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  
-  // Filter blog posts based on search term and category
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [blogData, setBlogData] = useState<BlogResponse | null>(null);
+  const [categories, setCategories] = useState<string[]>(['All']);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  const POSTS_PER_PAGE = 9;
+
+  // Load categories on component mount
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const fetchedCategories = await fetchBlogCategories();
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.error('Error loading categories:', error);
+      }
+    };
+    loadCategories();
+  }, []);
+
+  // Load blog posts when filters or pagination change
+  useEffect(() => {
+    const loadBlogPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchBlogPosts(
+          {
+            category: selectedCategory,
+            search: searchTerm || undefined
+          },
+          {
+            page: currentPage,
+            limit: POSTS_PER_PAGE
+          }
+        );
+        setBlogData(response);
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+        toast({
+          title: "Error loading blog posts",
+          description: "Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlogPosts();
+  }, [searchTerm, selectedCategory, currentPage, toast]);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory]);
+
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('All');
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -132,7 +122,7 @@ const Blog = () => {
                   placeholder="Search articles..."
                   className="pl-10 bg-white/10 border-gray-700 text-white placeholder:text-gray-400"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => handleSearch(e.target.value)}
                 />
               </div>
             </div>
@@ -143,14 +133,14 @@ const Blog = () => {
         <section className="py-8 border-b border-gray-200">
           <div className="container mx-auto px-4">
             <div className="flex items-center gap-2 overflow-x-auto pb-2">
-              {allCategories.map((category) => (
+              {categories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? "default" : "outline"}
                   className={selectedCategory === category 
                     ? "bg-[#ea384c] hover:bg-[#ea384c]/90" 
                     : "border-gray-300 text-gray-700"}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => handleCategoryChange(category)}
                 >
                   {category}
                 </Button>
@@ -162,14 +152,32 @@ const Blog = () => {
         {/* Blog posts grid */}
         <section className="py-12">
           <div className="container mx-auto px-4">
-            {filteredPosts.length > 0 ? (
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <Card key={index} className="flex flex-col h-full">
+                    <div className="h-48 bg-gray-200 animate-pulse" />
+                    <CardHeader>
+                      <div className="h-4 bg-gray-200 animate-pulse rounded mb-2" />
+                      <div className="h-6 bg-gray-200 animate-pulse rounded" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        <div className="h-4 bg-gray-200 animate-pulse rounded" />
+                        <div className="h-4 bg-gray-200 animate-pulse rounded w-3/4" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : blogData && blogData.data.length > 0 ? (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredPosts.map((post) => (
+                  {blogData.data.map((post) => (
                     <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
                       <div className="h-48 overflow-hidden">
                         <img 
-                          src={post.image} 
+                          src={post.image_url || '/placeholder.svg'} 
                           alt={post.title} 
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                         />
@@ -181,23 +189,69 @@ const Blog = () => {
                         </div>
                         <CardTitle className="text-xl">{post.title}</CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="flex-grow">
                         <p className="text-gray-600">{post.excerpt}</p>
                       </CardContent>
-                      <CardFooter className="pt-0 mt-auto flex justify-between items-center">
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <Calendar className="h-4 w-4" />
-                          <span>{post.date}</span>
+                      <CardFooter className="pt-0 mt-auto">
+                        <div className="w-full flex flex-col gap-3">
+                          <div className="flex items-center justify-between text-sm text-gray-500">
+                            <div className="flex items-center gap-2">
+                              <Calendar className="h-4 w-4" />
+                              <span>{formatBlogDate(post.date_published)}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-4 w-4" />
+                              <span>{post.read_time} min read</span>
+                            </div>
+                          </div>
+                          <Link to={`/blog/${post.slug}`} className="w-full">
+                            <Button variant="outline" className="w-full text-[#ea384c] border-[#ea384c] hover:bg-[#ea384c] hover:text-white">
+                              Read Full Article <ArrowRight className="h-4 w-4 ml-1" />
+                            </Button>
+                          </Link>
                         </div>
-                        <Link to={post.slug}>
-                          <Button variant="link" className="text-[#ea384c]">
-                            Read Full Article <ArrowRight className="h-4 w-4 ml-1" />
-                          </Button>
-                        </Link>
                       </CardFooter>
                     </Card>
                   ))}
                 </div>
+                
+                {/* Pagination */}
+                {blogData.totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-12">
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="flex items-center gap-2"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                      Previous
+                    </Button>
+                    
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: blogData.totalPages }, (_, i) => i + 1).map((page) => (
+                        <Button
+                          key={page}
+                          variant={currentPage === page ? "default" : "outline"}
+                          onClick={() => handlePageChange(page)}
+                          className={currentPage === page ? "bg-[#ea384c] hover:bg-[#ea384c]/90" : ""}
+                        >
+                          {page}
+                        </Button>
+                      ))}
+                    </div>
+                    
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === blogData.totalPages}
+                      className="flex items-center gap-2"
+                    >
+                      Next
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
               </>
             ) : (
               <div className="text-center py-12">
@@ -206,10 +260,7 @@ const Blog = () => {
                 <Button 
                   variant="outline" 
                   className="mt-4"
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedCategory('All');
-                  }}
+                  onClick={clearFilters}
                 >
                   Clear filters
                 </Button>

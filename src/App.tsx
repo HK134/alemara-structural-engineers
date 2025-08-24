@@ -7,6 +7,7 @@ import Portfolio from '@/pages/Portfolio';
 import ProjectDetail from '@/pages/ProjectDetail';
 import FAQPage from '@/pages/FAQPage';
 import Blog from '@/pages/Blog';
+import BlogPostPage from '@/pages/BlogPost';
 import Contact from '@/pages/Contact';
 import SiteVisits from '@/pages/BlogPost/SiteVisits';
 import Residential from '@/pages/services/Residential';
@@ -83,6 +84,7 @@ function App() {
             <Route path="/project/:id" element={<ProjectDetail />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/blog/importance-of-site-visits" element={<SiteVisits />} />
             <Route path="/contact" element={<Contact />} />
 

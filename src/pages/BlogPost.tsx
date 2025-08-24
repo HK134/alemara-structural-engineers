@@ -1,205 +1,293 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StickyBookingButton from '@/components/StickyBookingButton';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft, Calendar, User, Tag, ArrowRight } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Calendar, Clock, Tag, ArrowLeft, ArrowRight, User } from "lucide-react";
+import { fetchBlogPostBySlug, fetchFeaturedBlogPosts, formatBlogDate, type BlogPost } from '@/utils/blogService';
+import { useToast } from "@/components/ui/use-toast";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "5 Things to Consider Before Starting a Loft Conversion",
-    excerpt: "Planning a loft conversion? Our structural engineers share the key considerations to ensure success.",
-    content: `<p>Converting your loft into a living space can add significant value to your home, but there are several important structural considerations to address before you begin. This guide explores the essential factors to evaluate before starting your loft conversion project.</p>
-    
-    <h2>1. Structural Assessment</h2>
-    <p>Before any work begins, a thorough structural assessment is essential. This includes evaluating:</p>
-    <ul>
-      <li>Existing roof structure and whether it needs reinforcement</li>
-      <li>Load-bearing capabilities of the floor beneath</li>
-      <li>Wall strength and stability</li>
-      <li>Foundation adequacy for the additional weight</li>
-    </ul>
-    
-    <h2>2. Headroom Requirements</h2>
-    <p>For a loft to be habitable, you need adequate headroom. Building regulations typically require a minimum height of 2.2m over at least half the floor area. If your existing loft doesn't meet these requirements, you may need to consider:</p>
-    <ul>
-      <li>Raising the roof (which requires planning permission)</li>
-      <li>Lowering the ceiling of the floor below (more complex and disruptive)</li>
-    </ul>
-    
-    <h2>3. Access Considerations</h2>
-    <p>How will people access the new space? You'll need a permanent staircase that complies with building regulations. Consider:</p>
-    <ul>
-      <li>Space required for a staircase (approximately 1.8m x 0.8m footprint)</li>
-      <li>Impact on the room below</li>
-      <li>Building regulations regarding rise, going, and headroom</li>
-    </ul>
-    
-    <h2>4. Building Regulations and Planning Permission</h2>
-    <p>Most loft conversions are covered under permitted development rights, but you'll still need:</p>
-    <ul>
-      <li>Building regulations approval for structural changes, fire safety, thermal efficiency, etc.</li>
-      <li>Planning permission if you're extending beyond the existing roof space</li>
-      <li>Party wall agreements if you share walls with neighbors</li>
-    </ul>
-    
-    <h2>5. Budgetary Considerations</h2>
-    <p>Finally, be realistic about costs. A typical loft conversion can cost between £30,000 and £50,000 depending on the complexity. Allow for:</p>
-    <ul>
-      <li>Structural engineering fees</li>
-      <li>Building control fees</li>
-      <li>Construction costs</li>
-      <li>A contingency of at least 10% for unexpected issues</li>
-    </ul>
-    
-    <p>By considering these five crucial factors before beginning your loft conversion project, you can ensure a smoother process with fewer surprises along the way. Our structural engineers can help assess your property and provide detailed recommendations tailored to your specific circumstances.</p>`,
-    date: "June 15, 2023",
-    slug: "loft-conversion-considerations",
-    category: "Residential",
-    image: "/lovable-uploads/bb746e6a-6105-42d2-81e9-1c0805d61938.png",
-    author: "Sarah Johnson, MEng CEng",
-    relatedPosts: [2, 3]
-  },
-  {
-    id: 2,
-    title: "Understanding Building Regulations for House Extensions",
-    excerpt: "Navigate the complexities of building regulations with our expert guide for homeowners.",
-    content: "Full article content goes here...",
-    date: "May 22, 2023",
-    slug: "building-regulations-for-extensions",
-    category: "Regulations",
-    image: "/lovable-uploads/551ecc30-f655-4a5d-8c6a-775bbc45da9e.png",
-    author: "Michael Patel, BSc CEng MIStructE",
-    relatedPosts: [1, 5]
-  },
-];
+const BlogPostPage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const { toast } = useToast();
 
-const BlogPost = () => {
-  const { slug } = useParams();
-  
-  const currentPost = blogPosts.find(post => post.slug === slug);
-  
-  const relatedPosts = currentPost?.relatedPosts
-    ? blogPosts.filter(post => currentPost.relatedPosts?.includes(post.id))
-    : [];
-  
-  if (!currentPost) {
+  useEffect(() => {
+    if (!slug) return;
+
+    const loadPost = async () => {
+      setLoading(true);
+      try {
+        const blogPost = await fetchBlogPostBySlug(slug);
+        if (blogPost) {
+          setPost(blogPost);
+          // Load related posts (featured posts as fallback)
+          const related = await fetchFeaturedBlogPosts(3);
+          // Filter out current post from related posts
+          setRelatedPosts(related.filter(p => p.id !== blogPost.id).slice(0, 2));
+        } else {
+          setNotFound(true);
+        }
+      } catch (error) {
+        console.error('Error loading blog post:', error);
+        toast({
+          title: "Error loading blog post",
+          description: "Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPost();
+  }, [slug, toast]);
+
+  if (notFound) {
+    return <Navigate to="/404" replace />;
+  }
+
+  if (loading) {
     return (
-      <>
+      <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="min-h-screen bg-gray-50 py-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-gray-800 mb-4">Article Not Found</h1>
-              <p className="text-gray-600 mb-8">The article you're looking for doesn't exist or has been moved.</p>
-              <Link to="/blog">
-                <Button className="bg-[#ea384c] hover:bg-[#ea384c]/90">
-                  Back to Blog
-                </Button>
-              </Link>
+        <main className="flex-grow">
+          <div className="container mx-auto px-4 py-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="animate-pulse">
+                <div className="h-8 bg-gray-200 rounded mb-4 w-3/4" />
+                <div className="h-4 bg-gray-200 rounded mb-8 w-1/2" />
+                <div className="h-64 bg-gray-200 rounded mb-8" />
+                <div className="space-y-4">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <div key={i} className="h-4 bg-gray-200 rounded w-full" />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
+  if (!post) {
+    return <Navigate to="/404" replace />;
+  }
+
+  const pageTitle = `${post.title} | Alemara Structural Engineers Blog`;
+  const pageDescription = post.meta_description || post.excerpt || post.title;
+  const canonicalUrl = `https://alemara.co.uk/blog/${post.slug}`;
+
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={post.image_url || ''} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "image": post.image_url || "",
+            "author": {
+              "@type": "Person",
+              "name": post.author
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Alemara Structural Engineers"
+            },
+            "datePublished": post.date_published,
+            "dateModified": post.updated_at,
+            "description": pageDescription
+          })}
+        </script>
+      </Helmet>
+      
       <Navbar />
       <main className="flex-grow">
-        {/* Hero section with blog image */}
-        <div className="w-full h-64 md:h-96 relative">
-          <img 
-            src={currentPost.image} 
-            alt={currentPost.title} 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
+        {/* Breadcrumb */}
+        <div className="bg-gray-50 py-4">
+          <div className="container mx-auto px-4">
+            <nav className="flex items-center gap-2 text-sm text-gray-600">
+              <Link to="/" className="hover:text-[#ea384c]">Home</Link>
+              <span>/</span>
+              <Link to="/blog" className="hover:text-[#ea384c]">Blog</Link>
+              <span>/</span>
+              <span className="text-gray-900">{post.title}</span>
+            </nav>
+          </div>
         </div>
-        
-        {/* Blog content */}
-        <div className="container mx-auto px-4 py-12">
-          <div className="max-w-3xl mx-auto">
-            {/* Back to blog link */}
-            <Link to="/blog" className="inline-flex items-center text-[#ea384c] mb-6 hover:text-[#ea384c]/80">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to all articles
-            </Link>
-            
-            {/* Blog meta info */}
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <Tag className="h-4 w-4 text-[#ea384c]" />
-                <span className="text-[#ea384c] text-sm">{currentPost.category}</span>
+
+        {/* Article Header */}
+        <article className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <header className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <Tag className="h-4 w-4 text-[#ea384c]" />
+                  <span className="text-[#ea384c] text-sm font-medium">{post.category}</span>
+                </div>
+                
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A1F2C] mb-6">
+                  {post.title}
+                </h1>
+
+                <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-6">
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{post.author}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>{formatBlogDate(post.date_published)}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{post.read_time} min read</span>
+                  </div>
+                </div>
+
+                {post.excerpt && (
+                  <p className="text-xl text-gray-700 leading-relaxed mb-8">
+                    {post.excerpt}
+                  </p>
+                )}
+              </header>
+
+              {/* Featured Image */}
+              {post.image_url && (
+                <div className="mb-8">
+                  <img 
+                    src={post.image_url} 
+                    alt={post.title}
+                    className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+                  />
+                </div>
+              )}
+
+              {/* Article Content */}
+              <div className="prose prose-lg max-w-none prose-headings:text-[#1A1F2C] prose-a:text-[#ea384c] prose-a:no-underline hover:prose-a:underline">
+                {post.content.split('\n').map((paragraph, index) => {
+                  if (paragraph.startsWith('## ')) {
+                    return <h2 key={index} className="text-2xl font-bold text-[#1A1F2C] mt-8 mb-4">{paragraph.replace('## ', '')}</h2>;
+                  } else if (paragraph.startsWith('### ')) {
+                    return <h3 key={index} className="text-xl font-semibold text-[#1A1F2C] mt-6 mb-3">{paragraph.replace('### ', '')}</h3>;
+                  } else if (paragraph.startsWith('- ')) {
+                    return <li key={index} className="ml-4">{paragraph.replace('- ', '')}</li>;
+                  } else if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
+                    return <p key={index} className="font-semibold mb-4">{paragraph.replace(/\*\*/g, '')}</p>;
+                  } else if (paragraph.trim() === '') {
+                    return <br key={index} />;
+                  } else {
+                    return <p key={index} className="mb-4 leading-relaxed">{paragraph}</p>;
+                  }
+                })}
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{currentPost.title}</h1>
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2">
-                  <User className="h-4 w-4 text-gray-500" />
-                  <span className="text-gray-500 text-sm">{currentPost.author}</span>
+
+              {/* Tags */}
+              {post.tags && post.tags.length > 0 && (
+                <div className="mt-12 pt-8 border-t border-gray-200">
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.map((tag, index) => (
+                      <span 
+                        key={index}
+                        className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-gray-500" />
-                  <span className="text-gray-500 text-sm">{currentPost.date}</span>
-                </div>
+              )}
+
+              {/* Navigation */}
+              <div className="mt-12 pt-8 border-t border-gray-200">
+                <Link to="/blog">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <ArrowLeft className="h-4 w-4" />
+                    Back to Blog
+                  </Button>
+                </Link>
               </div>
             </div>
-            
-            {/* Blog content */}
-            <div 
-              className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: currentPost.content }}
-            />
-            
-            {/* Author bio */}
-            <div className="mt-12 p-6 bg-gray-100 rounded-lg">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">About the Author</h3>
-              <p className="text-gray-600">
-                {currentPost.author} is a chartered structural engineer with extensive experience in residential and commercial projects across London.
-              </p>
-            </div>
-            
-            {/* Related articles */}
-            {relatedPosts.length > 0 && (
-              <div className="mt-16">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Related Articles</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {relatedPosts.map((post) => (
-                    <Card key={post.id} className="hover:shadow-md transition-shadow duration-300">
-                      <div className="h-40 overflow-hidden">
+          </div>
+        </article>
+
+        {/* Related Posts */}
+        {relatedPosts.length > 0 && (
+          <section className="py-12 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold text-[#1A1F2C] mb-8">Related Articles</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {relatedPosts.map((relatedPost) => (
+                    <Card key={relatedPost.id} className="hover:shadow-lg transition-shadow duration-300">
+                      <div className="h-48 overflow-hidden">
                         <img 
-                          src={post.image} 
-                          alt={post.title} 
+                          src={relatedPost.image_url || '/placeholder.svg'} 
+                          alt={relatedPost.title}
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <CardHeader>
-                        <CardTitle className="text-lg">{post.title}</CardTitle>
-                      </CardHeader>
-                      <CardFooter className="flex justify-between items-center">
-                        <div className="text-sm text-gray-500">{post.date}</div>
-                        <Link to={`/blog/${post.slug}`}>
-                          <Button variant="link" className="text-[#ea384c]">
-                            Read more <ArrowRight className="h-4 w-4 ml-1" />
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Tag className="h-4 w-4 text-[#ea384c]" />
+                          <span className="text-[#ea384c] text-sm">{relatedPost.category}</span>
+                        </div>
+                        <h3 className="text-xl font-semibold mb-2">{relatedPost.title}</h3>
+                        <p className="text-gray-600 mb-4">{relatedPost.excerpt}</p>
+                        <Link to={`/blog/${relatedPost.slug}`}>
+                          <Button variant="link" className="text-[#ea384c] p-0">
+                            Read More <ArrowRight className="h-4 w-4 ml-1" />
                           </Button>
                         </Link>
-                      </CardFooter>
+                      </CardContent>
                     </Card>
                   ))}
                 </div>
               </div>
-            )}
+            </div>
+          </section>
+        )}
+
+        {/* Call to Action */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto bg-[#1A1F2C] rounded-lg p-8 text-center text-white">
+              <h2 className="text-2xl font-bold mb-4">Need Structural Engineering Services?</h2>
+              <p className="text-gray-300 mb-6">
+                Our team of chartered structural engineers is ready to help with your project. 
+                From initial consultation to detailed design, we provide comprehensive structural engineering services across London.
+              </p>
+              <Link to="/contact">
+                <Button className="bg-[#ea384c] hover:bg-[#ea384c]/90">
+                  Get in Touch
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
+        </section>
       </main>
+      
       <Footer />
       <StickyBookingButton />
     </div>
   );
 };
 
-export default BlogPost;
+export default BlogPostPage;
