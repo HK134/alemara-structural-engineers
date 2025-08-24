@@ -14,7 +14,7 @@ const createProjectSlug = (title: string): string => {
     .replace(/^-+|-+$/g, '');
 };
 
-const SitemapGenerator = () => {
+const SitemapUpdater = () => {
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -110,15 +110,13 @@ ${urls.join('\n')}
 
         setResult(response);
 
-        // If this is an API request (check user agent or referrer), return JSON
-        const isApiRequest = window.location.search.includes('api=true') || 
-                           document.referrer.includes('n8n') ||
-                           navigator.userAgent.toLowerCase().includes('bot') ||
-                           window.location.search.includes('format=json');
+        // Check if JSON format is requested
+        const urlParams = new URLSearchParams(window.location.search);
+        const isJsonFormat = urlParams.get('format') === 'json';
 
-        if (isApiRequest) {
-          // Replace the entire page content with JSON
-          document.body.innerHTML = `<pre style="font-family: monospace; white-space: pre-wrap; margin: 20px;">${JSON.stringify(response, null, 2)}</pre>`;
+        if (isJsonFormat) {
+          // Replace the entire page content with JSON for API calls
+          document.body.innerHTML = `<pre style="font-family: monospace; white-space: pre-wrap; margin: 20px; font-size: 14px;">${JSON.stringify(response, null, 2)}</pre>`;
           document.title = 'Sitemap API Response';
         }
 
@@ -132,13 +130,12 @@ ${urls.join('\n')}
         
         setResult(errorResponse);
 
-        const isApiRequest = window.location.search.includes('api=true') || 
-                           document.referrer.includes('n8n') ||
-                           navigator.userAgent.toLowerCase().includes('bot') ||
-                           window.location.search.includes('format=json');
+        const urlParams = new URLSearchParams(window.location.search);
+        const isJsonFormat = urlParams.get('format') === 'json';
 
-        if (isApiRequest) {
-          document.body.innerHTML = `<pre style="font-family: monospace; white-space: pre-wrap; margin: 20px;">${JSON.stringify(errorResponse, null, 2)}</pre>`;
+        if (isJsonFormat) {
+          document.body.innerHTML = `<pre style="font-family: monospace; white-space: pre-wrap; margin: 20px; font-size: 14px;">${JSON.stringify(errorResponse, null, 2)}</pre>`;
+          document.title = 'Sitemap API Error';
         }
       } finally {
         setLoading(false);
@@ -152,18 +149,18 @@ ${urls.join('\n')}
     return (
       <div style={{ 
         fontFamily: 'Arial, sans-serif', 
-        maxWidth: '800px', 
+        maxWidth: '900px', 
         margin: '50px auto', 
         padding: '20px' 
       }}>
-        <h1>Sitemap Generator</h1>
+        <h1>🔄 Sitemap Generator</h1>
         <div style={{ 
           padding: '15px', 
           backgroundColor: '#fff3cd', 
           border: '1px solid #ffeaa7', 
           borderRadius: '4px' 
         }}>
-          <strong>Status:</strong> Generating sitemap...
+          <strong>Status:</strong> Generating sitemap with live blog data...
         </div>
       </div>
     );
@@ -173,11 +170,11 @@ ${urls.join('\n')}
     return (
       <div style={{ 
         fontFamily: 'Arial, sans-serif', 
-        maxWidth: '800px', 
+        maxWidth: '900px', 
         margin: '50px auto', 
         padding: '20px' 
       }}>
-        <h1>Sitemap Generator</h1>
+        <h1>❌ Sitemap Generator</h1>
         <div style={{ 
           padding: '15px', 
           backgroundColor: '#f8d7da', 
@@ -208,20 +205,20 @@ ${urls.join('\n')}
     if (!result?.sitemap_xml) return;
     
     navigator.clipboard.writeText(result.sitemap_xml).then(() => {
-      alert('Sitemap XML copied to clipboard!');
+      alert('✅ Sitemap XML copied to clipboard!\n\nNext steps:\n1. Save this as sitemap.xml\n2. Upload to replace the current sitemap.xml file\n3. Or use in your deployment process');
     });
   };
 
   return (
     <div style={{ 
       fontFamily: 'Arial, sans-serif', 
-      maxWidth: '800px', 
+      maxWidth: '900px', 
       margin: '50px auto', 
       padding: '20px',
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#f8f9fa',
       borderRadius: '8px'
     }}>
-      <h1>Dynamic Sitemap Generator</h1>
+      <h1>🗺️ Dynamic Sitemap Generator</h1>
       
       <div style={{ 
         padding: '15px', 
@@ -231,70 +228,110 @@ ${urls.join('\n')}
         borderRadius: '4px'
       }}>
         <strong>Status:</strong> {result.status}<br/>
-        <strong>Message:</strong> {result.message}
+        <strong>Message:</strong> {result.message}<br/>
+        <strong>Generated:</strong> {new Date(result.timestamp).toLocaleString()}
       </div>
 
       {result.status === 'success' && (
-        <div>
-          <h3>Generated Sitemap Preview (first 1000 chars):</h3>
-          <pre style={{ 
-            backgroundColor: '#f8f9fa', 
+        <>
+          <div style={{ 
             padding: '15px', 
-            borderRadius: '4px',
-            overflow: 'auto',
-            fontSize: '12px'
+            marginBottom: '20px',
+            backgroundColor: '#fff3cd',
+            border: '1px solid #ffeaa7',
+            borderRadius: '4px'
           }}>
-            {result.sitemap_xml?.substring(0, 1000)}...
-          </pre>
-          
-          <div style={{ marginTop: '20px' }}>
-            <button 
-              onClick={downloadSitemap}
-              style={{ 
-                background: '#007bff', 
-                color: 'white', 
-                padding: '10px 20px', 
-                border: 'none', 
-                borderRadius: '4px', 
-                cursor: 'pointer', 
-                margin: '5px' 
-              }}
-            >
-              Download Sitemap
-            </button>
-            <button 
-              onClick={copyToClipboard}
-              style={{ 
-                background: '#28a745', 
-                color: 'white', 
-                padding: '10px 20px', 
-                border: 'none', 
-                borderRadius: '4px', 
-                cursor: 'pointer', 
-                margin: '5px' 
-              }}
-            >
-              Copy XML
-            </button>
+            <h3>⚠️ Important Notice</h3>
+            <p>The current sitemap at <a href="https://alemara.co.uk/sitemap.xml" target="_blank">https://alemara.co.uk/sitemap.xml</a> is a static file.</p>
+            <p><strong>To update it:</strong></p>
+            <ol>
+              <li>Download or copy the generated sitemap below</li>
+              <li>Replace the static <code>public/sitemap.xml</code> file in your project</li>
+              <li>Redeploy your site, OR</li>
+              <li>Use this endpoint in your build process to generate fresh sitemaps</li>
+            </ol>
           </div>
-        </div>
+
+          <div>
+            <h3>📄 Generated Sitemap Preview (first 1000 chars):</h3>
+            <pre style={{ 
+              backgroundColor: '#f8f9fa', 
+              padding: '15px', 
+              borderRadius: '4px',
+              overflow: 'auto',
+              fontSize: '12px',
+              border: '1px solid #dee2e6'
+            }}>
+              {result.sitemap_xml?.substring(0, 1000)}...
+            </pre>
+            
+            <div style={{ marginTop: '20px' }}>
+              <button 
+                onClick={downloadSitemap}
+                style={{ 
+                  background: '#007bff', 
+                  color: 'white', 
+                  padding: '12px 24px', 
+                  border: 'none', 
+                  borderRadius: '4px', 
+                  cursor: 'pointer', 
+                  margin: '5px',
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                }}
+              >
+                📥 Download sitemap.xml
+              </button>
+              <button 
+                onClick={copyToClipboard}
+                style={{ 
+                  background: '#28a745', 
+                  color: 'white', 
+                  padding: '12px 24px', 
+                  border: 'none', 
+                  borderRadius: '4px', 
+                  cursor: 'pointer', 
+                  margin: '5px',
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                }}
+              >
+                📋 Copy XML to Clipboard
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
-      <div style={{ marginTop: '30px', fontSize: '14px', color: '#666' }}>
-        <h3>API Usage:</h3>
-        <p><strong>For JSON response:</strong> Add <code>?format=json</code> or <code>?api=true</code> to the URL</p>
-        <p><strong>Current URL:</strong> <code>{window.location.href}</code></p>
-        <p><strong>JSON API URL:</strong> <code>{window.location.href}?format=json</code></p>
+      <div style={{ marginTop: '30px', fontSize: '14px', color: '#666', backgroundColor: 'white', padding: '20px', borderRadius: '4px' }}>
+        <h3>🤖 API Usage for N8N:</h3>
+        <div style={{ backgroundColor: '#f8f9fa', padding: '10px', borderRadius: '4px', marginBottom: '15px' }}>
+          <strong>Endpoint:</strong> <code>{window.location.href}?format=json</code>
+        </div>
         
-        <h4>N8N Integration:</h4>
+        <h4>N8N Setup:</h4>
+        <ol>
+          <li><strong>HTTP Request Node:</strong>
+            <ul>
+              <li>Method: GET</li>
+              <li>URL: <code>{window.location.href}?format=json</code></li>
+            </ul>
+          </li>
+          <li><strong>Extract sitemap_xml field</strong> from the JSON response</li>
+          <li><strong>Use the XML content</strong> to update your static sitemap file</li>
+        </ol>
+
+        <h4>Response includes:</h4>
         <ul>
-          <li>Method: GET</li>
-          <li>URL: {window.location.href}?format=json</li>
-          <li>Expected response: JSON with status, message, timestamp, sitemap_xml</li>
+          <li><code>status</code> - success/error</li>
+          <li><code>message</code> - human readable status</li>
+          <li><code>sitemap_xml</code> - the complete XML sitemap content</li>
+          <li><code>urls_count</code> - total URLs in sitemap</li>
+          <li><code>blog_posts_count</code> - number of blog posts included</li>
         </ul>
       </div>
     </div>
   );
 };
 
-export default SitemapGenerator; 
+export default SitemapUpdater; 

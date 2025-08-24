@@ -25,7 +25,7 @@ import HackneyShoreditch from '@/pages/areas/HackneyShoreditch';
 import KensingtonChelsea from '@/pages/areas/KensingtonChelsea';
 import WestminsterMayfair from '@/pages/areas/WestminsterMayfair';
 import LondonBoroughs from '@/pages/areas/LondonBoroughs';
-import SitemapGenerator from '@/pages/SitemapGenerator';
+import SitemapUpdater from '@/pages/SitemapUpdater';
 import ClientOnboarding from '@/pages/ClientOnboarding';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import Terms from '@/pages/Terms';
@@ -139,7 +139,7 @@ function App() {
             <Route path="/client" element={<ProtectedRoute allowedRoles={['client']}><ClientDashboard /></ProtectedRoute>} />
             
             {/* API Endpoints */}
-            <Route path="/sitemap-generator" element={<SitemapGenerator />} />
+            <Route path="/sitemap-generator" element={<SitemapUpdater />} />
 
             {/* Not Found Route */}
             <Route path="*" element={<NotFound />} />
