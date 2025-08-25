@@ -10,6 +10,94 @@ import { Calendar, Clock, Tag, ArrowLeft, ArrowRight, User } from "lucide-react"
 import { fetchBlogPostBySlug, fetchFeaturedBlogPosts, formatBlogDate, getBlogImageUrl, type BlogPost } from '@/utils/blogService';
 import { useToast } from "@/components/ui/use-toast";
 
+// Helper function to parse text with links
+const parseTextWithLinks = (text: string): React.ReactNode => {
+  if (!text) return text;
+  
+  // Handle markdown-style links [text](url)
+  const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  // Handle HTML-style links <a href="url">text</a>
+  const htmlLinkRegex = /<a\s+href="([^"]+)"[^>]*>([^<]+)<\/a>/g;
+  
+  let parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  
+  // First, handle markdown links
+  let markdownMatch;
+  const markdownMatches: Array<{ start: number; end: number; text: string; url: string }> = [];
+  
+  while ((markdownMatch = markdownLinkRegex.exec(text)) !== null) {
+    markdownMatches.push({
+      start: markdownMatch.index,
+      end: markdownMatch.index + markdownMatch[0].length,
+      text: markdownMatch[1],
+      url: markdownMatch[2]
+    });
+  }
+  
+  // Then handle HTML links
+  let htmlMatch;
+  const htmlMatches: Array<{ start: number; end: number; text: string; url: string }> = [];
+  
+  while ((htmlMatch = htmlLinkRegex.exec(text)) !== null) {
+    htmlMatches.push({
+      start: htmlMatch.index,
+      end: htmlMatch.index + htmlMatch[0].length,
+      text: htmlMatch[2],
+      url: htmlMatch[1]
+    });
+  }
+  
+  // Combine and sort all matches by position
+  const allMatches = [...markdownMatches, ...htmlMatches].sort((a, b) => a.start - b.start);
+  
+  if (allMatches.length === 0) {
+    return text;
+  }
+  
+  allMatches.forEach((match, index) => {
+    // Add text before the link
+    if (match.start > lastIndex) {
+      parts.push(text.slice(lastIndex, match.start));
+    }
+    
+    // Add the link
+    const isExternalLink = match.url.startsWith('http') || match.url.startsWith('https');
+    const isBlogLink = match.url.startsWith('/blog/') || match.url.includes('/blog/');
+    
+    if (isBlogLink && !isExternalLink) {
+      // Internal blog link - use React Router Link
+      parts.push(
+        <Link key={`link-${index}`} to={match.url} className="text-[#ea384c] hover:underline">
+          {match.text}
+        </Link>
+      );
+    } else {
+      // External link or other internal links
+      parts.push(
+        <a 
+          key={`link-${index}`} 
+          href={match.url} 
+          className="text-[#ea384c] hover:underline"
+          target={isExternalLink ? "_blank" : "_self"}
+          rel={isExternalLink ? "noopener noreferrer" : undefined}
+        >
+          {match.text}
+        </a>
+      );
+    }
+    
+    lastIndex = match.end;
+  });
+  
+  // Add remaining text after the last link
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  
+  return <>{parts}</>;
+};
+
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
@@ -184,17 +272,17 @@ const BlogPostPage = () => {
               <div className="prose prose-lg max-w-none prose-headings:text-[#1A1F2C] prose-a:text-[#ea384c] prose-a:no-underline hover:prose-a:underline">
                 {post.content.split('\n').map((paragraph, index) => {
                   if (paragraph.startsWith('## ')) {
-                    return <h2 key={index} className="text-2xl font-bold text-[#1A1F2C] mt-8 mb-4">{paragraph.replace('## ', '')}</h2>;
+                    return <h2 key={index} className="text-2xl font-bold text-[#1A1F2C] mt-8 mb-4">{parseTextWithLinks(paragraph.replace('## ', ''))}</h2>;
                   } else if (paragraph.startsWith('### ')) {
-                    return <h3 key={index} className="text-xl font-semibold text-[#1A1F2C] mt-6 mb-3">{paragraph.replace('### ', '')}</h3>;
+                    return <h3 key={index} className="text-xl font-semibold text-[#1A1F2C] mt-6 mb-3">{parseTextWithLinks(paragraph.replace('### ', ''))}</h3>;
                   } else if (paragraph.startsWith('- ')) {
-                    return <li key={index} className="ml-4">{paragraph.replace('- ', '')}</li>;
+                    return <li key={index} className="ml-4">{parseTextWithLinks(paragraph.replace('- ', ''))}</li>;
                   } else if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-                    return <p key={index} className="font-semibold mb-4">{paragraph.replace(/\*\*/g, '')}</p>;
+                    return <p key={index} className="font-semibold mb-4">{parseTextWithLinks(paragraph.replace(/\*\*/g, ''))}</p>;
                   } else if (paragraph.trim() === '') {
                     return <br key={index} />;
                   } else {
-                    return <p key={index} className="mb-4 leading-relaxed">{paragraph}</p>;
+                    return <p key={index} className="mb-4 leading-relaxed">{parseTextWithLinks(paragraph)}</p>;
                   }
                 })}
               </div>
