@@ -50,7 +50,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import './App.css';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import AdminLayout from '@/components/AdminLayout';
 import EngineerLayout from '@/components/EngineerLayout';

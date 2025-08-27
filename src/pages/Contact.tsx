@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TypeformSideButton from '@/components/TypeformSideButton';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 const Contact = () => {

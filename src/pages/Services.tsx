@@ -11,7 +11,7 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import CommonQuestions from '@/components/CommonQuestions';
 import Footer from '@/components/Footer';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import BespokeDesignServices from '@/components/services/BespokeDesignServices';
 import StructuralSurveyServices from '@/components/services/StructuralSurveyServices';

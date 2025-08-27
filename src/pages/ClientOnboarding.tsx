@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2, CheckCircle } from 'lucide-react';
 import { toast } from "sonner";
 import { saveFormSubmissionToDatabase } from '@/utils/db/submissions';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const serviceOptions = [
   { value: "structural-design", label: "Structural Design & Calculations" },

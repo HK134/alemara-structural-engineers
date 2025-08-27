@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactDialog from '@/components/ContactDialog';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import StickyBookingButton from '@/components/StickyBookingButton';
 import { Badge } from "@/components/ui/badge";
 

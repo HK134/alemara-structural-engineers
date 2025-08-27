@@ -12,7 +12,7 @@ import ServiceCTA from '@/components/services/ServiceCTA';
 import ProjectInfo from '@/components/project/ProjectInfo';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const ProjectDetail = () => {
   const params = useParams();

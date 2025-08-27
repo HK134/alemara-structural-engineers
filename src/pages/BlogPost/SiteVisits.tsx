@@ -2,7 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import SiteVisitHero from '@/components/blog/SiteVisitHero';
 import SiteVisitReasons from '@/components/blog/SiteVisitReasons';
 import SiteVisitInspection from '@/components/blog/SiteVisitInspection';

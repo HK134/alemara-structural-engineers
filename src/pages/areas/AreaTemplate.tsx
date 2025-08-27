@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, CheckCircle, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 interface AreaTemplateProps {
   areaName: string;
