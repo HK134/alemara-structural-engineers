@@ -179,12 +179,20 @@ const BlogPostPage = () => {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:image" content={getBlogImageUrl(post.image_path)} />
         <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={getBlogImageUrl(post.image_path)} />
+        <meta name="article:published_time" content={post.date_published} />
+        <meta name="article:modified_time" content={post.updated_at} />
+        <meta name="article:author" content={post.author} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -197,11 +205,19 @@ const BlogPostPage = () => {
             },
             "publisher": {
               "@type": "Organization",
-              "name": "Alemara Structural Engineers"
+              "name": "Alemara Structural Engineers",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://alemara.co.uk/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png"
+              }
             },
             "datePublished": post.date_published,
-            "dateModified": post.updated_at,
-            "description": pageDescription
+            "dateModified": post.updated_at || post.date_published,
+            "description": pageDescription,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonicalUrl
+            }
           })}
         </script>
       </Helmet>

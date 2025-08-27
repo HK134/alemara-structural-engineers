@@ -100,9 +100,32 @@ const Blog = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
-        <title>Blog | Structural Engineering Insights</title>
-        <meta name="description" content="Expert articles from Alemara Structural Engineers on structural surveys, extensions, loft conversions, regulations, and property issues in London." />
+        <title>Structural Engineering Blog | Expert Insights & Guides | Alemara</title>
+        <meta name="description" content="Expert structural engineering insights, guides, and industry updates from Alemara's team of chartered engineers. Learn about surveys, renovations, building regulations and more." />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://alemara.co.uk/blog" />
+        <meta property="og:title" content="Structural Engineering Blog | Alemara Engineers" />
+        <meta property="og:description" content="Expert insights and guides on structural engineering, building surveys, and property renovations in London." />
+        <meta property="og:url" content="https://alemara.co.uk/blog" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Alemara Structural Engineering Blog",
+            "description": "Expert structural engineering insights and guides",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Alemara Structural Engineers",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://alemara.co.uk/lovable-uploads/a543004b-6dda-4449-b14e-4a9212b75d84.png"
+              }
+            },
+            "url": "https://alemara.co.uk/blog"
+          })}
+        </script>
       </Helmet>
       <Navbar />
       <main className="flex-grow">

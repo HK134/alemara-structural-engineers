@@ -63,17 +63,22 @@ function DomainCheck() {
     // Check if we're on the wrong domain and redirect
     const currentDomain = window.location.hostname;
     const canonicalDomain = 'alemara.co.uk';
+    const allowedDomains = ['alemara.co.uk', 'www.alemara.co.uk', 'localhost', '127.0.0.1'];
     
-    if (currentDomain !== canonicalDomain && currentDomain !== 'localhost') {
+    // Only redirect from truly wrong domains (like amatrix.co)
+    if (!allowedDomains.includes(currentDomain) && !currentDomain.includes('lovable.dev')) {
       // Redirect to canonical domain
       window.location.replace(`https://${canonicalDomain}${window.location.pathname}${window.location.search}`);
     }
   }, []);
 
   const currentDomain = typeof window !== 'undefined' ? window.location.hostname : '';
-  const isWrongDomain = currentDomain !== 'alemara.co.uk' && currentDomain !== 'localhost';
+  const productionDomains = ['alemara.co.uk', 'www.alemara.co.uk'];
+  const isProductionDomain = productionDomains.includes(currentDomain);
+  const isDevelopmentDomain = currentDomain === 'localhost' || currentDomain === '127.0.0.1' || currentDomain.includes('lovable.dev');
 
-  if (isWrongDomain) {
+  // Only add noindex for non-production, non-development domains (like amatrix.co)
+  if (!isProductionDomain && !isDevelopmentDomain) {
     return (
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
