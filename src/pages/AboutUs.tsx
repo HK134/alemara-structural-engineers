@@ -10,10 +10,16 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
 const teamMembers = [{
-  name: "Hayder",
+  name: "Hassanien",
   role: "Practice Manager",
+  image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
+  bio: "Hassanien's meticulous approach to practice management ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
+  email: "hassanien@alemara.co.uk"
+}, {
+  name: "Hayder",
+  role: "Structural Engineer",
   image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
-  bio: "With over 10 years in structural engineering management, Hayder oversees our practice operations and leads the major projects division, ensuring clients receive exceptional service and technical excellence.",
+  bio: "With over 10 years in structural engineering management, Hayder specializes in major projects division, ensuring clients receive exceptional service and technical excellence.",
   email: "hayder@alemara.co.uk"
 }, {
   name: "Matheos",
@@ -51,12 +57,6 @@ const teamMembers = [{
   image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
   bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
   email: "jaya@alemara.co.uk"
-}, {
-  name: "Hassanien",
-  role: "Project Manager",
-  image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
-  bio: "Hassanien's meticulous approach to project planning ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
-  email: "hassanien@alemara.co.uk"
 }, {
   name: "Nasrin",
   role: "Senior Structural Engineer",
