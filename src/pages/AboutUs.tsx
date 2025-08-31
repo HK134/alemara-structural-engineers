@@ -76,12 +76,6 @@ const teamMembers = [{
   bio: "Johnny brings a passion for combining traditional structural engineering with cutting-edge technology, developing innovative solutions that bridge the gap between classic engineering principles and modern digital tools.",
   email: "johnny@alemara.co.uk"
 }, {
-  name: "Hayder",
-  role: "Project Engineer",
-  image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
-  bio: "With over 10 years in structural engineering management, Hayder specializes in major projects division, ensuring clients receive exceptional service and technical excellence.",
-  email: "hayder@alemara.co.uk"
-}, {
   name: "Kirsti",
   role: "Operations Manager",
   image: "",
