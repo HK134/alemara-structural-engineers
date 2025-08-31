@@ -93,6 +93,12 @@ const teamMembers = [{
   image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
   bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
   email: "zoe@alemara.co.uk"
+}, {
+  name: "Sandhya",
+  role: "Structural Engineer",
+  image: "",
+  bio: "Sandhya brings expertise in structural analysis and design, specializing in residential and commercial projects with a focus on sustainable and innovative engineering solutions.",
+  email: "sandhya@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
