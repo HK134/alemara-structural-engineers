@@ -16,12 +16,6 @@ const teamMembers = [{
   bio: "Hassanien's meticulous approach to practice management ensures our engineering projects are delivered on time and within budget while maintaining rigorous quality standards.",
   email: "hassanien@alemara.co.uk"
 }, {
-  name: "Hayder",
-  role: "Structural Engineer",
-  image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
-  bio: "With over 10 years in structural engineering management, Hayder specializes in major projects division, ensuring clients receive exceptional service and technical excellence.",
-  email: "hayder@alemara.co.uk"
-}, {
   name: "Matheos",
   role: "Chartered Structural Engineer",
   image: "/lovable-uploads/fdcd7944-f4b5-4001-89a1-17adf6b188df.png",
@@ -81,6 +75,12 @@ const teamMembers = [{
   image: "",
   bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
   email: "ahmed@alemara.co.uk"
+}, {
+  name: "Hayder",
+  role: "Structural Engineer",
+  image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
+  bio: "With over 10 years in structural engineering management, Hayder specializes in major projects division, ensuring clients receive exceptional service and technical excellence.",
+  email: "hayder@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
