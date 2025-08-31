@@ -76,6 +76,12 @@ const teamMembers = [{
   bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
   email: "ahmed@alemara.co.uk"
 }, {
+  name: "Johnny",
+  role: "Structural Engineer",
+  image: "/lovable-uploads/1f1c7ce3-5c75-4be7-9e18-f23d926812ed.png",
+  bio: "Johnny brings a passion for combining traditional structural engineering with cutting-edge technology, developing innovative solutions that bridge the gap between classic engineering principles and modern digital tools.",
+  email: "johnny@alemara.co.uk"
+}, {
   name: "Hayder",
   role: "Structural Engineer",
   image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
