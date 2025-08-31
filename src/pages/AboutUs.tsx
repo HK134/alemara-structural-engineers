@@ -34,12 +34,6 @@ const teamMembers = [{
   bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects.",
   email: "neil@alemara.co.uk"
 }, {
-  name: "Zoë",
-  role: "Operations Manager",
-  image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
-  bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
-  email: "zoe@alemara.co.uk"
-}, {
   name: "Mitch",
   role: "Construction Manager",
   image: "/lovable-uploads/a8a0964f-22e7-423b-bf2c-8222396bd389.png",
@@ -83,10 +77,16 @@ const teamMembers = [{
   email: "johnny@alemara.co.uk"
 }, {
   name: "Hayder",
-  role: "Structural Engineer",
+  role: "Project Engineer",
   image: "/lovable-uploads/1ab701e8-4ba8-4e1c-9d1d-1ca2c9cd967b.png",
   bio: "With over 10 years in structural engineering management, Hayder specializes in major projects division, ensuring clients receive exceptional service and technical excellence.",
   email: "hayder@alemara.co.uk"
+}, {
+  name: "Zoë",
+  role: "Operations Manager",
+  image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
+  bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
+  email: "zoe@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
