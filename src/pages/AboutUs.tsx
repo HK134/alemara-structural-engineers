@@ -82,10 +82,16 @@ const teamMembers = [{
   bio: "With over 10 years in structural engineering management, Hayder specializes in major projects division, ensuring clients receive exceptional service and technical excellence.",
   email: "hayder@alemara.co.uk"
 }, {
-  name: "Zoë",
+  name: "Kirsti",
   role: "Operations Manager",
+  image: "",
+  bio: "With a background in corporate psychology, Kirsti brings a unique understanding of team dynamics and organizational behavior to our operations, ensuring seamless project coordination while fostering a positive work environment.",
+  email: "kirsti@alemara.co.uk"
+}, {
+  name: "Zoë", 
+  role: "Marketing Manager",
   image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
-  bio: "Zoë ensures our day-to-day operations run seamlessly, coordinating between teams and clients to deliver projects efficiently and on schedule.",
+  bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
   email: "zoe@alemara.co.uk"
 }];
 const AboutUs = () => {
