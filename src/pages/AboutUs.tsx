@@ -46,11 +46,11 @@ const teamMembers = [{
   bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
   email: "jaya@alemara.co.uk"
 }, {
-  name: "Nasrin",
+  name: "Nas",
   role: "Senior Structural Engineer",
   image: "",
-  bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
-  email: "nasrin@alemara.co.uk"
+  bio: "Nas specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
+  email: "nas@alemara.co.uk"
 }, {
   name: "Mirsad",
   role: "Senior Structural Engineer",
@@ -78,7 +78,7 @@ const teamMembers = [{
 }, {
   name: "Kirsti",
   role: "Operations Manager",
-  image: "",
+  image: "/lovable-uploads/kirsti-profile.png",
   bio: "With a background in corporate psychology, Kirsti brings a unique understanding of team dynamics and organizational behavior to our operations, ensuring seamless project coordination while fostering a positive work environment.",
   email: "kirsti@alemara.co.uk"
 }, {
