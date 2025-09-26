@@ -93,6 +93,12 @@ const teamMembers = [{
   image: "",
   bio: "Sandhya brings expertise in structural analysis and design, specializing in residential and commercial projects with a focus on sustainable and innovative engineering solutions.",
   email: "sandhya@alemara.co.uk"
+}, {
+  name: "Josh",
+  role: "Structural Engineer", 
+  image: "",
+  bio: "Josh brings a unique perspective to structural engineering, having worked hands-on in the construction trade before transitioning to design. His practical field experience allows him to create designs that are not only structurally sound but also highly buildable, bridging the gap between engineering theory and real-world construction challenges.",
+  email: "joshua@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
