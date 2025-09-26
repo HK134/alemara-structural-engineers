@@ -78,7 +78,7 @@ const teamMembers = [{
 }, {
   name: "Kirsti",
   role: "Operations Manager",
-  image: "/lovable-uploads/kirsti-profile.png",
+  image: "/lovable-uploads/kirsti-operations-manager.png",
   bio: "With a background in corporate psychology, Kirsti brings a unique understanding of team dynamics and organizational behavior to our operations, ensuring seamless project coordination while fostering a positive work environment.",
   email: "kirsti@alemara.co.uk"
 }, {
