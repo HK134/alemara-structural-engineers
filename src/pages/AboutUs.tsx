@@ -75,13 +75,14 @@ const teamMembers = [{
   image: "/lovable-uploads/johnny-profile.png",
   bio: "Johnny brings a passion for combining traditional structural engineering with cutting-edge technology, developing innovative solutions that bridge the gap between classic engineering principles and modern digital tools.",
   email: "johnny@alemara.co.uk",
-  imageScale: 110
+  imageScale: 130
 }, {
   name: "Kirsti",
   role: "Operations Manager",
   image: "/lovable-uploads/kirsti-operations-manager.png",
   bio: "With a background in corporate psychology, Kirsti brings a unique understanding of team dynamics and organizational behavior to our operations, ensuring seamless project coordination while fostering a positive work environment.",
-  email: "kirsti@alemara.co.uk"
+  email: "kirsti@alemara.co.uk",
+  imageScale: 130
 }, {
   name: "Zoë", 
   role: "Marketing Manager",
@@ -95,7 +96,7 @@ const teamMembers = [{
   bio: "Sandhya brings expertise in structural analysis and design, specializing in residential and commercial projects with a focus on sustainable and innovative engineering solutions.",
   email: "sandhya@alemara.co.uk"
 }, {
-  name: "Josh",
+  name: "Joshua",
   role: "Structural Engineer", 
   image: "",
   bio: "Josh brings a unique perspective to structural engineering, having worked hands-on in the construction trade before transitioning to design. His practical field experience allows him to create designs that are not only structurally sound but also highly buildable, bridging the gap between engineering theory and real-world construction challenges.",
