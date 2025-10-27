@@ -103,7 +103,7 @@ const teamMembers = [{
   email: "joshua@alemara.co.uk"
 }, {
   name: "Hanoob",
-  role: "Senior Structural Engineer",
+  role: "Senior Structural & Façade Engineer",
   image: "/lovable-uploads/hanoob-profile.png",
   bio: "Hanoob is our specialist in facade and glass structural engineering, with over 5 years of focused experience in this highly specialized field. His expertise in designing transparent and curtain wall systems ensures both structural integrity and architectural excellence in modern building envelopes.",
   email: "hanoob@alemara.co.uk"
