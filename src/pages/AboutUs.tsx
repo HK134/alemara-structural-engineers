@@ -100,6 +100,12 @@ const teamMembers = [{
   image: "",
   bio: "Josh brings a unique perspective to structural engineering, having worked hands-on in the construction trade before transitioning to design. His practical field experience allows him to create designs that are not only structurally sound but also highly buildable, bridging the gap between engineering theory and real-world construction challenges.",
   email: "joshua@alemara.co.uk"
+}, {
+  name: "Hanoob",
+  role: "Senior Structural Engineer",
+  image: "/lovable-uploads/hanoob-profile.png",
+  bio: "Hanoob is our specialist in facade and glass structural engineering, with over 5 years of focused experience in this highly specialized field. His expertise in designing transparent and curtain wall systems ensures both structural integrity and architectural excellence in modern building envelopes.",
+  email: "hanoob@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
