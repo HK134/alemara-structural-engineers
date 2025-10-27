@@ -33,13 +33,13 @@ const teamMembers = [{
   image: "/lovable-uploads/0fa16540-97de-43ea-8d62-de381379aaab.png",
   bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects.",
   email: "neil@alemara.co.uk"
-}, {
+}, /* {
   name: "Mitch",
   role: "Construction Manager",
   image: "/lovable-uploads/a8a0964f-22e7-423b-bf2c-8222396bd389.png",
   bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
   email: "mitch@alemara.co.uk"
-}, {
+}, */ {
   name: "Jaya",
   role: "Senior Structural Engineer",
   image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
