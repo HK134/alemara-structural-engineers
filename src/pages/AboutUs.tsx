@@ -74,7 +74,8 @@ const teamMembers = [{
   role: "Structural Engineer",
   image: "/lovable-uploads/johnny-profile.png",
   bio: "Johnny brings a passion for combining traditional structural engineering with cutting-edge technology, developing innovative solutions that bridge the gap between classic engineering principles and modern digital tools.",
-  email: "johnny@alemara.co.uk"
+  email: "johnny@alemara.co.uk",
+  imageScale: 110
 }, {
   name: "Kirsti",
   role: "Operations Manager",

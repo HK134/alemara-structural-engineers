@@ -10,9 +10,10 @@ interface TeamMemberProps {
   image: string;
   bio: string;
   email?: string;
+  imageScale?: number;
 }
 
-const TeamMember = ({ name, role, image, bio, email }: TeamMemberProps) => {
+const TeamMember = ({ name, role, image, bio, email, imageScale = 150 }: TeamMemberProps) => {
   // Format the first name for email if not provided
   const firstName = name.split(' ')[0].toLowerCase();
   const emailAddress = email || `${firstName}@alemara.co.uk`;
@@ -26,7 +27,8 @@ const TeamMember = ({ name, role, image, bio, email }: TeamMemberProps) => {
               <AvatarImage 
                 src={image} 
                 alt={`${name} - ${role}`} 
-                className="object-cover scale-150" // Increased scale from 125 to 150 to make images larger
+                style={{ transform: `scale(${imageScale / 100})` }}
+                className="object-cover"
               />
               <AvatarFallback className="bg-[#ea384c]/10 text-[#ea384c] text-2xl">
                 {name.charAt(0)}
