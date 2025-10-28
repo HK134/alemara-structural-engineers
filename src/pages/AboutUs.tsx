@@ -41,8 +41,8 @@ const teamMembers = [{
   email: "mitch@alemara.co.uk"
 }, */ {
   name: "Jaya",
-  role: "Senior Structural Engineer",
-  image: "/lovable-uploads/7d10d14f-4a3b-4c6f-ad5a-561f899b4bea.png",
+  role: "Structural Engineer",
+  image: "/lovable-uploads/jaya-profile.png",
   bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
   email: "jaya@alemara.co.uk"
 }, {
@@ -85,7 +85,7 @@ const teamMembers = [{
   imageScale: 130
 }, {
   name: "Zoë", 
-  role: "Marketing Manager",
+  role: "Partnerships Manager",
   image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
   bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
   email: "zoe@alemara.co.uk"
