@@ -92,7 +92,7 @@ const teamMembers = [{
 }, {
   name: "Sandhya",
   role: "Structural Engineer",
-  image: "",
+  image: "/lovable-uploads/sandhya-profile.png",
   bio: "Sandhya brings expertise in structural analysis and design, specializing in residential and commercial projects with a focus on sustainable and innovative engineering solutions.",
   email: "sandhya@alemara.co.uk"
 }, {
