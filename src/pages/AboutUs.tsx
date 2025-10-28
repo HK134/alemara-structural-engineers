@@ -30,7 +30,7 @@ const teamMembers = [{
 }, {
   name: "Neil",
   role: "Chartered Structural Engineer",
-  image: "/lovable-uploads/0fa16540-97de-43ea-8d62-de381379aaab.png",
+  image: "/lovable-uploads/neil-profile.png",
   bio: "Neil's expertise in commercial structures and historic building renovations has contributed to some of London's most challenging conservation projects.",
   email: "neil@alemara.co.uk"
 }, /* {
