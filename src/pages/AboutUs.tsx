@@ -24,7 +24,7 @@ const teamMembers = [{
 }, {
   name: "Dr. Hassan",
   role: "Principal Civil Engineer",
-  image: "/lovable-uploads/357c7682-51ff-4501-9504-dfa32e250d61.png",
+  image: "/lovable-uploads/hassan-profile.png",
   bio: "With a PhD in Civil Engineering and extensive research background, Dr. Hassan leads our infrastructure projects and provides expert consultation on challenging technical problems.",
   email: "hassan@alemara.co.uk"
 }, {
