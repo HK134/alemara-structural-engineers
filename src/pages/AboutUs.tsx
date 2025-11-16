@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AccreditationSection from '@/components/AccreditationSection';
 import TeamMember from '@/components/about/TeamMember';
+import OrganizationalChart from '@/components/about/OrganizationalChart';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle, Medal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -357,6 +358,9 @@ const AboutUs = () => {
             </div>
           </div>
         </section>
+        
+        {/* Organizational Chart */}
+        <OrganizationalChart />
         
         {/* Meet the Team */}
         <section className="py-20 bg-white">
