@@ -103,7 +103,7 @@ const teamMembers = [{
   email: "sandhya@alemara.co.uk"
 }, {
   name: "Joshua",
-  role: "Structural Engineer", 
+  role: "Structural & Temporary Works Engineer", 
   image: "/lovable-uploads/josh-profile.png",
   bio: "Josh brings a unique perspective to structural engineering, having worked hands-on in the construction trade before transitioning to design. His practical field experience allows him to create designs that are not only structurally sound but also highly buildable, bridging the gap between engineering theory and real-world construction challenges.",
   email: "joshua@alemara.co.uk",
