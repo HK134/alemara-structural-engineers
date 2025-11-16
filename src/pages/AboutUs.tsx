@@ -40,24 +40,6 @@ const teamMembers = [{
   bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
   email: "mitch@alemara.co.uk"
 }, */ {
-  name: "Jaya",
-  role: "Structural Engineer",
-  image: "/lovable-uploads/jaya-profile.png",
-  bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
-  email: "jaya@alemara.co.uk"
-}, {
-  name: "Mirsad",
-  role: "Senior Structural Engineer",
-  image: "",
-  bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
-  email: "mirsad@alemara.co.uk"
-}, {
-  name: "Ahmed",
-  role: "Senior Structural Engineer",
-  image: "",
-  bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
-  email: "ahmed@alemara.co.uk"
-}, {
   name: "Mohamed",
   role: "Senior Structural Engineer",
   image: "/lovable-uploads/mohamed-profile.png",
@@ -102,6 +84,30 @@ const teamMembers = [{
   image: "/lovable-uploads/hanoob-profile.png",
   bio: "Hanoob is our specialist in facade and glass structural engineering, with over 5 years of focused experience in this highly specialized field. His expertise in designing transparent and curtain wall systems ensures both structural integrity and architectural excellence in modern building envelopes.",
   email: "hanoob@alemara.co.uk"
+}, {
+  name: "Jaya",
+  role: "Structural Engineer",
+  image: "/lovable-uploads/jaya-profile.png",
+  bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
+  email: "jaya@alemara.co.uk"
+}, {
+  name: "Hayder",
+  role: "Practice Director",
+  image: "",
+  bio: "With over 10 years of industry experience across major infrastructure and residential projects, Hayder brings strategic leadership and technical excellence to every project, ensuring the highest standards of structural engineering delivery.",
+  email: "hayder@alemara.co.uk"
+}, {
+  name: "Mirsad",
+  role: "Senior Structural Engineer",
+  image: "",
+  bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
+  email: "mirsad@alemara.co.uk"
+}, {
+  name: "Ahmed",
+  role: "Senior Structural Engineer",
+  image: "",
+  bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
+  email: "ahmed@alemara.co.uk"
 }, {
   name: "Sam",
   role: "Senior Structural Engineer",
