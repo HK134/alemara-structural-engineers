@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AccreditationSection from '@/components/AccreditationSection';
 import TeamMember from '@/components/about/TeamMember';
-import OrganizationalChart from '@/components/about/OrganizationalChart';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import { Building, Users, Award, Target, ArrowRight, Shield, Clock, CheckCircle, Medal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -123,6 +122,12 @@ const teamMembers = [{
   image: "",
   bio: "Nas specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
   email: "nas@alemara.co.uk"
+}, {
+  name: "Hussain",
+  role: "Senior Geospatial Surveyor",
+  image: "",
+  bio: "Hussain brings specialized expertise in geospatial surveying from major infrastructure projects including HS2. His advanced knowledge in point cloud processing, 3D laser scanning, and precise measurement techniques ensures accurate spatial data for complex engineering projects, bridging the gap between physical site conditions and digital design models.",
+  email: "hussain@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
@@ -360,9 +365,6 @@ const AboutUs = () => {
             </div>
           </div>
         </section>
-        
-        {/* Organizational Chart */}
-        <OrganizationalChart />
         
         {/* Meet the Team */}
         <section className="py-20 bg-white">
