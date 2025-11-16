@@ -10,6 +10,12 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
 const teamMembers = [{
+  name: "Hayder",
+  role: "Practice Director",
+  image: "/lovable-uploads/hayder-profile.png",
+  bio: "With over 10 years of industry experience across major infrastructure and residential projects, Hayder brings strategic leadership and technical excellence to every project, ensuring the highest standards of structural engineering delivery.",
+  email: "hayder@alemara.co.uk"
+}, {
   name: "Hassanien",
   role: "Practice Manager",
   image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
@@ -90,12 +96,6 @@ const teamMembers = [{
   image: "/lovable-uploads/jaya-profile.png",
   bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
   email: "jaya@alemara.co.uk"
-}, {
-  name: "Hayder",
-  role: "Practice Director",
-  image: "",
-  bio: "With over 10 years of industry experience across major infrastructure and residential projects, Hayder brings strategic leadership and technical excellence to every project, ensuring the highest standards of structural engineering delivery.",
-  email: "hayder@alemara.co.uk"
 }, {
   name: "Mirsad",
   role: "Senior Structural Engineer",
