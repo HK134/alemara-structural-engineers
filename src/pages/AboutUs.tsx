@@ -15,7 +15,8 @@ const teamMembers = [{
   role: "Practice Director",
   image: "/lovable-uploads/hayder-profile.png",
   bio: "With over 10 years of industry experience across major infrastructure and residential projects, Hayder brings strategic leadership and technical excellence to every project, ensuring the highest standards of structural engineering delivery.",
-  email: "hayder@alemara.co.uk"
+  email: "hayder@alemara.co.uk",
+  imageScale: 120
 }, {
   name: "Hassanien",
   role: "Practice Manager",
@@ -69,9 +70,10 @@ const teamMembers = [{
 }, {
   name: "Zoë", 
   role: "Partnerships Manager",
-  image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
+  image: "/lovable-uploads/zoe-profile.png",
   bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
-  email: "zoe@alemara.co.uk"
+  email: "zoe@alemara.co.uk",
+  imageScale: 140
 }, {
   name: "Sandhya",
   role: "Structural Engineer",
