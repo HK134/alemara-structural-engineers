@@ -107,6 +107,51 @@ export type Database = {
         }
         Relationships: []
       }
+      companyknowledge: {
+        Row: {
+          embedding: string | null
+          id: string
+          info: string | null
+          metadata: Json | null
+        }
+        Insert: {
+          embedding?: string | null
+          id?: string
+          info?: string | null
+          metadata?: Json | null
+        }
+        Update: {
+          embedding?: string | null
+          id?: string
+          info?: string | null
+          metadata?: Json | null
+        }
+        Relationships: []
+      }
+      CompanyKnowledge: {
+        Row: {
+          content: string | null
+          created_at: string
+          embedding: string | null
+          id: string
+          metadata: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          metadata?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          embedding?: string | null
+          id?: string
+          metadata?: string | null
+        }
+        Relationships: []
+      }
       engineer_timesheets: {
         Row: {
           created_at: string
@@ -252,6 +297,60 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      n8n_chat_histories: {
+        Row: {
+          id: string
+          message: Json
+          session_id: string
+        }
+        Insert: {
+          id?: string
+          message: Json
+          session_id: string
+        }
+        Update: {
+          id?: string
+          message?: Json
+          session_id?: string
+        }
+        Relationships: []
+      }
+      n8n_info_request_whatsapp: {
+        Row: {
+          addressStatus: boolean | null
+          created_at: string
+          emailStatus: boolean | null
+          enquiryStatus: boolean | null
+          fileUploads: boolean | null
+          id: string
+          nameStatus: boolean | null
+          notifyStatus: boolean | null
+          whatsappNumber: string
+        }
+        Insert: {
+          addressStatus?: boolean | null
+          created_at?: string
+          emailStatus?: boolean | null
+          enquiryStatus?: boolean | null
+          fileUploads?: boolean | null
+          id?: string
+          nameStatus?: boolean | null
+          notifyStatus?: boolean | null
+          whatsappNumber: string
+        }
+        Update: {
+          addressStatus?: boolean | null
+          created_at?: string
+          emailStatus?: boolean | null
+          enquiryStatus?: boolean | null
+          fileUploads?: boolean | null
+          id?: string
+          nameStatus?: boolean | null
+          notifyStatus?: boolean | null
+          whatsappNumber?: string
+        }
+        Relationships: []
       }
       project_engineer_assignments: {
         Row: {
@@ -414,12 +513,9 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      generate_project_reference: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
+      generate_project_reference: { Args: never; Returns: string }
       get_engineer_stats: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           engineer_id: string
           engineer_name: string
@@ -428,10 +524,18 @@ export type Database = {
         }[]
       }
       get_status_counts: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           count: number
           status: string
+        }[]
+      }
+      match_documents: {
+        Args: { filter?: Json; match_count?: number; query_embedding: string }
+        Returns: {
+          content: string
+          id: string
+          similarity: number
         }[]
       }
     }
