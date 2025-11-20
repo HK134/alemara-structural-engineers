@@ -92,13 +92,13 @@ const teamMembers = [{
   image: "/lovable-uploads/hanoob-profile.png",
   bio: "Hanoob is our specialist in facade and glass structural engineering, with over 5 years of focused experience in this highly specialized field. His expertise in designing transparent and curtain wall systems ensures both structural integrity and architectural excellence in modern building envelopes.",
   email: "hanoob@alemara.co.uk"
-}, {
+}, /* {
   name: "Jaya",
   role: "Structural Engineer",
   image: "/lovable-uploads/jaya-profile.png",
   bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
   email: "jaya@alemara.co.uk"
-}, {
+}, */ {
   name: "Mirsad",
   role: "Senior Structural Engineer",
   image: "",
@@ -110,13 +110,13 @@ const teamMembers = [{
   image: "/lovable-uploads/mohamed-profile.png",
   bio: "With over 10 years of industry experience spanning from nuclear grade projects to residential developments, Mohamed brings versatile expertise to complex engineering challenges. His diverse project portfolio and passion for outdoor hobbies inform his balanced approach to structural design.",
   email: "mohamed@alemara.co.uk"
-}, {
+}, /* {
   name: "Sam",
   role: "Senior Structural Engineer",
   image: "",
   bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
   email: "sam@alemara.co.uk"
-}, {
+}, */ {
   name: "Nas",
   role: "Senior Structural Engineer",
   image: "",
