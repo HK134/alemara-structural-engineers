@@ -47,11 +47,11 @@ const teamMembers = [{
   bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
   email: "mitch@alemara.co.uk"
 }, */ {
-  name: "Mohamed",
+  name: "Ahmed",
   role: "Senior Structural Engineer",
-  image: "/lovable-uploads/mohamed-profile.png",
-  bio: "With over 10 years of industry experience spanning from nuclear grade projects to residential developments, Mohamed brings versatile expertise to complex engineering challenges. His diverse project portfolio and passion for outdoor hobbies inform his balanced approach to structural design.",
-  email: "mohamed@alemara.co.uk"
+  image: "/lovable-uploads/ahmed-profile.png",
+  bio: "Ahmed specializes in high-end residential projects, bringing meticulous attention to detail and innovative structural solutions to luxury homes and sophisticated property transformations.",
+  email: "ahmed@alemara.co.uk"
 }, {
   name: "Johnny",
   role: "Structural Engineer",
@@ -105,11 +105,11 @@ const teamMembers = [{
   bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
   email: "mirsad@alemara.co.uk"
 }, {
-  name: "Ahmed",
+  name: "Mohamed",
   role: "Senior Structural Engineer",
-  image: "",
-  bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
-  email: "ahmed@alemara.co.uk"
+  image: "/lovable-uploads/mohamed-profile.png",
+  bio: "With over 10 years of industry experience spanning from nuclear grade projects to residential developments, Mohamed brings versatile expertise to complex engineering challenges. His diverse project portfolio and passion for outdoor hobbies inform his balanced approach to structural design.",
+  email: "mohamed@alemara.co.uk"
 }, {
   name: "Sam",
   role: "Senior Structural Engineer",
