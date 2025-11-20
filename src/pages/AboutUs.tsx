@@ -264,6 +264,24 @@ const AboutUs = () => {
           </div>
         </section>
         
+        {/* Meet the Team */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-6">
+              <div className="flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-[#ea384c] mr-3" />
+                <h2 className="text-3xl font-bold text-[#1A1F2C]">Meet Our Team</h2>
+              </div>
+              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                Our diverse team of qualified professionals brings together decades of expertise in structural and civil engineering.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {teamMembers.map((member, index) => <TeamMember key={index} name={member.name} role={member.role} image={member.image} bio={member.bio} email={member.email} />)}
+            </div>
+          </div>
+        </section>
         
         {/* Expertise & Value Proposition */}
         <section className="py-20 bg-gray-50">
@@ -339,25 +357,6 @@ const AboutUs = () => {
                   </ul>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Meet the Team */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-6">
-              <div className="flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-[#ea384c] mr-3" />
-                <h2 className="text-3xl font-bold text-[#1A1F2C]">Meet Our Team</h2>
-              </div>
-              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                Our diverse team of qualified professionals brings together decades of expertise in structural and civil engineering.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {teamMembers.map((member, index) => <TeamMember key={index} name={member.name} role={member.role} image={member.image} bio={member.bio} email={member.email} />)}
             </div>
           </div>
         </section>
