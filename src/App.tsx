@@ -44,6 +44,7 @@ import EngineerAvailability from '@/pages/EngineerAvailability';
 import EngineerInvoices from '@/pages/EngineerInvoices';
 import EngineerMessages from '@/pages/EngineerMessages';
 import ClientDashboard from '@/pages/ClientDashboard';
+import NaturalHistoryMuseum from '@/pages/NaturalHistoryMuseum';
 import NotFound from '@/pages/NotFound';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -143,6 +144,9 @@ function App() {
             <Route path="/areas/kensington-chelsea" element={<KensingtonChelsea />} />
             <Route path="/areas/westminster-mayfair" element={<WestminsterMayfair />} />
             <Route path="/areas/london-boroughs" element={<LondonBoroughs />} />
+
+            {/* Standalone Pages */}
+            <Route path="/Natural-History-Museum" element={<NaturalHistoryMuseum />} />
 
             <Route path="/client-onboarding" element={<ClientOnboarding />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
