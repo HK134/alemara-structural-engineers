@@ -10,6 +10,13 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
 const teamMembers = [{
+  name: "Hayder",
+  role: "Practice Director",
+  image: "/lovable-uploads/hayder-profile.png",
+  bio: "With over 10 years of industry experience across major infrastructure and residential projects, Hayder brings strategic leadership and technical excellence to every project, ensuring the highest standards of structural engineering delivery.",
+  email: "hayder@alemara.co.uk",
+  imageScale: 120
+}, {
   name: "Hassanien",
   role: "Practice Manager",
   image: "/lovable-uploads/9abf20b7-377a-4626-8214-45f423afa5b4.png",
@@ -40,34 +47,10 @@ const teamMembers = [{
   bio: "With hands-on construction experience, Mitch bridges the gap between engineering designs and practical implementation, ensuring buildability for all our projects.",
   email: "mitch@alemara.co.uk"
 }, */ {
-  name: "Jaya",
-  role: "Structural Engineer",
-  image: "/lovable-uploads/jaya-profile.png",
-  bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
-  email: "jaya@alemara.co.uk"
-}, {
-  name: "Nas",
-  role: "Senior Structural Engineer",
-  image: "",
-  bio: "Nas specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
-  email: "nas@alemara.co.uk"
-}, {
-  name: "Mirsad",
-  role: "Senior Structural Engineer",
-  image: "",
-  bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
-  email: "mirsad@alemara.co.uk"
-}, {
-  name: "Sam",
-  role: "Senior Structural Engineer",
-  image: "",
-  bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
-  email: "sam@alemara.co.uk"
-}, {
   name: "Ahmed",
   role: "Senior Structural Engineer",
-  image: "",
-  bio: "Ahmed focuses on residential structural projects, specializing in optimizing designs for extensions and internal reconfigurations to maximize living space.",
+  image: "/lovable-uploads/ahmed-profile.png",
+  bio: "Ahmed specializes in high-end residential projects, bringing meticulous attention to detail and innovative structural solutions to luxury homes and sophisticated property transformations.",
   email: "ahmed@alemara.co.uk"
 }, {
   name: "Johnny",
@@ -86,9 +69,10 @@ const teamMembers = [{
 }, {
   name: "Zoë", 
   role: "Partnerships Manager",
-  image: "/lovable-uploads/366ed2ae-8d3f-4bd9-a291-75d5a6d2f1ad.png",
+  image: "/lovable-uploads/zoe-profile.png",
   bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
-  email: "zoe@alemara.co.uk"
+  email: "zoe@alemara.co.uk",
+  imageScale: 140
 }, {
   name: "Sandhya",
   role: "Structural Engineer",
@@ -97,9 +81,9 @@ const teamMembers = [{
   email: "sandhya@alemara.co.uk"
 }, {
   name: "Joshua",
-  role: "Structural Engineer", 
+  role: "Temporary Works Engineer", 
   image: "/lovable-uploads/josh-profile.png",
-  bio: "Josh brings a unique perspective to structural engineering, having worked hands-on in the construction trade before transitioning to design. His practical field experience allows him to create designs that are not only structurally sound but also highly buildable, bridging the gap between engineering theory and real-world construction challenges.",
+  bio: "Josh brings extensive experience in both major infrastructure and residential projects, specializing in temporary works design and structural engineering. Having worked hands-on in the construction trade before transitioning to design, his practical field experience allows him to create solutions that bridge the gap between engineering theory and real-world construction challenges.",
   email: "joshua@alemara.co.uk",
   imageScale: 140
 }, {
@@ -108,6 +92,42 @@ const teamMembers = [{
   image: "/lovable-uploads/hanoob-profile.png",
   bio: "Hanoob is our specialist in facade and glass structural engineering, with over 5 years of focused experience in this highly specialized field. His expertise in designing transparent and curtain wall systems ensures both structural integrity and architectural excellence in modern building envelopes.",
   email: "hanoob@alemara.co.uk"
+}, /* {
+  name: "Jaya",
+  role: "Structural Engineer",
+  image: "/lovable-uploads/jaya-profile.png",
+  bio: "Jaya specializes in steel and concrete design, bringing extensive experience in multi-story residential and commercial developments across London.",
+  email: "jaya@alemara.co.uk"
+}, */ {
+  name: "Mirsad",
+  role: "Senior Structural Engineer",
+  image: "",
+  bio: "Mirsad's expertise lies in residential transformations, particularly loft conversions and property remodeling projects requiring creative structural interventions.",
+  email: "mirsad@alemara.co.uk"
+}, {
+  name: "Mohamed",
+  role: "Senior Structural Engineer",
+  image: "/lovable-uploads/mohamed-profile.png",
+  bio: "With over 10 years of industry experience spanning from nuclear grade projects to residential developments, Mohamed brings versatile expertise to complex engineering challenges. His diverse project portfolio and passion for outdoor hobbies inform his balanced approach to structural design.",
+  email: "mohamed@alemara.co.uk"
+}, /* {
+  name: "Sam",
+  role: "Senior Structural Engineer",
+  image: "",
+  bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
+  email: "sam@alemara.co.uk"
+}, */ {
+  name: "Nas",
+  role: "Senior Structural Engineer",
+  image: "",
+  bio: "Nas specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
+  email: "nas@alemara.co.uk"
+}, {
+  name: "Hussain",
+  role: "Senior Geospatial Surveyor",
+  image: "",
+  bio: "Hussain brings specialized expertise in geospatial surveying from major infrastructure projects including HS2. His advanced knowledge in point cloud processing, 3D laser scanning, and precise measurement techniques ensures accurate spatial data for complex engineering projects, bridging the gap between physical site conditions and digital design models.",
+  email: "hussain@alemara.co.uk"
 }];
 const AboutUs = () => {
   return <div className="min-h-screen flex flex-col">
@@ -244,26 +264,21 @@ const AboutUs = () => {
           </div>
         </section>
         
-        {/* Our Workspace - Image Gallery */}
-        <section className="py-16 bg-gray-50">
+        {/* Meet the Team */}
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-[#1A1F2C]">Our Workspace</h2>
+            <div className="text-center mb-6">
+              <div className="flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-[#ea384c] mr-3" />
+                <h2 className="text-3xl font-bold text-[#1A1F2C]">Meet Our Team</h2>
+              </div>
               <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                Our modern offices provide the perfect environment for innovation and collaboration, enabling our team to deliver exceptional engineering solutions.
+                Our diverse team of qualified professionals brings together decades of expertise in structural and civil engineering.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img src="/lovable-uploads/8aab59c0-c673-4311-9ec9-a9a8c5e24bfa.png" alt="Alemara Office Interior" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
-              </div>
-              <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img src="/lovable-uploads/cd403569-d073-445b-a33e-06c990b9b4c9.png" alt="Alemara Engineering Studio" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
-              </div>
-              <div className="rounded-lg overflow-hidden shadow-md h-64">
-                <img src="/lovable-uploads/1538283d-b9c2-4605-b325-82f813edfcba.png" alt="Alemara Meeting Room" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {teamMembers.map((member, index) => <TeamMember key={index} name={member.name} role={member.role} image={member.image} bio={member.bio} email={member.email} />)}
             </div>
           </div>
         </section>
@@ -342,29 +357,6 @@ const AboutUs = () => {
                   </ul>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Meet the Team */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-6">
-              <div className="flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-[#ea384c] mr-3" />
-                <h2 className="text-3xl font-bold text-[#1A1F2C]">Meet Our Team</h2>
-              </div>
-              <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                Our diverse team of qualified professionals brings together decades of expertise in structural and civil engineering.
-              </p>
-              <div className="text-center mt-5 mb-8">
-                <p className="text-lg font-medium text-[#1A1F2C]">Small enough to make your home project feel personal</p>
-                <p className="text-lg font-medium text-[#1A1F2C] mt-1">Skilled enough to take on sensitive mega projects</p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {teamMembers.map((member, index) => <TeamMember key={index} name={member.name} role={member.role} image={member.image} bio={member.bio} email={member.email} />)}
             </div>
           </div>
         </section>
