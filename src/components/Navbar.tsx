@@ -132,6 +132,12 @@ const Navbar = () => {
                   <span>New Builds</span>
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-gray-100 py-2">
+                <a href="https://surveys.alemara.co.uk/" target="_blank" rel="noopener noreferrer">
+                  <span>Aerial & Land Surveys ↗</span>
+                </a>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           
@@ -224,6 +230,8 @@ const Navbar = () => {
                     <Link to="/services/basement-extensions" className="block text-white hover:text-[#ea384c] transition-colors">Basement Extensions</Link>
                     <Link to="/services/subsidence-crack-surveys" className="block text-white hover:text-[#ea384c] transition-colors">Subsidence & Crack Surveys</Link>
                     <Link to="/services/new-builds" className="block text-white hover:text-[#ea384c] transition-colors">New Builds</Link>
+                    <div className="border-t border-gray-600 my-2"></div>
+                    <a href="https://surveys.alemara.co.uk/" target="_blank" rel="noopener noreferrer" className="block text-white hover:text-[#ea384c] transition-colors">Aerial & Land Surveys ↗</a>
                   </div>
                 </div>
                 
