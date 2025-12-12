@@ -24,7 +24,7 @@ const teamMembers = [{
   email: "hassanien@alemara.co.uk"
 }, {
   name: "Matheos",
-  role: "Chartered Structural Engineer",
+  role: "Structural Engineer",
   image: "/lovable-uploads/matheos-profile.png",
   bio: "Matheos specializes in complex residential renovations and extensions, bringing creative structural solutions that balance design ambition with technical feasibility.",
   email: "matheos@alemara.co.uk"
