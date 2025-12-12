@@ -30,7 +30,7 @@ const OrganizationalChart = () => {
     },
     {
       name: "Matheos",
-      role: "Chartered Structural Engineer",
+      role: "Structural Engineer",
       email: "matheos@alemara.co.uk"
     },
     {
