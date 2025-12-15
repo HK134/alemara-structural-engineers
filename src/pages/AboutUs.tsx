@@ -24,7 +24,7 @@ const teamMembers = [{
   email: "hassanien@alemara.co.uk"
 }, {
   name: "Matheos",
-  role: "Chartered Structural Engineer",
+  role: "Structural Engineer",
   image: "/lovable-uploads/matheos-profile.png",
   bio: "Matheos specializes in complex residential renovations and extensions, bringing creative structural solutions that balance design ambition with technical feasibility.",
   email: "matheos@alemara.co.uk"
@@ -125,7 +125,7 @@ const teamMembers = [{
 }, {
   name: "Hussain",
   role: "Senior Geospatial Surveyor",
-  image: "",
+  image: "/lovable-uploads/hussain-profile.png",
   bio: "Hussain brings specialized expertise in geospatial surveying from major infrastructure projects including HS2. His advanced knowledge in point cloud processing, 3D laser scanning, and precise measurement techniques ensures accurate spatial data for complex engineering projects, bridging the gap between physical site conditions and digital design models.",
   email: "hussain@alemara.co.uk"
 }];
