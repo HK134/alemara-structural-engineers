@@ -6,14 +6,25 @@ import { ExternalLink, Maximize2 } from 'lucide-react';
 import ProjectModal from './project/ProjectModal';
 import { toast } from "sonner";
 
+// Helper function to create slug from title
+const createSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
 interface ProjectProps {
   project: {
-    id: number;
+    id: string | number;
     title: string;
     type: string;
+    cover_image?: string;
     image: string;
     description: string;
-    completion: string;
+    completion?: string;
     featured?: boolean;
     architect?: string;
     location?: string;
@@ -31,8 +42,8 @@ const PortfolioCard = ({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Get the first image from the project.images array if available, otherwise use the main image
-  const displayImage = project.images && project.images.length > 0 ? project.images[0] : project.image;
+  // Get the cover image, fallback to images array, then main image
+  const displayImage = project.cover_image || (project.images && project.images.length > 0 ? project.images[0] : project.image);
   
   // Get alt text for better accessibility and SEO
   const imageAlt = project.imageAlt && project.imageAlt.length > 0 

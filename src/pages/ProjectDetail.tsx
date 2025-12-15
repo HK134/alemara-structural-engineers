@@ -4,15 +4,25 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import StickyBookingButton from '@/components/StickyBookingButton';
-import { portfolioItems, getProjectsByType, getProjectBySlug, getProjectById, getProjectSlug } from '@/data/projects';
+import { supabase } from '@/integrations/supabase/client';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Building, Home, HardHat } from 'lucide-react';
+import { Building, Home, HardHat, Loader2 } from 'lucide-react';
 import PortfolioCard from '@/components/PortfolioCard';
 import ServiceCTA from '@/components/services/ServiceCTA';
 import ProjectInfo from '@/components/project/ProjectInfo';
 import ProjectNavigation from '@/components/project/ProjectNavigation';
 import InfrastructureProjectDetail from '@/components/project/InfrastructureProjectDetail';
 import { Helmet } from 'react-helmet-async';
+
+// Helper function to create slug from title
+const createSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
 
 const ProjectDetail = () => {
   const params = useParams();
@@ -24,58 +34,80 @@ const ProjectDetail = () => {
   const [nextProject, setNextProject] = useState<any>(null);
   const [relatedProjects, setRelatedProjects] = useState<any[]>([]);
   const [filterType, setFilterType] = useState<string>('all');
+  const [allProjects, setAllProjects] = useState<any[]>([]);
 
   useEffect(() => {
-    if (!slugOrId) return;
-
-    // Try to resolve by slug first
-    let current = getProjectBySlug(slugOrId);
-
-    // If not found, try numeric ID and redirect to slug URL for canonical consistency
-    if (!current && /^\d+$/.test(slugOrId)) {
-      const byId = getProjectById(parseInt(slugOrId, 10));
-      if (byId) {
-        const canonical = `/portfolio/${getProjectSlug(byId)}`;
-        navigate(canonical, { replace: true });
-        current = byId;
+    const fetchProject = async () => {
+      if (!slugOrId) return;
+      
+      setLoading(true);
+      try {
+        // Fetch all projects for navigation
+        const { data: allProjectsData, error: allError } = await (supabase as any)
+          .from('portfolio_projects')
+          .select('*')
+          .eq('published', true)
+          .order('display_order', { ascending: true });
+        
+        if (allError) throw allError;
+        setAllProjects(allProjectsData || []);
+        
+        // Try to find project by slug (matching title)
+        let currentProject = (allProjectsData || []).find((p: any) => 
+          createSlug(p.title) === slugOrId
+        );
+        
+        // If not found by slug, try by ID
+        if (!currentProject) {
+          currentProject = (allProjectsData || []).find((p: any) => 
+            p.id === slugOrId
+          );
+          
+          // If found by ID, redirect to slug URL
+          if (currentProject) {
+            const canonical = `/portfolio/${createSlug(currentProject.title)}`;
+            navigate(canonical, { replace: true });
+          }
+        }
+        
+        if (currentProject) {
+          setProject(currentProject);
+          
+          // Find prev/next projects
+          const currentIndex = (allProjectsData || []).findIndex((p: any) => p.id === currentProject.id);
+          setPrevProject(currentIndex > 0 ? allProjectsData[currentIndex - 1] : null);
+          setNextProject(currentIndex < (allProjectsData || []).length - 1 ? allProjectsData[currentIndex + 1] : null);
+          
+          // Load related projects
+          await loadRelatedProjects(currentProject.type, currentProject.id, allProjectsData);
+        }
+      } catch (error) {
+        console.error('Error fetching project:', error);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
+    
+    fetchProject();
+  }, [slugOrId, navigate]);
 
-    if (current) {
-      setProject(current);
-      const currentIndex = portfolioItems.findIndex(item => item.id === current!.id);
-      setPrevProject(currentIndex > 0 ? portfolioItems[currentIndex - 1] : null);
-      setNextProject(currentIndex < portfolioItems.length - 1 ? portfolioItems[currentIndex + 1] : null);
-      updateRelatedProjects(current.type);
-    }
-
-    setLoading(false);
-  }, [slugOrId]);
+  const loadRelatedProjects = async (type: string, currentId: string, projects: any[]) => {
+    let filtered = type === 'all' ? projects : projects.filter((p: any) => p.type === type);
+    filtered = filtered.filter((p: any) => p.id !== currentId);
+    setRelatedProjects(filtered.slice(0, 3));
+  };
   
   // Update related projects when filter changes
   useEffect(() => {
-    if (project) {
-      updateRelatedProjects(filterType);
+    if (project && allProjects.length > 0) {
+      loadRelatedProjects(filterType, project.id, allProjects);
     }
-  }, [filterType, project]);
-  
-  const updateRelatedProjects = (type: string) => {
-    // Get filtered projects based on type
-    let filteredProjects = type === 'all' 
-      ? portfolioItems 
-      : getProjectsByType(type);
-    
-    // Exclude current project
-    filteredProjects = filteredProjects.filter(item => item.id !== project?.id);
-    
-    // Limit to 3 projects
-    setRelatedProjects(filteredProjects.slice(0, 3));
-  };
+  }, [filterType, project, allProjects]);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-2xl">Loading...</div>
+        <Loader2 className="h-8 w-8 animate-spin text-[#ea384c]" />
       </div>
     );
   }
@@ -88,12 +120,12 @@ const ProjectDetail = () => {
     );
   }
 
-  // Special handling for civil infrastructure projects (Hinkley Point C and HS2)
-  const isInfrastructureProject = project.id === 11 || project.id === 12;
+  // Special handling for civil infrastructure projects (check by title)
+  const isInfrastructureProject = project.title?.includes('HPC') || project.title?.includes('HS2');
 
   const pageTitle = `${project.title} | London Structural Engineering Project`;
   const pageDescription = project.description?.substring(0, 160);
-  const canonicalUrl = `https://alemara.co.uk/portfolio/${getProjectSlug(project)}`;
+  const canonicalUrl = `https://alemara.co.uk/portfolio/${createSlug(project.title)}`;
 
   return (
     <div className="min-h-screen flex flex-col">

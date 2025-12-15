@@ -3,266 +3,524 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://alemara.co.uk/</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/about-us</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/residential</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/loft-conversions</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/residential/loft-conversions</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/extensions</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/residential/extensions</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/structural-surveys</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/commercial</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/civil-engineering</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/basement-extensions</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/subsidence-crack-surveys</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/services/new-builds</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/areas/islington-highbury</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/areas/camden-kentish-town</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/areas/hackney-shoreditch</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/areas/kensington-chelsea</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/areas/westminster-mayfair</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/areas/london-boroughs</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/faq</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/contact</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/privacy-policy</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/terms</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/blog</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/cheval-place-knightsbridge</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/victoria-park-project-east-london</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/warrington-crescent-maida-vale</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/burrows-court-residential-development</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/carlton-road-victorian-conversion</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/gloucester-gardens-heritage-renovation</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/gloucester-gardens-2-period-property-restoration</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/gloucester-terrace-classic-london-terrace</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/pimlico</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/hanningfield-timber-structure</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/mollands-riba-feature-project</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/ongar-new-build-project</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/five-miles-music-venue</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/mayfair</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/riverbank-plaza-hotel-structural-upgrade</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/hpc-somerset</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/hs2-high-speed-rail-infrastructure</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alemara.co.uk/portfolio/watford-stadium-structural-assessment</loc>
-    <lastmod>2025-11-15</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/discovering-london-lofts-smart-conversion-styles-for-maximising-space</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/discovering-space-and-value-exploring-londons-top-garage-extensions</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/enhancing-your-london-home-best-ways-to-expand-your-dining-area</loc>
+    <lastmod>2025-12-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/expanding-space-and-style-a-homeowners-guide-to-bedroom-extensions-in-london</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/optimising-space-and-light-designing-the-perfect-lean-to-conservatory-for-your-london-home</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/maximizing-your-london-home-choosing-between-a-conservatory-and-an-extension</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/building-success-in-london-how-expert-structural-engineering-accelerates-approvals</loc>
+    <lastmod>2025-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/enhancing-productivity-how-structural-expertise-boosts-clever-london-builds</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/connecting-design-and-structure-enhancing-londons-built-environment-with-collaborative-expertise</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/building-londons-future-how-architects-and-structural-engineers-shape-our-city</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/elevate-your-london-home-with-stylish-kitchen-extension-ideas</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/ensuring-safe-and-compliant-home-renovations-in-london</loc>
+    <lastmod>2025-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/enhancing-bedroom-extensions-in-london-homes-maximise-space-and-style</loc>
+    <lastmod>2025-11-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/how-structural-engineers-ensure-safe-and-smooth-london-home-renovations</loc>
+    <lastmod>2025-11-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/transform-your-london-home-top-extension-ideas-to-expand-your-dining-space</loc>
+    <lastmod>2025-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/shaping-londons-future-understanding-civil-and-structural-engineering-roles</loc>
+    <lastmod>2025-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/maximising-space-and-value-creative-garage-extension-ideas-for-london-homes</loc>
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/understanding-structural-engineering-fees-in-london-what-to-expect-in-2025</loc>
+    <lastmod>2025-10-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/selecting-the-ideal-living-room-extension-to-enhance-your-london-home</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/unleashing-space-and-style-creative-bathroom-extensions-for-london-homes</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/unlocking-london-loft-potential-a-comprehensive-guide-to-stylish-space-expansion</loc>
+    <lastmod>2025-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/maximising-london-living-space-a-complete-guide-to-dormer-loft-conversion-styles-and-challenges</loc>
+    <lastmod>2025-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/unlock-extra-space-how-mansard-loft-conversions-enhance-london-homes</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/maximising-space-and-light-unlocking-the-potential-of-velux-loft-windows-in-london-homes</loc>
+    <lastmod>2025-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/unlocking-london-living-space-the-essential-guide-to-shell-loft-conversions</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/unlocking-extra-space-the-modern-approach-to-london-loft-transformations</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/unlocking-hidden-potential-how-loft-conversions-transform-london-bungalows</loc>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/finding-the-perfect-conservatory-style-for-your-london-home</loc>
+    <lastmod>2025-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/enhance-your-london-home-with-classic-conservatory-design-and-useful-tips</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/creating-more-room-a-handy-guide-to-loft-conversions-for-semi-detached-homes-in-london</loc>
+    <lastmod>2025-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/adding-classic-charm-to-london-homes-with-victorian-conservatories</loc>
+    <lastmod>2025-09-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/illuminating-elegance-londons-stylish-orangeries</loc>
+    <lastmod>2025-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/discovering-brightness-and-room-how-gable-end-conservatories-change-london-homes</loc>
+    <lastmod>2025-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/brighten-your-london-home-with-a-modern-lean-to-conservatory-a-practical-guide</loc>
+    <lastmod>2025-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/maximising-space-and-value-navigating-home-improvements-in-london</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/the-importance-of-structural-engineers-knowing-architecture-basics</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/building-regulations-for-extensions</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/loft-conversion-considerations</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/structural-engineering-site-visits</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/structural-issues-period-properties-what-to-look-for</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/commercial-property-surveys-complete-guide</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/subsidence-london-properties-causes-solutions</loc>
+    <lastmod>2025-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alemara.co.uk/blog/how-to-choose-structural-engineer-your-project</loc>
+    <lastmod>2025-08-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

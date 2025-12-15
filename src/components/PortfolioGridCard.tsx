@@ -2,16 +2,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from "sonner";
-import { getProjectSlug } from '@/data/projects';
+
+// Helper function to create slug from title
+const createSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
 
 interface ProjectProps {
 	project: {
-		id: number;
+		id: string | number;
 		title: string;
 		type: string;
+		cover_image?: string;
 		image: string;
 		description: string;
-		completion: string;
+		completion?: string;
 		location?: string;
 	};
 }
@@ -42,40 +52,20 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
 
 	// Handle image errors with improved fallbacks
 	const handleImageError = () => {
-		console.error(`Failed to load image for project ${project.id}:`, project.image);
+		console.error(`Failed to load image for project ${project.id}:`, imageUrl);
 		setImageError(true);
 		
 		// Special handling for specific projects
 		const target = document.getElementById(`project-img-${project.id}`) as HTMLImageElement;
 		if (!target) return;
 		
-		// Cheval Place project (id: 15)
-		if (project.id === 15) {
-			target.src = 'https://alwjzubhrjubtvwenyqt.supabase.co/storage/v1/object/public/alemaraprojectimages/Cheval%20Place/alemara-cheval-place.jpg';
-			setImageError(false);
-			return;
-		}
-		
-		// Victoria Park Project (id: 2)
-		if (project.id === 2) {
-			target.src = '/lovable-uploads/f7869f8f-7c74-4b3b-927d-b68dcbd70016.png';
-			setImageError(false);
-			return;
-		}
-		
-		// Warrington Crescent (id: 13)
-		if (project.id === 13) {
-			target.src = '/lovable-uploads/5fee22ca-8fc0-40ec-afa2-94dc5b75eb98.png';
-			setImageError(false);
-			return;
-		}
-		
-		// Use a placeholder for other projects
+		// Use a placeholder for projects with failed images
 		target.src = '/placeholder.svg';
 		toast.error(`Could not load image for ${project.title}`);
 	};
 
-	const slug = getProjectSlug(project);
+	const slug = createSlug(project.title);
+	const imageUrl = project.cover_image || project.image;
 
 	return (
 		<Link 
@@ -92,7 +82,7 @@ const PortfolioGridCard = ({ project }: ProjectProps) => {
 				)}
 				<img 
 					id={`project-img-${project.id}`}
-					src={project.image} 
+					src={imageUrl} 
 					alt={`${project.title} - ${project.type} structural engineering project`}
 					className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
 					loading="lazy"

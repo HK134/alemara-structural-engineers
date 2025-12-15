@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { portfolioItems } from '@/data/projects';
+import { supabase } from '@/integrations/supabase/client';
 import { Helmet } from "react-helmet";
 import ServiceCTA from '@/components/services/ServiceCTA';
-import { Building, Home, HardHat } from 'lucide-react';
+import { Building, Home, HardHat, Loader2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import PortfolioGridCard from '@/components/PortfolioGridCard';
@@ -20,11 +20,36 @@ import {
 const Portfolio = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const projectsPerPage = 6;
   
+  useEffect(() => {
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const { data, error } = await (supabase as any)
+          .from('portfolio_projects')
+          .select('*')
+          .eq('published', true)
+          .order('display_order', { ascending: true });
+        
+        if (error) throw error;
+        
+        setProjects(data || []);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchProjects();
+  }, []);
+  
   const filteredProjects = activeTab === 'all' 
-    ? portfolioItems
-    : portfolioItems.filter(item => item.type === activeTab);
+    ? projects
+    : projects.filter(item => item.type === activeTab);
     
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
@@ -92,11 +117,21 @@ const Portfolio = () => {
               </div>
               
               <TabsContent value={activeTab} className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {currentProjects.map(project => (
-                    <PortfolioGridCard key={project.id} project={project} />
-                  ))}
-                </div>
+                {loading ? (
+                  <div className="flex justify-center items-center py-20">
+                    <Loader2 className="h-8 w-8 animate-spin text-[#ea384c]" />
+                  </div>
+                ) : currentProjects.length === 0 ? (
+                  <div className="text-center py-20">
+                    <p className="text-gray-600">No projects found in this category.</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {currentProjects.map(project => (
+                      <PortfolioGridCard key={project.id} project={project} />
+                    ))}
+                  </div>
+                )}
                 
                 {totalPages > 1 && (
                   <Pagination className="mt-12">

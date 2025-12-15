@@ -3,7 +3,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { getProjectSlug } from '@/data/projects';
+
+// Helper function to create slug from title
+const createSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
 
 interface ProjectNavigationProps {
   prevProject: any;
@@ -11,8 +20,8 @@ interface ProjectNavigationProps {
 }
 
 const ProjectNavigation = ({ prevProject, nextProject }: ProjectNavigationProps) => {
-  const prevSlug = prevProject ? getProjectSlug(prevProject) : null;
-  const nextSlug = nextProject ? getProjectSlug(nextProject) : null;
+  const prevSlug = prevProject ? createSlug(prevProject.title) : null;
+  const nextSlug = nextProject ? createSlug(nextProject.title) : null;
 
   return (
     <div className="flex justify-between mt-12">
