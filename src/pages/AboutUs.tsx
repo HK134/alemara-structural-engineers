@@ -117,10 +117,10 @@ const teamMembers = [{
   bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
   email: "sam@alemara.co.uk"
 }, */ {
-  name: "Nas",
+  name: "Nasrin",
   role: "Senior Structural Engineer",
-  image: "",
-  bio: "Nas specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
+  image: "/lovable-uploads/nasrin-profile.png",
+  bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
   email: "nas@alemara.co.uk"
 }, {
   name: "Hussain",
