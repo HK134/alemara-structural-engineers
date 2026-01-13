@@ -116,11 +116,11 @@ const teamMembers = [{
   bio: "Sam is our basement specialist, with particular expertise in complex underpinning projects and creating new subterranean living spaces in London's challenging ground conditions.",
   email: "sam@alemara.co.uk"
 }, */ {
-  name: "Kirsti",
+  name: "Kristi",
   role: "Operations Manager",
   image: "/lovable-uploads/kirsti-operations-manager.png",
-  bio: "With a background in corporate psychology, Kirsti brings a unique understanding of team dynamics and organizational behavior to our operations, ensuring seamless project coordination while fostering a positive work environment.",
-  email: "kirsti@alemara.co.uk",
+  bio: "With a background in corporate psychology, Kristi brings a unique understanding of team dynamics and organizational behavior to our operations, ensuring seamless project coordination while fostering a positive work environment.",
+  email: "kristi@alemara.co.uk",
   imageScale: 130
 }, {
   name: "Hussain",
