@@ -352,6 +352,66 @@ export type Database = {
         }
         Relationships: []
       }
+      portfolio_projects: {
+        Row: {
+          architect: string | null
+          completion: string | null
+          cover_image: string
+          created_at: string
+          description: string
+          display_order: number | null
+          featured: boolean | null
+          full_description: string | null
+          id: string
+          image: string
+          image_alt: string[] | null
+          images: string[] | null
+          location: string | null
+          published: boolean | null
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          architect?: string | null
+          completion?: string | null
+          cover_image: string
+          created_at?: string
+          description: string
+          display_order?: number | null
+          featured?: boolean | null
+          full_description?: string | null
+          id?: string
+          image: string
+          image_alt?: string[] | null
+          images?: string[] | null
+          location?: string | null
+          published?: boolean | null
+          title: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          architect?: string | null
+          completion?: string | null
+          cover_image?: string
+          created_at?: string
+          description?: string
+          display_order?: number | null
+          featured?: boolean | null
+          full_description?: string | null
+          id?: string
+          image?: string
+          image_alt?: string[] | null
+          images?: string[] | null
+          location?: string | null
+          published?: boolean | null
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       project_engineer_assignments: {
         Row: {
           assigned_at: string | null
@@ -538,6 +598,8 @@ export type Database = {
           similarity: number
         }[]
       }
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
     }
     Enums: {
       project_stage: "New" | "Contacted" | "Live" | "Archived" | "Unconverted"
