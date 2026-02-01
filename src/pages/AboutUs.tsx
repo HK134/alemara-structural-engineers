@@ -72,13 +72,13 @@ const teamMembers = [{
   bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
   email: "zoe@alemara.co.uk",
   imageScale: 140
-}, {
+}, /* {
   name: "Sandhya",
   role: "Structural Engineer",
   image: "/lovable-uploads/sandhya-profile.png",
   bio: "Sandhya brings expertise in structural analysis and design, specializing in residential and commercial projects with a focus on sustainable and innovative engineering solutions.",
   email: "sandhya@alemara.co.uk"
-}, {
+}, */ {
   name: "Joshua",
   role: "Temporary Works Engineer", 
   image: "/lovable-uploads/josh-profile.png",
