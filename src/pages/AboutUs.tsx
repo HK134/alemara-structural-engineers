@@ -65,14 +65,14 @@ const teamMembers = [/* {
   image: "/lovable-uploads/nasrin-profile.png",
   bio: "Nasrin specializes in diagnosing structural cracks and subsidence issues, providing expert assessments and remedial solutions for compromised structures.",
   email: "nas@alemara.co.uk"
-}, {
+}, /* {
   name: "Zoë",
   role: "Partnerships Manager",
   image: "/lovable-uploads/zoe-profile.png",
   bio: "Zoë drives our marketing initiatives and brand development, ensuring our engineering expertise reaches the right clients through strategic communication and relationship building.",
   email: "zoe@alemara.co.uk",
   imageScale: 140
-}, /* {
+}, */ /* {
   name: "Sandhya",
   role: "Structural Engineer",
   image: "/lovable-uploads/sandhya-profile.png",
